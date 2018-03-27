@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -31,4 +30,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'pub.devrel:easypermissions:0.3.0'
     implementation 'com.android.support:multidex:1.0.0'
+    //底部导航栏
+    compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
+    //butterknife
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
