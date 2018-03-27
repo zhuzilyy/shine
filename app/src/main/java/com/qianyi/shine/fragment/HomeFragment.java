@@ -27,6 +27,9 @@ public class HomeFragment extends BaseFragment {
          * 就方式来积分说了
          */
         add(5,3);
+        /**
+         *
+         */
 
     }
 
