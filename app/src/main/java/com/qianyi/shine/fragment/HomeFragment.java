@@ -22,6 +22,11 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
+
+
+
+
+
         //副经理说金粉世家解放军是否积分设计费
         /***
          * 就方式来积分说了
