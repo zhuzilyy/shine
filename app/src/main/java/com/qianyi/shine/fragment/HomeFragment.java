@@ -22,7 +22,11 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-
+        //副经理说金粉世家解放军是否积分设计费
+        /***
+         * 就方式来积分说了
+         */
+        add(5,3);
 
     }
 
@@ -34,5 +38,9 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initListener() {
 
+    }
+
+    public int add(int a,int b){
+        return a+b;
     }
 }
