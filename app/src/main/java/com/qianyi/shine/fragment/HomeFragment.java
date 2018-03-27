@@ -36,7 +36,5 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    public int add(int a,int b){
-        return a+b;
-    }
+
 }
