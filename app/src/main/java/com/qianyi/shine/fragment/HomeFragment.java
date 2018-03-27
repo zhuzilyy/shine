@@ -22,19 +22,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-        view_home=LayoutInflater.from(getActivity()).inflate(R.layout.fragment_home,null);
 
-
-
-
-        //副经理说金粉世家解放军是否积分设计费
-        /***
-         * 就方式来积分说了
-         */
-        add(5,3);//jvksjoijoijfohfoihfiuf
-        /**
-         *
-         */
 
     }
 
