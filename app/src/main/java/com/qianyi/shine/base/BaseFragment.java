@@ -37,7 +37,6 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
     /**
      * 初始化fragment布局时调用
      * @param inflater

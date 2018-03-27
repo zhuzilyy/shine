@@ -22,7 +22,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-
+        view_home=LayoutInflater.from(getActivity()).inflate(R.layout.fragment_home,null);
 
     }
 
