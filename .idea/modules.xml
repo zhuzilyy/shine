@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://D:\Android\StudioContent3.0\shine\app\app.iml" filepath="D:\Android\StudioContent3.0\shine\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://D:\Android\Studio3.0\shine\library\library.iml" filepath="D:\Android\Studio3.0\shine\library\library.iml" />
       <module fileurl="file://$PROJECT_DIR$/shine.iml" filepath="$PROJECT_DIR$/shine.iml" />
       <module fileurl="file://D:\Android\StudioContent3.0\shine\shine.iml" filepath="D:\Android\StudioContent3.0\shine\shine.iml" />
     </modules>
