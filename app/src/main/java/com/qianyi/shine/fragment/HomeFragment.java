@@ -54,7 +54,6 @@ class Request extends Thread {
         mCallBack = callBack;
         mHandler = new Handler(Looper.getMainLooper());
     }
-
     @Override
     public void run() {
         try {Thread.sleep(500);} catch (InterruptedException e) {}
@@ -208,6 +207,7 @@ public class HomeFragment extends BaseFragment {
                 Toast.makeText(getActivity(), "网络错误", Toast.LENGTH_LONG).show();
                 mAdapter.setEnableLoadMore(true);
                 mSwipeRefreshLayout.setRefreshing(false);
+                mAdapter.notifyDataSetChanged();
             }
         }).start();
     }

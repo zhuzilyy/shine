@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <TextView
+            android:textColor="@color/main_blue"
+            android:textSize="20sp"
+            android:text="登录"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <com.qianyi.shine.ui.account.view.ClearEditText
+        android:maxLength="11"
+        android:singleLine="true"
+        android:layout_marginTop="70dp"
+        android:id="@+id/et_userName"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="请输入输入手机号"
+        android:inputType="number"
+        android:textSize="16sp"
+        android:textColorHint="@color/gray"
+        android:background="@null"
+        android:textCursorDrawable="@null"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+    <View
+        android:background="#ececec"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <!--密码-->
+    <com.qianyi.shine.ui.account.view.ClearEditText
+        android:singleLine="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/et_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="请输入密码"
+        android:textSize="16sp"
+        android:textColorHint="@color/gray"
+        android:background="@null"
+        android:textCursorDrawable="@null"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+    <View
+        android:background="#ececec"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <!--忘记密码-->
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="14sp"
+            android:text="忘记密码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/main_blue"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp"
+            android:text="还没有账号,去注册>>"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    
+    <Button
+        android:id="@+id/btn_login"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:background="@drawable/bg_login"
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center_horizontal"
+        android:text="登录"
+        android:layout_width="300dp"
+        android:layout_height="45dp" />
+    <!--三方登录-->
+    <RelativeLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_thirdLogin"
+            android:layout_centerInParent="true"
+            android:textSize="14sp"
+            android:text="三方登录"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_marginRight="10dp"
+            android:background="@color/gray"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tv_thirdLogin"
+            android:layout_width="60dp"
+            android:layout_height="0.5dp"/>
+        <View
+            android:layout_marginLeft="10dp"
+            android:background="@color/gray"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_thirdLogin"
+            android:layout_width="60dp"
+            android:layout_height="0.5dp"/>
+    </RelativeLayout>
+
+    <!--三方登录的logo-->
+    <RelativeLayout
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginRight="80dp"
+            android:layout_toLeftOf="@+id/iv_login_qq"
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_login_weibo"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/login_weibo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv_login_qq"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/login_qq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_marginLeft="80dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_login_qq"
+            android:id="@+id/iv_login_wechat"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/login_wechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

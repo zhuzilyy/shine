@@ -9,13 +9,16 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 
 /**
  * Created by Administrator on 2018/1/25.
  */
 
 public abstract class BaseActivity extends FragmentActivity {
-    //Unbinder unbinder;
+    Unbinder unbinder;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +27,7 @@ public abstract class BaseActivity extends FragmentActivity {
     private void initConfigure() {
         //加载布局
         getResLayout();
-        //unbinder= ButterKnife.bind(this);
+        unbinder= ButterKnife.bind(this);
         //初始化控件
         initViews();
         //初始化数据
@@ -54,7 +57,7 @@ public abstract class BaseActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //unbinder.unbind();
+        unbinder.unbind();
     }
 
     protected abstract void initViews();

@@ -25,7 +25,6 @@ public class CareerFragment extends BaseFragment {
 
 
     }
-
     @Override
     protected void initData() {
 
