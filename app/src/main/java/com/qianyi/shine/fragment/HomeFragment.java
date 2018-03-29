@@ -113,6 +113,7 @@ public class HomeFragment extends BaseFragment {
     protected void initViews() {
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         //上拉加载
         initAdapter();
         //添加head
@@ -164,21 +165,22 @@ public class HomeFragment extends BaseFragment {
         count2.setTypeface(typeface1);
         count3.setTypeface(typeface1);
         count4.setTypeface(typeface1);
-        main_headRv= headView.findViewById(R.id.main_headRv);
-        main_headRv.setLayoutManager(new GridLayoutManager(getActivity(),1,GridLayoutManager.HORIZONTAL,false));
+        //大学推荐[横向滑动的recyclerView]
+//        main_headRv= headView.findViewById(R.id.main_headRv);
+//        main_headRv.setLayoutManager(new GridLayoutManager(getActivity(),1,GridLayoutManager.HORIZONTAL,false));
 
-        headView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAdapter.setNewData(null);
-                mAdapter.setLoadMoreView(new CustomLoadMoreView());
-                mRecyclerView.setAdapter(mAdapter);
-                Toast.makeText(getActivity(), "change complete", Toast.LENGTH_LONG).show();
-
-                mSwipeRefreshLayout.setRefreshing(true);
-                refresh();
-            }
-        });
+//        headView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mAdapter.setNewData(null);
+//                mAdapter.setLoadMoreView(new CustomLoadMoreView());
+//                mRecyclerView.setAdapter(mAdapter);
+//                Toast.makeText(getActivity(), "change complete", Toast.LENGTH_LONG).show();
+//
+//                mSwipeRefreshLayout.setRefreshing(true);
+//                refresh();
+//            }
+//        });
         mAdapter.addHeaderView(headView);
     }
     private void initRefreshLayout() {
