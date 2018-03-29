@@ -4,12 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="1dp"
-    android:gravity="center"
-
-    android:orientation="vertical">
+    android:gravity="center">
     <!--蓝色部分-->
     <LinearLayout
-        android:visibility="visible"
         android:id="@+id/main_sectionOne"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +14,8 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingBottom="50dp"
-        android:paddingTop="15dp">
+        android:paddingTop="15dp"
+        android:visibility="visible">
         <!--定位+搜索-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,8 +38,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/dp_6"
                     android:gravity="center"
-                    android:textColor="@color/white"
-                    android:text="沈阳" />
+                    android:text="沈阳"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
             <!--搜索-->
@@ -173,9 +171,9 @@
                         android:layout_height="0dp"
                         android:layout_weight="3"
                         android:gravity="center"
-                        android:textSize="16sp"
                         android:text="256"
-                        android:textColor="@color/main_blue" />
+                        android:textColor="@color/main_blue"
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -219,8 +217,8 @@
                         android:layout_weight="3"
                         android:gravity="center"
                         android:text="256"
-                        android:textSize="16sp"
-                        android:textColor="@color/main_blue" />
+                        android:textColor="@color/main_blue"
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -264,8 +262,8 @@
                         android:layout_weight="3"
                         android:gravity="center"
                         android:text="256"
-                        android:textSize="16sp"
-                        android:textColor="@color/main_blue" />
+                        android:textColor="@color/main_blue"
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -300,33 +298,33 @@
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
             android:background="@mipmap/main_bg01">
+
             <ImageView
                 android:id="@+id/icon01"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@mipmap/icon01"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="25dp"
                 android:layout_marginBottom="@dimen/dp_10"
-                />
+                android:layout_marginLeft="25dp"
+                android:src="@mipmap/icon01" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="院校优先填报"
-                android:textSize="18sp"
-                android:layout_toRightOf="@+id/icon01"
-                android:textColor="@color/white"
                 android:layout_marginLeft="@dimen/dp_10"
+                android:layout_toRightOf="@+id/icon01"
                 android:gravity="center_vertical"
-                />
+                android:text="院校优先填报"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@mipmap/double_right_arrow"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
-                />
+                android:src="@mipmap/double_right_arrow" />
 
         </RelativeLayout>
         <!--专业优先填报-->
@@ -337,33 +335,33 @@
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
             android:background="@mipmap/main_bg01">
+
             <ImageView
                 android:id="@+id/icon02"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@mipmap/icon02"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="25dp"
                 android:layout_marginBottom="@dimen/dp_10"
-                />
+                android:layout_marginLeft="25dp"
+                android:src="@mipmap/icon02" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="专业优先填报"
-                android:layout_toRightOf="@+id/icon02"
-                android:textColor="@color/white"
-                android:textSize="18sp"
                 android:layout_marginLeft="@dimen/dp_10"
+                android:layout_toRightOf="@+id/icon02"
                 android:gravity="center_vertical"
-                />
+                android:text="院校优先填报"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@mipmap/double_right_arrow"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
-                />
+                android:src="@mipmap/double_right_arrow" />
 
         </RelativeLayout>
         <!--智能填报-->
@@ -374,68 +372,66 @@
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
             android:background="@mipmap/main_bg01">
+
             <ImageView
                 android:id="@+id/icon03"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@mipmap/icon03"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="25dp"
                 android:layout_marginBottom="@dimen/dp_10"
-                />
+                android:layout_marginLeft="25dp"
+                android:src="@mipmap/icon03" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="智能填报"
-                android:textSize="18sp"
-                android:layout_toRightOf="@+id/icon03"
-                android:textColor="@color/white"
                 android:layout_marginLeft="@dimen/dp_10"
+                android:layout_toRightOf="@+id/icon03"
                 android:gravity="center_vertical"
-                />
+                android:text="智能填报"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@mipmap/double_right_arrow"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
-                />
+                android:src="@mipmap/double_right_arrow" />
 
         </RelativeLayout>
     </LinearLayout>
     <!--第三部分-->
     <LinearLayout
         android:id="@+id/main_sectionThree"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_below="@+id/main_sectionTwo"
         android:layout_width="match_parent"
         android:layout_height="85dp"
-        android:orientation="horizontal"
+        android:layout_below="@+id/main_sectionTwo"
         android:layout_marginLeft="@dimen/dp_5"
         android:layout_marginRight="@dimen/dp_5"
-        >
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
         <!--找大学-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@mipmap/find_college"
-                />
+                android:src="@mipmap/find_college" />
+
             <TextView
-                android:gravity="center"
-                android:layout_marginTop="@dimen/dp_3"
-                android:textSize="12sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:gravity="center"
                 android:text="找大学"
-                />
+                android:textSize="12sp" />
 
         </LinearLayout>
         <!--查专业-->
@@ -444,21 +440,20 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@mipmap/findout_zhuanye"
-                />
+                android:src="@mipmap/findout_zhuanye" />
+
             <TextView
-                android:gravity="center"
-                android:layout_marginTop="@dimen/dp_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:gravity="center"
                 android:text="查专业"
-                android:textSize="12sp"
-                />
+                android:textSize="12sp" />
 
         </LinearLayout>
         <!--搜职业-->
@@ -467,21 +462,20 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@mipmap/search"
-                />
+                android:src="@mipmap/search" />
+
             <TextView
-                android:gravity="center"
-                android:layout_marginTop="@dimen/dp_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:gravity="center"
                 android:text="搜职业"
-                android:textSize="12sp"
-                />
+                android:textSize="12sp" />
 
         </LinearLayout>
         <!--看就业-->
@@ -490,21 +484,20 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@mipmap/look"
-                />
+                android:src="@mipmap/look" />
+
             <TextView
-                android:gravity="center"
-                android:layout_marginTop="@dimen/dp_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:gravity="center"
                 android:text="看就业"
-                android:textSize="12sp"
-                />
+                android:textSize="12sp" />
 
         </LinearLayout>
         <!--测录取率-->
@@ -513,85 +506,114 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:src="@mipmap/test"
-                />
+                android:src="@mipmap/test" />
+
             <TextView
-                android:gravity="center"
-                android:layout_marginTop="@dimen/dp_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:layout_marginTop="@dimen/dp_3"
+                android:gravity="center"
                 android:text="测录取率"
-                />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
     </LinearLayout>
     <!--第四部分 大学推荐-->
-    <LinearLayout
-        android:id="@+id/main_sectionfour"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_below="@+id/main_sectionThree"
+    <!--大学推荐title-->
+    <RelativeLayout
+        android:id="@+id/main_sectionfour_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/main_sectionThree"
+        android:layout_marginTop="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_15"
         android:paddingRight="@dimen/dp_10"
-        android:paddingLeft="@dimen/dp_10"
-        android:orientation="vertical"
         >
-        <!--title-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
+        <ImageView
+            android:id="@+id/flag"
+            android:layout_width="3dp"
+            android:layout_height="18dp"
+            android:layout_centerVertical="true"
+            android:background="@color/main_blue" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_toRightOf="@+id/flag"
+            android:gravity="center"
+            android:text="推荐大学"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/flag2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/right_arrow" />
 
-            >
-            <ImageView
-                android:id="@+id/flag"
-                android:layout_centerVertical="true"
-                android:layout_width="3dp"
-                android:layout_height="18dp"
-                android:background="@color/main_blue"
-                />
-            <TextView
-                android:layout_toRightOf="@+id/flag"
-                android:gravity="center"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:layout_marginLeft="@dimen/dp_8"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="推荐大学"
-                />
-            <ImageView
-                android:id="@+id/flag2"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@mipmap/right_arrow"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                />
-            <TextView
-                android:layout_toLeftOf="@+id/flag2"
-               android:gravity="center"
-                android:textSize="12sp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="查看更多"
-                />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/flag2"
+            android:gravity="center"
+            android:text="查看更多"
+            android:textSize="12sp" />
+    </RelativeLayout>
+    <!--推荐大学-->
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/main_sectionfour_title"
+        android:id="@+id/main_headRv"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_height="85dp" />
+    <!--高考头条标题-->
+    <RelativeLayout
+        android:id="@+id/main_gaokao_title"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/main_headRv"
+        android:layout_marginTop="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_15"
+        android:paddingRight="@dimen/dp_10"
+        >
+        <ImageView
+            android:id="@+id/flag3"
+            android:layout_width="3dp"
+            android:layout_height="18dp"
+            android:layout_centerVertical="true"
+            android:background="@color/main_blue" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_toRightOf="@+id/flag3"
+            android:gravity="center"
+            android:text="高考头条"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/flag4"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/right_arrow" />
 
-
-        </RelativeLayout>
-        <!--推荐大学-->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/main_headRv"
-            android:layout_width="match_parent"
-            android:layout_height="85dp"/>
-
-    </LinearLayout>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/flag4"
+            android:gravity="center"
+            android:text="查看更多"
+            android:textSize="12sp" />
+    </RelativeLayout>
 
 </RelativeLayout>
