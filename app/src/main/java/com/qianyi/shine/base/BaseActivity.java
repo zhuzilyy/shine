@@ -34,7 +34,7 @@ public abstract class BaseActivity extends FragmentActivity {
         initData();
         initListener();
         //设置状态栏的颜色
-        setStatusColor();
+        setStatusBarColor();
     }
     private void setStatusColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -64,4 +64,5 @@ public abstract class BaseActivity extends FragmentActivity {
     protected abstract void initData();
     protected abstract void getResLayout();
     protected abstract void initListener();
+    protected abstract void setStatusBarColor();
 }
