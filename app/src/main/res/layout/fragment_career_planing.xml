@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
+    android:background="@color/white"
     >
     <ScrollView
         android:layout_width="match_parent"
@@ -43,8 +44,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="去测试"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:paddingRight="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
                     android:paddingBottom="@dimen/dp_8"
                     android:paddingTop="@dimen/dp_8"
                     android:textColor="@color/main_blue"
@@ -62,9 +63,42 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
                 app:cardCornerRadius="@dimen/dp_5"
-                app:cardBackgroundColor="@color/colorPrimary"
+
                 android:layout_marginTop="@dimen/dp_10"
                 >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_gradient_orange"
+                    >
+                    <ImageView
+                        android:id="@+id/profession_icon01"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/profession_icon01"
+                        />
+                    <TextView
+                        android:layout_toRightOf="@+id/profession_icon01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="按职业选专业"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        />
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@mipmap/double_right_arrow"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        />
+
+                </RelativeLayout>
             </android.support.v7.widget.CardView>
             <!--看职业就业-->
             <android.support.v7.widget.CardView
@@ -73,9 +107,42 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
                 app:cardCornerRadius="@dimen/dp_5"
-                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardBackgroundColor="@color/cardview_light_background"
                 android:layout_marginTop="@dimen/dp_10"
                 >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_gradient_blue"
+                    >
+                    <ImageView
+                        android:id="@+id/profession_icon02"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/profession_icon02"
+                        />
+                    <TextView
+                        android:layout_toRightOf="@+id/profession_icon02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="看职业就业"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        />
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@mipmap/double_right_arrow"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        />
+
+                </RelativeLayout>
             </android.support.v7.widget.CardView>
             <!--本科毕业生从事的10个高薪工作-->
             <android.support.v7.widget.CardView
@@ -84,9 +151,45 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
                 app:cardCornerRadius="@dimen/dp_5"
-                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardBackgroundColor="@color/main_blue"
                 android:layout_marginTop="@dimen/dp_10"
                 >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_gradient_purple"
+                    >
+                    <ImageView
+                        android:id="@+id/profession_icon03"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/profession_icon01"
+                        />
+                    <TextView
+                        android:layout_toRightOf="@+id/profession_icon03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="本科毕业生所从事的10个高薪职业及其对应专业"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:layout_toLeftOf="@+id/profession_arrow"
+                        android:layout_marginRight="25dp"
+                        />
+                    <ImageView
+                        android:id="@+id/profession_arrow"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@mipmap/double_right_arrow"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        />
+
+                </RelativeLayout>
             </android.support.v7.widget.CardView>
             <!--本科毕业生从事的10个高薪工作-->
             <android.support.v7.widget.CardView
@@ -95,9 +198,47 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
                 app:cardCornerRadius="@dimen/dp_5"
-                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardBackgroundColor="@color/light_gray"
                 android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_10"
                 >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_gradient_pink"
+                    >
+
+                    <ImageView
+                        android:id="@+id/profession_icon04"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/profession_icon04"
+                        />
+                    <TextView
+                        android:layout_toLeftOf="@+id/profession_arrow_"
+                        android:layout_marginRight="25dp"
+                        android:layout_toRightOf="@+id/profession_icon04"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="本科毕业生所从事的10个高薪职业及其对应专业"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        />
+                    <ImageView
+                        android:id="@+id/profession_arrow_"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@mipmap/double_right_arrow"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        />
+
+                </RelativeLayout>
             </android.support.v7.widget.CardView>
 
         </LinearLayout>
