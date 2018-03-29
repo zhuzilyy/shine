@@ -1,5 +1,6 @@
 package com.qianyi.shine.fragment;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Handler;
@@ -9,9 +10,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +31,7 @@ import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.fragment.entity.Status;
 import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.loadmore.CustomLoadMoreView;
+import com.qianyi.shine.ui.account.view.MEditText;
 import com.qianyi.shine.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -57,6 +62,7 @@ public class HomeFragment extends BaseFragment {
     List<TestEntity> testEntities;
     private GridAdapter CollegeAdapter;
     private List<CollegeEntity> listCollege=new ArrayList<>();
+    private MEditText editText;
 
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
@@ -148,6 +154,7 @@ public class HomeFragment extends BaseFragment {
         count4.setTypeface(typeface1);
         //大学推荐[横向滑动的recyclerView]
         main_headRv= headView.findViewById(R.id.main_headRv);
+        editText=headView.findViewById(R.id.main_search);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),1,GridLayoutManager.HORIZONTAL,false);
         main_headRv.setFocusable(false);
         main_headRv.setLayoutManager(gridLayoutManager);
@@ -155,14 +162,43 @@ public class HomeFragment extends BaseFragment {
         //推荐大学点击事件
         CollegeAdapter.setOnItemClickListener(new GridAdapter.OnRecyclerViewItemClickListener() {
             @Override
-            public void onItemClick(View view) {
+            public void onItemClick(View view,int posion) {
 
 
             }
 
             @Override
-            public void onItemLongClick(View view) {
+            public void onItemLongClick(View view,int posion) {
 
+            }
+        });
+
+        /***
+         * 监听软键盘右下角的搜索
+         */
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                Toast.makeText(mActivity, EditorInfo.IME_ACTION_SEARCH+" ==", Toast.LENGTH_SHORT).show();
+                /*判断是否是“search”键*/
+                if(actionId == EditorInfo.IME_ACTION_NEXT){
+
+                    /*隐藏软键盘*/
+                    InputMethodManager imm = (InputMethodManager) v
+                            .getContext().getSystemService(
+                                    Context.INPUT_METHOD_SERVICE);
+                    if (imm.isActive()) {
+                        imm.hideSoftInputFromWindow(
+                                v.getApplicationWindowToken(), 0);
+                    }
+
+                    Toast.makeText(mActivity, editText.getText().toLowerCase(), Toast.LENGTH_SHORT).show();
+
+
+                    return true;
+                }
+                return false;
             }
         });
 

@@ -14,7 +14,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingBottom="50dp"
-        android:paddingTop="15dp"
+
         android:visibility="visible">
         <!--定位+搜索-->
         <LinearLayout
@@ -43,18 +43,39 @@
 
             </LinearLayout>
             <!--搜索-->
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
                 android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_8"
                 android:layout_weight="1"
                 android:background="@drawable/shape_corner">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/fdj"
+                    />
+            <com.qianyi.shine.ui.account.view.MEditText
+                android:id="@+id/main_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:me_del_enable="true"
+                app:me_eye_enable="false"
+                app:me_hintColor="@color/gray"
+                app:me_textColor="@color/black"
+                app:me_textSize="@dimen/dp_5"
+                android:imeOptions="actionSearch"
+                app:me_hint="搜索学校、专业"
+                app:me_padding_left="@dimen/dp_10"
 
+                />
 
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -139,6 +160,7 @@
     </LinearLayout>
     <!--第二部分-->
     <LinearLayout
+        android:visibility="visible"
         android:id="@+id/main_sectionTwo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -173,7 +195,7 @@
                         android:gravity="center"
                         android:text="256"
                         android:textColor="@color/main_blue"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -189,7 +211,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dp_6"
+                            android:layout_marginLeft="@dimen/dp_4"
                             android:text="冲刺" />
 
                     </LinearLayout>
@@ -218,7 +240,7 @@
                         android:gravity="center"
                         android:text="256"
                         android:textColor="@color/main_blue"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -234,8 +256,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dp_6"
-                            android:text="冲刺" />
+                            android:layout_marginLeft="@dimen/dp_4"
+                            android:text="保守" />
 
                     </LinearLayout>
 
@@ -263,7 +285,7 @@
                         android:gravity="center"
                         android:text="256"
                         android:textColor="@color/main_blue"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -279,8 +301,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dp_6"
-                            android:text="冲刺" />
+                            android:layout_marginLeft="@dimen/dp_4"
+                            android:text="稳妥" />
 
                     </LinearLayout>
 
@@ -334,7 +356,7 @@
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
-            android:background="@mipmap/main_bg01">
+            android:background="@mipmap/main_bg02">
 
             <ImageView
                 android:id="@+id/icon02"
@@ -371,7 +393,7 @@
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
-            android:background="@mipmap/main_bg01">
+            android:background="@mipmap/main_bg03">
 
             <ImageView
                 android:id="@+id/icon03"

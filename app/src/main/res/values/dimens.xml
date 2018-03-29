@@ -15,4 +15,7 @@
 
     <dimen name="sp_14">14sp</dimen>
     <dimen name="toolbar_padding_top">0dp</dimen>
+    <dimen name="medit_padding_top">10dp</dimen>
+    <dimen name="medit_padding_bottom">3dp</dimen>
+    <dimen name="textSize_14">14sp</dimen>
 </resources>
