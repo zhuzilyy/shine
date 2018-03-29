@@ -1,6 +1,5 @@
 package com.qianyi.shine.ui.account.activity;
 
-import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
@@ -40,12 +39,17 @@ public class LoginActivity extends BaseActivity {
     protected void getResLayout() {
         setContentView(R.layout.activity_login);
     }
-
     @Override
     protected void initListener() {
 
 
     }
+
+    @Override
+    protected void setStatusBarColor() {
+        //SetStatusBarColor.setWindowStatusBarColor();
+    }
+
     @OnClick({R.id.btn_login})
     public void click(View view){
         switch (view.getId()){

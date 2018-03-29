@@ -56,6 +56,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     protected void initListener() {
 
     }
+
+    @Override
+    protected void setStatusBarColor() {
+
+    }
+
     /***
      * 显示隐藏Fragment
      *
