@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,79 +18,30 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.data.DataServer;
+import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
+import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.fragment.entity.Status;
+import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.loadmore.CustomLoadMoreView;
 import com.qianyi.shine.utils.ToastUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Response;
 
 
 /**
  * Created by NEUNB on 2018/3/19.
  */
 
-interface RequestCallBack {
-    void success(List<Status> data);
-
-    void fail(Exception e);
-}
-
-class Request extends Thread {
-    private static final int PAGE_SIZE = 6;
-    private int mPage;
-    private RequestCallBack mCallBack;
-    private Handler mHandler;
-
-    private static boolean mFirstPageNoMore;
-    private static boolean mFirstError = true;
-
-    public Request(int page, RequestCallBack callBack) {
-        mPage = page;
-        mCallBack = callBack;
-        mHandler = new Handler(Looper.getMainLooper());
-    }
-    @Override
-    public void run() {
-        try {Thread.sleep(500);} catch (InterruptedException e) {}
-
-        if (mPage == 2 && mFirstError) {
-            mFirstError = false;
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    mCallBack.fail(new RuntimeException("fail"));
-                }
-            });
-        } else {
-            int size = PAGE_SIZE;
-            if (mPage == 1) {
-                if (mFirstPageNoMore) {
-                    size = 1;
-                }
-                mFirstPageNoMore = !mFirstPageNoMore;
-                if (!mFirstError) {
-                    mFirstError = true;
-                }
-            } else if (mPage == 4) {
-                size = 1;
-            }
-
-            final int dataSize = size;
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    mCallBack.success(DataServer.getSampleData(dataSize));
-                }
-            });
-        }
-    }
-}
 
 
 public class HomeFragment extends BaseFragment {
@@ -102,6 +54,10 @@ public class HomeFragment extends BaseFragment {
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private RecyclerView main_headRv;
+    List<TestEntity> testEntities;
+    private GridAdapter CollegeAdapter;
+    private List<CollegeEntity> listCollege=new ArrayList<>();
+
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_home=inflater.inflate(R.layout.fragment_home,null);
@@ -126,6 +82,27 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+        testEntities=new ArrayList<>();
+        testEntities.add(new TestEntity(R.mipmap.toutiao,"福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
+        testEntities.add(new TestEntity(R.mipmap.tou2,"佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
+        testEntities.add(new TestEntity(R.mipmap.tou3,"FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
+        testEntities.add(new TestEntity(R.mipmap.toutiao,"福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
+        testEntities.add(new TestEntity(R.mipmap.tou2,"佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
+        testEntities.add(new TestEntity(R.mipmap.tou3,"FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
+        testEntities.add(new TestEntity(R.mipmap.toutiao,"福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
+        testEntities.add(new TestEntity(R.mipmap.tou2,"佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
+        testEntities.add(new TestEntity(R.mipmap.tou3,"FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
+        //***************
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo01,"","北京大学","北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo02,"","清华大学","北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo01,"","西京大学","北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo02,"","东北农业大学","北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo02,"","齐齐哈尔大学","北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo01,"","西北农林大学","北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo02,"","长春大学","北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo01,"","吉林动画学院","北京市/综合/211"));
+
+
 
     }
 
@@ -139,7 +116,6 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onLoadMoreRequested() {
                 loadMore();
-
             }
         });
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
@@ -152,6 +128,11 @@ public class HomeFragment extends BaseFragment {
                 Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_LONG).show();
             }
         });
+        /**
+         * 推荐大学适配器
+         */
+        CollegeAdapter=new GridAdapter(getActivity(),listCollege);
+
     }
     private void addHeadView() {
 
@@ -166,8 +147,24 @@ public class HomeFragment extends BaseFragment {
         count3.setTypeface(typeface1);
         count4.setTypeface(typeface1);
         //大学推荐[横向滑动的recyclerView]
-//        main_headRv= headView.findViewById(R.id.main_headRv);
-//        main_headRv.setLayoutManager(new GridLayoutManager(getActivity(),1,GridLayoutManager.HORIZONTAL,false));
+        main_headRv= headView.findViewById(R.id.main_headRv);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),1,GridLayoutManager.HORIZONTAL,false);
+        main_headRv.setFocusable(false);
+        main_headRv.setLayoutManager(gridLayoutManager);
+        main_headRv.setAdapter(CollegeAdapter);
+        //推荐大学点击事件
+        CollegeAdapter.setOnItemClickListener(new GridAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view) {
+
+
+            }
+
+            @Override
+            public void onItemLongClick(View view) {
+
+            }
+        });
 
 //        headView.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -187,8 +184,7 @@ public class HomeFragment extends BaseFragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refresh();
-
+               refresh();
             }
         });
     }
@@ -196,37 +192,64 @@ public class HomeFragment extends BaseFragment {
     private void refresh() {
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        new Request(mNextRequestPage, new RequestCallBack() {
+        apiHome.refresh("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
-            public void success(List<Status> data) {
-                setData(true, data);
-                mAdapter.setEnableLoadMore(true);
-                mSwipeRefreshLayout.setRefreshing(false);
+            public void onSuccess(Call call, Response response, String s) {
+                Log.i("ppp","131"+s);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setData(true,testEntities);
+                        mAdapter.setEnableLoadMore(true);
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                });
             }
 
             @Override
-            public void fail(Exception e) {
-                Toast.makeText(getActivity(), "网络错误", Toast.LENGTH_LONG).show();
-                mAdapter.setEnableLoadMore(true);
-                mSwipeRefreshLayout.setRefreshing(false);
-                mAdapter.notifyDataSetChanged();
+            public void onEror(Call call, int statusCode, Exception e) {
+                Log.i("ppp","132"+e);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setData(true,testEntities);
+                        mAdapter.setEnableLoadMore(true);
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+
+
             }
-        }).start();
+        });
+
     }
     //加载
     private void loadMore() {
-        new Request(mNextRequestPage, new RequestCallBack() {
+
+        apiHome.loadMore("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
-            public void success(List<Status> data) {
-                setData(false, data);
+            public void onSuccess(Call call, Response response, String s) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setData(false, testEntities);
+                    }
+                });
+
             }
 
             @Override
-            public void fail(Exception e) {
-                mAdapter.loadMoreFail();
-                Toast.makeText(getActivity(), "网络错误", Toast.LENGTH_LONG).show();
+            public void onEror(Call call, int statusCode, Exception e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdapter.loadMoreFail();
+                        Toast.makeText(getActivity(), "网络错误", Toast.LENGTH_LONG).show();
+                    }
+                });
+
             }
-        }).start();
+        });
     }
 
     private void setData(boolean isRefresh, List data) {
@@ -242,7 +265,7 @@ public class HomeFragment extends BaseFragment {
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
             mAdapter.loadMoreEnd(isRefresh);
-            Toast.makeText(mActivity, "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             mAdapter.loadMoreComplete();
         }

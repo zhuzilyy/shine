@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.qianyi.shine.R;
 import com.qianyi.shine.fragment.entity.Status;
+import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.utils.SpannableStringUtils;
 import com.qianyi.shine.utils.ToastUtils;
 
@@ -23,13 +24,18 @@ import com.qianyi.shine.utils.ToastUtils;
  * 修改时间：
  * 修改备注：
  */
-public class PullToRefreshAdapter extends BaseQuickAdapter<Status, BaseViewHolder> {
+public class PullToRefreshAdapter extends BaseQuickAdapter<TestEntity, BaseViewHolder> {
     public PullToRefreshAdapter() {
         super( R.layout.layout_toutiao, null);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, Status item) {
+    protected void convert(BaseViewHolder helper, TestEntity item) {
+
+            helper.setImageResource(R.id.item_img,item.getImg());
+            helper.setText(R.id.item_desc,item.getDes());
+
+
 //        Toast.makeText(mContext, helper.getLayoutPosition()+"", Toast.LENGTH_SHORT).show();
 //        Log.i("ppp",item+"");
 //        helper.setImageResource(R.id.img,R.mipmap.animation_img1);
