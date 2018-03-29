@@ -105,6 +105,7 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     class MyViewHolder extends RecyclerView.ViewHolder {
         private ImageView iv;
 
+
         public MyViewHolder(View view) {
             super(view);
             iv = view.findViewById(R.id.collegeImg);
