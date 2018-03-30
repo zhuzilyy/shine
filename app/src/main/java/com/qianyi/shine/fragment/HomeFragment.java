@@ -163,6 +163,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onItemClick(int position) {
                 Toast.makeText(mActivity, "position"+position, Toast.LENGTH_SHORT).show();
+
             }
         });
 
