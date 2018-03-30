@@ -1,6 +1,7 @@
 package com.qianyi.shine.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Handler;
@@ -32,6 +33,7 @@ import com.qianyi.shine.fragment.entity.Status;
 import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.loadmore.CustomLoadMoreView;
 import com.qianyi.shine.ui.account.view.MEditText;
+import com.qianyi.shine.ui.college.CollegeActivity;
 import com.qianyi.shine.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -158,14 +160,17 @@ public class HomeFragment extends BaseFragment {
         main_headRv.setFocusable(false);
         main_headRv.setLayoutManager(gridLayoutManager);
         main_headRv.setAdapter(CollegeAdapter);
+
         //推荐大学点击事件
         CollegeAdapter.setOnItemClickListener(new GridAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(mActivity, "position"+position, Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getActivity(), CollegeActivity.class);
+                startActivity(intent);
 
             }
         });
+
 
 
         /***

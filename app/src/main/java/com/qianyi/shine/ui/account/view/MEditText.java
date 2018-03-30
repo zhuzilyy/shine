@@ -154,6 +154,10 @@ public class MEditText extends RelativeLayout implements View.OnFocusChangeListe
 
     }
 
+    public void setFocusable(boolean isFocusable){
+        etInput.setFocusable(isFocusable);
+    }
+
 
     public String getText(){
 
