@@ -98,7 +98,8 @@ public class HomeFragment extends BaseFragment {
         testEntities.add(new TestEntity(R.mipmap.toutiao,"福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
         testEntities.add(new TestEntity(R.mipmap.tou2,"佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
         testEntities.add(new TestEntity(R.mipmap.tou3,"FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
-        //***************
+
+        //*********************************************
         listCollege.add(new CollegeEntity(R.mipmap.college_logo01,"","北京大学","北京市/综合/211"));
         listCollege.add(new CollegeEntity(R.mipmap.college_logo02,"","清华大学","北京市/综合/211"));
         listCollege.add(new CollegeEntity(R.mipmap.college_logo01,"","西京大学","北京市/综合/211"));
@@ -107,8 +108,6 @@ public class HomeFragment extends BaseFragment {
         listCollege.add(new CollegeEntity(R.mipmap.college_logo01,"","西北农林大学","北京市/综合/211"));
         listCollege.add(new CollegeEntity(R.mipmap.college_logo02,"","长春大学","北京市/综合/211"));
         listCollege.add(new CollegeEntity(R.mipmap.college_logo01,"","吉林动画学院","北京市/综合/211"));
-
-
 
     }
 
@@ -162,16 +161,11 @@ public class HomeFragment extends BaseFragment {
         //推荐大学点击事件
         CollegeAdapter.setOnItemClickListener(new GridAdapter.OnRecyclerViewItemClickListener() {
             @Override
-            public void onItemClick(View view,int posion) {
-
-
-            }
-
-            @Override
-            public void onItemLongClick(View view,int posion) {
-
+            public void onItemClick(int position) {
+                Toast.makeText(mActivity, "position"+position, Toast.LENGTH_SHORT).show();
             }
         });
+
 
         /***
          * 监听软键盘右下角的搜索

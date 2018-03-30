@@ -16,13 +16,13 @@
         <ImageView
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@mipmap/mine_msg"
             />
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_alignParentRight="true"
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="22dp"
             android:layout_height="wrap_content">
             <com.makeramen.roundedimageview.RoundedImageView
                 android:layout_width="75dp"
@@ -80,9 +80,9 @@
         android:layout_height="58dp">
         <ImageView
             android:id="@+id/mine_icon_attention"
-            android:layout_width="25dp"
+            android:layout_width="22dp"
             android:layout_centerVertical="true"
-            android:layout_height="25dp"
+            android:layout_height="22dp"
             android:layout_marginLeft="15dp"
             android:src="@mipmap/mine_attention"
             />
@@ -97,8 +97,8 @@
             android:text="我的关注"
             />
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@mipmap/rightarrow"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -120,9 +120,9 @@
         android:layout_height="58dp">
         <ImageView
             android:id="@+id/mine_icon_vip"
-            android:layout_width="25dp"
+            android:layout_width="22dp"
             android:layout_centerVertical="true"
-            android:layout_height="25dp"
+            android:layout_height="22dp"
             android:layout_marginLeft="15dp"
             android:src="@mipmap/mine_vip"
             />
@@ -137,8 +137,8 @@
             android:text="开通/VIP"
             />
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@mipmap/rightarrow"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -160,9 +160,9 @@
         android:layout_height="58dp">
         <ImageView
             android:id="@+id/mine_icon_set"
-            android:layout_width="25dp"
+            android:layout_width="22dp"
             android:layout_centerVertical="true"
-            android:layout_height="25dp"
+            android:layout_height="22dp"
             android:layout_marginLeft="15dp"
             android:src="@mipmap/mine_setting"
             />
@@ -177,8 +177,8 @@
             android:text="我的关注"
             />
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@mipmap/rightarrow"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -200,9 +200,9 @@
         android:layout_height="58dp">
         <ImageView
             android:id="@+id/mine_icon_help"
-            android:layout_width="25dp"
+            android:layout_width="22dp"
             android:layout_centerVertical="true"
-            android:layout_height="25dp"
+            android:layout_height="22dp"
             android:layout_marginLeft="15dp"
             android:src="@mipmap/mine_help"
             />
@@ -217,8 +217,8 @@
             android:text="我的关注"
             />
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@mipmap/rightarrow"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
