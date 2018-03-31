@@ -53,6 +53,7 @@ public class GaoKaoNewsActivity extends BaseActivity {
         mSwipeRefreshLayout.setRefreshing(true);
         refresh();
 
+
     }
 
     @Override
