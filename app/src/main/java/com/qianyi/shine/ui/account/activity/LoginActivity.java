@@ -47,10 +47,9 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void setStatusBarColor() {
-        //SetStatusBarColor.setWindowStatusBarColor();
     }
 
-    @OnClick({R.id.btn_login})
+    @OnClick({R.id.btn_login,R.id.tv_register,R.id.iv_login_qq,R.id.iv_login_weibo,R.id.iv_login_wechat,R.id.tv_findPwd})
     public void click(View view){
         switch (view.getId()){
             case R.id.btn_login:
@@ -59,8 +58,26 @@ public class LoginActivity extends BaseActivity {
                 /*if (isParamsEmpty(userName,pwd)){
                     login(userName,pwd);
                 }*/
-                jumpActivity(LoginActivity.this, MainActivity.class);
+                jumpActivity(LoginActivity.this, GuessScoreActivity.class);
+                finish();
                 break;
+            case R.id.tv_register:
+                jumpActivity(LoginActivity.this, RegisterActivity.class);
+                finish();
+                break;
+            case R.id.iv_login_qq:
+                jumpActivity(LoginActivity.this, BindPhoneActivity.class);
+                break;
+            case R.id.iv_login_wechat:
+                jumpActivity(LoginActivity.this, BindPhoneActivity.class);
+                break;
+            case R.id.iv_login_weibo:
+                jumpActivity(LoginActivity.this, BindPhoneActivity.class);
+                break;
+            case R.id.tv_findPwd:
+                jumpActivity(LoginActivity.this, FindPwdActiviy.class);
+                break;
+
         }
     }
     //登录的方法

@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 
 /**
  * Created by NEUNB on 2018/2/28.
@@ -18,7 +21,7 @@ public abstract class BaseFragment extends Fragment {
     protected Activity mActivity;
     //视图
     public View view;
-    //Unbinder unbinder;
+    Unbinder unbinder;
     /**
      * 如果你用了support 23的库，上面的方法会提示过时，有强迫症的小伙伴，可以用下面的方法代替
      * 解决 getActivity()空指针
@@ -51,7 +54,7 @@ public abstract class BaseFragment extends Fragment {
         //初始化布局
         view = getResLayout(inflater,container);
         //绑定framgent
-        //unbinder = ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         //初始化控件
         initViews();
         //初始化监听事件
@@ -72,7 +75,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         //解除绑定
-        //unbinder.unbind();
+        unbinder.unbind();
         super.onDestroyView();
     }
 

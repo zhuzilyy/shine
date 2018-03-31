@@ -1,11 +1,16 @@
 package com.qianyi.shine.fragment;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseFragment;
+import com.qianyi.shine.ui.mine.activity.HelpCenterActivity;
+import com.qianyi.shine.ui.mine.activity.SettingActivity;
+
+import butterknife.OnClick;
 
 
 /**
@@ -33,5 +38,19 @@ public class MineFragment extends BaseFragment {
     @Override
     protected void initListener() {
 
+    }
+    @OnClick({R.id.rl_setting,R.id.rl_helpCenter})
+    public void click(View view){
+        Intent intent=null;
+        switch (view.getId()){
+            case R.id.rl_setting:
+                intent=new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_helpCenter:
+                intent=new Intent(getActivity(), HelpCenterActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }
