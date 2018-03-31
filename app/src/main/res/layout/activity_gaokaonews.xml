@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    style="@style/bg"
+    >
+    <com.qianyi.shine.ui.gaokao_news.view.XTitleView
+        android:layout_width="match_parent"
+        app:back_src="@mipmap/back"
+        app:tv_left="高考头条"
+        app:isshow_right_iv="gone"
+        app:isshow_right_tv="gone"
+        app:titleSize="6.5sp"
+        app:graty_title="middle"
+        app:titleColor="@color/black"
+        app:title_background_color="@color/white"
+        android:layout_height="45dp"/>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

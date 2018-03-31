@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,16 +23,13 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
-import com.qianyi.shine.data.DataServer;
 import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
-import com.qianyi.shine.fragment.entity.Status;
 import com.qianyi.shine.fragment.entity.TestEntity;
-import com.qianyi.shine.loadmore.CustomLoadMoreView;
+import com.qianyi.shine.ui.gaokao_news.activity.GaoKaoNewsActivity;
 import com.qianyi.shine.ui.account.view.MEditText;
 import com.qianyi.shine.ui.college.CollegeActivity;
-import com.qianyi.shine.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +46,7 @@ import okhttp3.Response;
 
 
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private View view_home;
     @BindView(R.id.rv_list)
     public RecyclerView mRecyclerView;
@@ -65,6 +60,7 @@ public class HomeFragment extends BaseFragment {
     private GridAdapter CollegeAdapter;
     private List<CollegeEntity> listCollege=new ArrayList<>();
     private MEditText editText;
+
 
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
@@ -170,6 +166,11 @@ public class HomeFragment extends BaseFragment {
 
             }
         });
+        //高考头条
+        TextView gaokao_tv=headView.findViewById(R.id.gaokao_tv);
+        View flag4=headView.findViewById(R.id.flag4);
+        gaokao_tv.setOnClickListener(this);
+        flag4.setOnClickListener(this);
 
 
 
@@ -308,4 +309,18 @@ public class HomeFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.gaokao_tv:
+            case R.id.flag4:
+                startActivity(new Intent(getActivity(),GaoKaoNewsActivity.class));
+            break;
+
+            default:
+            break;
+
+
+        }
+    }
 }

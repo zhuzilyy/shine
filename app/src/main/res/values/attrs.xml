@@ -20,4 +20,47 @@
         <attr name="me_padding_left" format="dimension"/>
         <attr name="me_padding_right" format="dimension"/>
     </declare-styleable>
+
+    <!--xzyTitle-->
+    <declare-styleable name="XTitleView">
+        <!--左边的文字-->
+        <attr name="tv_left" format="string"/>
+        <!--右边的文字-->
+        <attr name="tv_right" format="string"/>
+        <!--back图标是否显示-->
+        <attr name="isshow_back" format="enum">
+            <enum name="visable" value="0"/>
+            <enum name="invisable" value="1"/>
+            <enum name="gone_" value="2"/>
+        </attr>
+        <!--右边的文字是否显示-->
+        <attr name="isshow_right_tv" format="enum">
+            <enum name="visable" value="0"/>
+            <enum name="invisable" value="1"/>
+            <enum name="gone" value="2"/>
+        </attr>
+        <!--右边的图标是否显示-->
+        <attr name="isshow_right_iv" format="enum">
+            <enum name="visable" value="0"/>
+            <enum name="invisable" value="1"/>
+            <enum name="gone" value="2"/>e
+        </attr>
+        <!--title文字是靠左显示还是居中-->
+        <attr name="graty_title" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="middle" value="1"/>
+        </attr>
+        <!--title文字的大小-->
+        <attr name="titleSize" format="dimension"/>
+        <!--back图标的引用-->
+        <attr name="back_src" format="reference|color"/>
+        <!--右边图标的引用-->
+        <attr name="right_iv_scr" format="reference|color"/>
+        <!--背景色的设置-->
+        <attr name="title_background_color" format="color"/>
+        <!--title颜色-->
+        <attr name="titleColor" format="color"/>
+
+
+    </declare-styleable>
 </resources>

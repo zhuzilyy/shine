@@ -7,6 +7,7 @@
     android:gravity="center">
     <!--蓝色部分-->
     <LinearLayout
+
         android:id="@+id/main_sectionOne"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -630,6 +631,7 @@
             android:src="@mipmap/right_arrow" />
 
         <TextView
+            android:id="@+id/gaokao_tv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_toLeftOf="@+id/flag4"
