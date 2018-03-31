@@ -116,6 +116,7 @@
         />
     <!--开通/激活vip-->
     <RelativeLayout
+        android:id="@+id/rl_vip"
         android:layout_width="match_parent"
         android:layout_height="58dp">
         <ImageView
