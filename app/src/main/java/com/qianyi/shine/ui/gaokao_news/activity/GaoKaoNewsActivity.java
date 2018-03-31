@@ -127,6 +127,7 @@ public class GaoKaoNewsActivity extends BaseActivity {
                         setData(true, testEntities);
                         mAdapter.setEnableLoadMore(true);
                         mSwipeRefreshLayout.setRefreshing(false);
+
                     }
                 });
             }
