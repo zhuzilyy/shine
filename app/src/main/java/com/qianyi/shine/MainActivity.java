@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     protected void getResLayout() {
-        setContentView(R.layout.lay_main);
+        setContentView(R.layout.activity_main);
     }
 
     @Override
