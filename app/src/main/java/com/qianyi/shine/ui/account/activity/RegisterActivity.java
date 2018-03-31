@@ -36,11 +36,21 @@ public class RegisterActivity extends BaseActivity {
     protected void setStatusBarColor() {
 
     }
-    @OnClick({R.id.tv_login})
+    @OnClick({R.id.tv_login,R.id.iv_login_wechat,R.id.iv_login_weibo,R.id.iv_login_qq})
     public void click(View view){
         switch (view.getId()){
             case R.id.tv_login:
                 jumpActivity(this,LoginActivity.class);
+                finish();
+                break;
+            case R.id.iv_login_qq:
+                jumpActivity(RegisterActivity.this, BindPhoneActivity.class);
+                break;
+            case R.id.iv_login_wechat:
+                jumpActivity(RegisterActivity.this, BindPhoneActivity.class);
+                break;
+            case R.id.iv_login_weibo:
+                jumpActivity(RegisterActivity.this, BindPhoneActivity.class);
                 break;
         }
     }

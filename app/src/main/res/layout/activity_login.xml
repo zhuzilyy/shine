@@ -8,13 +8,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
-        android:layout_marginTop="20dp"
+        android:background="@color/main_blue"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="44dp">
         <TextView
-            android:textColor="@color/main_blue"
-            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             android:text="登录"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -28,7 +28,7 @@
         android:layout_height="40dp"
         android:hint="请输入输入手机号"
         android:inputType="number"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textColorHint="@color/gray"
         android:background="@null"
         android:textCursorDrawable="@null"
@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:hint="请输入密码"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textColorHint="@color/gray"
         android:background="@null"
         android:textCursorDrawable="@null"
@@ -70,11 +70,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/tv_findPwd"
             android:textSize="14sp"
             android:text="忘记密码"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tv_register"
             android:textColor="@color/main_blue"
             android:layout_alignParentRight="true"
             android:textSize="14sp"

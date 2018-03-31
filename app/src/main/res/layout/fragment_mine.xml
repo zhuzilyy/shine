@@ -156,6 +156,7 @@
         />
     <!--设置-->
     <RelativeLayout
+        android:id="@+id/rl_setting"
         android:layout_width="match_parent"
         android:layout_height="58dp">
         <ImageView
@@ -174,7 +175,7 @@
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:text="我的关注"
+            android:text="设置"
             />
         <ImageView
             android:layout_width="22dp"
@@ -196,6 +197,7 @@
         />
     <!--帮助-->
     <RelativeLayout
+        android:id="@+id/rl_helpCenter"
         android:layout_width="match_parent"
         android:layout_height="58dp">
         <ImageView
@@ -214,7 +216,7 @@
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:text="我的关注"
+            android:text="帮助"
             />
         <ImageView
             android:layout_width="22dp"

@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
 
+import com.qianyi.shine.MainActivity;
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.utils.SetStatusBarColor;
@@ -27,7 +28,6 @@ public class GuessScoreActivity extends BaseActivity {
     protected void initData() {
 
     }
-
     @Override
     protected void getResLayout() {
         setContentView(R.layout.activity_guess_score);
@@ -38,11 +38,14 @@ public class GuessScoreActivity extends BaseActivity {
     protected void initListener() {
 
     }
-    @OnClick({R.id.btn_confirm})
+    @OnClick({R.id.btn_confirm,R.id.iv_back})
     public void click(View view){
         switch (view.getId()){
             case R.id.btn_confirm:
-                jumpActivity(this,LoginActivity.class);
+                jumpActivity(this,MainActivity.class);
+                break;
+            case R.id.iv_back:
+                finish();
                 break;
         }
     }
