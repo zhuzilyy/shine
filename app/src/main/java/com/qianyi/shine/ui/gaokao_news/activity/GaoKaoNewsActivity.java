@@ -17,6 +17,7 @@ import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.ui.gaokao_news.adapter.GaokaoAdapter;
+import com.qianyi.shine.ui.gaokao_news.view.XTitleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,8 @@ public class GaoKaoNewsActivity extends BaseActivity {
     List<TestEntity> testEntities;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
+    @BindView(R.id.title)
+    public XTitleView titleView;
 
     @Override
     protected void initViews() {
@@ -80,7 +83,12 @@ public class GaoKaoNewsActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-
+        titleView.setBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

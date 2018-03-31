@@ -6,6 +6,7 @@
     style="@style/bg"
     >
     <com.qianyi.shine.ui.gaokao_news.view.XTitleView
+        android:id="@+id/title"
         android:layout_width="match_parent"
         app:back_src="@mipmap/back"
         app:tv_left="高考头条"
