@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <include layout="@layout/layout_title"/>
+    <ScrollView
+
+        android:overScrollMode="never"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"  >
+             <RelativeLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="230dp">
+                 <ImageView
+                     android:layout_marginTop="10dp"
+                     android:layout_marginRight="10dp"
+                     android:layout_marginLeft="10dp"
+                     android:src="@mipmap/bg_vip"
+                     android:scaleType="fitXY"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent" />
+                 <LinearLayout
+                     android:orientation="vertical"
+                     android:layout_centerInParent="true"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content">
+                     <ImageView
+                         android:layout_gravity="center_horizontal"
+                         android:src="@mipmap/crow"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content" />
+                     <!--开通vip-->
+                    <LinearLayout
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:src="@mipmap/line_vip_left"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:text="开通VIP"
+                            android:textSize="20sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <ImageView
+                            android:src="@mipmap/line_vip_right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_marginTop="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:text="开通阳光志愿VIP,尊享超级特权"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                     <TextView
+                         android:layout_marginTop="20dp"
+                         android:background="@drawable/bg_vip_time"
+                         android:textColor="@color/white"
+                         android:gravity="center"
+                         android:layout_gravity="center_horizontal"
+                         android:text="有效期1个月"
+                         android:layout_width="100dp"
+                         android:layout_height="40dp" />
+                 </LinearLayout>
+             </RelativeLayout>
+            <TextView
+                android:text="VIP特色功能"
+                android:layout_marginTop="20dp"
+                android:textSize="16sp"
+                android:textColor="@color/orange"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/vip1"
+                    android:src="@mipmap/vip1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/vip1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:text="录取概率分析"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="3dp"
+                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!--评选专业-->
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/vip2"
+                    android:src="@mipmap/vip2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/vip2"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:text="做测评选专业"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="3dp"
+                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/vip3"
+                    android:src="@mipmap/vip3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/vip3"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:text="智能填志愿"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="3dp"
+                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/vip4"
+                    android:src="@mipmap/vip4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/vip4"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:text="按职业选专业"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="3dp"
+                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/vip5"
+                    android:src="@mipmap/vip5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/vip5"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:text="详尽高校数据"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="3dp"
+                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/vip6"
+                    android:src="@mipmap/vip6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/vip6"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:text="志愿表分析"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="3dp"
+                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:paddingBottom="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/vip7"
+                    android:src="@mipmap/vip7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/vip7"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:text="按公司推荐"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="3dp"
+                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:background="@color/main_blue"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:textColor="@color/main_blue"
+            android:background="@drawable/bg_active_vip"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:text="激活VIP卡"
+            android:layout_width="0dp"
+            android:layout_height="40dp" />
+        <TextView
+            android:textColor="@color/white"
+            android:background="@drawable/bg_open_vip"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+           android:layout_marginRight="20dp"
+            android:textSize="16sp"
+            android:text="激活VIP卡"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

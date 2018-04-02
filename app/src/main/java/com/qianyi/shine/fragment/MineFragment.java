@@ -9,6 +9,7 @@ import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.ui.mine.activity.HelpCenterActivity;
 import com.qianyi.shine.ui.mine.activity.SettingActivity;
+import com.qianyi.shine.ui.mine.activity.VipActivity;
 
 import butterknife.OnClick;
 
@@ -39,7 +40,7 @@ public class MineFragment extends BaseFragment {
     protected void initListener() {
 
     }
-    @OnClick({R.id.rl_setting,R.id.rl_helpCenter})
+    @OnClick({R.id.rl_setting,R.id.rl_helpCenter,R.id.rl_vip})
     public void click(View view){
         Intent intent=null;
         switch (view.getId()){
@@ -49,6 +50,10 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.rl_helpCenter:
                 intent=new Intent(getActivity(), HelpCenterActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_vip:
+                intent=new Intent(getActivity(), VipActivity.class);
                 startActivity(intent);
                 break;
         }

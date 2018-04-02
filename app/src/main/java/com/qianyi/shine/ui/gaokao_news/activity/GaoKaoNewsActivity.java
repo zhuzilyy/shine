@@ -17,7 +17,7 @@ import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.ui.gaokao_news.adapter.GaokaoAdapter;
-import com.qianyi.shine.utils.ToastUtils;
+import com.qianyi.shine.ui.gaokao_news.view.XTitleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +40,8 @@ public class GaoKaoNewsActivity extends BaseActivity {
     List<TestEntity> testEntities;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
+    @BindView(R.id.title)
+    public XTitleView titleView;
 
     @Override
     protected void initViews() {
@@ -69,7 +71,9 @@ public class GaoKaoNewsActivity extends BaseActivity {
         testEntities.add(new TestEntity(R.mipmap.toutiao, "福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
         testEntities.add(new TestEntity(R.mipmap.tou2, "佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
         testEntities.add(new TestEntity(R.mipmap.tou3, "FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
+
     }
+
     @Override
     protected void getResLayout() {
         setContentView(R.layout.activity_gaokaonews);
@@ -79,7 +83,12 @@ public class GaoKaoNewsActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-
+        titleView.setBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -101,7 +110,6 @@ public class GaoKaoNewsActivity extends BaseActivity {
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
 //        mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
-
 
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override

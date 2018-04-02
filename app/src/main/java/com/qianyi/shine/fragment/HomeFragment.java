@@ -65,7 +65,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_home=inflater.inflate(R.layout.fragment_home,null);
-        ButterKnife.bind(this,view_home);
         return view_home;
     }
 
