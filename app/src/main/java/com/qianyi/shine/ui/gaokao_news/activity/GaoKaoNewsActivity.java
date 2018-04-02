@@ -17,6 +17,7 @@ import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.ui.gaokao_news.adapter.GaokaoAdapter;
+import com.qianyi.shine.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,9 +69,7 @@ public class GaoKaoNewsActivity extends BaseActivity {
         testEntities.add(new TestEntity(R.mipmap.toutiao, "福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
         testEntities.add(new TestEntity(R.mipmap.tou2, "佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
         testEntities.add(new TestEntity(R.mipmap.tou3, "FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
-
     }
-
     @Override
     protected void getResLayout() {
         setContentView(R.layout.activity_gaokaonews);
@@ -102,6 +101,7 @@ public class GaoKaoNewsActivity extends BaseActivity {
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
 //        mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
+
 
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
