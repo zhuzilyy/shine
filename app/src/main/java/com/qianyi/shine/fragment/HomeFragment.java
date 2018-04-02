@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,8 @@ import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.ui.gaokao_news.activity.GaoKaoNewsActivity;
 import com.qianyi.shine.ui.account.view.MEditText;
 import com.qianyi.shine.ui.college.CollegeActivity;
+import com.qianyi.shine.ui.home.FindCollegeActivity;
+import com.qianyi.shine.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,19 +63,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private GridAdapter CollegeAdapter;
     private List<CollegeEntity> listCollege=new ArrayList<>();
     private MEditText editText;
-
-
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_home=inflater.inflate(R.layout.fragment_home,null);
         return view_home;
     }
-
     @Override
     protected void initViews() {
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         //上拉加载
         initAdapter();
         //添加head
@@ -137,13 +136,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     }
     private void addHeadView() {
-
         Typeface typeface1=Typeface.createFromAsset(getActivity().getAssets(),"fonts/bebas.ttf");
         View headView = getLayoutInflater().inflate(R.layout.head_view, (ViewGroup) mRecyclerView.getParent(), false);
         TextView count= headView.findViewById(R.id.suitCount);
         TextView count2=headView.findViewById(R.id.count2);
         TextView count3=headView.findViewById(R.id.count3);
         TextView count4=headView.findViewById(R.id.count4);
+        LinearLayout ll_findCollege=headView.findViewById(R.id.ll_findCollege);
         count.setTypeface(typeface1);
         count2.setTypeface(typeface1);
         count3.setTypeface(typeface1);
@@ -170,6 +169,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         View flag4=headView.findViewById(R.id.flag4);
         gaokao_tv.setOnClickListener(this);
         flag4.setOnClickListener(this);
+        ll_findCollege.setOnClickListener(this);
 
 
 
@@ -315,7 +315,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.flag4:
                 startActivity(new Intent(getActivity(),GaoKaoNewsActivity.class));
             break;
-
+            case R.id.ll_findCollege:
+                startActivity(new Intent(getActivity(),FindCollegeActivity.class));
+                break;
             default:
             break;
 

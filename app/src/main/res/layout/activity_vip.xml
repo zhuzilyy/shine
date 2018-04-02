@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:background="@color/white"
+    android:id="@+id/rl_vip"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -334,6 +335,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <TextView
+            android:id="@+id/tv_activeVip"
             android:textColor="@color/main_blue"
             android:background="@drawable/bg_active_vip"
             android:gravity="center"
@@ -344,13 +346,14 @@
             android:layout_width="0dp"
             android:layout_height="40dp" />
         <TextView
+            android:id="@+id/tv_openVip"
             android:textColor="@color/white"
             android:background="@drawable/bg_open_vip"
             android:layout_marginLeft="20dp"
             android:gravity="center"
            android:layout_marginRight="20dp"
             android:textSize="16sp"
-            android:text="激活VIP卡"
+            android:text="开通VIP卡"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="40dp" />

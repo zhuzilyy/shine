@@ -71,6 +71,14 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.mine.activity.VipActivity"/>
+        <!--激活vip-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.mine.activity.ActiveVipActivity"/>
+        <!--激活vip-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.home.FindCollegeActivity"/>
     </application>
 
 </manifest>

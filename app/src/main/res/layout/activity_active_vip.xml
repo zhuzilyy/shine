@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_title"/>
+    <com.qianyi.shine.ui.account.view.ClearEditText
+        android:singleLine="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/et_vipNum"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="请输入VIP卡序列号"
+        android:inputType="number"
+        android:textSize="15sp"
+        android:textColorHint="@color/gray"
+        android:background="@null"
+        android:textCursorDrawable="@null"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+    <View
+        android:background="#ececec"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+
+    <com.qianyi.shine.ui.account.view.ClearEditText
+        android:singleLine="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/et_vipPwd"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="请输入VIP密码"
+        android:inputType="number"
+        android:textSize="15sp"
+        android:textColorHint="@color/gray"
+        android:background="@null"
+        android:textCursorDrawable="@null"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
+    <View
+        android:background="#ececec"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <Button
+        android:id="@+id/btn_activeVip"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:background="@drawable/bg_login"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:text="激活VIP卡"
+        android:layout_width="300dp"
+        android:layout_height="45dp" />
+    <TextView
+        android:id="@+id/tv_buyVip"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/main_blue"
+        android:textSize="14sp"
+        android:text="还没有VIP卡，去购买>>"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
