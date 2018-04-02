@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:singleLine="true"
+            android:text="腾讯课堂-腾讯推出的专业在线教育平台,聚合大量优质教育机构和名师,下设职业培训"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:layout_width="250dp"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_centerVertical="true"
+            android:src="@mipmap/arrow_right"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <View
+        android:background="@color/common_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+</LinearLayout>

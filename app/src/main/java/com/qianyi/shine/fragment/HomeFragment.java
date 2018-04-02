@@ -31,14 +31,13 @@ import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.ui.gaokao_news.activity.GaoKaoNewsActivity;
 import com.qianyi.shine.ui.account.view.MEditText;
 import com.qianyi.shine.ui.college.CollegeActivity;
-import com.qianyi.shine.ui.home.FindCollegeActivity;
-import com.qianyi.shine.utils.ToastUtils;
+import com.qianyi.shine.ui.home.activity.EmploymentActivity;
+import com.qianyi.shine.ui.home.activity.FindCollegeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -143,6 +142,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         TextView count3=headView.findViewById(R.id.count3);
         TextView count4=headView.findViewById(R.id.count4);
         LinearLayout ll_findCollege=headView.findViewById(R.id.ll_findCollege);
+        LinearLayout ll_employment=headView.findViewById(R.id.ll_employment);
+        //点击事件
+        ll_findCollege.setOnClickListener(this);
+        ll_employment.setOnClickListener(this);
+
         count.setTypeface(typeface1);
         count2.setTypeface(typeface1);
         count3.setTypeface(typeface1);
@@ -169,7 +173,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         View flag4=headView.findViewById(R.id.flag4);
         gaokao_tv.setOnClickListener(this);
         flag4.setOnClickListener(this);
-        ll_findCollege.setOnClickListener(this);
 
 
 
@@ -306,8 +309,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             mAdapter.loadMoreComplete();
         }
     }
-
-
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -318,7 +319,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.ll_findCollege:
                 startActivity(new Intent(getActivity(),FindCollegeActivity.class));
                 break;
-            default:
+            case R.id.ll_employment:
+                startActivity(new Intent(getActivity(),EmploymentActivity.class));
             break;
 
 
