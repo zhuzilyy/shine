@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
@@ -65,7 +74,7 @@
                 <TextView
                     android:textColor="@color/white"
                     android:layout_marginTop="10dp"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:text="全部大学"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -96,7 +105,7 @@
                 <TextView
                     android:textColor="@color/white"
                     android:layout_marginTop="10dp"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:text="大学排名"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -129,5 +138,395 @@
             android:layout_width="50dp"
             android:layout_height="0.5dp"/>
     </LinearLayout>
+    <!--本省 北上广 全国-->
+    <LinearLayout
+        android:background="@drawable/bg_college_area"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <!--本省-->
+        <LinearLayout
+            android:id="@+id/ll_benSheng"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/bensheng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:text="本省"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
+        </LinearLayout>
+        <View
+            android:background="@color/common_line"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+        <!--北上广-->
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@+id/ll_beiShangGaung"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/beishangguang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:text="北上广"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:background="@color/common_line"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+        <!--全国-->
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@+id/ll_quanGuo"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/quanguo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:text="全国"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--按批次选学校-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_gravity="center_vertical"
+            android:background="@color/main_blue"
+            android:layout_width="50dp"
+            android:layout_height="0.5dp"/>
+        <TextView
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/main_blue"
+            android:layout_gravity="center_vertical"
+            android:textSize="14sp"
+            android:text="按批次选学校"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_gravity="center_vertical"
+            android:background="@color/main_blue"
+            android:layout_width="50dp"
+            android:layout_height="0.5dp"/>
+    </LinearLayout>
+
+
+
+    <!--批次-->
+    <LinearLayout
+        android:background="@drawable/bg_college_area"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <!--本省-->
+        <LinearLayout
+            android:id="@+id/ll_yiBen"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/yiben"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:text="本一批"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <View
+            android:background="@color/common_line"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+        <!--北上广-->
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@+id/ll_erBen"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/erben"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:text="本二批"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:background="@color/common_line"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+        <!--全国-->
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@+id/ll_sanBen"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/sanben"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:text="本三批"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <View
+            android:background="@color/common_line"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+        <!--专科-->
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@+id/ll_zhuanke"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/zhuanke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:text="专科批"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--按层次选学校-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_gravity="center_vertical"
+            android:background="@color/main_blue"
+            android:layout_width="50dp"
+            android:layout_height="0.5dp"/>
+        <TextView
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/main_blue"
+            android:layout_gravity="center_vertical"
+            android:textSize="14sp"
+            android:text="按层次选学校"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_gravity="center_vertical"
+            android:background="@color/main_blue"
+            android:layout_width="50dp"
+            android:layout_height="0.5dp"/>
+    </LinearLayout>
+    <!--按照层次-->
+    <LinearLayout
+        android:background="@drawable/bg_college_area"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <!--本省-->
+        <LinearLayout
+            android:id="@+id/ll_985"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/college_985"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:text="985"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <View
+            android:background="@color/common_line"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+        <!--北上广-->
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@+id/ll_211"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/college_211"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:text="211"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:background="@color/common_line"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+        <!--全国-->
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@+id/ll_zhuoYue"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/zhuoyue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:text="卓越"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <View
+            android:background="@color/common_line"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
+        <!--专科-->
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@+id/ll_shengZhongDian"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/shengzhongdian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:text="省重点"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+            <!--按类型选择学校-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/main_blue"
+                    android:layout_width="50dp"
+                    android:layout_height="0.5dp"/>
+                <TextView
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/main_blue"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:text="按类型选择学校"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/main_blue"
+                    android:layout_width="50dp"
+                    android:layout_height="0.5dp"/>
+            </LinearLayout>
+            <com.qianyi.shine.ui.home.view.MyGridView
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:horizontalSpacing="10dp"
+                android:verticalSpacing="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:numColumns="4"
+                android:id="@+id/gridview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

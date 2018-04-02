@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_title"/>
+    <View
+        android:background="@color/common_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <LinearLayout
+            android:id="@+id/ll_benKe"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+        <TextView
+            android:textColor="@color/main_blue"
+            android:id="@+id/tv_benKe"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="本科"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+            <View
+                android:id="@+id/view_benKe"
+                android:background="@color/main_blue"
+                android:layout_width="50dp"
+                android:layout_height="2dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_zhuanKe"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_zhuanKe"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="专科"
+                android:textSize="14sp" />
+            <View
+                android:visibility="invisible"
+                android:id="@+id/view_zhuanKe"
+                android:background="@color/main_blue"
+                android:layout_width="50dp"
+                android:layout_height="2dp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_marginTop="5dp"
+        android:background="@color/common_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <FrameLayout
+        android:id="@+id/fl_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>

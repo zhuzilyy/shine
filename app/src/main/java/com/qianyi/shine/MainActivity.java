@@ -29,8 +29,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         FragmentTransaction ft=fragmentManager.beginTransaction();
         AddOrShowFra(ft,homeFragment);
         ButterKnife.bind(this);
-
-
         bar.setMode(BottomNavigationBar.MODE_FIXED);
         bar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_DEFAULT);
         bar.addItem(new BottomNavigationItem(getResources().getDrawable(R.mipmap.main_home),"首页").setActiveColorResource(R.color.main_blue))
