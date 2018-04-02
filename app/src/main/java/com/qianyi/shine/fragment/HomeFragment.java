@@ -28,11 +28,16 @@ import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.fragment.entity.TestEntity;
+import com.qianyi.shine.ui.college.CollegeActivity;
+import com.qianyi.shine.ui.college.activity.MoreCollegeActivity;
 import com.qianyi.shine.ui.gaokao_news.activity.GaoKaoNewsActivity;
 import com.qianyi.shine.ui.account.view.MEditText;
+<<<<<<< Updated upstream
 import com.qianyi.shine.ui.college.CollegeActivity;
 import com.qianyi.shine.ui.home.activity.EmploymentActivity;
 import com.qianyi.shine.ui.home.activity.FindCollegeActivity;
+=======
+>>>>>>> Stashed changes
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,6 +173,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
             }
         });
+        //更多大学
+        TextView moreCollege=headView.findViewById(R.id.moreCollege);
+        View flag2=headView.findViewById(R.id.flag2);
+        moreCollege.setOnClickListener(this);
+        flag2.setOnClickListener(this);
         //高考头条
         TextView gaokao_tv=headView.findViewById(R.id.gaokao_tv);
         View flag4=headView.findViewById(R.id.flag4);
@@ -316,11 +326,20 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.flag4:
                 startActivity(new Intent(getActivity(),GaoKaoNewsActivity.class));
             break;
+<<<<<<< Updated upstream
             case R.id.ll_findCollege:
                 startActivity(new Intent(getActivity(),FindCollegeActivity.class));
                 break;
             case R.id.ll_employment:
                 startActivity(new Intent(getActivity(),EmploymentActivity.class));
+=======
+            case R.id.moreCollege:
+            case R.id.flag2:
+                startActivity(new Intent(getActivity(),MoreCollegeActivity.class));
+                break;
+
+            default:
+>>>>>>> Stashed changes
             break;
 
 

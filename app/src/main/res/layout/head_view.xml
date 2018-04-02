@@ -584,6 +584,7 @@
             android:src="@mipmap/right_arrow" />
 
         <TextView
+            android:id="@+id/moreCollege"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_toLeftOf="@+id/flag2"
@@ -593,6 +594,7 @@
     </RelativeLayout>
     <!--推荐大学-->
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_below="@+id/main_sectionfour_title"
         android:id="@+id/main_headRv"
         android:layout_width="match_parent"
