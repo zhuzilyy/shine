@@ -2,7 +2,6 @@ package com.qianyi.shine.ui.home;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseActivity;
-
 /**
  * Created by Administrator on 2018/4/1.
  */
