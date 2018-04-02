@@ -1,6 +1,5 @@
 package com.qianyi.shine.ui.account.activity;
 
-import android.content.Intent;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
