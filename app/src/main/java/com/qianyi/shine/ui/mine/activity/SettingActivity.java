@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.ui.account.activity.WebviewActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -53,6 +54,8 @@ public class SettingActivity extends BaseActivity{
                 startActivity(intent);
                 break;
             case R.id.rl_userAgreement:
+                intent=new Intent(SettingActivity.this,WebviewActivity.class);
+                startActivity(intent);
                 break;
         }
     }

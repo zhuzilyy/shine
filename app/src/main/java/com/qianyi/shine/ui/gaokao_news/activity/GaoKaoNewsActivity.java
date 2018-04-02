@@ -181,11 +181,9 @@ public class GaoKaoNewsActivity extends BaseActivity {
                         Toast.makeText(GaoKaoNewsActivity.this, "网络错误", Toast.LENGTH_LONG).show();
                     }
                 });
-
             }
         });
     }
-
     private void initRefreshLayout() {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
