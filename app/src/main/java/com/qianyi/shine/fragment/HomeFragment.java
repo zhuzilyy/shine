@@ -279,6 +279,21 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.gaokao_tv:
+            case R.id.flag4:
+                startActivity(new Intent(getActivity(),GaoKaoNewsActivity.class));
+                break;
+            //找大学
+            case R.id.ll_findCollege:
+                startActivity(new Intent(getActivity(),FindCollegeActivity.class));
+                break;
+            //看就业
+            case R.id.ll_employment:
+                startActivity(new Intent(getActivity(),EmploymentActivity.class));
+                break;
 
+
+        }
     }
 }
