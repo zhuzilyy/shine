@@ -1,5 +1,6 @@
 package com.qianyi.shine.ui.account.activity;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -29,10 +30,17 @@ public class WebviewActivity extends BaseActivity {
     private WebSettings webSettings;
     @Override
     protected void initViews() {
-        tv_title.setText("用户须知");
-        webSettings=wv_webview.getSettings();
-        WebviewUtil.setWebview(wv_webview, webSettings);
-        wv_webview.loadUrl("https://www.baidu.com/?tn=78040160_26_pg&ch=1");
+        Intent intent=getIntent();
+        if (intent!=null){
+            String title=intent.getStringExtra("tilte");
+            String url=intent.getStringExtra("url");
+            tv_title.setText(title);
+            webSettings=wv_webview.getSettings();
+            WebviewUtil.setWebview(wv_webview, webSettings);
+            wv_webview.loadUrl(url);
+        }
+
+
     }
 
     @Override

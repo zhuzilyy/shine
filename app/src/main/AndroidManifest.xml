@@ -107,6 +107,10 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.mine.activity.JoinUsActivity"/>
+        <!--我的关注-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.mine.activity.FocusActivity"/>
     </application>
 
 </manifest>

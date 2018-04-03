@@ -74,8 +74,17 @@
         android:layout_height="@dimen/dp_5"
         android:background="@color/light_gray"
         />
+    <!--点亮-->
+    <TextView
+        android:gravity="center"
+        android:textColor="@color/main_blue"
+        android:text="点亮VIP图标"
+        android:background="#ecf7fe"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
     <!--我的关注-->
     <RelativeLayout
+        android:id="@+id/rl_focus"
         android:layout_width="match_parent"
         android:layout_height="58dp">
         <ImageView
