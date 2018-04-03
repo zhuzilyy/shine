@@ -28,11 +28,14 @@ import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.fragment.entity.TestEntity;
+import com.qianyi.shine.ui.college.CollegeActivity;
+import com.qianyi.shine.ui.college.activity.MoreCollegeActivity;
 import com.qianyi.shine.ui.gaokao_news.activity.GaoKaoNewsActivity;
 import com.qianyi.shine.ui.account.view.MEditText;
 import com.qianyi.shine.ui.college.CollegeActivity;
 import com.qianyi.shine.ui.home.activity.EmploymentActivity;
 import com.qianyi.shine.ui.home.activity.FindCollegeActivity;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,6 +171,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
             }
         });
+        //更多大学
+        TextView moreCollege=headView.findViewById(R.id.moreCollege);
+        View flag2=headView.findViewById(R.id.flag2);
+        moreCollege.setOnClickListener(this);
+        flag2.setOnClickListener(this);
         //高考头条
         TextView gaokao_tv=headView.findViewById(R.id.gaokao_tv);
         View flag4=headView.findViewById(R.id.flag4);
@@ -176,47 +184,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
 
 
-        /***
-         * 监听软键盘右下角的搜索
-         */
-        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                Toast.makeText(mActivity, EditorInfo.IME_ACTION_SEARCH+" ==", Toast.LENGTH_SHORT).show();
-                /*判断是否是“search”键*/
-                if(actionId == EditorInfo.IME_ACTION_NEXT){
-
-                    /*隐藏软键盘*/
-                    InputMethodManager imm = (InputMethodManager) v
-                            .getContext().getSystemService(
-                                    Context.INPUT_METHOD_SERVICE);
-                    if (imm.isActive()) {
-                        imm.hideSoftInputFromWindow(
-                                v.getApplicationWindowToken(), 0);
-                    }
-
-                    Toast.makeText(mActivity, editText.getText().toLowerCase(), Toast.LENGTH_SHORT).show();
-
-
-                    return true;
-                }
-                return false;
-            }
-        });
-
-//        headView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mAdapter.setNewData(null);
-//                mAdapter.setLoadMoreView(new CustomLoadMoreView());
-//                mRecyclerView.setAdapter(mAdapter);
-//                Toast.makeText(getActivity(), "change complete", Toast.LENGTH_LONG).show();
-//
-//                mSwipeRefreshLayout.setRefreshing(true);
-//                refresh();
-//            }
-//        });
         mAdapter.addHeaderView(headView);
     }
     private void initRefreshLayout() {
@@ -309,21 +276,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             mAdapter.loadMoreComplete();
         }
     }
+
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.gaokao_tv:
-            case R.id.flag4:
-                startActivity(new Intent(getActivity(),GaoKaoNewsActivity.class));
-            break;
-            case R.id.ll_findCollege:
-                startActivity(new Intent(getActivity(),FindCollegeActivity.class));
-                break;
-            case R.id.ll_employment:
-                startActivity(new Intent(getActivity(),EmploymentActivity.class));
-            break;
 
-
-        }
     }
 }

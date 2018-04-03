@@ -25,4 +25,5 @@
     <color name="purple_end">#c2aee1</color>
     <color name="pink">#fc6a68</color>
     <color name="pink_end">#f7b4b3</color>
+    <color name="dark_gray">#3d3d3d</color>
 </resources>

@@ -47,6 +47,7 @@
                     android:layout_height="35dp">
 
                     <TextView
+                        android:id="@+id/goText_tv"
                         android:layout_width="80dp"
                         android:layout_height="35dp"
                         android:gravity="center"
