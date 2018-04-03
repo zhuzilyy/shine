@@ -30,6 +30,10 @@
         <activity android:name=".ui.college.CollegeActivity"
             android:screenOrientation="portrait"
             />
+        <!--专业主页-->
+        <activity android:name=".ui.college.activity.ProfessionalActivity"
+            android:screenOrientation="portrait"
+            />
 
         <!--更多大学-->
         <activity

@@ -23,6 +23,7 @@ import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.career_planning.entity.SuitableForMeEntity;
+import com.qianyi.shine.ui.college.activity.ProfessionalActivity;
 import com.qianyi.shine.ui.college.adapter.ProfessionAdapter;
 
 import java.util.ArrayList;
@@ -106,6 +107,13 @@ public class collegeProfessionalSettingsFragment extends BaseFragment {
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
 //        mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent=new Intent(getActivity(),ProfessionalActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
 
 
     }
