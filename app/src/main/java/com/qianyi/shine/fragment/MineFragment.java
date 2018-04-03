@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseFragment;
+import com.qianyi.shine.ui.mine.activity.FocusActivity;
 import com.qianyi.shine.ui.mine.activity.HelpCenterActivity;
 import com.qianyi.shine.ui.mine.activity.JoinUsActivity;
 import com.qianyi.shine.ui.mine.activity.SettingActivity;
@@ -41,9 +42,12 @@ public class MineFragment extends BaseFragment {
     protected void initListener() {
 
     }
-    @OnClick({R.id.rl_setting,R.id.rl_helpCenter,R.id.rl_vip})
+    @OnClick({R.id.rl_setting,R.id.rl_helpCenter,R.id.rl_vip,R.id.rl_focus})
     public void click(View view){
         switch (view.getId()){
+            case R.id.rl_focus:
+                startActivity(new Intent(getActivity(), FocusActivity.class));
+                break;
             case R.id.rl_setting:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
@@ -53,7 +57,6 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.rl_vip:
                 startActivity(new Intent(getActivity(), VipActivity.class));
-
                 break;
         }
     }

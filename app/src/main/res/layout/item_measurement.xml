@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="性格测试"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+        <TextView
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            android:drawablePadding="10dp"
+            android:text="共一份报告"
+            android:drawableRight="@mipmap/arrow_right"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:text="有道翻译提供即时免费的中文、英语、日语、韩语、法语、俄语、西班牙语、葡萄牙语、越南语全文翻译、网页翻译、文档翻译服务。"
+        android:maxLines="4"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_marginTop="10dp"
+        android:background="@color/common_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+</LinearLayout>
