@@ -83,6 +83,7 @@ public class SuitableForMyProfessionActivity extends BaseActivity {
     private void addHeadView() {
         View headView = getLayoutInflater().inflate(R.layout.head_view_suitableme, (ViewGroup) mRecyclerView.getParent(), false);
         mAdapter.addHeaderView(headView);
+
     }
 
     @Override
@@ -184,6 +185,7 @@ public class SuitableForMyProfessionActivity extends BaseActivity {
                         setData(false, forMeEntities);
                     }
                 });
+
 
             }
 
