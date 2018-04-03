@@ -51,30 +51,29 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
                 android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/dp_8"
                 android:layout_weight="1"
-                android:background="@drawable/shape_corner">
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/fdj"
-                    />
-            <com.qianyi.shine.ui.account.view.MEditText
-                android:id="@+id/main_search"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:me_del_enable="true"
-                app:me_eye_enable="false"
-                app:me_hintColor="@color/gray"
-                app:me_textColor="@color/black"
-                app:me_textSize="@dimen/dp_5"
-                android:imeOptions="actionSearch"
-                app:me_hint="搜索学校、专业"
-                app:me_padding_left="@dimen/dp_10"
+                android:background="@drawable/shape_corner"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_8">
 
-                />
+                <ImageView
+                    android:id="@+id/fdj_icon"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@mipmap/fdj" />
+
+                <TextView
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@+id/fdj_icon"
+                    android:id="@+id/main_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray"
+                    android:hint="搜索学校、专业"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -161,13 +160,13 @@
     </LinearLayout>
     <!--第二部分-->
     <LinearLayout
-        android:visibility="visible"
         android:id="@+id/main_sectionTwo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/main_sectionOne"
         android:layout_marginTop="-25dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
         <!--冲刺，保守，稳妥-->
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -433,7 +432,7 @@
         android:layout_below="@+id/main_sectionTwo"
         android:layout_marginLeft="@dimen/dp_5"
         android:layout_marginRight="@dimen/dp_5"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_15"
         android:orientation="horizontal">
         <!--找大学-->
         <LinearLayout
@@ -558,14 +557,15 @@
         android:layout_below="@+id/main_sectionThree"
         android:layout_marginTop="@dimen/dp_10"
         android:paddingLeft="@dimen/dp_15"
-        android:paddingRight="@dimen/dp_10"
-        >
+        android:paddingRight="@dimen/dp_10">
+
         <ImageView
             android:id="@+id/flag"
             android:layout_width="3dp"
             android:layout_height="18dp"
             android:layout_centerVertical="true"
             android:background="@color/main_blue" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -575,6 +575,7 @@
             android:text="推荐大学"
             android:textColor="@color/black"
             android:textSize="16sp" />
+
         <ImageView
             android:id="@+id/flag2"
             android:layout_width="20dp"
@@ -593,30 +594,42 @@
             android:textSize="12sp" />
     </RelativeLayout>
     <!--推荐大学-->
-    <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_below="@+id/main_sectionfour_title"
-        android:id="@+id/main_headRv"
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/main_headRv_LL"
         android:layout_width="match_parent"
-        android:layout_marginLeft="@dimen/dp_15"
-        android:layout_marginRight="@dimen/dp_10"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_sectionfour_title"
+        android:layout_marginBottom="@dimen/dp_10"
+
+        android:layout_marginTop="@dimen/dp_10">
+
+        <android.support.v7.widget.RecyclerView
+
+            android:id="@+id/main_headRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_10" />
+    </LinearLayout>
+
     <!--高考头条标题-->
     <RelativeLayout
         android:id="@+id/main_gaokao_title"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_below="@+id/main_headRv"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_below="@+id/main_headRv_LL"
+        android:layout_marginTop="@dimen/dp_15"
         android:paddingLeft="@dimen/dp_15"
-        android:paddingRight="@dimen/dp_10"
-        >
+        android:paddingRight="@dimen/dp_10">
+
         <ImageView
             android:id="@+id/flag3"
             android:layout_width="3dp"
             android:layout_height="18dp"
             android:layout_centerVertical="true"
             android:background="@color/main_blue" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -626,6 +639,7 @@
             android:text="高考头条"
             android:textColor="@color/black"
             android:textSize="16sp" />
+
         <ImageView
             android:id="@+id/flag4"
             android:layout_width="20dp"

@@ -6,7 +6,7 @@
     <color name="light_gray">#dfdfdf</color>
     //*******************
     <color name="main_blue">#1aa1f3</color>
-    <color name="bg">#F0F0F0</color>
+    <color name="bg">#fff</color>
     <color name="hard_color">#48495f</color>
     <color name="item_bg">#FFFFFF</color>
     <color name="clickspan_color">#00ddb6</color>

@@ -28,6 +28,7 @@ import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.fragment.entity.TestEntity;
+import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.college.CollegeActivity;
 import com.qianyi.shine.ui.college.activity.MoreCollegeActivity;
 import com.qianyi.shine.ui.gaokao_news.activity.GaoKaoNewsActivity;
@@ -64,7 +65,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     List<TestEntity> testEntities;
     private GridAdapter CollegeAdapter;
     private List<CollegeEntity> listCollege=new ArrayList<>();
-    private MEditText editText;
+    private TextView editText;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_home=inflater.inflate(R.layout.fragment_home,null);
@@ -124,11 +125,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
 //        mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
-
+        //高考头条条目点击
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-                Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_LONG).show();
+               Intent intent=new Intent(getActivity(), WebviewActivity.class);
+               startActivity(intent);
             }
         });
         /**
@@ -181,9 +183,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         View flag4=headView.findViewById(R.id.flag4);
         gaokao_tv.setOnClickListener(this);
         flag4.setOnClickListener(this);
-
-
-
         mAdapter.addHeaderView(headView);
     }
     private void initRefreshLayout() {
@@ -283,6 +282,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.gaokao_tv:
             case R.id.flag4:
                 startActivity(new Intent(getActivity(),GaoKaoNewsActivity.class));
+                break;
+            case R.id.flag2:
+            case R.id .moreCollege:
+                startActivity(new Intent(getActivity(),MoreCollegeActivity.class));
                 break;
             //找大学
             case R.id.ll_findCollege:
