@@ -99,6 +99,10 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.home.activity.EmploymentActivity"/>
+        <!--加入我们-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.mine.activity.JoinUsActivity"/>
     </application>
 
 </manifest>

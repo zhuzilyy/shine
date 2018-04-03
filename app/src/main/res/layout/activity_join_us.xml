@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_title"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="阳光志愿"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:ellipsize="end"
+        android:maxLines="6"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:text="教育部高校招生阳光工程指定信息发布平台、自主招生报名平台。发布高校招生章程,提供学生名单公示、院校信息、分数线、填报志愿、选专业、高考咨询等服务。
+教育部高校招生阳光工程指定信息发布平台、自主招生报名平台。发布高校招生章程,提供学生名单公示、院校信息、分数线、填报志愿、选专业、高考咨询等服务。"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_marginTop="20dp"
+        android:background="@color/common_line"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <!--姓名-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:text="姓名"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:textSize="15sp"
+            android:hint="点击输入"
+            android:background="@null"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <View
+        android:background="@color/common_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <!--联系电话-->
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:text="联系电话"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:inputType="number"
+            android:textSize="15sp"
+            android:hint="点击输入"
+            android:background="@null"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <View
+        android:background="@color/common_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>\
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="个人说明"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <EditText
+            android:maxLines="8"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:gravity="top"
+            android:textSize="14sp"
+            android:hint="请填写个人简介"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_college_area"
+            android:layout_width="match_parent"
+            android:layout_height="120dp" />
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_confirm"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:background="@drawable/bg_login"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:text="确认提交"
+        android:layout_width="300dp"
+        android:layout_height="45dp" />
+
+</LinearLayout>

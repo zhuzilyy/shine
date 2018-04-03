@@ -63,7 +63,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private RecyclerView main_headRv;
     List<TestEntity> testEntities;
     private GridAdapter CollegeAdapter;
-    private List<CollegeEntity> listCollege=new ArrayList<>();
+    private List<CollegeEntity> listCollege = new ArrayList<>();
     private MEditText editText;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
@@ -292,8 +292,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.ll_employment:
                 startActivity(new Intent(getActivity(),EmploymentActivity.class));
                 break;
-
-
         }
     }
 }

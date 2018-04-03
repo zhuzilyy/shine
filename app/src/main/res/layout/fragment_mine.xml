@@ -217,7 +217,7 @@
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:text="帮助"
+            android:text="加入我们"
             />
         <ImageView
             android:layout_width="22dp"
