@@ -133,6 +133,7 @@ public class collegeProfessionalSettingsFragment extends BaseFragment {
                         mAdapter.setEnableLoadMore(true);
                         mSwipeRefreshLayout.setRefreshing(false);
 
+
                     }
                 });
             }
