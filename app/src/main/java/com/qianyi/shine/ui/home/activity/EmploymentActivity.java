@@ -12,7 +12,6 @@ import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.ui.home.fragment.BenkeFragment;
 import com.qianyi.shine.ui.home.fragment.ZhuankeFragment;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
