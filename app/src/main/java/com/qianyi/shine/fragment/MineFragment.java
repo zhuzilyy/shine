@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.ui.mine.activity.HelpCenterActivity;
+import com.qianyi.shine.ui.mine.activity.JoinUsActivity;
 import com.qianyi.shine.ui.mine.activity.SettingActivity;
 import com.qianyi.shine.ui.mine.activity.VipActivity;
 
@@ -42,19 +43,17 @@ public class MineFragment extends BaseFragment {
     }
     @OnClick({R.id.rl_setting,R.id.rl_helpCenter,R.id.rl_vip})
     public void click(View view){
-        Intent intent=null;
         switch (view.getId()){
             case R.id.rl_setting:
-                intent=new Intent(getActivity(), SettingActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
             case R.id.rl_helpCenter:
-                intent=new Intent(getActivity(), HelpCenterActivity.class);
-                startActivity(intent);
+                //startActivity(new Intent(getActivity(), HelpCenterActivity.class));
+                startActivity(new Intent(getActivity(), JoinUsActivity.class));
                 break;
             case R.id.rl_vip:
-                intent=new Intent(getActivity(), VipActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(getActivity(), VipActivity.class));
+
                 break;
         }
     }
