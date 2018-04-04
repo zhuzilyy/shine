@@ -111,6 +111,10 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.mine.activity.FocusActivity"/>
+        <!--我的消息-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.mine.activity.MessageActivity"/>
     </application>
 
 </manifest>

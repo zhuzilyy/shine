@@ -10,6 +10,7 @@ import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.ui.mine.activity.FocusActivity;
 import com.qianyi.shine.ui.mine.activity.HelpCenterActivity;
 import com.qianyi.shine.ui.mine.activity.JoinUsActivity;
+import com.qianyi.shine.ui.mine.activity.MessageActivity;
 import com.qianyi.shine.ui.mine.activity.SettingActivity;
 import com.qianyi.shine.ui.mine.activity.VipActivity;
 
@@ -42,7 +43,7 @@ public class MineFragment extends BaseFragment {
     protected void initListener() {
 
     }
-    @OnClick({R.id.rl_setting,R.id.rl_helpCenter,R.id.rl_vip,R.id.rl_focus})
+    @OnClick({R.id.rl_setting,R.id.rl_helpCenter,R.id.rl_vip,R.id.rl_focus,R.id.iv_message,R.id.iv_share})
     public void click(View view){
         switch (view.getId()){
             case R.id.rl_focus:
@@ -57,6 +58,11 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.rl_vip:
                 startActivity(new Intent(getActivity(), VipActivity.class));
+                break;
+            case R.id.iv_message:
+                startActivity(new Intent(getActivity(), MessageActivity.class));
+                break;
+            case R.id.iv_share:
                 break;
         }
     }
