@@ -40,10 +40,6 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
     @BindView(R.id.Scholarship_re)
     public RelativeLayout Scholarship_re;
 
-
-
-
-
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         View layoutRes= inflater.inflate(R.layout.fragment_college_introduction,null);
@@ -63,7 +59,6 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
                 Toast.makeText(mActivity, "pp"+position, Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     @Override
@@ -81,13 +76,13 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
         switch(v.getId()){
             case R.id.Accommodation_re:
                 Intent intent_Accommodation = new Intent(getActivity(), WebviewActivity.class);
-                intent_Accommodation.putExtra("tilte","住宿条件");
+                intent_Accommodation.putExtra("title","住宿条件");
                 intent_Accommodation.putExtra("url","http://www.baidu.com");
                 getActivity().startActivity(intent_Accommodation);
                 break;
             case R.id.Scholarship_re:
                 Intent intent_Scholarship = new Intent(getActivity(), WebviewActivity.class);
-                intent_Scholarship.putExtra("tilte","奖学金设置");
+                intent_Scholarship.putExtra("title","奖学金设置");
                 intent_Scholarship.putExtra("url","http://www.baidu.com");
                 getActivity().startActivity(intent_Scholarship);
                 break;

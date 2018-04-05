@@ -1,10 +1,12 @@
-package com.qianyi.shine.ui.college;
+package com.qianyi.shine.ui.college.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,13 +28,13 @@ import butterknife.OnClick;
 
 public class CollegeActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.college_Introduction)
-    public LinearLayout college_Introduction;
+    public RelativeLayout college_Introduction;
     @BindView(R.id.college_ProfessionalSettings)
-    public LinearLayout college_ProfessionalSettings;
+    public RelativeLayout college_ProfessionalSettings;
     @BindView(R.id.college_Score)
-    public LinearLayout college_Score;
+    public RelativeLayout college_Score;
     @BindView(R.id.college_EmploymentProspects)
-    public LinearLayout college_EmploymentProspects;
+    public RelativeLayout college_EmploymentProspects;
     @BindView(R.id.indicator01)
     public View Indicator01;
     @BindView(R.id.indicator02)
@@ -55,6 +57,9 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
     public TextView collete_tv03;
     @BindView(R.id.collete_tv04)
     public TextView collete_tv04;
+    @BindView(R.id.back)
+    public ImageView back;
+
 
 
     @Override
@@ -88,10 +93,14 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-    @OnClick({R.id.college_Introduction, R.id.college_ProfessionalSettings, R.id.college_Score, R.id.college_EmploymentProspects})
+    @OnClick({R.id.college_Introduction, R.id.college_ProfessionalSettings, R.id.college_Score,
+            R.id.college_EmploymentProspects,R.id.back})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.back:
+                finish();
+                break;
             case R.id.college_Introduction:
                 showIndicator(0);
                 if(introductionFragment==null){

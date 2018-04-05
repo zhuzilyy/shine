@@ -1,5 +1,13 @@
 apply plugin: 'com.android.application'
 android {
+    signingConfigs {
+        config_xzy_release {
+            keyAlias 'android.keystore'
+            keyPassword 'android.keystore'
+            storeFile file('C:/Program Files/Java/jdk1.7.0_67/bin/android.keystore')
+            storePassword '031424'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.qianyi.shine"
@@ -16,11 +24,9 @@ android {
         }
     }
     sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
-
     repositories {
         mavenCentral()
     }
-
 }
 
 dependencies {
@@ -47,4 +53,6 @@ dependencies {
     //圆形图片
     compile 'com.makeramen:roundedimageview:2.3.0'
     compile 'com.android.support:design:26.1.0'
+    implementation project(':MPChartLib')
+    implementation project(':library_tag')
 }

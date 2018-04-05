@@ -110,6 +110,7 @@ public class collegeProfessionalSettingsFragment extends BaseFragment {
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Toast.makeText(mActivity, "专业设置", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(getActivity(),ProfessionalActivity.class);
                 getActivity().startActivity(intent);
             }

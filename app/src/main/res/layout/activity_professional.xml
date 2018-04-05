@@ -1,72 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/light_gray"
+
     >
-    <include layout="@layout/layout_title"
-        />
-    <!--head-->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/main_blue"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="哲学"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
+        android:paddingBottom="50dp">
 
-            />
+        <include layout="@layout/layout_title" />
+
+        <!--head-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="100dp"
+            android:background="@color/main_blue"
             android:gravity="center"
-            android:layout_marginTop="@dimen/dp_10"
-            >
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="所属学科：社会学"
-               android:textColor="@color/white"
-               android:textSize="14sp"
-               />
+            android:orientation="vertical">
+
             <TextView
-                android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="门类：思想类"
+                android:text="哲学"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="30sp"
+                android:textStyle="bold"
+
                 />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="所属学科：社会学"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="门类：思想类"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
         </LinearLayout>
+        <!---->
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            app:tabBackground="@color/white"
+            app:tabIndicatorColor="@color/main_blue"
+            app:tabSelectedTextColor="@color/main_blue"
+            app:tabTextColor="@color/gray" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tablayout"
+            android:layout_marginTop="@dimen/dp_5" />
 
     </LinearLayout>
-    <!---->
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tablayout"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabSelectedTextColor="@color/main_blue"
-        app:tabTextColor="@color/gray"
-        app:tabIndicatorColor="@color/main_blue"
-        app:tabBackground="@color/white"
-        android:layout_alignParentTop="true" />
-    <android.support.v4.view.ViewPager
-        android:layout_marginTop="@dimen/dp_10"
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tablayout" />
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/shape_coner_blue"
+            android:gravity="center"
+            android:text="＋ 加关注"
+            android:textColor="@color/main_blue"
+            android:textSize="16sp"
+
+            />
+
+    </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

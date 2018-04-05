@@ -29,11 +29,11 @@ import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
-import com.qianyi.shine.ui.college.CollegeActivity;
+import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.college.activity.MoreCollegeActivity;
 import com.qianyi.shine.ui.gaokao_news.activity.GaoKaoNewsActivity;
 import com.qianyi.shine.ui.account.view.MEditText;
-import com.qianyi.shine.ui.college.CollegeActivity;
+import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.home.activity.EmploymentActivity;
 import com.qianyi.shine.ui.home.activity.FindCollegeActivity;
 
@@ -132,7 +132,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
                 Intent intent = new Intent(getActivity(), WebviewActivity.class);
-                intent.putExtra("tilte", "高考头条");
+                intent.putExtra("title", "高考头条");
                 intent.putExtra("url", "http://www.qq.com");
                 startActivity(intent);
             }

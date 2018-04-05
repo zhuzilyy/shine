@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10"
+    >
+    <TextView
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="经济学"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+
+        />
+    <TextView
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="经济学防腐剂哦和覅误会发hi我和覅误会浮图峪佛问佛即佛文件佛废物和覅会未婚夫股权杨国富顾问佛服务号返回合肥 发hi乌尔"
+        android:textColor="@color/gray"
+
+        />
+    <View
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/light_gray"
+        />
+
+</LinearLayout>

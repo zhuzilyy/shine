@@ -1,7 +1,354 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red">
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+    <com.qianyi.shine.ui.college.view.MyScrollview
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <!--专业介绍-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <!--title-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_height="50dp">
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="25dp"
+                        android:background="@color/main_blue"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="专业介绍"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+
+                        />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/light_gray"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginRight="@dimen/dp_15"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:text="家乐福将额外金佛服务我金佛我我覅我二姐佛if文件覅及佛为费文件积分卡微积分范围及放假饿哦我就放假而忘记哦范围及放假哦额为减肥"
+                    android:layout_marginBottom="@dimen/dp_10"
+                     />
+            </LinearLayout>
+            <!--知识能力-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <!--title-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_height="50dp">
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="25dp"
+                        android:background="@color/main_blue"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="知识能力"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+
+                        />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/light_gray"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginRight="@dimen/dp_15"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:text="家乐福将额外金佛服务我金佛我我覅我二姐佛if文件覅及佛为费文件积分卡微积分范围及放假饿哦我就放假而忘记哦范围及放假哦额为减肥"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    />
+
+
+            </LinearLayout>
+            <!--体质要求-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <!--title-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_height="50dp">
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="25dp"
+                        android:background="@color/main_blue"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="体质要求"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+
+                        />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/light_gray"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginRight="@dimen/dp_15"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:text="家乐福将额外金佛服务我金佛我我覅我二姐佛if文件覅及佛为费文件积分卡微积分范围及放假饿哦我就放假而忘记哦范围及放假哦额为减肥"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    />
+
+
+            </LinearLayout>
+            <!--005 男女比例-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="vertical">
+                <!--title-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_10">
+
+                    <View
+                        android:id="@+id/indecator3"
+                        android:layout_width="5dp"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:background="@color/main_blue" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_toRightOf="@+id/indecator3"
+                        android:text="男女比例"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+                <!--比例图-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ProgressBar
+                        android:id="@+id/id_progress"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_marginLeft="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:max="100"
+                        android:progress="60"
+                        android:progressDrawable="@drawable/progressbar_bg" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="@dimen/dp_5">
+                        <!--男-->
+                        <ImageView
+                            android:id="@+id/nan_icon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:src="@mipmap/nan" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:layout_toRightOf="@+id/nan_icon"
+                            android:text="60%"
+                            android:textColor="@color/main_blue"
+                            android:textSize="12sp" />
+                        <!--女-->
+                        <ImageView
+                            android:id="@+id/nv_icon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/dp_15"
+                            android:src="@mipmap/nv" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:layout_toLeftOf="@+id/nv_icon"
+                            android:text="40%"
+                            android:textColor="@color/taohong"
+                            android:textSize="12sp" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <!--开设课程-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/dp_10"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!--title-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_height="50dp">
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="25dp"
+                        android:background="@color/main_blue"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="开始的课程"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+
+                        />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/light_gray"
+                    />
+                <me.gujun.android.taggroup.TagGroup
+                    android:id="@+id/tag_profession"
+                    style="@style/TagGroup.Large"
+                    android:layout_margin="@dimen/dp_10"
+                    android:layout_marginTop="10dp" />
+
+            </LinearLayout>
+            <!--对口职业-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <!--title-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_height="50dp">
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="25dp"
+                        android:background="@color/main_blue"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="对口职业"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+
+                        />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/light_gray"
+                    />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants"
+                    >
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rightprofession_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+    </com.qianyi.shine.ui.college.view.MyScrollview>
+
+</LinearLayout>

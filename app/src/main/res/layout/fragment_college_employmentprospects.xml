@@ -310,6 +310,39 @@
 
             </LinearLayout>
             <!--学校下所有专业的就业报告-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <!--title-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_10"
+
+                    android:layout_height="50dp">
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="25dp"
+                        android:background="@color/main_blue"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="学校下所有专业的就业报告"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        />
+
+                </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_allreport"
+                    android:overScrollMode="never"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
             <!--行业去向-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -337,15 +370,33 @@
                         />
 
                 </LinearLayout>
-                <View
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:layout_marginRight="@dimen/dp_10"
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chat_Industry"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/light_gray"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_height="300dp" />
+                <TextView
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="经发局囧囧繁花似锦覅设计费繁花似锦fish覅乌尔禾佛文件否铺完 符合我也就覅偶发我IE金佛我我发我IE见覅偶我发我诶见佛if围殴金佛我万佛微积分 "
+                    android:layout_marginRight="@dimen/dp_15"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:paddingBottom="20dp"
                     />
 
             </LinearLayout>
+            <View
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/light_gray"
+                />
             <!--地区去向-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -373,12 +424,22 @@
                         />
 
                 </LinearLayout>
-                <View
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:layout_marginRight="@dimen/dp_10"
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chat_Area"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/light_gray"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_height="300dp" />
+                <TextView
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="经发局囧囧繁花似锦覅设计费繁花似锦fish覅乌尔禾佛文件否铺完 符合我也就覅偶发我IE金佛我我发我IE见覅偶我发我诶见佛if围殴金佛我万佛微积分 "
+                    android:layout_marginRight="@dimen/dp_15"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:paddingBottom="20dp"
                     />
 
             </LinearLayout>

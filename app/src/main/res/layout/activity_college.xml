@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/light_gray"
+    >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -15,6 +17,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:background="@mipmap/college_gate">
+                <ImageView
+                    android:id="@+id/back"
+                    android:padding="@dimen/dp_10"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/back"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -67,19 +78,21 @@
             </RelativeLayout>
             <!--title-->
             <LinearLayout
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!--简介-->
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/college_Introduction"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+
                     android:orientation="vertical">
 
                     <TextView
+                       android:layout_centerInParent="true"
                         android:id="@+id/collete_tv01"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -88,20 +101,20 @@
                         android:textSize="14sp" />
 
                     <View
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:id="@+id/indicator01"
                         android:layout_width="24dp"
                         android:layout_height="4dp"
-                        android:layout_marginTop="@dimen/dp_5"
                         android:background="@drawable/shape_corner_blue" />
 
-                </LinearLayout>
+                </RelativeLayout>
                 <!--专业设置-->
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/college_ProfessionalSettings"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -110,25 +123,25 @@
                         android:layout_height="wrap_content"
                         android:text="专业设置"
                         android:textColor="@color/black"
-
+                        android:layout_centerInParent="true"
                         android:textSize="14sp" />
 
                     <View
                         android:id="@+id/indicator02"
                         android:layout_width="50dp"
                         android:layout_height="4dp"
-                        android:layout_marginTop="@dimen/dp_5"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:background="@drawable/shape_corner_blue"
                         android:visibility="invisible" />
 
-                </LinearLayout>
+                </RelativeLayout>
                 <!--分数线-->
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/college_Score"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -137,25 +150,25 @@
                         android:layout_height="wrap_content"
                         android:text="分数线"
                         android:textColor="@color/black"
-
+                        android:layout_centerInParent="true"
                         android:textSize="14sp" />
 
                     <View
                         android:id="@+id/indicator03"
                         android:layout_width="40dp"
                         android:layout_height="4dp"
-                        android:layout_marginTop="@dimen/dp_5"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:background="@drawable/shape_corner_blue"
                         android:visibility="invisible" />
 
-                </LinearLayout>
+                </RelativeLayout>
                 <!--就业前景-->
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/college_EmploymentProspects"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -164,23 +177,25 @@
                         android:layout_height="wrap_content"
                         android:text="就业前景"
                         android:textColor="@color/black"
-
+                        android:layout_centerInParent="true"
                         android:textSize="14sp" />
 
                     <View
                         android:id="@+id/indicator04"
                         android:layout_width="50dp"
                         android:layout_height="4dp"
-                        android:layout_marginTop="@dimen/dp_5"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
                         android:background="@drawable/shape_corner_blue"
                         android:visibility="invisible" />
 
-                </LinearLayout>
+                </RelativeLayout>
 
 
             </LinearLayout>
 
             <FrameLayout
+                android:layout_marginTop="@dimen/dp_5"
                 android:id="@+id/college_switLayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
