@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.fragment.adapter.GridAdapter;
@@ -51,8 +54,15 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
     protected void initViews() {
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),3,GridLayoutManager.VERTICAL,false);
         PicCollege_rv.setLayoutManager(gridLayoutManager);
+        PicCollege_rv.setFocusable(false);
         adapter=new PicCollegeAdapter(getActivity(),listCollege);
         PicCollege_rv.setAdapter(adapter);
+        adapter.setOnItemClickListener(new PicCollegeAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(mActivity, "pp"+position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -71,10 +81,14 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
         switch(v.getId()){
             case R.id.Accommodation_re:
                 Intent intent_Accommodation = new Intent(getActivity(), WebviewActivity.class);
+                intent_Accommodation.putExtra("tilte","住宿条件");
+                intent_Accommodation.putExtra("url","http://www.baidu.com");
                 getActivity().startActivity(intent_Accommodation);
                 break;
             case R.id.Scholarship_re:
                 Intent intent_Scholarship = new Intent(getActivity(), WebviewActivity.class);
+                intent_Scholarship.putExtra("tilte","奖学金设置");
+                intent_Scholarship.putExtra("url","http://www.baidu.com");
                 getActivity().startActivity(intent_Scholarship);
                 break;
             default:

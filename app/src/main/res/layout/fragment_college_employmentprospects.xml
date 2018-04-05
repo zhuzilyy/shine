@@ -1,8 +1,395 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/yellow"
+    android:background="@color/white"
+    android:paddingBottom="60dp"
     >
 
-</RelativeLayout>
+    <com.qianyi.shine.ui.college.view.MyScrollview
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <!--就业前景概况-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <!--title-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_height="50dp">
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="25dp"
+                        android:background="@color/main_blue"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="就业前景概况"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+
+                        />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/light_gray"
+                    />
+                <!--content-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:paddingTop="@dimen/dp_10"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <!--001-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/dp_10"
+                        android:paddingTop="@dimen/dp_10"
+                        >
+                        <!--薪酬排名-->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.9"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="33"
+                                android:textSize="16sp"
+                                android:textColor="@color/orange"
+                                />
+                            <TextView
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="薪酬排名"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                />
+
+                        </LinearLayout>
+                        <!--毕业5年月薪-->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.4"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="￥15000~8000"
+                                android:textSize="16sp"
+                                android:textColor="@color/orange"
+                                />
+                            <TextView
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="毕业5年月薪"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                />
+
+                        </LinearLayout>
+                        <!--最多去向行业-->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="互联网"
+                                android:textSize="16sp"
+                                android:textColor="@color/orange"
+                                />
+                            <TextView
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="最多去向行业"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                />
+
+                        </LinearLayout>
+                        <!--最多去向城市-->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="北京"
+                                android:textSize="16sp"
+                                android:textColor="@color/orange"
+                                />
+                            <TextView
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="最多去向城市"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!--002-->
+                    <LinearLayout
+                        android:paddingTop="@dimen/dp_10"
+                        android:paddingBottom="@dimen/dp_10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="建筑环境与能源应用工程"
+                            android:textSize="20sp"
+                            android:textColor="@color/orange"
+
+                            />
+                        <TextView
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="就业前景最好的专业"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/light_gray"
+                    />
+
+
+            </LinearLayout>
+            <!--高薪专业-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <!--title-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_10"
+
+                    android:layout_height="50dp">
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="25dp"
+                        android:background="@color/main_blue"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="高薪专业"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:descendantFocusability="blocksDescendants"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    >
+                    <LinearLayout
+
+                        android:background="@color/light_gray"
+                        android:id="@+id/ll_money"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="45dp"
+                            android:background="@color/light_gray" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="45dp"
+                            android:background="@color/gray" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_weight="5"
+                            android:gravity="center"
+                            android:text="专业名称"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="45dp"
+                            android:background="@color/gray" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_weight="2.3"
+                            android:gravity="center"
+                            android:text="毕业5年月薪"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="45dp"
+                            android:background="@color/light_gray" />
+
+                    </LinearLayout>
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_below="@+id/ll_money"
+                        android:id="@+id/rv_money"
+                        android:overScrollMode="never"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+            <!--学校下所有专业的就业报告-->
+            <!--行业去向-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <!--title-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_10"
+
+                    android:layout_height="50dp">
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="25dp"
+                        android:background="@color/main_blue"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="行业去向"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        />
+
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/light_gray"
+                    />
+
+            </LinearLayout>
+            <!--地区去向-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <!--title-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_10"
+
+                    android:layout_height="50dp">
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="25dp"
+                        android:background="@color/main_blue"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="地区去向"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        />
+
+                </LinearLayout>
+                <View
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/light_gray"
+                    />
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </com.qianyi.shine.ui.college.view.MyScrollview>
+
+
+
+</LinearLayout>

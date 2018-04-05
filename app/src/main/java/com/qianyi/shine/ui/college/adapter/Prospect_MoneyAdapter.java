@@ -2,25 +2,21 @@ package com.qianyi.shine.ui.college.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.qianyi.shine.R;
-import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/4/3.
+ * Created by Administrator on 2018/4/4.
  */
 
-public class PicCollegeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+public class Prospect_MoneyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     private Context mContext;
     private List<CollegeEntity> datas;//数据
 
@@ -31,14 +27,14 @@ public class PicCollegeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     }
 
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+    private Prospect_MoneyAdapter.OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+    public void setOnItemClickListener(Prospect_MoneyAdapter.OnRecyclerViewItemClickListener listener) {
         mOnItemClickListener = listener;
     }
 
     //适配器初始化
-    public PicCollegeAdapter(Context context, List<CollegeEntity> datas) {
+    public Prospect_MoneyAdapter(Context context, List<CollegeEntity> datas) {
         mContext = context;
         this.datas = datas;
     }
@@ -58,9 +54,9 @@ public class PicCollegeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         //根据item类别加载不同ViewHolder
         if (viewType == 0) {
             View view = LayoutInflater.from(mContext
-            ).inflate(R.layout.pic_college_item_iv, parent,
+            ).inflate(R.layout.lay_hightmoney_item, parent,
                     false);//这个布局就是一个imageview用来显示图片
-            PicCollegeAdapter.MyViewHolder holder = new PicCollegeAdapter.MyViewHolder(view);
+            Prospect_MoneyAdapter.MyViewHolder holder = new Prospect_MoneyAdapter.MyViewHolder(view);
 
 
 
@@ -72,11 +68,11 @@ public class PicCollegeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //将数据与item视图进行绑定，如果是MyViewHolder就加载网络图片，如果是MyViewHolder2就显示页数
-        if (holder instanceof PicCollegeAdapter.MyViewHolder) {
+        if (holder instanceof Prospect_MoneyAdapter.MyViewHolder) {
 
             // Picasso.with(mContext).load(datas.get(position).getUrl()).into(((MyViewHolder) holder).iv);//加载网络图片
             if(mOnItemClickListener!=null){
-                ((PicCollegeAdapter.MyViewHolder) holder).pic_item.setOnClickListener(new View.OnClickListener() {
+                ((Prospect_MoneyAdapter.MyViewHolder) holder).pic_item.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //把条目的位置回调回去
@@ -91,7 +87,7 @@ public class PicCollegeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        return datas.size() == 0? 9:0;//获取数据的个数
+        return this.datas.size();//获取数据的个数
     }
 
 
@@ -110,5 +106,4 @@ public class PicCollegeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         }
     }
-
 }

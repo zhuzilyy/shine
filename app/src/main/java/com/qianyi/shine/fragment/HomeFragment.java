@@ -51,26 +51,27 @@ import okhttp3.Response;
  */
 
 
-
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
-    private View view_home;
+    private static final int PAGE_SIZE = 6;
     @BindView(R.id.rv_list)
     public RecyclerView mRecyclerView;
     @BindView(R.id.swipeLayout)
     public SwipeRefreshLayout mSwipeRefreshLayout;
+    List<TestEntity> testEntities;
+    private View view_home;
     private PullToRefreshAdapter mAdapter;
     private int mNextRequestPage = 1;
-    private static final int PAGE_SIZE = 6;
     private RecyclerView main_headRv;
-    List<TestEntity> testEntities;
     private GridAdapter CollegeAdapter;
-    private List<CollegeEntity> listCollege=new ArrayList<>();
+    private List<CollegeEntity> listCollege = new ArrayList<>();
     private TextView editText;
+
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
-        view_home=inflater.inflate(R.layout.fragment_home,null);
+        view_home = inflater.inflate(R.layout.fragment_home, null);
         return view_home;
     }
+
     @Override
     protected void initViews() {
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
@@ -87,26 +88,26 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void initData() {
-        testEntities=new ArrayList<>();
-        testEntities.add(new TestEntity(R.mipmap.toutiao,"福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
-        testEntities.add(new TestEntity(R.mipmap.tou2,"佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
-        testEntities.add(new TestEntity(R.mipmap.tou3,"FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
-        testEntities.add(new TestEntity(R.mipmap.toutiao,"福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
-        testEntities.add(new TestEntity(R.mipmap.tou2,"佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
-        testEntities.add(new TestEntity(R.mipmap.tou3,"FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
-        testEntities.add(new TestEntity(R.mipmap.toutiao,"福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
-        testEntities.add(new TestEntity(R.mipmap.tou2,"佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
-        testEntities.add(new TestEntity(R.mipmap.tou3,"FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
+        testEntities = new ArrayList<>();
+        testEntities.add(new TestEntity(R.mipmap.toutiao, "福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
+        testEntities.add(new TestEntity(R.mipmap.tou2, "佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
+        testEntities.add(new TestEntity(R.mipmap.tou3, "FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
+        testEntities.add(new TestEntity(R.mipmap.toutiao, "福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
+        testEntities.add(new TestEntity(R.mipmap.tou2, "佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
+        testEntities.add(new TestEntity(R.mipmap.tou3, "FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
+        testEntities.add(new TestEntity(R.mipmap.toutiao, "福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
+        testEntities.add(new TestEntity(R.mipmap.tou2, "佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
+        testEntities.add(new TestEntity(R.mipmap.tou3, "FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
 
         //*********************************************
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo01,"","北京大学","北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo02,"","清华大学","北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo01,"","西京大学","北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo02,"","东北农业大学","北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo02,"","齐齐哈尔大学","北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo01,"","西北农林大学","北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo02,"","长春大学","北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo01,"","吉林动画学院","北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo01, "", "北京大学", "北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo02, "", "清华大学", "北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo01, "", "西京大学", "北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo02, "", "东北农业大学", "北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo02, "", "齐齐哈尔大学", "北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo01, "", "西北农林大学", "北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo02, "", "长春大学", "北京市/综合/211"));
+        listCollege.add(new CollegeEntity(R.mipmap.college_logo01, "", "吉林动画学院", "北京市/综合/211"));
 
     }
 
@@ -114,6 +115,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     protected void initListener() {
 
     }
+
     private void initAdapter() {
         mAdapter = new PullToRefreshAdapter();
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
@@ -129,25 +131,28 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-               Intent intent=new Intent(getActivity(), WebviewActivity.class);
-               startActivity(intent);
+                Intent intent = new Intent(getActivity(), WebviewActivity.class);
+                intent.putExtra("tilte", "高考头条");
+                intent.putExtra("url", "http://www.qq.com");
+                startActivity(intent);
             }
         });
         /**
          * 推荐大学适配器
          */
-        CollegeAdapter=new GridAdapter(getActivity(),listCollege);
+        CollegeAdapter = new GridAdapter(getActivity(), listCollege);
 
     }
+
     private void addHeadView() {
-        Typeface typeface1=Typeface.createFromAsset(getActivity().getAssets(),"fonts/bebas.ttf");
+        Typeface typeface1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/bebas.ttf");
         View headView = getLayoutInflater().inflate(R.layout.head_view, (ViewGroup) mRecyclerView.getParent(), false);
-        TextView count= headView.findViewById(R.id.suitCount);
-        TextView count2=headView.findViewById(R.id.count2);
-        TextView count3=headView.findViewById(R.id.count3);
-        TextView count4=headView.findViewById(R.id.count4);
-        LinearLayout ll_findCollege=headView.findViewById(R.id.ll_findCollege);
-        LinearLayout ll_employment=headView.findViewById(R.id.ll_employment);
+        TextView count = headView.findViewById(R.id.suitCount);
+        TextView count2 = headView.findViewById(R.id.count2);
+        TextView count3 = headView.findViewById(R.id.count3);
+        TextView count4 = headView.findViewById(R.id.count4);
+        LinearLayout ll_findCollege = headView.findViewById(R.id.ll_findCollege);
+        LinearLayout ll_employment = headView.findViewById(R.id.ll_employment);
         //点击事件
         ll_findCollege.setOnClickListener(this);
         ll_employment.setOnClickListener(this);
@@ -157,9 +162,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         count3.setTypeface(typeface1);
         count4.setTypeface(typeface1);
         //大学推荐[横向滑动的recyclerView]
-        main_headRv= headView.findViewById(R.id.main_headRv);
-        editText=headView.findViewById(R.id.main_search);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),1,GridLayoutManager.HORIZONTAL,false);
+        main_headRv = headView.findViewById(R.id.main_headRv);
+        editText = headView.findViewById(R.id.main_search);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1, GridLayoutManager.HORIZONTAL, false);
         main_headRv.setFocusable(false);
         main_headRv.setLayoutManager(gridLayoutManager);
         main_headRv.setAdapter(CollegeAdapter);
@@ -168,31 +173,33 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         CollegeAdapter.setOnItemClickListener(new GridAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent=new Intent(getActivity(), CollegeActivity.class);
+                Intent intent = new Intent(getActivity(), CollegeActivity.class);
                 startActivity(intent);
 
             }
         });
         //更多大学
-        TextView moreCollege=headView.findViewById(R.id.moreCollege);
-        View flag2=headView.findViewById(R.id.flag2);
+        TextView moreCollege = headView.findViewById(R.id.moreCollege);
+        View flag2 = headView.findViewById(R.id.flag2);
         moreCollege.setOnClickListener(this);
         flag2.setOnClickListener(this);
         //高考头条
-        TextView gaokao_tv=headView.findViewById(R.id.gaokao_tv);
-        View flag4=headView.findViewById(R.id.flag4);
+        TextView gaokao_tv = headView.findViewById(R.id.gaokao_tv);
+        View flag4 = headView.findViewById(R.id.flag4);
         gaokao_tv.setOnClickListener(this);
         flag4.setOnClickListener(this);
         mAdapter.addHeaderView(headView);
     }
+
     private void initRefreshLayout() {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-               refresh();
+                refresh();
             }
         });
     }
+
     //刷新
     private void refresh() {
         mNextRequestPage = 1;
@@ -200,11 +207,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         apiHome.refresh("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, String s) {
-                Log.i("ppp","131"+s);
+                Log.i("ppp", "131" + s);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true,testEntities);
+                        setData(true, testEntities);
                         mAdapter.setEnableLoadMore(true);
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
@@ -213,11 +220,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
-                Log.i("ppp","132"+e);
+                Log.i("ppp", "132" + e);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true,testEntities);
+                        setData(true, testEntities);
                         mAdapter.setEnableLoadMore(true);
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
@@ -228,6 +235,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         });
 
     }
+
     //加载
     private void loadMore() {
 
@@ -278,22 +286,24 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.gaokao_tv:
             case R.id.flag4:
-                startActivity(new Intent(getActivity(),GaoKaoNewsActivity.class));
+                Intent intent_news = new Intent(getActivity(), GaoKaoNewsActivity.class);
+
+                startActivity(intent_news);
                 break;
             case R.id.flag2:
-            case R.id .moreCollege:
-                startActivity(new Intent(getActivity(),MoreCollegeActivity.class));
+            case R.id.moreCollege:
+                startActivity(new Intent(getActivity(), MoreCollegeActivity.class));
                 break;
             //找大学
             case R.id.ll_findCollege:
-                startActivity(new Intent(getActivity(),FindCollegeActivity.class));
+                startActivity(new Intent(getActivity(), FindCollegeActivity.class));
                 break;
             //看就业
             case R.id.ll_employment:
-                startActivity(new Intent(getActivity(),EmploymentActivity.class));
+                startActivity(new Intent(getActivity(), EmploymentActivity.class));
                 break;
 
 
