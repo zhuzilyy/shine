@@ -1,6 +1,5 @@
 package com.qianyi.shine.ui.mine.activity;
 
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,8 +8,6 @@ import android.widget.TextView;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseActivity;
-import com.qianyi.shine.ui.home.fragment.BenkeFragment;
-import com.qianyi.shine.ui.home.fragment.ZhuankeFragment;
 import com.qianyi.shine.ui.mine.fragment.CollegeFragment;
 import com.qianyi.shine.ui.mine.fragment.MajorFragment;
 import com.qianyi.shine.ui.mine.fragment.MeasurementFragment;

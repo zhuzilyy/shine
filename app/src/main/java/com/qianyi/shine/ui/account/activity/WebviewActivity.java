@@ -32,7 +32,7 @@ public class WebviewActivity extends BaseActivity {
     protected void initViews() {
         Intent intent=getIntent();
         if (intent!=null){
-            String title=intent.getStringExtra("tilte");
+            String title=intent.getStringExtra("title");
             String url=intent.getStringExtra("url");
             tv_title.setText(title);
             webSettings=wv_webview.getSettings();
