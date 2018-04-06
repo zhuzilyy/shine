@@ -55,4 +55,5 @@ dependencies {
     compile 'com.android.support:design:26.1.0'
     implementation project(':MPChartLib')
     implementation project(':library_tag')
+    implementation project(':library_dropdownmenu')
 }
