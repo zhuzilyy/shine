@@ -4,221 +4,225 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/light_gray"
-    >
-
-        <LinearLayout
+    android:orientation="vertical">
+    <!--<com.qianyi.shine.ui.college.view.MyScrollview
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--head-->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <!--head-->
+            android:layout_height="180dp"
+            android:background="@mipmap/college_gate">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_5"
+                android:padding="@dimen/dp_10"
+                android:src="@mipmap/back" />
+
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:background="@mipmap/college_gate">
-                <ImageView
-                    android:id="@+id/back"
-                    android:padding="@dimen/dp_10"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@mipmap/back"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:layout_marginLeft="@dimen/dp_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/college_logo"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/college_logo02"
+                    app:riv_corner_radius="48dp"
+
                     />
 
-                <RelativeLayout
+                <TextView
+                    android:layout_width="28dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/college_logo"
+                    android:layout_alignRight="@+id/college_logo"
+                    android:background="@drawable/shape_corner_blue"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/collegeName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true">
+                    android:layout_below="@+id/college_logo"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="北京大学"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/college_logo"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="30dp"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/college_logo02"
-                        app:riv_corner_radius="48dp"
-
-                        />
-
-                    <TextView
-                        android:layout_width="28dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/college_logo"
-                        android:layout_alignRight="@+id/college_logo"
-                        android:background="@drawable/shape_corner_blue"
-                        android:gravity="center"
-                        android:text="1"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        android:id="@+id/collegeName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/college_logo"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="北京大学"
-                        android:textColor="@color/white"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/collegeName"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:text="·985、211、研隶属·"
-                        android:textColor="@color/white"
-                        android:textSize="14sp" />
-                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/collegeName"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="·985、211、研隶属·"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
             </RelativeLayout>
-            <!--title-->
-            <LinearLayout
-                android:background="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <!--简介-->
-                <RelativeLayout
-                    android:id="@+id/college_Introduction"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-
-                    android:orientation="vertical">
-
-                    <TextView
-                       android:layout_centerInParent="true"
-                        android:id="@+id/collete_tv01"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="简介"
-                        android:textColor="@color/main_blue"
-                        android:textSize="14sp" />
-
-                    <View
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/indicator01"
-                        android:layout_width="24dp"
-                        android:layout_height="4dp"
-                        android:background="@drawable/shape_corner_blue" />
-
-                </RelativeLayout>
-                <!--专业设置-->
-                <RelativeLayout
-                    android:id="@+id/college_ProfessionalSettings"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/collete_tv02"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="专业设置"
-                        android:textColor="@color/black"
-                        android:layout_centerInParent="true"
-                        android:textSize="14sp" />
-
-                    <View
-                        android:id="@+id/indicator02"
-                        android:layout_width="50dp"
-                        android:layout_height="4dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:background="@drawable/shape_corner_blue"
-                        android:visibility="invisible" />
-
-                </RelativeLayout>
-                <!--分数线-->
-                <RelativeLayout
-                    android:id="@+id/college_Score"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/collete_tv03"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="分数线"
-                        android:textColor="@color/black"
-                        android:layout_centerInParent="true"
-                        android:textSize="14sp" />
-
-                    <View
-                        android:id="@+id/indicator03"
-                        android:layout_width="40dp"
-                        android:layout_height="4dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:background="@drawable/shape_corner_blue"
-                        android:visibility="invisible" />
-
-                </RelativeLayout>
-                <!--就业前景-->
-                <RelativeLayout
-                    android:id="@+id/college_EmploymentProspects"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/collete_tv04"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="就业前景"
-                        android:textColor="@color/black"
-                        android:layout_centerInParent="true"
-                        android:textSize="14sp" />
-
-                    <View
-                        android:id="@+id/indicator04"
-                        android:layout_width="50dp"
-                        android:layout_height="4dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:background="@drawable/shape_corner_blue"
-                        android:visibility="invisible" />
-
-                </RelativeLayout>
-
-
-            </LinearLayout>
-
-            <FrameLayout
-                android:layout_marginTop="@dimen/dp_5"
-                android:id="@+id/college_switLayout"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+        </RelativeLayout>
+        <!--title-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal">
+            <!--简介-->
+            <RelativeLayout
+                android:id="@+id/college_Introduction"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@color/main_blue" />
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/collete_tv01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="简介"
+                    android:textColor="@color/main_blue"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/indicator01"
+                    android:layout_width="24dp"
+                    android:layout_height="4dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/shape_corner_blue" />
+
+            </RelativeLayout>
+            <!--专业设置-->
+            <RelativeLayout
+                android:id="@+id/college_ProfessionalSettings"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/collete_tv02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="专业设置"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/indicator02"
+                    android:layout_width="50dp"
+                    android:layout_height="4dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/shape_corner_blue"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+            <!--分数线-->
+            <RelativeLayout
+                android:id="@+id/college_Score"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/collete_tv03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="分数线"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/indicator03"
+                    android:layout_width="40dp"
+                    android:layout_height="4dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/shape_corner_blue"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+            <!--就业前景-->
+            <RelativeLayout
+                android:id="@+id/college_EmploymentProspects"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/collete_tv04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="就业前景"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/indicator04"
+                    android:layout_width="50dp"
+                    android:layout_height="4dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/shape_corner_blue"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+
         </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/college_switLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_weight="1"
+            android:background="@color/main_blue"
+            android:orientation="vertical" />
+    </LinearLayout>
+  <!--  </com.qianyi.shine.ui.college.view.MyScrollview>-->
+
     <LinearLayout
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
         android:background="@color/white"
-        android:gravity="center"
-        android:layout_height="50dp">
+        android:gravity="center">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/shape_coner_blue"
             android:gravity="center"
             android:text="＋ 加关注"
-            android:textSize="16sp"
             android:textColor="@color/main_blue"
-            android:background="@drawable/shape_coner_blue"
-            android:layout_marginRight="45dp"
-            android:layout_marginLeft="45dp"
+            android:textSize="16sp"
 
             />
 
