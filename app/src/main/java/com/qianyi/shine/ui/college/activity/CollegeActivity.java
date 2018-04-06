@@ -100,6 +100,7 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.back:
                 finish();
+
                 break;
             case R.id.college_Introduction:
                 showIndicator(0);
