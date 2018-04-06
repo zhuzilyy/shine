@@ -38,7 +38,6 @@ public class MineFragment extends BaseFragment {
         view_mine=inflater.inflate(R.layout.fragment_mine,null);
         return view_mine;
     }
-
     @Override
     protected void initViews() {
         view_share=LayoutInflater.from(getActivity()).inflate(R.layout.pw_share,null);
