@@ -1,5 +1,6 @@
 package com.qianyi.shine.ui.home.activity;
 
+import android.view.View;
 import android.widget.GridView;
 
 import com.qianyi.shine.R;
@@ -8,6 +9,7 @@ import com.qianyi.shine.ui.home.adapter.CollegeAdapter;
 import com.qianyi.shine.ui.home.view.MyGridView;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2018/4/1.
@@ -41,5 +43,13 @@ public class FindCollegeActivity extends BaseActivity {
     @Override
     protected void setStatusBarColor() {
 
+    }
+    @OnClick({R.id.iv_back})
+    public void click(View view){
+        switch (view.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+        }
     }
 }

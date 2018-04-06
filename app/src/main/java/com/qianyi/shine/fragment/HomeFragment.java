@@ -36,6 +36,7 @@ import com.qianyi.shine.ui.account.view.MEditText;
 import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.home.activity.EmploymentActivity;
 import com.qianyi.shine.ui.home.activity.FindCollegeActivity;
+import com.qianyi.shine.ui.home.activity.FindMajorActivity;
 
 
 import java.util.ArrayList;
@@ -153,9 +154,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         TextView count4 = headView.findViewById(R.id.count4);
         LinearLayout ll_findCollege = headView.findViewById(R.id.ll_findCollege);
         LinearLayout ll_employment = headView.findViewById(R.id.ll_employment);
+        LinearLayout ll_findMajor = headView.findViewById(R.id.ll_findMajor);
         //点击事件
         ll_findCollege.setOnClickListener(this);
         ll_employment.setOnClickListener(this);
+        ll_findMajor.setOnClickListener(this);
 
         count.setTypeface(typeface1);
         count2.setTypeface(typeface1);
@@ -305,7 +308,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.ll_employment:
                 startActivity(new Intent(getActivity(), EmploymentActivity.class));
                 break;
-
+            //查专业
+            case R.id.ll_findMajor:
+                startActivity(new Intent(getActivity(), FindMajorActivity.class));
+                break;
 
         }
     }

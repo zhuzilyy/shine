@@ -1,9 +1,14 @@
 package com.qianyi.shine.fragment;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseFragment;
@@ -14,6 +19,7 @@ import com.qianyi.shine.ui.mine.activity.MessageActivity;
 import com.qianyi.shine.ui.mine.activity.SettingActivity;
 import com.qianyi.shine.ui.mine.activity.VipActivity;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 
@@ -23,6 +29,10 @@ import butterknife.OnClick;
 
 public class MineFragment extends BaseFragment {
     private View view_mine;
+    private PopupWindow pw_share;
+    private View view_share;
+    @BindView(R.id.ll_mine)
+    LinearLayout ll_mine;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_mine=inflater.inflate(R.layout.fragment_mine,null);
@@ -31,9 +41,8 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-
+        view_share=LayoutInflater.from(getActivity()).inflate(R.layout.pw_share,null);
     }
-
     @Override
     protected void initData() {
 
@@ -63,7 +72,39 @@ public class MineFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), MessageActivity.class));
                 break;
             case R.id.iv_share:
+                shwoSharePw();
                 break;
         }
+    }
+   //弹出分享pw
+    private void shwoSharePw() {
+        pw_share = new PopupWindow(getActivity());
+        pw_share.setContentView(view_share);
+        pw_share.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        pw_share.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        pw_share.setTouchable(true);
+        pw_share.setFocusable(true);
+        pw_share.setBackgroundDrawable(new BitmapDrawable());
+        pw_share.setAnimationStyle(R.style.AnimBottom);
+        pw_share
+                .showAtLocation(ll_mine, Gravity.BOTTOM, 0, 0);
+        // 设置pw弹出时候的背景颜色的变化
+        backgroundAlpha(0.5f);
+        pw_share.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1f);
+            }
+        });
+    }
+    /**
+     * 设置添加屏幕的背景透明度
+     *
+     * @param
+     */
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+        lp.alpha = bgAlpha;
+        getActivity().getWindow().setAttributes(lp);
     }
 }
