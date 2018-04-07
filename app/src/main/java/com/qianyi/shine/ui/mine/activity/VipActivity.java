@@ -58,6 +58,7 @@ public class VipActivity extends BaseActivity {
         pw_payMethod.setTouchable(true);
         pw_payMethod.setFocusable(true);
         pw_payMethod.setBackgroundDrawable(new BitmapDrawable());
+        pw_payMethod.setAnimationStyle(R.style.AnimBottom);
         pw_payMethod
                 .showAtLocation(rl_vip, Gravity.BOTTOM, 0, 0);
         // 设置pw弹出时候的背景颜色的变化
@@ -98,8 +99,8 @@ public class VipActivity extends BaseActivity {
         pw_buyVip.setTouchable(true);
         pw_buyVip.setFocusable(true);
         pw_buyVip.setBackgroundDrawable(new BitmapDrawable());
-        pw_buyVip
-                .showAtLocation(rl_vip, Gravity.BOTTOM, 0, 0);
+        pw_buyVip.setAnimationStyle(R.style.AnimBottom);
+        pw_buyVip.showAtLocation(rl_vip, Gravity.BOTTOM, 0, 0);
         // 设置pw弹出时候的背景颜色的变化
         backgroundAlpha(0.5f);
         pw_buyVip.setOnDismissListener(new PopupWindow.OnDismissListener() {

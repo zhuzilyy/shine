@@ -37,8 +37,6 @@
         <item name="android:textSize">10sp</item>
         <item name="android:textColor">#FFCCCCCC</item>
     </style>
-
-
     <!--启动界面主题-->
     <style name="Launch"  parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
@@ -46,5 +44,10 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="AnimBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
 </resources>

@@ -115,6 +115,10 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.mine.activity.MessageActivity"/>
+        <!--查专业-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.home.activity.FindMajorActivity"/>
     </application>
 
 </manifest>
