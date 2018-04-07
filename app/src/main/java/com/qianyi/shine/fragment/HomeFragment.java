@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.home.activity.EmploymentActivity;
 import com.qianyi.shine.ui.home.activity.FindCollegeActivity;
 import com.qianyi.shine.ui.home.activity.FindMajorActivity;
+import com.qianyi.shine.ui.home.activity.PriorityCollegeActivity;
 import com.qianyi.shine.ui.home.activity.SearchOccupationActivity;
 
 
@@ -157,11 +159,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         LinearLayout ll_employment = headView.findViewById(R.id.ll_employment);
         LinearLayout ll_findMajor = headView.findViewById(R.id.ll_findMajor);
         LinearLayout ll_search_occupation = headView.findViewById(R.id.ll_search_occupation);
+        RelativeLayout rl_priorityCollege = headView.findViewById(R.id.rl_priorityCollege);
         //点击事件
         ll_findCollege.setOnClickListener(this);
         ll_employment.setOnClickListener(this);
         ll_findMajor.setOnClickListener(this);
         ll_search_occupation.setOnClickListener(this);
+        rl_priorityCollege.setOnClickListener(this);
 
         count.setTypeface(typeface1);
         count2.setTypeface(typeface1);
@@ -318,6 +322,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             //查专业
             case R.id.ll_search_occupation:
                 startActivity(new Intent(getActivity(), SearchOccupationActivity.class));
+                break;
+            //查专业
+            case R.id.rl_priorityCollege:
+                startActivity(new Intent(getActivity(), PriorityCollegeActivity.class));
                 break;
         }
     }

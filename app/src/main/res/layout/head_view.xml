@@ -314,6 +314,7 @@
         </android.support.v7.widget.CardView>
         <!--院校优先填报-->
         <RelativeLayout
+            android:id="@+id/rl_priorityCollege"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_marginLeft="@dimen/dp_10"

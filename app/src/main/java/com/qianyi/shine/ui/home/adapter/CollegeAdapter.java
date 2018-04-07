@@ -12,7 +12,6 @@ import com.qianyi.shine.R;
 /**
  * Created by NEUNB on 2018/4/2.
  */
-
 public class CollegeAdapter extends BaseAdapter {
     private Context context;
     private String[] collegeTypes={"综合","理工","财经","农林","医药","师范","体育","政法","艺术","民族","军事","语言"};
