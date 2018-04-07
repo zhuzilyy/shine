@@ -1,46 +1,37 @@
-package com.qianyi.shine.ui.home.fragment;
+package com.qianyi.shine.ui.home.activity;
 
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.kanade.treeadapter.Node;
 import com.kanade.treeadapter.TreeAdapter;
 import com.kanade.treeadapter.TreeItemClickListener;
 import com.qianyi.shine.R;
-import com.qianyi.shine.base.BaseFragment;
+import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.ui.college.activity.ProfessionalActivity;
-import com.qianyi.shine.ui.home.activity.SearchOccupationActivity;
-import com.qianyi.shine.ui.home.bean.Major;
 import com.qianyi.shine.ui.home.bean.Major;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
- * Created by Administrator on 2018/4/6.
+ * Created by Administrator on 2018/4/7.
  */
 
-public class MajorBenkeFragment extends BaseFragment {
+public class SearchOccupationActivity extends BaseActivity {
     @BindView(R.id.rv)
     RecyclerView recyclerView;
-    private View view_benke;
     private List<Major> list;
     @Override
-    protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
-        view_benke=inflater.inflate(R.layout.fragment_major_benke,null);
-        return view_benke;
-    }
-
-    @Override
     protected void initViews() {
-        //majorList=new ArrayList<>();
+
     }
     @Override
     protected void initData() {
@@ -85,8 +76,8 @@ public class MajorBenkeFragment extends BaseFragment {
             Major secondMajor=new Major(i,5,"工程经济学");
             list.add(secondMajor);
         }
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        final TreeAdapter<Major> adapter = new TreeAdapter<>(getActivity());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        final TreeAdapter<Major> adapter = new TreeAdapter<>(this);
         adapter.setNodes(list);
         adapter.setListener(new TreeItemClickListener() {
             @Override
@@ -96,16 +87,31 @@ public class MajorBenkeFragment extends BaseFragment {
                 }*/
                 int level = node.getLevel();
                 if (level==2){
-                    startActivity(new Intent(getActivity(), ProfessionalActivity.class));
+                    startActivity(new Intent(SearchOccupationActivity.this, OccupationDetailActivity.class));
                 }
-                //Toast.makeText(getActivity(), node.getId()+"=======getId======", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SearchOccupationActivity.this, node.getId()+"=======getId======", Toast.LENGTH_SHORT).show();
             }
         });
         recyclerView.setAdapter(adapter);
     }
-
+    @Override
+    protected void getResLayout() {
+        setContentView(R.layout.activity_search_occpation);
+    }
     @Override
     protected void initListener() {
 
+    }
+    @Override
+    protected void setStatusBarColor() {
+
+    }
+    @OnClick({R.id.iv_back})
+    public void click(View view){
+        switch (view.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+        }
     }
 }

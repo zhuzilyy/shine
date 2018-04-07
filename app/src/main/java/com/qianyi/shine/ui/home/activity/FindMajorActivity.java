@@ -34,7 +34,7 @@ public class FindMajorActivity extends BaseActivity {
     @Override
     protected void initViews() {
         zhuankeFragment=new MajorZhuanKeFragment();
-        benkeFragment=new MajorZhuanKeFragment();
+        benkeFragment=new MajorBenkeFragment();
         //初始化碎片
         initFragment();
     }
@@ -57,7 +57,7 @@ public class FindMajorActivity extends BaseActivity {
     }
     private void initFragment() {
         if (benkeFragment == null) {
-            benkeFragment = new BenkeFragment();
+            benkeFragment = new MajorBenkeFragment();
         }
 
         if (!benkeFragment.isAdded()) {

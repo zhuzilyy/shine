@@ -1,1 +1,1 @@
-include ':app', ':library', ':MPChartLib', ':library_tag', ':library_dropdownmenu'
+include ':app', ':library', ':MPChartLib', ':library_tag', ':library_dropdownmenu', ':treeadapter'

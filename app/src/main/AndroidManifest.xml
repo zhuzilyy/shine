@@ -119,6 +119,18 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.home.activity.FindMajorActivity"/>
+        <!--大学列表-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.home.activity.CollegeListActivity"/>
+        <!--搜专业-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.home.activity.SearchOccupationActivity"/>
+        <!--专业详情-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.home.activity.OccupationDetailActivity"/>
     </application>
 
 </manifest>

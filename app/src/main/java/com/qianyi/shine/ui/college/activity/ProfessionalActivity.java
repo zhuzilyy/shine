@@ -40,7 +40,6 @@ public class ProfessionalActivity extends BaseActivity implements View.OnClickLi
         title.setText("哲学");
 
         myPageAdapter = new MyPageAdapter(getSupportFragmentManager());
-
         ArrayList<Fragment> datas = new ArrayList<Fragment>();
         datas.add(new Profession_BaseInfoFragment());
         datas.add(new Profession_ProspectsFragment());

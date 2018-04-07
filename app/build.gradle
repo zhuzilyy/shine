@@ -56,4 +56,5 @@ dependencies {
     implementation project(':MPChartLib')
     implementation project(':library_tag')
     implementation project(':library_dropdownmenu')
+    implementation project(':treeadapter')
 }
