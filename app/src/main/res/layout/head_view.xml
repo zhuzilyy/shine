@@ -389,6 +389,7 @@
         </RelativeLayout>
         <!--智能填报-->
         <RelativeLayout
+            android:id="@+id/rl_integenceFill"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_marginLeft="@dimen/dp_10"

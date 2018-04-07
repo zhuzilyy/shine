@@ -132,7 +132,6 @@ public class PriorityCollegeActivity extends BaseActivity {
         popupViews.add(orderView);
         popupViews.add(areaView);
         popupViews.add(typeView);
-
         //填充布局
         View contentView= LayoutInflater.from(PriorityCollegeActivity.this).inflate(R.layout.layout_refresh,null);
         swipeRefreshLayout=contentView.findViewById(R.id.swipeLayout);

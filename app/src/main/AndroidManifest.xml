@@ -134,5 +134,9 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.home.activity.PriorityCollegeActivity"/>
+        <!--智能填报-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.home.activity.IntelligentFillCollegeActivity"/>
     </application>
 </manifest>

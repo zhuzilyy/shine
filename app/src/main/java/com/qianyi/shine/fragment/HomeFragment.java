@@ -1,6 +1,5 @@
 package com.qianyi.shine.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -9,12 +8,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,11 +29,10 @@ import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.college.activity.MoreCollegeActivity;
 import com.qianyi.shine.ui.gaokao_news.activity.GaoKaoNewsActivity;
-import com.qianyi.shine.ui.account.view.MEditText;
-import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.home.activity.EmploymentActivity;
 import com.qianyi.shine.ui.home.activity.FindCollegeActivity;
 import com.qianyi.shine.ui.home.activity.FindMajorActivity;
+import com.qianyi.shine.ui.home.activity.IntelligentFillCollegeActivity;
 import com.qianyi.shine.ui.home.activity.PriorityCollegeActivity;
 import com.qianyi.shine.ui.home.activity.SearchOccupationActivity;
 
@@ -160,12 +155,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         LinearLayout ll_findMajor = headView.findViewById(R.id.ll_findMajor);
         LinearLayout ll_search_occupation = headView.findViewById(R.id.ll_search_occupation);
         RelativeLayout rl_priorityCollege = headView.findViewById(R.id.rl_priorityCollege);
+        RelativeLayout rl_integenceFill = headView.findViewById(R.id.rl_integenceFill);
         //点击事件
         ll_findCollege.setOnClickListener(this);
         ll_employment.setOnClickListener(this);
         ll_findMajor.setOnClickListener(this);
         ll_search_occupation.setOnClickListener(this);
         rl_priorityCollege.setOnClickListener(this);
+        rl_integenceFill.setOnClickListener(this);
 
         count.setTypeface(typeface1);
         count2.setTypeface(typeface1);
@@ -326,6 +323,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             //查专业
             case R.id.rl_priorityCollege:
                 startActivity(new Intent(getActivity(), PriorityCollegeActivity.class));
+                break;
+            //智能填报
+            case R.id.rl_integenceFill:
+                startActivity(new Intent(getActivity(), IntelligentFillCollegeActivity.class));
                 break;
         }
     }
