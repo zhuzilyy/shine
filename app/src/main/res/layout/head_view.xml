@@ -482,6 +482,7 @@
         </LinearLayout>
         <!--搜职业-->
         <LinearLayout
+            android:id="@+id/ll_search_occupation"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

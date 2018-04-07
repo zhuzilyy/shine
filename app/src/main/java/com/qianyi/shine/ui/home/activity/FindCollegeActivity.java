@@ -1,5 +1,6 @@
 package com.qianyi.shine.ui.home.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.GridView;
 
@@ -23,7 +24,6 @@ public class FindCollegeActivity extends BaseActivity {
     protected void initViews() {
 
     }
-
     @Override
     protected void initData() {
         collegeAdapter=new CollegeAdapter(this);
@@ -44,11 +44,14 @@ public class FindCollegeActivity extends BaseActivity {
     protected void setStatusBarColor() {
 
     }
-    @OnClick({R.id.iv_back})
+    @OnClick({R.id.iv_back,R.id.ll_allCollege})
     public void click(View view){
         switch (view.getId()){
             case R.id.iv_back:
                 finish();
+                break;
+            case R.id.ll_allCollege:
+                startActivity(new Intent(FindCollegeActivity.this,CollegeListActivity.class));
                 break;
         }
     }
