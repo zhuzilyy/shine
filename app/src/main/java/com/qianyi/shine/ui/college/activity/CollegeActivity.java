@@ -75,7 +75,7 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void initData() {
-
+            //先提交
     }
 
     @Override
