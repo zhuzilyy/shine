@@ -217,8 +217,8 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:layout_marginTop="@dimen/dp_10"
                     android:id="@+id/chart_01"
-                    android:layout_width="260dp"
-                    android:layout_height="260dp" />
+                    android:layout_width="240dp"
+                    android:layout_height="240dp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -258,8 +258,8 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:layout_marginTop="@dimen/dp_10"
                     android:id="@+id/chart_02"
-                    android:layout_width="260dp"
-                    android:layout_height="260dp" />
+                    android:layout_width="240dp"
+                    android:layout_height="240dp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -298,8 +298,8 @@
                 <com.github.mikephil.charting.charts.PieChart
                     android:layout_marginTop="@dimen/dp_10"
                     android:id="@+id/chart_03"
-                    android:layout_width="260dp"
-                    android:layout_height="260dp" />
+                    android:layout_width="240dp"
+                    android:layout_height="240dp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

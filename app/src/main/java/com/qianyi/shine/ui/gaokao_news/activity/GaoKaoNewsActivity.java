@@ -1,5 +1,6 @@
 package com.qianyi.shine.ui.gaokao_news.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.fragment.entity.TestEntity;
+import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.gaokao_news.adapter.GaokaoAdapter;
 import com.qianyi.shine.ui.gaokao_news.view.XTitleView;
 
@@ -114,7 +116,11 @@ public class GaoKaoNewsActivity extends BaseActivity {
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-                Toast.makeText(GaoKaoNewsActivity.this, Integer.toString(position), Toast.LENGTH_LONG).show();
+               Intent intent=new Intent(GaoKaoNewsActivity.this, WebviewActivity.class);
+               intent.putExtra("title","高考头条");
+               intent.putExtra("url","http://www.baidu.com");
+
+               startActivity(intent);
             }
         });
 
