@@ -206,7 +206,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             public void onItemClick(int position) {
                 Intent intent = new Intent(getActivity(), CollegeActivity.class);
                 startActivity(intent);
-
             }
         });
         //更多大学
