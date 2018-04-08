@@ -35,11 +35,12 @@
                     android:src="@mipmap/location" />
 
                 <TextView
+                    android:id="@+id/cityName"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/dp_6"
                     android:gravity="center"
-                    android:text="沈阳"
+                    android:text="定位中.."
                     android:textColor="@color/white" />
 
             </LinearLayout>

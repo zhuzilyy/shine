@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qianyi.shine.R;
@@ -64,7 +69,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private GridAdapter CollegeAdapter;
     private List<CollegeEntity> listCollege = new ArrayList<>();
     private TextView editText;
+    //==========定位============
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+    //声明AMapLocationClientOption对象
+    public AMapLocationClientOption mLocationOption = null;
 
+    //初始化AMapLocationClientOption对象
+    private TextView cityname;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_home = inflater.inflate(R.layout.fragment_home, null);
@@ -73,6 +85,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void initViews() {
+        //获取定位
+        getCityName();
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //上拉加载
@@ -156,6 +170,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         LinearLayout ll_search_occupation = headView.findViewById(R.id.ll_search_occupation);
         RelativeLayout rl_priorityCollege = headView.findViewById(R.id.rl_priorityCollege);
         RelativeLayout rl_integenceFill = headView.findViewById(R.id.rl_integenceFill);
+
+        cityname=headView.findViewById(R.id.cityName);
         //点击事件
         ll_findCollege.setOnClickListener(this);
         ll_employment.setOnClickListener(this);
@@ -329,5 +345,50 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), IntelligentFillCollegeActivity.class));
                 break;
         }
+    }
+
+    private void getCityName() {
+
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getActivity());
+        mLocationOption = new AMapLocationClientOption();
+        mLocationOption.setLocationPurpose(AMapLocationClientOption.AMapLocationPurpose.SignIn);
+        //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        //设置定位模式为AMapLocationMode.Device_Sensors，仅设备模式。
+        // mLocationOption.setLocationMode(AMapLocationMode.Device_Sensors);
+        mLocationOption.setInterval(1000);
+        //设置是否返回地址信息（默认返回地址信息）
+        mLocationOption.setNeedAddress(true);
+        //启动定位
+        mLocationClient.startLocation();
+
+        if (null != mLocationClient) {
+            mLocationClient.setLocationOption(mLocationOption);
+            //设置场景模式后最好调用一次stop，再调用start以保证场景模式生效
+            mLocationClient.stopLocation();
+            mLocationClient.startLocation();
+        }
+
+        //设置定位回调监听
+        mLocationClient.setLocationListener(new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation aMapLocation) {
+                Log.i("xzy", "errcode==" + aMapLocation.getErrorCode());
+                if (aMapLocation.getErrorCode() == 0) {
+                    double lat = aMapLocation.getLatitude();//维度
+                    double log = aMapLocation.getLongitude();//经度
+                    if(!TextUtils.isEmpty(aMapLocation.getCity())){
+                        cityname.setText(aMapLocation.getCity());
+                    }
+//                    LatLng latLng=new LatLng(lat,log);
+//                    changeLocation(latLng);
+                    Log.i("xzy", "111111111111111111111111");
+                } else {
+                    //定位失败
+                    Log.i("xzy", "err+" + aMapLocation.getErrorCode() + "  info=" + aMapLocation.getErrorInfo());
+                }
+            }
+        });
     }
 }
