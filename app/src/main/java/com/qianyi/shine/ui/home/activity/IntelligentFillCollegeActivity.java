@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,7 @@ import okhttp3.Response;
  * Created by Administrator on 2018/4/7.
  */
 
-public class IntelligentFillCollegeActivity extends BaseActivity {
+public class IntelligentFillCollegeActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.rv_college)
@@ -53,6 +54,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity {
         initRefreshLayout();
         swipeRefreshLayout.setRefreshing(true);
         refresh();
+        //初始化头布局
 
     }
     @Override
@@ -90,6 +92,13 @@ public class IntelligentFillCollegeActivity extends BaseActivity {
         //添加headerView
         View view_header=getLayoutInflater().inflate(R.layout.header_intelligence_fill,null);
         mAdapter.addHeaderView(view_header);
+        //点击事件
+        view_header.findViewById(R.id.rl_willing).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(IntelligentFillCollegeActivity.this,WillingsSettingActivity.class));
+            }
+        });
 
 
         rv_college.addOnItemTouchListener(new OnItemClickListener() {
@@ -198,6 +207,15 @@ public class IntelligentFillCollegeActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.iv_back:
                 finish();
+                break;
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tv_willings:
+                Toast.makeText(this, "22222222222222", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

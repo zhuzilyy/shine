@@ -165,5 +165,13 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.home.activity.IntelligentFillCollegeActivity"/>
+        <!--意愿设置-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.home.activity.WillingsSettingActivity"/>
+        <!--选择地区-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.home.activity.SelectCollegeAreaActivity"/>
     </application>
 </manifest>
