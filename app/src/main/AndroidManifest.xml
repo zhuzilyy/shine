@@ -36,7 +36,7 @@
         <!--高德定位开始-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="b0caadc3563da77f5c9d2a17c16a82d8"/>
+            android:value="bef91b325ee3115b60dba2764a3dbf03"/>
         <service android:name="com.amap.api.location.APSService"/>
         <!--高德定位结束-->
         <activity android:name=".MainActivity"
