@@ -3,7 +3,7 @@ android {
     signingConfigs {
         config_xzy_release {
             keyAlias 'android.keystore'
-            keyPassword 'android.keystore'
+            keyPassword '031424'
             storeFile file('C:/Program Files/Java/jdk1.7.0_67/bin/android.keystore')
             storePassword '031424'
         }
@@ -16,16 +16,22 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.config_xzy_release
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            signingConfig signingConfigs.config_xzy_release
+        }
     }
     sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
     repositories {
         mavenCentral()
+    }
+    productFlavors {
     }
 }
 

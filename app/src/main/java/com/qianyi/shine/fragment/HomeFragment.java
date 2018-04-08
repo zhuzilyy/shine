@@ -92,7 +92,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     protected void initViews() {
 
-        //Log.i("loc",sHA1(getActivity()));
+        Log.i("loc",sHA1(getActivity()));
         //获取定位
         getCityName();
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
