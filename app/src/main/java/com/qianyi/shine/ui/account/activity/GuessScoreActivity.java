@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.qianyi.shine.MainActivity;
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.ui.home.activity.SelectCollegeAreaActivity;
 import com.qianyi.shine.utils.SetStatusBarColor;
 
 import butterknife.BindView;
@@ -38,7 +39,7 @@ public class GuessScoreActivity extends BaseActivity {
     protected void initListener() {
 
     }
-    @OnClick({R.id.btn_confirm,R.id.iv_back})
+    @OnClick({R.id.btn_confirm,R.id.iv_back,R.id.tv_selectArea})
     public void click(View view){
         switch (view.getId()){
             case R.id.btn_confirm:
@@ -46,6 +47,9 @@ public class GuessScoreActivity extends BaseActivity {
                 break;
             case R.id.iv_back:
                 finish();
+                break;
+            case R.id.tv_selectArea:
+                jumpActivity(this,SelectCollegeAreaActivity.class);
                 break;
         }
     }
