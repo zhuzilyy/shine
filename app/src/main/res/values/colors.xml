@@ -34,4 +34,8 @@
     <color name="mask_color">#88888888</color>
     <color name="check_bg">#f2f2f2</color>
     <color name="un_press_color">#9C27B0</color>
+    <color name="cicle_red_light">#ffffff</color>
+    <color name="cicle_red">#ff2256</color>
+    <color name="cicle_yellow">#ffb811</color>
+    <color name="cicle_green">#48990f</color>
 </resources>
