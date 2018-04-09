@@ -22,6 +22,7 @@
         android:layout_marginTop="23dp"
         android:textSize="18sp"
         android:textColor="#424242"/>
+
     <TextView
         android:id="@+id/no_internet_wrong_why"
         android:layout_width="wrap_content"
