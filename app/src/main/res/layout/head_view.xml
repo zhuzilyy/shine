@@ -7,7 +7,6 @@
     android:gravity="center">
     <!--蓝色部分-->
     <LinearLayout
-
         android:id="@+id/main_sectionOne"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +14,6 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingBottom="50dp"
-
         android:visibility="visible">
         <!--定位+搜索-->
         <LinearLayout
@@ -356,6 +354,7 @@
         </RelativeLayout>
         <!--专业优先填报-->
         <RelativeLayout
+            android:id="@+id/rl_majorPriority"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_marginLeft="@dimen/dp_10"
@@ -378,7 +377,7 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_toRightOf="@+id/icon02"
                 android:gravity="center_vertical"
-                android:text="院校优先填报"
+                android:text="专业优先填报"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 

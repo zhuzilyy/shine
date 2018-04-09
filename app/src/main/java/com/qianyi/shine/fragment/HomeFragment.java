@@ -41,6 +41,7 @@ import com.qianyi.shine.ui.home.activity.EmploymentActivity;
 import com.qianyi.shine.ui.home.activity.FindCollegeActivity;
 import com.qianyi.shine.ui.home.activity.FindMajorActivity;
 import com.qianyi.shine.ui.home.activity.IntelligentFillCollegeActivity;
+import com.qianyi.shine.ui.home.activity.OccupationDetailActivity;
 import com.qianyi.shine.ui.home.activity.PriorityCollegeActivity;
 import com.qianyi.shine.ui.home.activity.SearchOccupationActivity;
 
@@ -178,6 +179,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         LinearLayout ll_search_occupation = headView.findViewById(R.id.ll_search_occupation);
         RelativeLayout rl_priorityCollege = headView.findViewById(R.id.rl_priorityCollege);
         RelativeLayout rl_integenceFill = headView.findViewById(R.id.rl_integenceFill);
+        RelativeLayout rl_majorPriority = headView.findViewById(R.id.rl_majorPriority);
 
         cityname=headView.findViewById(R.id.cityName);
         //点击事件
@@ -187,6 +189,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         ll_search_occupation.setOnClickListener(this);
         rl_priorityCollege.setOnClickListener(this);
         rl_integenceFill.setOnClickListener(this);
+        rl_majorPriority.setOnClickListener(this);
 
         count.setTypeface(typeface1);
         count2.setTypeface(typeface1);
@@ -350,6 +353,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             //智能填报
             case R.id.rl_integenceFill:
                 startActivity(new Intent(getActivity(), IntelligentFillCollegeActivity.class));
+                break;
+            //专业优先填报
+            case R.id.rl_majorPriority:
+                startActivity(new Intent(getActivity(), FindMajorActivity.class));
                 break;
         }
     }
