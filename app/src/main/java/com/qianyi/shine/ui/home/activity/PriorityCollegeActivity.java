@@ -194,7 +194,7 @@ public class PriorityCollegeActivity extends BaseActivity {
         recyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(PriorityCollegeActivity.this, com.qianyi.shine.ui.college.activity.CollegeActivity.class);
+                Intent intent=new Intent(PriorityCollegeActivity.this,PriorityCollegeDetailsActivity.class);
                 startActivity(intent);
             }
         });
