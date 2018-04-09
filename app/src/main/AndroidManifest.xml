@@ -177,5 +177,9 @@
         <activity android:name=".ui.home.activity.PriorityCollegeDetailsActivity"
             android:screenOrientation="portrait"
             />
+        <!--专业优先填报详情页-->
+        <activity android:name=".ui.home.activity.PriorityProfessionalDetailsActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 </manifest>
