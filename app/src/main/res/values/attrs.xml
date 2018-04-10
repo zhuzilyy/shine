@@ -19,6 +19,20 @@
         <attr name="me_background" format="reference|color"/>
         <attr name="me_padding_left" format="dimension"/>
         <attr name="me_padding_right" format="dimension"/>
+        <attr name="me_search_action" format="enum">
+            <!--回车键，按下后光标到下一行 -->
+            <enum name="actionNone" value="0"/>
+            <!--Go-->
+            <enum name="actionGo" value="1"/>
+            <!--放大镜-->
+            <enum name="actionSearch" value="2"/>
+            <!--Send-->
+            <enum name="actionSend" value="3"/>
+            <!--Next-->
+            <enum name="actionNext" value="4"/>
+            <!--Done-->
+            <enum name="actionDone" value="5"/>
+        </attr>
     </declare-styleable>
 
     <!--xzyTitle-->

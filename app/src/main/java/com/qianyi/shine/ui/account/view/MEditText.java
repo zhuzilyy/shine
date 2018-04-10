@@ -11,6 +11,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -98,9 +99,12 @@ public class MEditText extends RelativeLayout implements View.OnFocusChangeListe
                 case R.styleable.MEditText_me_eye_enable:
                     eyeEnable = a.getBoolean(index, false);
                     break;
-
                 case R.styleable.MEditText_me_inputType:
                     setInputType(a.getInt(index,0));
+                    break;
+                    //设置软键盘右下角的显示样式
+                case R.styleable.MEditText_me_search_action:
+                    setSearchAction(a.getInt(index,0));
                     break;
                 case R.styleable.MEditText_me_hintColor:
                     //设置提示文字的颜色
@@ -136,8 +140,55 @@ public class MEditText extends RelativeLayout implements View.OnFocusChangeListe
         }
     }
 
+    /***
+     * 设置软键盘右下角按键样式
+     * @param antion
+     */
+    private void setSearchAction(int antion) {
+        switch(antion){
+            case 0:
+                //回车键，按下后光标到下一行
+                etInput.setImeOptions(EditorInfo.IME_ACTION_NONE);
+            break;
+            case 1:
+                //Go
+                etInput.setImeOptions(EditorInfo.IME_ACTION_GO);
+                break;
+            case 2:
+                //放大镜
+                etInput.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+                break;
+            case 3:
+                //Send
+                etInput.setImeOptions(EditorInfo.IME_ACTION_SEND);
+                break;
+            case 4:
+                //Next
+                etInput.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+                break;
+            case 5:
+                //Done
+                etInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
+                break;
+
+            default:
+            break;
+        }
+    }
+
+    public void addMETextChangedListener(TextWatcher tw){
+            etInput.addTextChangedListener(tw);
+
+
+    }
+
+
     public void setOnEditorActionListener(TextView.OnEditorActionListener l){
         etInput.setOnEditorActionListener(l);
+    }
+
+    public EditText getEditext(){
+        return etInput;
     }
 
 

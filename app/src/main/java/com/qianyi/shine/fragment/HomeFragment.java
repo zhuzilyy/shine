@@ -40,6 +40,7 @@ import com.qianyi.shine.ui.gaokao_news.activity.GaoKaoNewsActivity;
 import com.qianyi.shine.ui.home.activity.EmploymentActivity;
 import com.qianyi.shine.ui.home.activity.FindCollegeActivity;
 import com.qianyi.shine.ui.home.activity.FindMajorActivity;
+import com.qianyi.shine.ui.home.activity.HomeSearchActivity;
 import com.qianyi.shine.ui.home.activity.IntelligentFillCollegeActivity;
 import com.qianyi.shine.ui.home.activity.PriorityCollegeActivity;
 import com.qianyi.shine.ui.home.activity.SearchOccupationActivity;
@@ -179,6 +180,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         RelativeLayout rl_priorityCollege = headView.findViewById(R.id.rl_priorityCollege);
         RelativeLayout rl_integenceFill = headView.findViewById(R.id.rl_integenceFill);
         RelativeLayout rl_majorPriority = headView.findViewById(R.id.rl_majorPriority);
+        //主页搜索
+        LinearLayout homeSearchLin=headView.findViewById(R.id.homeSearch_ll);
         //goto院校优先填报
         LinearLayout gotoCollege01=headView.findViewById(R.id.goto_college01);
         LinearLayout gotoCollege02=headView.findViewById(R.id.goto_college02);
@@ -195,6 +198,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         rl_majorPriority.setOnClickListener(this);
         gotoCollege01.setOnClickListener(this);
         gotoCollege02.setOnClickListener(this);
+        homeSearchLin.setOnClickListener(this);
 
         count.setTypeface(typeface1);
         count2.setTypeface(typeface1);
@@ -367,6 +371,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.goto_college02:
                 Intent intent=new Intent(getActivity(),PriorityCollegeActivity.class);
                 startActivity(intent);
+            case R.id.homeSearch_ll:
+                startActivity(new Intent(getActivity(), HomeSearchActivity.class));
                 break;
         }
     }

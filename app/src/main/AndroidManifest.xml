@@ -181,5 +181,10 @@
         <activity android:name=".ui.home.activity.PriorityProfessionalDetailsActivity"
             android:screenOrientation="portrait"
             />
+        <!--主页搜索-->
+        <activity android:name=".ui.home.activity.HomeSearchActivity"
+            android:screenOrientation="portrait"
+            />
+
     </application>
 </manifest>

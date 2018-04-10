@@ -47,6 +47,7 @@
             </LinearLayout>
             <!--搜索-->
             <LinearLayout
+                android:id="@+id/homeSearch_ll"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
