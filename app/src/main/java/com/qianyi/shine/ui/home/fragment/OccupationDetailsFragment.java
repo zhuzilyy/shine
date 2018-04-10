@@ -18,16 +18,13 @@ import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
-import com.qianyi.shine.ui.college.adapter.OccupationRightProfessionAdapter;
 
-import com.qianyi.shine.ui.gaokao_news.adapter.GaokaoAdapter;
 import com.qianyi.shine.ui.home.adapter.OccupationDetailsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 

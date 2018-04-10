@@ -4,7 +4,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
-import com.qianyi.shine.MainActivity;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiAccount;
 import com.qianyi.shine.base.BaseActivity;
@@ -30,7 +29,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initViews() {
         customLoadingDialog=new CustomLoadingDialog(this);
-        customLoadingDialog.show();
+        //customLoadingDialog.show();
     }
 
     @Override

@@ -16,7 +16,6 @@ import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.ui.mine.adapter.MajorAdapter;
-import com.qianyi.shine.ui.mine.bean.CollegeBean;
 import com.qianyi.shine.ui.mine.bean.MajorBean;
 
 import java.util.ArrayList;

@@ -15,9 +15,6 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
-import com.qianyi.shine.fragment.entity.TestEntity;
-import com.qianyi.shine.ui.gaokao_news.activity.GaoKaoNewsActivity;
-import com.qianyi.shine.ui.gaokao_news.adapter.GaokaoAdapter;
 import com.qianyi.shine.ui.mine.adapter.CollegeAdapter;
 import com.qianyi.shine.ui.mine.bean.CollegeBean;
 

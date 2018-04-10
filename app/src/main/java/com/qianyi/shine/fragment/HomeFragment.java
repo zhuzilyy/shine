@@ -37,6 +37,7 @@ import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.college.activity.MoreCollegeActivity;
 import com.qianyi.shine.ui.gaokao_news.activity.GaoKaoNewsActivity;
+import com.qianyi.shine.ui.home.activity.AcceptanceRateActivity;
 import com.qianyi.shine.ui.home.activity.EmploymentActivity;
 import com.qianyi.shine.ui.home.activity.FindCollegeActivity;
 import com.qianyi.shine.ui.home.activity.FindMajorActivity;
@@ -185,6 +186,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         //goto院校优先填报
         LinearLayout gotoCollege01=headView.findViewById(R.id.goto_college01);
         LinearLayout gotoCollege02=headView.findViewById(R.id.goto_college02);
+        //测试录取率
+        LinearLayout ll_acceptanceRate=headView.findViewById(R.id.ll_acceptanceRate);
+
 
 
         cityname=headView.findViewById(R.id.cityName);
@@ -199,6 +203,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         gotoCollege01.setOnClickListener(this);
         gotoCollege02.setOnClickListener(this);
         homeSearchLin.setOnClickListener(this);
+        ll_acceptanceRate.setOnClickListener(this);
 
         count.setTypeface(typeface1);
         count2.setTypeface(typeface1);
@@ -332,7 +337,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.gaokao_tv:
             case R.id.flag4:
                 Intent intent_news = new Intent(getActivity(), GaoKaoNewsActivity.class);
-
                 startActivity(intent_news);
                 break;
             case R.id.flag2:
@@ -371,8 +375,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.goto_college02:
                 Intent intent=new Intent(getActivity(),PriorityCollegeActivity.class);
                 startActivity(intent);
+                break;
             case R.id.homeSearch_ll:
                 startActivity(new Intent(getActivity(), HomeSearchActivity.class));
+                break;
+                //测试录取率
+            case R.id.ll_acceptanceRate:
+                startActivity(new Intent(getActivity(), AcceptanceRateActivity.class));
                 break;
         }
     }

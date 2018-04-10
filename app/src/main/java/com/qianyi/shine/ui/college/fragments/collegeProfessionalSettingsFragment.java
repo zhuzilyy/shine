@@ -2,9 +2,6 @@ package com.qianyi.shine.ui.college.fragments;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,9 +16,6 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
-import com.qianyi.shine.fragment.adapter.GridAdapter;
-import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
-import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.career_planning.entity.SuitableForMeEntity;
 import com.qianyi.shine.ui.college.activity.ProfessionalActivity;
 import com.qianyi.shine.ui.college.adapter.ProfessionAdapter;
@@ -30,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 

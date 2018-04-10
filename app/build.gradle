@@ -64,4 +64,5 @@ dependencies {
     implementation project(':library_dropdownmenu')
     implementation project(':treeadapter')
     implementation files('libs/AMap_Location_V3.8.0_20180201.jar')
+    compile 'org.xutils:xutils:3.5.0'
 }

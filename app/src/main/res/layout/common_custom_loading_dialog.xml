@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="120dp"
-    android:layout_height="130dp"
+    android:layout_height="120dp"
     android:background="@drawable/bg_dialog"
     android:layout_gravity="center">
     <ImageView
@@ -19,6 +19,6 @@
         android:layout_centerHorizontal="true"
         android:text="正在加载"
         android:textSize="14sp"
-        android:layout_below="@+id/loadingIv"
+        android:layout_marginTop="70dp"
         />
 </RelativeLayout>

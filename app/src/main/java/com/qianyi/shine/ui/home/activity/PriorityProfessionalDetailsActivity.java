@@ -20,7 +20,6 @@ import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.ui.career_planning.entity.SuitableForMeEntity;
-import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.EstablishAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;

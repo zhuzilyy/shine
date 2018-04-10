@@ -20,17 +20,11 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
-import com.qianyi.shine.fragment.adapter.GridAdapter;
-import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
-import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.career_planning.entity.SuitableForMeEntity;
 import com.qianyi.shine.ui.college.activity.CollegeActivity;
-import com.qianyi.shine.ui.college.activity.ProfessionalActivity;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.EstablishAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
-import com.qianyi.shine.ui.college.adapter.ListDropDownAdapter;
-import com.qianyi.shine.ui.college.adapter.ProfessionAdapter;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;

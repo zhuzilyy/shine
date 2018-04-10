@@ -59,9 +59,6 @@ public class HomeSearchActivity extends BaseActivity implements View.OnClickList
         viewPager.setAdapter(myPageAdapter);
         // 将ViewPager与TabLayout相关联
         tab.setupWithViewPager(viewPager);
-
-
-
         final EditText editText = ed_search.getEditext();
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -70,8 +67,6 @@ public class HomeSearchActivity extends BaseActivity implements View.OnClickList
                         tab.setVisibility(View.VISIBLE);
                         viewPager.setVisibility(View.VISIBLE);
                         //查询数据，显示内容
-
-
                     }
                 return false;
             }

@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +54,6 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
         swipeRefreshLayout.setRefreshing(true);
         refresh();
         //初始化头布局
-
     }
     @Override
     protected void initData() {

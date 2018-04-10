@@ -17,7 +17,6 @@ import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.ui.mine.adapter.MeasurementAdapter;
 import com.qianyi.shine.ui.mine.bean.MeasurementBean;
-import com.qianyi.shine.ui.mine.bean.ProfessionBean;
 
 import java.util.ArrayList;
 import java.util.List;

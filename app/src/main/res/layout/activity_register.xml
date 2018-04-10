@@ -19,7 +19,7 @@
         android:maxLength="11"
         android:singleLine="true"
         android:layout_marginTop="70dp"
-        android:id="@+id/et_userName"
+        android:id="@+id/et_phoneNum"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:hint="请输入输入手机号"
@@ -117,13 +117,13 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_register"
         android:textSize="16sp"
         android:textColor="#fff"
         android:background="@drawable/bg_login"
         android:layout_marginTop="40dp"
         android:layout_gravity="center_horizontal"
-        android:text="登录"
+        android:text="注册"
         android:layout_width="300dp"
         android:layout_height="45dp" />
     <!--三方登录-->

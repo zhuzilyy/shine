@@ -16,8 +16,6 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
-import com.qianyi.shine.fragment.adapter.GridAdapter;
-import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.ui.career_planning.adapter.TestAdapter;
 import com.qianyi.shine.ui.career_planning.entity.SuitableForMeEntity;
 
