@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="120dp"
-    android:layout_height="120dp"
-    android:background="@color/white"
+    android:layout_height="130dp"
+    android:background="@drawable/bg_dialog"
     android:layout_gravity="center">
     <ImageView
         android:id="@+id/loadingIv"
@@ -11,11 +11,11 @@
         android:background="@drawable/common_loading"
         android:layout_centerHorizontal="true"/>
     <TextView
-        android:textColor="@color/black"
+        android:textColor="@color/dark_gray"
         android:gravity="center"
         android:id="@+id/loadingTv"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:text="正在加载"
         android:textSize="14sp"
