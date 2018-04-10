@@ -1,0 +1,39 @@
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    >
+    <com.qianyi.shine.ui.gaokao_news.view.XTitleView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        app:tv_left="专业优先"
+        app:graty_title="middle"
+        app:title_background_color="@android:color/transparent"
+        app:back_src="@mipmap/black_arrow"
+        app:isshow_right_tv="gone"
+        app:isshow_right_iv="gone"
+        app:titleSize="6.5sp"
+        app:titleColor="@color/black"
+        />
+
+    <com.yyydjk.library.DropDownMenu
+        android:id="@+id/dropDownMenu"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:ddmenuTextSize="13sp"
+        app:ddtextUnselectedColor="@color/drop_down_unselected"
+        app:ddtextSelectedColor="@color/drop_down_selected"
+        app:dddividerColor="@color/gray"
+        app:ddunderlineColor="@color/gray"
+        app:ddmenuMenuHeightPercent="0.5"
+        app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
+        app:ddmaskColor="@color/mask_color"
+        app:ddmenuBackgroundColor="@color/white"
+        app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
+        />
+</LinearLayout>
+

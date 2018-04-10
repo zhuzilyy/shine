@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/layout_title"/>
@@ -11,23 +13,32 @@
     <!--选择省份-->
     <RelativeLayout
         android:background="@color/white"
-        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="64dp">
         <TextView
+            android:layout_centerVertical="true"
             android:layout_marginLeft="20sp"
             android:textSize="15sp"
             android:text="选择高考省份"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/textView" />
         <TextView
-            android:layout_alignParentRight="true"
-            android:drawableRight="@mipmap/arrow_right"
-            android:drawablePadding="10dp"
-            android:layout_marginRight="20dp"
-            android:textColor="@color/gray"
-            android:textSize="15sp"
+            android:id="@+id/tv_selectArea"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/iv_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:text="点击选择"
+            android:textColor="@color/gray"
+            android:textSize="15sp" />
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:id="@+id/iv_arrow"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/arrow_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

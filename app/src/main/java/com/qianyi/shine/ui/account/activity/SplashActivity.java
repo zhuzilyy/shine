@@ -1,5 +1,11 @@
 package com.qianyi.shine.ui.account.activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
@@ -18,15 +24,21 @@ public class SplashActivity extends BaseActivity {
     ImageView iv_splash;
     @Override
     protected void initViews() {
-
+        boolean isGranted=checkedAllPermission(new String[]{
+                Manifest.permission.ACCESS_FINE_LOCATION
+        });
+        if(isGranted){
+            //开始动画
+            startAnim();
+        }else {
+            ActivityCompat.requestPermissions(this,new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION
+            },102);
+        }
     }
-
     @Override
     protected void initData() {
-        //开始动画
-        startAnim();
     }
-
     @Override
     protected void getResLayout() {
         setContentView(R.layout.activity_splash);
@@ -62,5 +74,41 @@ public class SplashActivity extends BaseActivity {
                 finish();
             }
         });
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //请求吗正确
+        if(102==requestCode){
+            boolean isGranded=true;
+            for (int permissionCode:grantResults) {
+                if(permissionCode!= PackageManager.PERMISSION_GRANTED){
+                    //权限被拒绝
+                    isGranded=false;
+                    Log.i("xzy","aaaaaaaaaaaaaaa");
+                    break;
+                }
+            }
+            if(isGranded){
+                Log.i("xzy","在启动页的权限请求成功");
+                //请求权限被赋予
+                //开始动画
+                startAnim();
+            }else {
+                //权限被拒绝
+                Log.i("xzy","在启动页的权限请求失败");
+                //开始动画
+                startAnim();
+            }
+        }
+    }
+    private boolean checkedAllPermission(String[] strings) {
+        for (String p:strings) {
+            if(ContextCompat.checkSelfPermission(this,p)!= PackageManager.PERMISSION_GRANTED){
+                //有一个没授予权限，就返回false
+                return false;
+            }
+        }
+        return true;
     }
 }

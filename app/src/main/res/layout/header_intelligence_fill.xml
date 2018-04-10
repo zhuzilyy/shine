@@ -46,6 +46,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/rl_willing"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
@@ -62,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
             <TextView
+                android:id="@+id/tv_willings"
                 android:layout_marginRight="10dp"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/iv_willing"

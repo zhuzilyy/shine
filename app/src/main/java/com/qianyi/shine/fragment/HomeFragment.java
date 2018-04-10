@@ -1,12 +1,16 @@
 package com.qianyi.shine.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +20,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qianyi.shine.R;
@@ -37,8 +45,11 @@ import com.qianyi.shine.ui.home.activity.PriorityCollegeActivity;
 import com.qianyi.shine.ui.home.activity.SearchOccupationActivity;
 
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import okhttp3.Call;
@@ -64,7 +75,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private GridAdapter CollegeAdapter;
     private List<CollegeEntity> listCollege = new ArrayList<>();
     private TextView editText;
+    //==========定位============
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+    //声明AMapLocationClientOption对象
+    public AMapLocationClientOption mLocationOption = null;
 
+    //初始化AMapLocationClientOption对象
+    private TextView cityname;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_home = inflater.inflate(R.layout.fragment_home, null);
@@ -73,6 +91,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void initViews() {
+
+        Log.i("loc",sHA1(getActivity()));
+        //获取定位
+        getCityName();
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //上拉加载
@@ -156,6 +178,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         LinearLayout ll_search_occupation = headView.findViewById(R.id.ll_search_occupation);
         RelativeLayout rl_priorityCollege = headView.findViewById(R.id.rl_priorityCollege);
         RelativeLayout rl_integenceFill = headView.findViewById(R.id.rl_integenceFill);
+        RelativeLayout rl_majorPriority = headView.findViewById(R.id.rl_majorPriority);
+        //goto院校优先填报
+        LinearLayout gotoCollege01=headView.findViewById(R.id.goto_college01);
+        LinearLayout gotoCollege02=headView.findViewById(R.id.goto_college02);
+
+
+        cityname=headView.findViewById(R.id.cityName);
         //点击事件
         ll_findCollege.setOnClickListener(this);
         ll_employment.setOnClickListener(this);
@@ -163,6 +192,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         ll_search_occupation.setOnClickListener(this);
         rl_priorityCollege.setOnClickListener(this);
         rl_integenceFill.setOnClickListener(this);
+        rl_majorPriority.setOnClickListener(this);
+        gotoCollege01.setOnClickListener(this);
+        gotoCollege02.setOnClickListener(this);
 
         count.setTypeface(typeface1);
         count2.setTypeface(typeface1);
@@ -182,7 +214,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             public void onItemClick(int position) {
                 Intent intent = new Intent(getActivity(), CollegeActivity.class);
                 startActivity(intent);
-
             }
         });
         //更多大学
@@ -328,6 +359,87 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.rl_integenceFill:
                 startActivity(new Intent(getActivity(), IntelligentFillCollegeActivity.class));
                 break;
+            //专业优先
+            case R.id.rl_majorPriority:
+                startActivity(new Intent(getActivity(), FindMajorActivity.class));
+                break;
+            case R.id.goto_college01:
+            case R.id.goto_college02:
+                Intent intent=new Intent(getActivity(),PriorityCollegeActivity.class);
+                startActivity(intent);
+                break;
         }
     }
+
+    private void getCityName() {
+
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getActivity());
+        mLocationOption = new AMapLocationClientOption();
+        mLocationOption.setLocationPurpose(AMapLocationClientOption.AMapLocationPurpose.SignIn);
+        //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        //设置定位模式为AMapLocationMode.Device_Sensors，仅设备模式。
+        // mLocationOption.setLocationMode(AMapLocationMode.Device_Sensors);
+        mLocationOption.setInterval(1000);
+        //设置是否返回地址信息（默认返回地址信息）
+        mLocationOption.setNeedAddress(true);
+        //启动定位
+        mLocationClient.startLocation();
+
+        if (null != mLocationClient) {
+            mLocationClient.setLocationOption(mLocationOption);
+            //设置场景模式后最好调用一次stop，再调用start以保证场景模式生效
+            mLocationClient.stopLocation();
+            mLocationClient.startLocation();
+        }
+
+        //设置定位回调监听
+        mLocationClient.setLocationListener(new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation aMapLocation) {
+                Log.i("xzy", "errcode==" + aMapLocation.getErrorCode());
+                if (aMapLocation.getErrorCode() == 0) {
+                    double lat = aMapLocation.getLatitude();//维度
+                    double log = aMapLocation.getLongitude();//经度
+                    if(!TextUtils.isEmpty(aMapLocation.getCity())){
+                        cityname.setText(aMapLocation.getCity());
+                    }
+//                    LatLng latLng=new LatLng(lat,log);
+//                    changeLocation(latLng);
+                    Log.i("xzy", "111111111111111111111111");
+                } else {
+                    //定位失败
+                    Log.i("xzy", "err+" + aMapLocation.getErrorCode() + "  info=" + aMapLocation.getErrorInfo());
+                }
+            }
+        });
+    }
+    public static String sHA1(Context context) {
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(
+                    context.getPackageName(), PackageManager.GET_SIGNATURES);
+            byte[] cert = info.signatures[0].toByteArray();
+            MessageDigest md = MessageDigest.getInstance("SHA1");
+            byte[] publicKey = md.digest(cert);
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < publicKey.length; i++) {
+                String appendString = Integer.toHexString(0xFF & publicKey[i])
+                        .toUpperCase(Locale.US);
+                if (appendString.length() == 1)
+                    hexString.append("0");
+                hexString.append(appendString);
+                hexString.append(":");
+            }
+            String result = hexString.toString();
+            return result.substring(0, result.length()-1);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
+
+

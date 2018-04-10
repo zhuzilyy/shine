@@ -4,13 +4,41 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!--用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!--用于获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!--用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!--用于访问网络，网络定位需要上网-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!--用于读取手机当前的状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!--用于写入缓存数据到扩展存储卡-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--用于申请调用A-GPS模块-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <!--用于申请获取蓝牙信息进行室内定位-->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--高德定位开始-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="bef91b325ee3115b60dba2764a3dbf03"/>
+        <service android:name="com.amap.api.location.APSService"/>
+        <!--高德定位结束-->
         <activity android:name=".MainActivity"
             android:windowSoftInputMode="adjustPan"
             >
@@ -19,7 +47,6 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.account.activity.LoginActivity">
-
         </activity>
         <!--估分-->
         <activity
@@ -138,5 +165,21 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.home.activity.IntelligentFillCollegeActivity"/>
+        <!--意愿设置-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.home.activity.WillingsSettingActivity"/>
+        <!--选择地区-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.home.activity.SelectCollegeAreaActivity"/>
+        <!--院校优先填报详情页-->
+        <activity android:name=".ui.home.activity.PriorityCollegeDetailsActivity"
+            android:screenOrientation="portrait"
+            />
+        <!--专业优先填报详情页-->
+        <activity android:name=".ui.home.activity.PriorityProfessionalDetailsActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 </manifest>
