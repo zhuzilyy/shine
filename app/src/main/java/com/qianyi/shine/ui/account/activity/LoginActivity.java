@@ -9,6 +9,7 @@ import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiAccount;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.view.ClearEditText;
 
 import butterknife.BindView;
@@ -25,9 +26,11 @@ public class LoginActivity extends BaseActivity {
     ClearEditText et_userName;
     @BindView(R.id.et_pwd)
     ClearEditText et_pwd;
+    CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
-
+        customLoadingDialog=new CustomLoadingDialog(this);
+        customLoadingDialog.show();
     }
 
     @Override
