@@ -4,8 +4,11 @@ android {
         config_xzy_release {
             keyAlias 'android.keystore'
             keyPassword '031424'
-            storeFile file('D:/Android/keystore/android.keystore')
+            storeFile file('C:/Program Files/Java/jdk1.7.0_67/bin/android.keystore')
             storePassword '031424'
+        }
+        debug {
+            storeFile file("C:/Program Files/Java/jdk1.7.0_67/bin/android.keystore")
         }
     }
     compileSdkVersion 26
@@ -66,7 +69,7 @@ dependencies {
     implementation files('libs/AMap_Location_V3.8.0_20180201.jar')
     compile 'org.xutils:xutils:3.5.0'
     //微信
-    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     //gson
     compile 'io.github.openfeign:feign-gson:9.5.0'
 }

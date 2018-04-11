@@ -34,7 +34,8 @@ public class MyApplication extends Application {
      */
     private void registToWX() {
         //AppConst.WEIXIN.APP_ID是指你应用在微信开放平台上的AppID，记得替换。
-        mWxApi = WXAPIFactory.createWXAPI(this, apiConstant.APP_ID, false);
+        mWxApi = WXAPIFactory.createWXAPI(this, apiConstant.APP_ID, true);
+       // mWxApi = WXAPIFactory.createWXAPI(getApplicationContext(),null);
         // 将该app注册到微信
         mWxApi.registerApp(apiConstant.APP_ID);
     }

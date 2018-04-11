@@ -6,12 +6,15 @@ import android.widget.Toast;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiAccount;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.application.MyApplication;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.view.ClearEditText;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -28,10 +31,12 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.et_pwd)
     ClearEditText et_pwd;
     CustomLoadingDialog customLoadingDialog;
+    public static IWXAPI mWxApi;
     @Override
     protected void initViews() {
         customLoadingDialog=new CustomLoadingDialog(this);
         //customLoadingDialog.show();
+
     }
 
     @Override
@@ -118,7 +123,7 @@ public class LoginActivity extends BaseActivity {
         }
         final SendAuth.Req req = new SendAuth.Req();
         req.scope = "snsapi_userinfo";
-        req.state = "diandi_wx_login";
+        req.state = "shine_wx_login";
         MyApplication.mWxApi.sendReq(req);
 
     }
