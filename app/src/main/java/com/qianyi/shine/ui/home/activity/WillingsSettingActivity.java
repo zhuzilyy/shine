@@ -16,6 +16,7 @@ import butterknife.OnClick;
  */
 
 public class WillingsSettingActivity extends BaseActivity {
+    private IntelligentFillCollegeActivity activity = new IntelligentFillCollegeActivity();
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.tv_area)
@@ -43,9 +44,14 @@ public class WillingsSettingActivity extends BaseActivity {
     protected void setStatusBarColor() {
 
     }
-    @OnClick({R.id.iv_back,R.id.rl_collegeArea,R.id.rl_major,R.id.rl_occupation})
+    @OnClick({R.id.iv_back,R.id.rl_collegeArea,R.id.rl_major,R.id.rl_occupation,R.id.btn_confirm})
     public void click(View view){
         switch (view.getId()){
+            case R.id.btn_confirm:
+
+
+                finish();
+                break;
             case R.id.iv_back:
                 finish();
                 break;
@@ -68,6 +74,8 @@ public class WillingsSettingActivity extends BaseActivity {
                 case 1:
                     String area=data.getStringExtra("area");
                     tv_area.setText(area);
+                    activity.setWillingCity(area);
+
                     break;
             }
         }

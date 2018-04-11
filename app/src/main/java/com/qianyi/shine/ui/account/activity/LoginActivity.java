@@ -6,10 +6,12 @@ import android.widget.Toast;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiAccount;
+import com.qianyi.shine.application.MyApplication;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.view.ClearEditText;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -71,7 +73,7 @@ public class LoginActivity extends BaseActivity {
                 jumpActivity(LoginActivity.this, BindPhoneActivity.class);
                 break;
             case R.id.iv_login_wechat:
-                jumpActivity(LoginActivity.this, BindPhoneActivity.class);
+                loginWX();
                 break;
             case R.id.iv_login_weibo:
                 jumpActivity(LoginActivity.this, BindPhoneActivity.class);
@@ -107,5 +109,17 @@ public class LoginActivity extends BaseActivity {
             return  false;
         }
         return true;
+    }
+
+    private void loginWX() {
+        if (!MyApplication.mWxApi.isWXAppInstalled()) {
+            Toast.makeText(this, "您还没安装微信客户端", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = "diandi_wx_login";
+        MyApplication.mWxApi.sendReq(req);
+
     }
 }

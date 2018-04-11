@@ -217,7 +217,6 @@ public class PriorityCollegeDetailsActivity extends BaseActivity implements View
         switch(v.getId()){
             case R.id.addAtention_tv:
                 Toast.makeText(this, "加关注", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(PriorityCollegeDetailsActivity.this, PriorityProfessionalDetailsActivity.class));
             break;
             case R.id.collegeDetails_tv:
                 Intent intent=new Intent(PriorityCollegeDetailsActivity.this, CollegeActivity.class);

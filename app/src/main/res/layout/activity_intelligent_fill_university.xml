@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="60dp"
+        >
     <include layout="@layout/layout_title"/>
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeLayout"
@@ -15,4 +21,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </android.support.v4.widget.SwipeRefreshLayout>
-</LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="55dp">
+        <Button
+            android:id="@+id/btn_comfirm_"
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_40"
+            android:text="生成志愿表"
+            android:background="@drawable/shape_corner_blue"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>

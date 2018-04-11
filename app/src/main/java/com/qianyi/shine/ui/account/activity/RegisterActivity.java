@@ -95,14 +95,13 @@ public class RegisterActivity extends BaseActivity {
     }
     //注册的方法
     private void register(String phoneNum, String confrimCode, String pwd) {
-      /* apiAccount.Register(apiConstant.REGISTER, phoneNum, pwd, confrimCode, new RequestCallBack<String>() {
+       apiAccount.Register(apiConstant.REGISTER, phoneNum, pwd, confrimCode, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(RegisterActivity.this, "3333333333"+s, Toast.LENGTH_SHORT).show();
-                        Log.i("tag",s);
+
                     }
                 });
             }
@@ -111,37 +110,12 @@ public class RegisterActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(RegisterActivity.this, "3333333333"+e, Toast.LENGTH_SHORT).show();
-                        Log.i("tag",e.getMessage()+"======3333=====");
+
                     }
                 });
             }
-        });*/
-        RequestParams params=new RequestParams(apiConstant.REGISTER);
-        params.addParameter("mobile",phoneNum);
-        params.addParameter("password",pwd);
-        params.addParameter("smscode",confrimCode);
-        x.http().post(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                Log.i("tag",result);
-                Toast.makeText(RegisterActivity.this, result, Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
         });
+
 
     }
 }

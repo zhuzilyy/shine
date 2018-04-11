@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.home.adapter.IntellgenceFillAdapter;
 import com.qianyi.shine.ui.home.bean.IntellgenceFillBean;
 
@@ -41,6 +43,25 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     public List<IntellgenceFillBean> infoList;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
+    //=========意愿设置========================
+    private static  String willingCity;
+    private static  String willingProfession;
+    private static String willingMajor;
+    public  String getWillingCity() {
+        return willingCity;
+    }public void   setWillingCity(String willingCity) {
+        this.willingCity = willingCity;
+    }public String getWillingProfession() {
+        return willingProfession;
+    }public void   setWillingProfession(String willingProfession) {
+        this.willingProfession = willingProfession;
+    }public String getWillingMajor() {
+        return willingMajor;
+    }public void   setWillingMajor(String willingMajor) {
+        this.willingMajor = willingMajor;
+    }
+
+    //=================================
     @Override
     protected void initViews() {
         tv_title.setText("智能填报");
@@ -208,13 +229,26 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
                 break;
         }
     }
-
+    @OnClick({R.id.btn_comfirm_})
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_willings:
                 Toast.makeText(this, "22222222222222", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.btn_comfirm_:
+                Toast.makeText(this, ""+getWillingCity(), Toast.LENGTH_SHORT).show();
+                if(!TextUtils.isEmpty(getWillingCity()) && TextUtils.isEmpty(getWillingMajor()) && TextUtils.isEmpty(getWillingProfession())){
+                        //只设置了地区
+                        Intent intent = new Intent(IntelligentFillCollegeActivity.this, PriorityCollegeActivity.class);
+                        startActivity(intent);
+                }else if(!TextUtils.isEmpty(getWillingMajor()) || !TextUtils.isEmpty(getWillingProfession())){
+                    //设置了专业或职业
+                    Intent intent = new Intent(IntelligentFillCollegeActivity.this, PriorityProfessionalDetailsActivity.class);
+                    startActivity(intent);
+                }
+                break;
+
         }
     }
 }

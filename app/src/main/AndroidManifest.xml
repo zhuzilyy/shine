@@ -190,5 +190,12 @@
         <activity android:name=".ui.home.activity.AcceptanceRateActivity"
             android:screenOrientation="portrait"
             />
+        <!--微信授权-->
+        <activity android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            android:launchMode="singleTop"
+            />
     </application>
 </manifest>
