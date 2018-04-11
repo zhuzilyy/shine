@@ -53,6 +53,7 @@
 
             <!--微信-->
             <LinearLayout
+                android:id="@+id/ll_wechat"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:layout_weight="1"

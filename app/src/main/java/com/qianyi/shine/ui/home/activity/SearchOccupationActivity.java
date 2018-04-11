@@ -29,9 +29,14 @@ public class SearchOccupationActivity extends BaseActivity {
     @BindView(R.id.rv)
     RecyclerView recyclerView;
     private List<Major> list;
+    private String tag;
+    private Intent intent;
     @Override
     protected void initViews() {
-
+        intent=getIntent();
+        if (intent!=null){
+            tag=intent.getStringExtra("tag");
+        }
     }
     @Override
     protected void initData() {
@@ -87,9 +92,13 @@ public class SearchOccupationActivity extends BaseActivity {
                 }*/
                 int level = node.getLevel();
                 if (level==2){
-                    startActivity(new Intent(SearchOccupationActivity.this, OccupationDetailActivity.class));
+                    if (tag.equals("willingSetting")){
+                        Intent intent=new Intent();
+                        intent.putExtra("cccupationName",node.getName());
+                        setResult(3,intent);
+                        finish();
+                    }
                 }
-                //Toast.makeText(SearchOccupationActivity.this, node.getId()+"=======getId======", Toast.LENGTH_SHORT).show();
             }
         });
         recyclerView.setAdapter(adapter);

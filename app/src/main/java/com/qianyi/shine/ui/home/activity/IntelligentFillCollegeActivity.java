@@ -43,25 +43,11 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     public List<IntellgenceFillBean> infoList;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
+    private TextView tv_willings;
     //=========意愿设置========================
-    private static  String willingCity;
-    private static  String willingProfession;
-    private static String willingMajor;
-    public  String getWillingCity() {
-        return willingCity;
-    }public void   setWillingCity(String willingCity) {
-        this.willingCity = willingCity;
-    }public String getWillingProfession() {
-        return willingProfession;
-    }public void   setWillingProfession(String willingProfession) {
-        this.willingProfession = willingProfession;
-    }public String getWillingMajor() {
-        return willingMajor;
-    }public void   setWillingMajor(String willingMajor) {
-        this.willingMajor = willingMajor;
-    }
-
-    //=================================
+    private  String area;
+    private  String majorName;
+    private  String occupationName;
     @Override
     protected void initViews() {
         tv_title.setText("智能填报");
@@ -110,16 +96,15 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
         rv_college.setAdapter(mAdapter);
         //添加headerView
         View view_header=getLayoutInflater().inflate(R.layout.header_intelligence_fill,null);
+        tv_willings=view_header.findViewById(R.id.tv_willings);
         mAdapter.addHeaderView(view_header);
         //点击事件
         view_header.findViewById(R.id.rl_willing).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(IntelligentFillCollegeActivity.this,WillingsSettingActivity.class));
+                startActivityForResult(new Intent(IntelligentFillCollegeActivity.this,WillingsSettingActivity.class),1);
             }
         });
-
-
         rv_college.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -237,18 +222,30 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
                 Toast.makeText(this, "22222222222222", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_comfirm_:
-                Toast.makeText(this, ""+getWillingCity(), Toast.LENGTH_SHORT).show();
-                if(!TextUtils.isEmpty(getWillingCity()) && TextUtils.isEmpty(getWillingMajor()) && TextUtils.isEmpty(getWillingProfession())){
+
+                if(!TextUtils.isEmpty(area)){
                         //只设置了地区
                         Intent intent = new Intent(IntelligentFillCollegeActivity.this, PriorityCollegeActivity.class);
                         startActivity(intent);
-                }else if(!TextUtils.isEmpty(getWillingMajor()) || !TextUtils.isEmpty(getWillingProfession())){
+                }else if(!TextUtils.isEmpty(majorName) || !TextUtils.isEmpty(occupationName)){
                     //设置了专业或职业
                     Intent intent = new Intent(IntelligentFillCollegeActivity.this, PriorityProfessionalDetailsActivity.class);
                     startActivity(intent);
                 }
                 break;
 
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data!=null){
+           int willingCount=data.getIntExtra("willing",0);
+           area=data.getStringExtra("area");
+           majorName=data.getStringExtra("majorName");
+           occupationName=data.getStringExtra("occupationName");
+            tv_willings.setText("已选"+willingCount+"项意愿");
         }
     }
 }

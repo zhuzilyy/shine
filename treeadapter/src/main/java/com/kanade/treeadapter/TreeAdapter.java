@@ -144,7 +144,7 @@ public class TreeAdapter<T extends RvTree> extends RecyclerView.Adapter<TreeAdap
         private ImageView icon;
         private TextView title;
         private ImageView detail;
-        private LinearLayout item;
+        private LinearLayout ll_item;
 
         private TreeViewHolder(View itemView) {
             super(itemView);
@@ -152,10 +152,12 @@ public class TreeAdapter<T extends RvTree> extends RecyclerView.Adapter<TreeAdap
             icon = (ImageView) itemView.findViewById(R.id.rv_item_tree_icon);
             title = (TextView) itemView.findViewById(R.id.rv_item_tree_title);
             detail = (ImageView) itemView.findViewById(R.id.tv_item_tree_detail);
+            ll_item = (LinearLayout) itemView.findViewById(R.id.item);
             //itemView = (LinearLayout) itemView.findViewById(R.id.item);
 
             itemView.setOnClickListener(this);
             detail.setOnClickListener(this);
+            ll_item.setOnClickListener(this);
             itemView.setTag(System.currentTimeMillis());
         }
 
@@ -189,6 +191,14 @@ public class TreeAdapter<T extends RvTree> extends RecyclerView.Adapter<TreeAdap
                     mListener.OnClick(node);
                 }
                 return;
+            }
+            //设置点击最后一层条目
+            if (view.getId()==R.id.item){
+                if (mListener!=null){
+                    if (node.getLevel()==2){
+                        mListener.OnClick(node);
+                    }
+                }
             }
 
             if (node != null && !node.isLeaf()) {
