@@ -1,5 +1,9 @@
 package com.qianyi.shine.ui.home.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -31,12 +35,18 @@ public class FindMajorActivity extends BaseActivity {
     View view_zhuanKe;
     @BindView(R.id.view_benKe)
     View view_benKe;
+    private MyReceiver myReceiver;
     @Override
     protected void initViews() {
         zhuankeFragment=new MajorZhuanKeFragment();
         benkeFragment=new MajorBenkeFragment();
         //初始化碎片
         initFragment();
+        //注册广播 点击选择专业的条目关闭专业选择的界面
+        myReceiver=new MyReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.setwilling");
+        registerReceiver(myReceiver,intentFilter);
     }
 
     @Override
@@ -116,5 +126,19 @@ public class FindMajorActivity extends BaseActivity {
                 break;
         }
         transaction.commit();
+    }
+
+    class MyReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals("com.action.setwilling")){
+                finish();
+            }
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myReceiver);
     }
 }

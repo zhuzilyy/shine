@@ -30,6 +30,8 @@ public class MajorZhuanKeFragment extends BaseFragment {
     RecyclerView recyclerView;
     private List<Major> list;
     private View view_zhuanke;
+    private String tag;
+    private Intent intent;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_zhuanke=inflater.inflate(R.layout.fragment_major_zhuanke,null);
@@ -38,7 +40,10 @@ public class MajorZhuanKeFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-
+        intent=getActivity().getIntent();
+        if (intent!=null){
+            tag=intent.getStringExtra("tag");
+        }
     }
 
     @Override
@@ -95,9 +100,13 @@ public class MajorZhuanKeFragment extends BaseFragment {
                 }*/
                 int level = node.getLevel();
                 if (level==2){
-                    startActivity(new Intent(getActivity(), ProfessionalActivity.class));
+                    if (tag.equals("willingSetting")){
+                        Intent intent=new Intent();
+                        intent.setAction("com.action.setwilling");
+                        intent.putExtra("majorName",node.getName());
+                        getActivity().sendBroadcast(intent);
+                    }
                 }
-               // Toast.makeText(getActivity(), node.getId()+"=======getId======", Toast.LENGTH_SHORT).show();
             }
         });
         recyclerView.setAdapter(adapter);

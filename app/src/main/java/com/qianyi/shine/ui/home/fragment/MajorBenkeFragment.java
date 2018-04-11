@@ -32,6 +32,8 @@ public class MajorBenkeFragment extends BaseFragment {
     RecyclerView recyclerView;
     private View view_benke;
     private List<Major> list;
+    private Intent intent;
+    private String tag;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_benke=inflater.inflate(R.layout.fragment_major_benke,null);
@@ -41,6 +43,10 @@ public class MajorBenkeFragment extends BaseFragment {
     @Override
     protected void initViews() {
         //majorList=new ArrayList<>();
+        intent=getActivity().getIntent();
+        if (intent!=null){
+            tag=intent.getStringExtra("tag");
+        }
     }
     @Override
     protected void initData() {
@@ -96,14 +102,18 @@ public class MajorBenkeFragment extends BaseFragment {
                 }*/
                 int level = node.getLevel();
                 if (level==2){
-                    startActivity(new Intent(getActivity(), ProfessionalActivity.class));
+                    //startActivity(new Intent(getActivity(), ProfessionalActivity.class));
+                    if (tag.equals("willingSetting")){
+                        Intent intent=new Intent();
+                        intent.setAction("com.action.setwilling");
+                        intent.putExtra("majorName",node.getName());
+                        getActivity().sendBroadcast(intent);
+                    }
                 }
-                //Toast.makeText(getActivity(), node.getId()+"=======getId======", Toast.LENGTH_SHORT).show();
             }
         });
         recyclerView.setAdapter(adapter);
     }
-
     @Override
     protected void initListener() {
 
