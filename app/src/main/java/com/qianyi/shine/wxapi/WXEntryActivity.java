@@ -3,174 +3,217 @@ package com.qianyi.shine.wxapi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiConstant;
+import com.qianyi.shine.application.MyApplication;
+import com.qianyi.shine.ui.account.bean.WXAccessTokenInfo;
+import com.qianyi.shine.ui.account.bean.WXErrorInfo;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
+
 
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
-	private static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
-
-	private Button gotoBtn, regBtn, launchBtn, checkBtn, scanBtn;
-
-	// IWXAPI 是第三方app和微信通信的openapi接口
-	private IWXAPI api;
+	private static final int RETURN_MSG_TYPE_LOGIN = 1;
+	private static final int RETURN_MSG_TYPE_SHARE = 2;
+	private Gson gson=new Gson();
+	public static Activity instance;
+	private String userOpenId;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.entry);
-		// 通过WXAPIFactory工厂，获取IWXAPI的实例
-		api = WXAPIFactory.createWXAPI(this, apiConstant.APP_ID, false);
-		api.registerApp(apiConstant.APP_ID);
-	/*	regBtn = (Button) findViewById(R.id.reg_btn);
-		regBtn.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// 将该app注册到微信
-
-			}
-		});*/
-
-		/*gotoBtn = (Button) findViewById(R.id.goto_send_btn);
-		gotoBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(WXEntryActivity.this, SendToWXActivity.class));
-				finish();
-			}
-		});
-
-		launchBtn = (Button) findViewById(R.id.launch_wx_btn);
-		launchBtn.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(WXEntryActivity.this, "launch result = " + api.openWXApp(), Toast.LENGTH_LONG).show();
-			}
-		});
-
-		checkBtn = (Button) findViewById(R.id.check_timeline_supported_btn);
-		checkBtn.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				int wxSdkVersion = api.getWXAppSupportAPI();
-				if (wxSdkVersion >= TIMELINE_SUPPORTED_VERSION) {
-					Toast.makeText(WXEntryActivity.this, "wxSdkVersion = " + Integer.toHexString(wxSdkVersion) + "\ntimeline supported", Toast.LENGTH_LONG).show();
-				} else {
-					Toast.makeText(WXEntryActivity.this, "wxSdkVersion = " + Integer.toHexString(wxSdkVersion) + "\ntimeline not supported", Toast.LENGTH_LONG).show();
-				}
-			}
-		});
-
-		scanBtn = (Button) findViewById(R.id.scan_qrcode_login_btn);
-		scanBtn.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(WXEntryActivity.this, ScanQRCodeLoginActivity.class));
-				finish();
-			}
-		});
-*/
-		//注意：
-		//第三方开发者如果使用透明界面来实现WXEntryActivity，需要判断handleIntent的返回值，如果返回值为false，则说明入参不合法未被SDK处理，应finish当前透明界面，避免外部通过传递非法参数的Intent导致停留在透明界面，引起用户的疑惑
-		try {
-			api.handleIntent(getIntent(), this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	protected void onNewIntent(Intent intent) {
-		super.onNewIntent(intent);
-		setIntent(intent);
-		api.handleIntent(intent, this);
-	}
-
-	@Override
-	public void onReq(BaseReq baseReq) {
-
+		setContentView(R.layout.lay_wxentry);
+		//如果没回调onResp，八成是这句没有写
+		MyApplication.mWxApi.handleIntent(this.getIntent(), this);
+		instance=this;
 	}
 
 	// 微信发送请求到第三方应用时，会回调到该方法
-	/*@Override
-	public void onReq(BaseReq req) {
-		switch (req.getType()) {
-			case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
-				goToGetMsg();
-				break;
-			case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
-				goToShowMsg((ShowMessageFromWX.Req) req);
-				break;
-			default:
-				break;
-		}
-	}*/
-	// 第三方应用发送到微信的请求处理后的响应结果，会回调到该方法
 	@Override
-	public void onResp(BaseResp resp) {
-		int result = 0;
-		Toast.makeText(this, "baseresp.getType = " + resp.getType(), Toast.LENGTH_SHORT).show();
-		switch (resp.errCode) {
-			case BaseResp.ErrCode.ERR_OK:
-				//result = R.string.errcode_success;
-				Toast.makeText(this, "3333333333333", Toast.LENGTH_SHORT).show();
-				break;
-			case BaseResp.ErrCode.ERR_USER_CANCEL:
-				Toast.makeText(this, "222222222222", Toast.LENGTH_SHORT).show();
-				//result = R.string.errcode_cancel;
-				break;
-			case BaseResp.ErrCode.ERR_AUTH_DENIED:
-				//result = R.string.errcode_deny;
-				break;
-			case BaseResp.ErrCode.ERR_UNSUPPORT:
-				//result = R.string.errcode_unsupported;
-				break;
-			default:
-				//result = R.string.errcode_unknown;
-				break;
-		}
-
-		Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+	public void onReq(BaseReq req) {
 	}
 
-	/*private void goToGetMsg() {
-		Intent intent = new Intent(this, GetFromWXActivity.class);
-		intent.putExtras(getIntent());
-		startActivity(intent);
-		finish();
-	}*/
+	// 第三方应用发送到微信的请求处理后的响应结果，会回调到该方法
+	//app发送消息给微信，处理返回消息的回调
+	@Override
+	public void onResp(BaseResp resp) {
+		Log.i("wx",resp.errStr);
 
-/*	private void goToShowMsg(ShowMessageFromWX.Req showReq) {
-		WXMediaMessage wxMsg = showReq.message;
-		WXAppExtendObject obj = (WXAppExtendObject) wxMsg.mediaObject;
+		switch (resp.errCode) {
+			case BaseResp.ErrCode.ERR_AUTH_DENIED:
+			case BaseResp.ErrCode.ERR_USER_CANCEL:
+				if (RETURN_MSG_TYPE_SHARE == resp.getType()){
+					Toast.makeText(this, "分享失败", Toast.LENGTH_SHORT).show();
+				}
+				else Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
+				break;
+			case BaseResp.ErrCode.ERR_OK:
+				Log.i("ee","000");
 
-		StringBuffer msg = new StringBuffer(); // 组织一个待显示的消息内容
-		msg.append("description: ");
-		msg.append(wxMsg.description);
-		msg.append("\n");
-		msg.append("extInfo: ");
-		msg.append(obj.extInfo);
-		msg.append("\n");
-		msg.append("filePath: ");
-		msg.append(obj.filePath);
+				switch (resp.getType()) {
+					case RETURN_MSG_TYPE_LOGIN:
+						//拿到了微信返回的code,立马再去请求access_token
+						String code = ((SendAuth.Resp) resp).code;
+						Log.i("wx","code = " + code);
+						//就在这个地方，用网络库什么的或者自己封的网络api，发请求去咯，注意是get请求
+						// 通过code获取授权口令access_token
+						getAccessToken(code);
+						break;
+					case RETURN_MSG_TYPE_SHARE:
+						Toast.makeText(this, "分享成功", Toast.LENGTH_SHORT).show();
+						finish();
+						break;
+				}
+				break;
+		}
+	}
 
-		Intent intent = new Intent(this, ShowFromWXActivity.class);
-		intent.putExtra(Constants.ShowMsgActivity.STitle, wxMsg.title);
-		intent.putExtra(Constants.ShowMsgActivity.SMessage, msg.toString());
-		intent.putExtra(Constants.ShowMsgActivity.BAThumbData, wxMsg.thumbData);
-		startActivity(intent);
-		finish();
-	}*/
+	/***
+	 * 获取AccessToken
+	 * @param code
+	 */
+	private void getAccessToken(String code) {
+		String GetAccessTokenURL="https://api.weixin.qq.com/sns/oauth2/access_token?" +
+				"appid=" + apiConstant.APP_ID +
+				"&secret=" + apiConstant.APP_SECRET +
+				"&code=" + code +
+				"&grant_type=authorization_code";
+
+		RequestParams params=new RequestParams(GetAccessTokenURL);
+		x.http().get(params, new Callback.CommonCallback<String>() {
+			@Override
+			public void onSuccess(String result) {
+				// 判断是否获取成功，成功则去获取用户信息，否则提示失败
+				processGetAccessTokenResult(result);
+				Log.i("ee",result);
+			}
+			@Override
+			public void onError(Throwable ex, boolean isOnCallback) {
+				Log.i("err","错误=="+ex);
+			}
+
+			@Override
+			public void onCancelled(CancelledException cex) {
+
+			}
+
+			@Override
+			public void onFinished() {
+
+			}
+		});
+
+	}
+
+
+	/**
+	 * 处理获取的授权信息结果
+	 * @param response 授权信息结果
+	 */
+	private void processGetAccessTokenResult(String response) {
+		// 验证获取授权口令返回的信息是否成功
+		if (validateSuccess(response)) {
+			// 使用Gson解析返回的授权口令信息
+			WXAccessTokenInfo tokenInfo = gson.fromJson(response, WXAccessTokenInfo.class);
+			// 保存信息到手机本地
+			//myUtils.saveAccessInfotoLocation(tokenInfo,WXEntryActivity.this);
+			// 获取用户信息
+			getUserInfo(tokenInfo.getAccess_token(), tokenInfo.getOpenid());
+		} else {
+			// 授权口令获取失败，解析返回错误信息
+			WXErrorInfo wxErrorInfo = gson.fromJson(response, WXErrorInfo.class);
+			// 提示错误信息
+			Log.i("wxErrorInfo","错误信息: " + wxErrorInfo.getErrmsg());
+
+		}
+	}
+
+	/**
+	 * 验证是否成功
+	 *
+	 * @param response 返回消息
+	 * @return 是否成功
+	 */
+	private boolean validateSuccess(String response) {
+		String errFlag = "errmsg";
+		return (errFlag.contains(response) && !"ok".equals(response))
+				|| (!"errcode".contains(response) && !errFlag.contains(response));
+	}
+
+	/*****
+	 * 获取用户信息
+	 * @param access_token
+	 * @param openid
+	 */
+	private void getUserInfo(String access_token, String openid){
+		String url="https://api.weixin.qq.com/sns/userinfo?" +
+				"access_token=" + access_token +
+				"&openid=" + openid;
+		RequestParams params=new RequestParams(url);
+		x.http().get(params, new Callback.CommonCallback<String>() {
+			@Override
+			public void onSuccess(String result) {
+				//Toast.makeText(WXEntryActivity.this, result+"", Toast.LENGTH_SHORT).show();
+				try {
+					JSONObject jsonObject=new JSONObject(result);
+					String openid=jsonObject.getString("openid");
+					userOpenId=openid;
+					String unionid=jsonObject.getString("unionid");
+					String nickname=jsonObject.getString("nickname");
+					int sex=jsonObject.getInt("sex");
+					String headimgurl=jsonObject.getString("headimgurl");
+					Intent intent=new Intent();
+					intent.setAction("com.action.startLogin");
+
+					finish();
+
+					//WechatLogin(openid,unionid,nickname,sex,headimgurl);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				//在这个地方获取到用户的信息后，将信息上传到自己分服务器，通过判断 是否绑定openid 来决定去哪：
+				//a:手机号注册 并绑定openid  直接登录操作，返回userInfo
+				//b:手机号注册，但未绑定openid,弹出绑定手机号和输入验证码界面，提交到后台，进行openid和手机号的绑定
+				//c:手机号未注册，第一次直接微信登录，跳转到注册界面，完善信息并将手机号和openID绑定并登录
+				//finish();
+			}
+			@Override
+			public void onError(Throwable ex, boolean isOnCallback) {
+				Log.i("wx",ex+"获取用户信息==错误");
+
+			}
+
+			@Override
+			public void onCancelled(CancelledException cex) {
+
+				Log.i("wx",cex+"获取用户信息==错误");
+			}
+
+			@Override
+			public void onFinished() {
+
+			}
+		});
+	}
+
+
+
+
+
 }

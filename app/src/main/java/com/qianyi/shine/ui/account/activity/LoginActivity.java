@@ -1,16 +1,23 @@
 package com.qianyi.shine.ui.account.activity;
 
+import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.qianyi.shine.MainActivity;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiAccount;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.application.MyApplication;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
+import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.account.view.ClearEditText;
+import com.qianyi.shine.utils.Utils;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
 import butterknife.BindView;
@@ -46,7 +53,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initListener() {
 
-
     }
 
     @Override
@@ -59,11 +65,9 @@ public class LoginActivity extends BaseActivity {
             case R.id.btn_login:
                 String userName=et_userName.getText().toString();
                 String pwd=et_pwd.getText().toString();
-                /*if (isParamsEmpty(userName,pwd)){
+                if (isParamsEmpty(userName,pwd)){
                     login(userName,pwd);
-                }*/
-                jumpActivity(LoginActivity.this, GuessScoreActivity.class);
-                finish();
+                }
                 break;
             case R.id.tv_register:
                 jumpActivity(LoginActivity.this, RegisterActivity.class);
@@ -81,23 +85,46 @@ public class LoginActivity extends BaseActivity {
             case R.id.tv_findPwd:
                 jumpActivity(LoginActivity.this, FindPwdActiviy.class);
                 break;
-
         }
     }
     //登录的方法
     private void login(String userName, String pwd) {
-        apiAccount.Login("", userName, pwd, new RequestCallBack<String>() {
+        final CustomLoadingDialog loadingDialog = new CustomLoadingDialog(LoginActivity.this);
+        loadingDialog.show();
+        apiAccount.Login(apiConstant.LOGIN, userName, pwd, new RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
-
+            public void onSuccess(Call call, Response response, final String s) {
+                loadingDialog.dismiss();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Gson gson = new Gson();
+                        LoginBean loginBean=gson.fromJson(s, LoginBean.class);
+                        if(loginBean != null){
+                           String code = loginBean.getCode();
+                           if("0" .equals(code)){
+                              LoginBean.LoginData.LoginInfo user = loginBean.getData().getInfo();
+                              try {
+                                  //存储当前用户
+                                  Utils.saveUser(user,LoginActivity.this);
+                                  startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                  finish();
+                              }catch (Exception e){
+                                  Log.i("excaption_shine",e.getMessage());
+                              }
+                           }else {
+                               Toast.makeText(LoginActivity.this, ""+loginBean.getInfo(), Toast.LENGTH_SHORT).show();
+                           }
+                        }
+                    }
+                });
             }
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
-
+                loadingDialog.dismiss();
             }
         });
     }
-
     //验证参数是不是非空
     private boolean isParamsEmpty(String userName, String pwd) {
         if (TextUtils.isEmpty(userName)){

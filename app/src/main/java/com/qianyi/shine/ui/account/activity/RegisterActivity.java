@@ -1,15 +1,19 @@
 package com.qianyi.shine.ui.account.activity;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiAccount;
 import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
+import com.qianyi.shine.ui.account.bean.RegisterBean;
 import com.qianyi.shine.ui.account.view.ClearEditText;
 import com.qianyi.shine.utils.ToastUtils;
 
@@ -95,22 +99,37 @@ public class RegisterActivity extends BaseActivity {
     }
     //注册的方法
     private void register(String phoneNum, String confrimCode, String pwd) {
+        final CustomLoadingDialog loadingDialog = new CustomLoadingDialog(RegisterActivity.this);
+        loadingDialog.show();
        apiAccount.Register(apiConstant.REGISTER, phoneNum, pwd, confrimCode, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
+                loadingDialog.dismiss();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
+                        Gson gson = new Gson();
+                        RegisterBean registerBean=gson.fromJson(s, RegisterBean.class);
+                        if(registerBean != null){
+                            String code = registerBean.getCode();
+                            if("0" .endsWith(code)){
+                                Toast.makeText(RegisterActivity.this, registerBean.getInfo(), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+                                finish();
+                            }else {
+                                Toast.makeText(RegisterActivity.this, registerBean.getInfo(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     }
                 });
             }
             @Override
             public void onEror(Call call, int statusCode, final Exception e) {
+                loadingDialog.dismiss();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
+                        Toast.makeText(RegisterActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

@@ -1,17 +1,22 @@
 package com.qianyi.shine.ui.account.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 
+import com.qianyi.shine.MainActivity;
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.ui.account.bean.LoginBean;
+import com.qianyi.shine.utils.Utils;
 
 import butterknife.BindView;
 
@@ -35,6 +40,21 @@ public class SplashActivity extends BaseActivity {
                     Manifest.permission.ACCESS_FINE_LOCATION
             },102);
         }
+
+        //自动登录
+        LoginBean.LoginData.LoginInfo user=Utils.readUser(SplashActivity.this);
+        if( user != null){
+            if(!TextUtils.isEmpty(user.getId())){
+                //登录过，进入主界面
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+
+
+
+
     }
     @Override
     protected void initData() {
