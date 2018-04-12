@@ -40,21 +40,6 @@ public class SplashActivity extends BaseActivity {
                     Manifest.permission.ACCESS_FINE_LOCATION
             },102);
         }
-
-        //自动登录
-        LoginBean.LoginData.LoginInfo user=Utils.readUser(SplashActivity.this);
-        if( user != null){
-            if(!TextUtils.isEmpty(user.getId())){
-                //登录过，进入主界面
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        }
-
-
-
-
     }
     @Override
     protected void initData() {
@@ -90,7 +75,17 @@ public class SplashActivity extends BaseActivity {
             }
             @Override
             public void onAnimationEnd(Animation animaton) {
-                jumpActivity(SplashActivity.this,LoginActivity.class);
+                //自动登录
+                LoginBean.LoginData.LoginInfo user=Utils.readUser(SplashActivity.this);
+                if( user != null){
+                    if(!TextUtils.isEmpty(user.getId())){
+                        //登录过，进入主界面
+                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }else{
+                    jumpActivity(SplashActivity.this,LoginActivity.class);
+                }
                 finish();
             }
         });

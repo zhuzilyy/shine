@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qianyi.shine">
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <!--用于进行网络定位-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -25,6 +23,9 @@
     <!--用于申请获取蓝牙信息进行室内定位-->
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+
+
     <application
         android:name=".application.MyApplication"
         android:allowBackup="true"
@@ -189,5 +190,7 @@
             android:screenOrientation="portrait"
             />
         <!--微信授权-->
+        <activity android:name=".wxapi.WXEntryActivity"
+            android:exported="true"/>
     </application>
 </manifest>

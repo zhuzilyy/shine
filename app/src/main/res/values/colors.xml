@@ -37,4 +37,9 @@
     <color name="cicle_red">#ff0000</color>
     <color name="cicle_green">#00ff00</color>
     <color name="cicle_red_light">#99fde1e1</color>
+    <!-- 选择图片弹窗-->
+    <color name="line">#DAD9DB</color>
+    <color name="btn_gradient_press">#CACACB</color>
+    <color name="btn_gradient_normal">#EBEBEB</color>
+    <color name="gray_light">#EBEDF0</color>
 </resources>
