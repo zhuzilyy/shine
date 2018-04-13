@@ -237,7 +237,6 @@ public class Utils {
         }
         return user;
     }
-
     /****
      * 清空sharedPreference中保存的用户信息
      * @param context
@@ -247,11 +246,5 @@ public class Utils {
         SharedPreferences preferences =context.getSharedPreferences("User",MODE_PRIVATE);
         preferences.edit().clear().commit();
         Log.i("clear","789");
-
-
-
     }
-//********************************************************************
-
-
 }

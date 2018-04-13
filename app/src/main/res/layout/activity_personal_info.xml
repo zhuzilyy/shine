@@ -172,7 +172,7 @@
 
     <TextView
         android:background="@color/white"
-        android:id="@+id/btn_quit"
+        android:id="@+id/tv_quit"
         android:layout_marginTop="30dp"
         android:text="退出登录"
         android:textColor="@color/main_blue"

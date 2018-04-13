@@ -18,7 +18,9 @@ import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.account.view.ClearEditText;
 import com.qianyi.shine.utils.Utils;
-import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.sdk.modelmsg.SendAuth;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -139,14 +141,17 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void loginWX() {
-        if (!MyApplication.mWxApi.isWXAppInstalled()) {
+     /*   if (!MyApplication.mWxApi.isWXAppInstalled()) {
             Toast.makeText(this, "您还没安装微信客户端", Toast.LENGTH_SHORT).show();
             return;
-        }
+        }*/
+        IWXAPI mWxApi = WXAPIFactory.createWXAPI(this, apiConstant.APP_ID, false);
+        // 将该app注册到微信
+        mWxApi.registerApp(apiConstant.APP_ID);
         final SendAuth.Req req = new SendAuth.Req();
         req.scope = "snsapi_userinfo";
         req.state = "diandi_wx_login";
-        MyApplication.mWxApi.sendReq(req);
+        mWxApi.sendReq(req);
 
     }
 }
