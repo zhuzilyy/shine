@@ -67,6 +67,15 @@ public class LoginBean {
              public String weiboid;
              public String is_vip;
              public String vip_endtime;
+             public MemberScoreInfo member_scoreinfo;
+
+            public MemberScoreInfo getMember_scoreinfo() {
+                return member_scoreinfo;
+            }
+
+            public void setMember_scoreinfo(MemberScoreInfo member_scoreinfo) {
+                this.member_scoreinfo = member_scoreinfo;
+            }
 
             public String getId() {
                 return id;
@@ -228,7 +237,71 @@ public class LoginBean {
                 this.vip_endtime = vip_endtime;
             }
 
-            public class memberScoreInfo {}
+            public class MemberScoreInfo implements Serializable {
+                public String id;
+                public String member_id;
+                public String prov;
+                public String type;
+                public String score;
+                public String rank;
+                public String create_time;
+
+                public String getId() {
+                    return id;
+                }
+
+                public void setId(String id) {
+                    this.id = id;
+                }
+
+                public String getMember_id() {
+                    return member_id;
+                }
+
+                public void setMember_id(String member_id) {
+                    this.member_id = member_id;
+                }
+
+                public String getProv() {
+                    return prov;
+                }
+
+                public void setProv(String prov) {
+                    this.prov = prov;
+                }
+
+                public String getType() {
+                    return type;
+                }
+
+                public void setType(String type) {
+                    this.type = type;
+                }
+
+                public String getScore() {
+                    return score;
+                }
+
+                public void setScore(String score) {
+                    this.score = score;
+                }
+
+                public String getRank() {
+                    return rank;
+                }
+
+                public void setRank(String rank) {
+                    this.rank = rank;
+                }
+
+                public String getCreate_time() {
+                    return create_time;
+                }
+
+                public void setCreate_time(String create_time) {
+                    this.create_time = create_time;
+                }
+            }
              
     
 

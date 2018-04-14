@@ -29,6 +29,7 @@ public class SplashActivity extends BaseActivity {
     ImageView iv_splash;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         boolean isGranted=checkedAllPermission(new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION
         });
@@ -87,6 +88,7 @@ public class SplashActivity extends BaseActivity {
                     jumpActivity(SplashActivity.this,LoginActivity.class);
                 }
                 finish();
+
             }
         });
     }

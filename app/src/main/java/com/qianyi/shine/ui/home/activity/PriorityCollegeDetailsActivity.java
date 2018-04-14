@@ -59,7 +59,7 @@ public class PriorityCollegeDetailsActivity extends BaseActivity implements View
     @Override
     protected void initViews() {
 
-
+        BaseActivity.addActivity(this);
         list=new ArrayList<>();
         list.add(new CollegeEntity(R.mipmap.icon01,"","111111",""));
         list.add(new CollegeEntity(R.mipmap.icon01,"","111111",""));

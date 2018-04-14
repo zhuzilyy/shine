@@ -64,6 +64,7 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         setStatusColor();
         ButterKnife.bind(this);
         fragmentManager=getSupportFragmentManager();

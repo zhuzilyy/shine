@@ -32,6 +32,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     public BottomNavigationBar bar;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         fragmentManager=getSupportFragmentManager();
         homeFragment=new HomeFragment();
         FragmentTransaction ft=fragmentManager.beginTransaction();

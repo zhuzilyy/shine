@@ -44,6 +44,7 @@ public class MessageActivity extends BaseActivity {
     private static final int PAGE_SIZE = 6;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         tv_title.setText("消息");
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         rv_message.setLayoutManager(new LinearLayoutManager(this));

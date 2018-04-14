@@ -31,6 +31,7 @@ public class VipActivity extends BaseActivity {
     private TextView tv_confirmOrder;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         tv_title.setText("购买VIP");
         view_buyVip=LayoutInflater.from(this).inflate(R.layout.pw_buy_vip,null);
         view_payMethod=LayoutInflater.from(this).inflate(R.layout.pw_pay_method,null);

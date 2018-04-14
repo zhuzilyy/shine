@@ -18,6 +18,7 @@ public class FindPwdActiviy extends BaseActivity {
     TextView tv_title;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         tv_title.setText("找回密码");
     }
 

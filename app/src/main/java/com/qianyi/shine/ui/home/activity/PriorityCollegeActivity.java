@@ -62,6 +62,7 @@ public class PriorityCollegeActivity extends BaseActivity {
     private View view_header;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         view_header=getLayoutInflater().inflate(R.layout.header_priority_college,null);
         tv_title.setText("院校优先填报");
         infoList=new ArrayList<>();

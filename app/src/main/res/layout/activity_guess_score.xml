@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:text="点击选择"
+            android:hint="点击选择"
             android:textColor="@color/gray"
             android:textSize="15sp" />
         <ImageView
@@ -60,12 +60,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <RadioGroup
+            android:id="@+id/rg"
             android:layout_marginRight="20dp"
             android:layout_alignParentRight="true"
             android:orientation="horizontal"
             android:layout_width="200dp"
             android:layout_height="match_parent">
             <RadioButton
+
                 android:textColor="@color/color"
                 android:background="@drawable/bg_subject"
                 android:textSize="15sp"
@@ -110,6 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <EditText
+            android:id="@+id/et_myscore"
             android:singleLine="true"
             android:digits="0.123456789"
             android:textSize="15sp"
@@ -139,6 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <EditText
+            android:id="@+id/et_myrank"
             android:singleLine="true"
             android:digits="0.123456789"
             android:textSize="15sp"
