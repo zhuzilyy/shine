@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.qianyi.shine.MainActivity;
+import com.qianyi.shine.utils.ListActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,6 +37,7 @@ public abstract class BaseActivity extends FragmentActivity {
         //加载布局
         getResLayout();
         unbinder= ButterKnife.bind(this);
+        ListActivity.list.add(this);
         //初始化控件
         initViews();
         //初始化数据
@@ -66,6 +68,7 @@ public abstract class BaseActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+        ListActivity.list.remove(this);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
