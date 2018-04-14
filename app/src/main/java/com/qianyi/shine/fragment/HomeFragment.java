@@ -116,16 +116,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void initData() {
-        //*********************************************
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo01, "", "北京大学", "北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo02, "", "清华大学", "北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo01, "", "西京大学", "北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo02, "", "东北农业大学", "北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo02, "", "齐齐哈尔大学", "北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo01, "", "西北农林大学", "北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo02, "", "长春大学", "北京市/综合/211"));
-        listCollege.add(new CollegeEntity(R.mipmap.college_logo01, "", "吉林动画学院", "北京市/综合/211"));
-
     }
 
     @Override
@@ -144,16 +134,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
 //        mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
-        //高考头条条目点击
-        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-                Intent intent = new Intent(getActivity(), WebviewActivity.class);
-                intent.putExtra("title", "高考头条");
-                intent.putExtra("url", "http://www.qq.com");
-                startActivity(intent);
-            }
-        });
+
 
 
     }
@@ -179,8 +160,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         LinearLayout gotoCollege02=headView.findViewById(R.id.goto_college02);
         //测试录取率
         LinearLayout ll_acceptanceRate=headView.findViewById(R.id.ll_acceptanceRate);
-
-
 
         cityname=headView.findViewById(R.id.cityName);
         //点击事件
@@ -266,6 +245,19 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                                             public void onItemClick(int position) {
                                                 Intent intent = new Intent(getActivity(), CollegeActivity.class);
                                                 startActivity(intent);
+                                            }
+                                        });
+                                        //高考头条条目点击
+                                        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
+                                            @Override
+                                            public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
+                                                Intent intent = new Intent(getActivity(), WebviewActivity.class);
+                                                intent.putExtra("title", "高考头条");
+                                                if(articles.size() >0 ){
+                                                    intent.putExtra("url", articles.get(position).getWeburl());
+                                                    startActivity(intent);
+                                                }
+
                                             }
                                         });
                                     }
