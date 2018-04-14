@@ -21,6 +21,7 @@ public class BindPhoneActivity extends BaseActivity {
     TextView tv_title;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         tv_title.setText("绑定手机");
     }
 

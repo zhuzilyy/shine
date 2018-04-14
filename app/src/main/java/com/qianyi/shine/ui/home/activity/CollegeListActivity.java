@@ -64,6 +64,7 @@ public class CollegeListActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         tv_title.setText("大学列表");
         infoList=new ArrayList<>();
         //省份

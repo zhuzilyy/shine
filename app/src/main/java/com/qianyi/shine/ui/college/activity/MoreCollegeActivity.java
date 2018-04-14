@@ -67,6 +67,7 @@ public class MoreCollegeActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         title=findViewById(R.id.title);
 
 

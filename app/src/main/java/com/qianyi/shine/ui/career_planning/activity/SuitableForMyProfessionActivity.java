@@ -45,6 +45,7 @@ public class SuitableForMyProfessionActivity extends BaseActivity {
     public TextView title;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         swipeLayout.setColorSchemeColors(Color.rgb(47,233,189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(SuitableForMyProfessionActivity.this));
         //

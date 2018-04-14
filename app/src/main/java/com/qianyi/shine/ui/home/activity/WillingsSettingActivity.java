@@ -33,6 +33,7 @@ public class WillingsSettingActivity extends BaseActivity {
     private String majorName,area,occupationName;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         tv_title.setText("意愿设置");
 
         //注册广播 拿到专业数据

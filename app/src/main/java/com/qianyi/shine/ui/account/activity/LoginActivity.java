@@ -39,6 +39,7 @@ public class LoginActivity extends BaseActivity {
     CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         customLoadingDialog=new CustomLoadingDialog(this);
         //customLoadingDialog.show();
     }
@@ -109,7 +110,7 @@ public class LoginActivity extends BaseActivity {
                               try {
                                   //存储当前用户
                                   Utils.saveUser(user,LoginActivity.this);
-                                  startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                  startActivity(new Intent(LoginActivity.this, GuessScoreActivity.class));
                                   finish();
                               }catch (Exception e){
                                   Log.i("excaption_shine",e.getMessage());
@@ -123,6 +124,7 @@ public class LoginActivity extends BaseActivity {
             }
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
+                Log.i("","123"+e.getMessage());
                 loadingDialog.dismiss();
             }
         });
@@ -141,10 +143,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void loginWX() {
-     /*   if (!MyApplication.mWxApi.isWXAppInstalled()) {
-            Toast.makeText(this, "您还没安装微信客户端", Toast.LENGTH_SHORT).show();
-            return;
-        }*/
+
         IWXAPI mWxApi = WXAPIFactory.createWXAPI(this, apiConstant.APP_ID, false);
         // 将该app注册到微信
         mWxApi.registerApp(apiConstant.APP_ID);

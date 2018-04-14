@@ -37,6 +37,7 @@ public class ProfessionalActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         title.setText("哲学");
 
         myPageAdapter = new MyPageAdapter(getSupportFragmentManager());

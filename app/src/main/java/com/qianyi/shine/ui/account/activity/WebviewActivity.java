@@ -30,6 +30,7 @@ public class WebviewActivity extends BaseActivity {
     private WebSettings webSettings;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         Intent intent=getIntent();
         if (intent!=null){
             String title=intent.getStringExtra("title");

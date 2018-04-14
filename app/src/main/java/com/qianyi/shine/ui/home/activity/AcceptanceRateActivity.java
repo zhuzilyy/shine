@@ -25,7 +25,7 @@ public class AcceptanceRateActivity extends BaseActivity {
     private HomeSearchCollegeAdapter homeSearchCollegeAdapter;
     @Override
     protected void initViews() {
-
+        BaseActivity.addActivity(this);
     }
     @Override
     protected void initData() {

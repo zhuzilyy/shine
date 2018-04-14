@@ -28,6 +28,7 @@ public class SelectCollegeAreaActivity extends BaseActivity {
             "云南省","陕西省","甘肃省","青海省","内蒙古","广西","宁夏","新疆",};
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         tv_title.setText("选择省份");
         selectAreaAdapter=new SelectAreaAdapter(areas,SelectCollegeAreaActivity.this);
         gv_area.setAdapter(selectAreaAdapter);

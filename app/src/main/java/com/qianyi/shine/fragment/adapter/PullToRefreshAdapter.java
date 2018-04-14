@@ -1,18 +1,24 @@
 package com.qianyi.shine.fragment.adapter;
 
+import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.qianyi.shine.R;
 import com.qianyi.shine.fragment.entity.Status;
 import com.qianyi.shine.fragment.entity.TestEntity;
+import com.qianyi.shine.ui.account.bean.LoginBean;
+import com.qianyi.shine.ui.home.bean.HomeBean;
 import com.qianyi.shine.utils.SpannableStringUtils;
 import com.qianyi.shine.utils.ToastUtils;
 
@@ -24,18 +30,19 @@ import com.qianyi.shine.utils.ToastUtils;
  * 修改时间：
  * 修改备注：
  */
-public class PullToRefreshAdapter extends BaseQuickAdapter<TestEntity, BaseViewHolder> {
-    public PullToRefreshAdapter() {
-        super( R.layout.layout_toutiao, null);
+public class PullToRefreshAdapter extends BaseQuickAdapter<HomeBean.HomeData.HomeInfo.Article, BaseViewHolder> {
+    private Context mContext;
+
+    public PullToRefreshAdapter(FragmentActivity activity) {
+        super(R.layout.layout_toutiao, null);
+        mContext = activity;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, TestEntity item) {
-
-            helper.setImageResource(R.id.item_img,item.getImg());
-            helper.setText(R.id.item_desc,item.getDes());
-
-
+    protected void convert(BaseViewHolder helper, HomeBean.HomeData.HomeInfo.Article item) {
+        ImageView imageView = helper.getView(R.id.item_img);
+        Glide.with(mContext).load(item.getImage()).into(imageView);
+        helper.setText(R.id.item_desc, item.getTitle());
 //        Toast.makeText(mContext, helper.getLayoutPosition()+"", Toast.LENGTH_SHORT).show();
 //        Log.i("ppp",item+"");
 //        helper.setImageResource(R.id.img,R.mipmap.animation_img1);

@@ -26,12 +26,26 @@ public class apiAccount {
         params.put("password",password);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
-    /*注册*/
+    /**
+     * 注册
+     * */
     public static void Register(String url,String account_mobile, String password, String smscode,RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
         params.put("mobile",account_mobile);
         params.put("password",password);
         params.put("smscode",smscode);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    /***
+     * 启程
+     */
+    public static void Launch(String url,String member_id, String type, String prov,String score,String rank,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",member_id);
+        params.put("type",type);
+        params.put("prov",prov);
+        params.put("score",score);
+        params.put("rank",rank);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
 }

@@ -33,6 +33,7 @@ public class SearchOccupationActivity extends BaseActivity {
     private Intent intent;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         intent=getIntent();
         if (intent!=null){
             tag=intent.getStringExtra("tag");

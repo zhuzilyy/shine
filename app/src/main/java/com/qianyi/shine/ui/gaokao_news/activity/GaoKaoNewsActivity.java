@@ -45,6 +45,7 @@ public class GaoKaoNewsActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(GaoKaoNewsActivity.this));
 

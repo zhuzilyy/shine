@@ -4,7 +4,7 @@ android {
         config_xzy_release {
             keyAlias 'android.keystore'
             keyPassword '031424'
-            storeFile file('C:/Program Files/Java/jdk1.7.0_67/bin/android.keystore')
+            storeFile file('D:/Android/keystore/android.keystore')
             storePassword '031424'
         }
     }
@@ -69,4 +69,6 @@ dependencies {
     compile 'io.github.openfeign:feign-gson:9.5.0'
     //base64.jar
     implementation files('libs/commons-codec.jar')
+    //glide
+    compile 'com.github.bumptech.glide:glide:3.5.2'
 }

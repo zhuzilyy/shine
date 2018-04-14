@@ -20,6 +20,7 @@ public class SettingActivity extends BaseActivity{
     TextView tv_title;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         tv_title.setText("设置");
     }
 

@@ -44,7 +44,7 @@ public class HomeSearchActivity extends BaseActivity implements View.OnClickList
     public ImageView back;
     @Override
     protected void initViews() {
-
+        BaseActivity.addActivity(this);
         myPageAdapter = new MyPageAdapter(getSupportFragmentManager());
         ArrayList<Fragment> datas = new ArrayList<Fragment>();
         datas.add(new SearchHomeCollegeFragment());

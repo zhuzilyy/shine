@@ -1,5 +1,6 @@
 package com.qianyi.shine.ui.mine.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class PersonalInfoActivity extends BaseActivity {
     TextView tv_title;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         tv_title.setText("我的资料");
     }
 
@@ -66,8 +68,11 @@ public class PersonalInfoActivity extends BaseActivity {
         quitDialog.setYesOnclickListener("确定", new SelfDialog.onYesOnclickListener() {
             @Override
             public void onYesClick() {
+                BaseActivity.removeActivity();
                Utils.clearSharedUser(PersonalInfoActivity.this);
-               quitDialog.dismiss();
+               startActivity(new Intent(PersonalInfoActivity.this,LoginActivity.class));
+               finish();
+
             }
         });
         quitDialog.setNoOnclickListener("取消", new SelfDialog.onNoOnclickListener() {
