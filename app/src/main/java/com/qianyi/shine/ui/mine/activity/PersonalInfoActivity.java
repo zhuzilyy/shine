@@ -34,7 +34,6 @@ public class PersonalInfoActivity extends BaseActivity {
     protected void getResLayout() {
         setContentView(R.layout.activity_personal_info);
     }
-
     @Override
     protected void initListener() {
 
