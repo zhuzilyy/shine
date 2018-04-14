@@ -11,7 +11,7 @@ public class apiConstant {
     //登录
     public static final String LOGIN=BASE_URL+"login";
     //启程
-    public static final String LAUNCH=BASE_URL+"insertMemberScoreinfo";
+    public static final String LAUNCH=BASE_URL+"insert_memberscoreinfo";
     //首页
     public static final String HOME=BASE_URL+"default_index";
 
