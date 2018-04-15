@@ -41,7 +41,7 @@ public class GuessScoreActivity extends BaseActivity {
     public TextView tv_selectArea;
     @BindView(R.id.rg)
     public RadioGroup rg;
-    private String type;
+    private String type="2";
     @BindView(R.id.et_myrank)
     public EditText et_myrank;
     @BindView(R.id.et_myscore)
