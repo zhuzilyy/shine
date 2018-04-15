@@ -22,7 +22,7 @@ public class FindCollegeActivity extends BaseActivity {
     private CollegeAdapter collegeAdapter;
     @Override
     protected void initViews() {
-
+        BaseActivity.addActivity(this);
     }
     @Override
     protected void initData() {

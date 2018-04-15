@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.qianyi.shine.R;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
+import com.qianyi.shine.ui.home.bean.HomeBean;
 
 import java.util.List;
 
@@ -22,7 +24,7 @@ import java.util.List;
 public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
     private Context mContext;
-    private List<CollegeEntity> datas;//数据
+    private List<HomeBean.HomeData.HomeInfo.RecommendUniversity> datas;//数据
 
     //自定义监听事件
     public static interface OnRecyclerViewItemClickListener {
@@ -38,7 +40,7 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
     }
 
     //适配器初始化
-    public GridAdapter(Context context, List<CollegeEntity> datas) {
+    public GridAdapter(Context context, List<HomeBean.HomeData.HomeInfo.RecommendUniversity> datas) {
         mContext = context;
         this.datas = datas;
     }
@@ -46,7 +48,7 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
     @Override
     public int getItemViewType(int position) {
         //判断item类别，是图还是显示页数（图片有URL）
-        if (!TextUtils.isEmpty(datas.get(position).getCollegeName())) {
+        if (!TextUtils.isEmpty(datas.get(position).getId())) {
             return 0;
         } else {
             return 1;
@@ -84,6 +86,9 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
                     }
                 });
             }
+            Glide.with(mContext).load(datas.get(position).getLogo()).into(((MyViewHolder) holder).collegeLogo);
+            ((MyViewHolder) holder).collegeName.setText(datas.get(position).getName());
+            ((MyViewHolder) holder).collegeDesc.setText(datas.get(position).getAttrtext());
 
         }
 
@@ -100,14 +105,18 @@ public class GridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
 
     //自定义ViewHolder，用于加载图片
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private ImageView iv;
+        private ImageView collegeLogo;
         private LinearLayout item_ll;
+        private TextView collegeName;
+        private TextView collegeDesc;
 
 
         public MyViewHolder(View view) {
             super(view);
-            iv = view.findViewById(R.id.collegeImg);
-            item_ll=view.findViewById(R.id.item_ll);
+            collegeLogo = view.findViewById(R.id.collegeImg);
+            item_ll = view.findViewById(R.id.item_ll);
+            collegeDesc = view.findViewById(R.id.college_desc);
+            collegeName = view.findViewById(R.id.college_name);
         }
     }
 

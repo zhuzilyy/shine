@@ -100,6 +100,7 @@ public class CollegeFragment extends BaseFragment{
                         setData(true, infoList);
                         collegeAdapter.setEnableLoadMore(true);
                         mSwipeRefreshLayout.setRefreshing(false);
+
                     }
                 });
             }

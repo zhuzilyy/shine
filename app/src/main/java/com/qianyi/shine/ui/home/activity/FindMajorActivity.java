@@ -38,6 +38,7 @@ public class FindMajorActivity extends BaseActivity {
     private MyReceiver myReceiver;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         zhuankeFragment=new MajorZhuanKeFragment();
         benkeFragment=new MajorBenkeFragment();
         //初始化碎片

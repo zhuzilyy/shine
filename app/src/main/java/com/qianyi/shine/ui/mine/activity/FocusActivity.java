@@ -34,6 +34,7 @@ public class FocusActivity extends BaseActivity {
     private Fragment currentFragment,collegeFragment,majorFragment,professionFragment,measurementFragment;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         tv_title.setText("我的关注");
         collegeFragment=new CollegeFragment();
         majorFragment=new MajorFragment();

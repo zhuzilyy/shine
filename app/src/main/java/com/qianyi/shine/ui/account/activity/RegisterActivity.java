@@ -38,7 +38,7 @@ public class RegisterActivity extends BaseActivity {
     ClearEditText et_pwd;
     @Override
     protected void initViews() {
-
+        BaseActivity.addActivity(this);
     }
 
     @Override

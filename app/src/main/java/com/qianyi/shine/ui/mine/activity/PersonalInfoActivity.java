@@ -1,13 +1,13 @@
 package com.qianyi.shine.ui.mine.activity;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.dialog.SelfDialog;
 import com.qianyi.shine.ui.account.activity.LoginActivity;
+import com.qianyi.shine.utils.ListActivity;
 import com.qianyi.shine.utils.Utils;
 
 import butterknife.BindView;
@@ -34,7 +34,6 @@ public class PersonalInfoActivity extends BaseActivity {
     protected void getResLayout() {
         setContentView(R.layout.activity_personal_info);
     }
-
     @Override
     protected void initListener() {
 
@@ -68,6 +67,8 @@ public class PersonalInfoActivity extends BaseActivity {
             public void onYesClick() {
                Utils.clearSharedUser(PersonalInfoActivity.this);
                quitDialog.dismiss();
+                ListActivity.close();
+               jumpActivity(PersonalInfoActivity.this,LoginActivity.class);
             }
         });
         quitDialog.setNoOnclickListener("取消", new SelfDialog.onNoOnclickListener() {

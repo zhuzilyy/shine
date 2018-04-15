@@ -1,5 +1,6 @@
 package com.qianyi.shine.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -12,7 +13,10 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.qianyi.shine.MainActivity;
+import com.qianyi.shine.utils.ListActivity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,8 +29,10 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseActivity extends FragmentActivity {
+    public static List<Activity> activities=new ArrayList<>();
     Unbinder unbinder;
     private boolean isExit=false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,7 @@ public abstract class BaseActivity extends FragmentActivity {
         //加载布局
         getResLayout();
         unbinder= ButterKnife.bind(this);
+        ListActivity.list.add(this);
         //初始化控件
         initViews();
         //初始化数据
@@ -66,6 +73,7 @@ public abstract class BaseActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+        ListActivity.list.remove(this);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -97,6 +105,26 @@ public abstract class BaseActivity extends FragmentActivity {
             }
         }else {
             finish();
+        }
+    }
+    /**
+     * 将activity添加进集合中
+     * @param activity
+     */
+    public static void addActivity(Activity activity){
+        activities.add(activity);
+    }
+
+    /***
+     * 从集合中移除activity
+     */
+    public static void removeActivity() {
+        for (int i = 0; i < activities.size(); i++) {
+
+            if (!activities.get(i).isFinishing()) {
+                activities.get(i).finish();
+            }
+
         }
     }
 

@@ -66,7 +66,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-
+        BaseActivity.addActivity(this);
         title.setBackListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

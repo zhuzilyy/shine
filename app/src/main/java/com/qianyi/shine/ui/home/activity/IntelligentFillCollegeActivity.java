@@ -50,6 +50,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     private  String occupationName;
     @Override
     protected void initViews() {
+        BaseActivity.addActivity(this);
         tv_title.setText("智能填报");
         infoList=new ArrayList<>();
         swipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
