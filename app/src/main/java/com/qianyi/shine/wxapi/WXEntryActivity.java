@@ -1,176 +1,118 @@
 package com.qianyi.shine.wxapi;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.qianyi.shine.api.apiConstant;
-import com.tencent.mm.opensdk.modelbase.BaseReq;
-import com.tencent.mm.opensdk.modelbase.BaseResp;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.tencent.mm.sdk.modelbase.BaseReq;
+import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.modelmsg.SendAuth;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 
-public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
+public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
 
-	private static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
+    public  int WX_LOGIN = 1;
 
-	private Button gotoBtn, regBtn, launchBtn, checkBtn, scanBtn;
+    private IWXAPI iwxapi;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
+        // 隐藏状态栏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-	// IWXAPI 是第三方app和微信通信的openapi接口
-	private IWXAPI api;
+        iwxapi = WXAPIFactory.createWXAPI(this, apiConstant.APP_ID, false);
+        //接收到分享以及登录的intent传递handleIntent方法，处理结果
+        iwxapi.handleIntent(getIntent(), this);
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.entry);
-		// 通过WXAPIFactory工厂，获取IWXAPI的实例
-		api = WXAPIFactory.createWXAPI(this, apiConstant.APP_ID, false);
-		api.registerApp(apiConstant.APP_ID);
-	/*	regBtn = (Button) findViewById(R.id.reg_btn);
-		regBtn.setOnClickListener(new View.OnClickListener() {
+    }
+    @Override
+    public void onReq(BaseReq baseReq) {
+    }
+    //请求回调结果处理
+    @Override
+    public void onResp(BaseResp baseResp) {
+        //微信登录为getType为1，分享为0
+        if (baseResp.getType() == WX_LOGIN){
+            //登录回调
+            SendAuth.Resp resp = (SendAuth.Resp) baseResp;
+            switch (resp.errCode) {
+                case BaseResp.ErrCode.ERR_OK:
+                    String code = String.valueOf(resp.code);
+                    //获取用户信息
+                    getAccessToken(code);
+                    break;
+                case BaseResp.ErrCode.ERR_AUTH_DENIED://用户拒绝授权
+                    break;
+                case BaseResp.ErrCode.ERR_USER_CANCEL://用户取消
+                    break;
+                default:
+                    break;
+            }
+        }else{
+            //分享成功回调
+            switch (baseResp.errCode) {
+                case BaseResp.ErrCode.ERR_OK:
+                    //分享成功
+                    Toast.makeText(WXEntryActivity.this, "分享成功", Toast.LENGTH_LONG).show();
+                    break;
+                case BaseResp.ErrCode.ERR_USER_CANCEL:
+                    //分享取消
+                    Toast.makeText(WXEntryActivity.this, "分享取消", Toast.LENGTH_LONG).show();
+                    break;
+                case BaseResp.ErrCode.ERR_AUTH_DENIED:
+                    //分享拒绝
+                    Toast.makeText(WXEntryActivity.this, "分享拒绝", Toast.LENGTH_LONG).show();
+                    break;
+            }
+        }
+        finish();
+    }
 
-			@Override
-			public void onClick(View v) {
-				// 将该app注册到微信
+    private void getAccessToken(String code) {
+        /*//获取授权
+        String http = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + Config.APP_ID + "&secret=" + Config.APP_SERECET + "&code=" + code + "&grant_type=authorization_code";
+        OkHttpUtils.ResultCallback<String> resultCallback = new OkHttpUtils.ResultCallback<String>() {
+            @Override
+            public void onSuccess(String response) {
+                String access = null;
+                String openId = null;
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    access = jsonObject.getString("access_token");
+                    openId = jsonObject.getString("openid");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //获取个人信息
+                String getUserInfo = "https://api.weixin.qq.com/sns/userinfo?access_token=" + access + "&openid=" + openId + "";
+                OkHttpUtils.ResultCallback<WeChatInfo> resultCallback = new OkHttpUtils.ResultCallback<WeChatInfo>() {
+                    @Override
+                    public void onSuccess(WeChatInfo response) {
+                        Log.i("TAG", response.toString());
+                        Toast.makeText(WXEntryActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                        finish();
+                    }
 
-			}
-		});*/
+                    @Override
+                    public void onFailure(Exception e) {
+                        Toast.makeText(WXEntryActivity.this, "登录失败1", Toast.LENGTH_SHORT).show();
+                    }
+                };
+                OkHttpUtils.get(getUserInfo, resultCallback);
+            }
 
-		/*gotoBtn = (Button) findViewById(R.id.goto_send_btn);
-		gotoBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(WXEntryActivity.this, SendToWXActivity.class));
-				finish();
-			}
-		});
-
-		launchBtn = (Button) findViewById(R.id.launch_wx_btn);
-		launchBtn.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(WXEntryActivity.this, "launch result = " + api.openWXApp(), Toast.LENGTH_LONG).show();
-			}
-		});
-
-		checkBtn = (Button) findViewById(R.id.check_timeline_supported_btn);
-		checkBtn.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				int wxSdkVersion = api.getWXAppSupportAPI();
-				if (wxSdkVersion >= TIMELINE_SUPPORTED_VERSION) {
-					Toast.makeText(WXEntryActivity.this, "wxSdkVersion = " + Integer.toHexString(wxSdkVersion) + "\ntimeline supported", Toast.LENGTH_LONG).show();
-				} else {
-					Toast.makeText(WXEntryActivity.this, "wxSdkVersion = " + Integer.toHexString(wxSdkVersion) + "\ntimeline not supported", Toast.LENGTH_LONG).show();
-				}
-			}
-		});
-
-		scanBtn = (Button) findViewById(R.id.scan_qrcode_login_btn);
-		scanBtn.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(WXEntryActivity.this, ScanQRCodeLoginActivity.class));
-				finish();
-			}
-		});
-*/
-		//注意：
-		//第三方开发者如果使用透明界面来实现WXEntryActivity，需要判断handleIntent的返回值，如果返回值为false，则说明入参不合法未被SDK处理，应finish当前透明界面，避免外部通过传递非法参数的Intent导致停留在透明界面，引起用户的疑惑
-		try {
-			api.handleIntent(getIntent(), this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	protected void onNewIntent(Intent intent) {
-		super.onNewIntent(intent);
-		setIntent(intent);
-		api.handleIntent(intent, this);
-	}
-
-	@Override
-	public void onReq(BaseReq baseReq) {
-
-	}
-
-	// 微信发送请求到第三方应用时，会回调到该方法
-	/*@Override
-	public void onReq(BaseReq req) {
-		switch (req.getType()) {
-			case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
-				goToGetMsg();
-				break;
-			case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
-				goToShowMsg((ShowMessageFromWX.Req) req);
-				break;
-			default:
-				break;
-		}
-	}*/
-	// 第三方应用发送到微信的请求处理后的响应结果，会回调到该方法
-	@Override
-	public void onResp(BaseResp resp) {
-		int result = 0;
-		Toast.makeText(this, "baseresp.getType = " + resp.getType(), Toast.LENGTH_SHORT).show();
-		switch (resp.errCode) {
-			case BaseResp.ErrCode.ERR_OK:
-				//result = R.string.errcode_success;
-				Toast.makeText(this, "3333333333333", Toast.LENGTH_SHORT).show();
-				break;
-			case BaseResp.ErrCode.ERR_USER_CANCEL:
-				Toast.makeText(this, "222222222222", Toast.LENGTH_SHORT).show();
-				//result = R.string.errcode_cancel;
-				break;
-			case BaseResp.ErrCode.ERR_AUTH_DENIED:
-				//result = R.string.errcode_deny;
-				break;
-			case BaseResp.ErrCode.ERR_UNSUPPORT:
-				//result = R.string.errcode_unsupported;
-				break;
-			default:
-				//result = R.string.errcode_unknown;
-				break;
-		}
-
-		Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-	}
-
-	/*private void goToGetMsg() {
-		Intent intent = new Intent(this, GetFromWXActivity.class);
-		intent.putExtras(getIntent());
-		startActivity(intent);
-		finish();
-	}*/
-
-/*	private void goToShowMsg(ShowMessageFromWX.Req showReq) {
-		WXMediaMessage wxMsg = showReq.message;
-		WXAppExtendObject obj = (WXAppExtendObject) wxMsg.mediaObject;
-
-		StringBuffer msg = new StringBuffer(); // 组织一个待显示的消息内容
-		msg.append("description: ");
-		msg.append(wxMsg.description);
-		msg.append("\n");
-		msg.append("extInfo: ");
-		msg.append(obj.extInfo);
-		msg.append("\n");
-		msg.append("filePath: ");
-		msg.append(obj.filePath);
-
-		Intent intent = new Intent(this, ShowFromWXActivity.class);
-		intent.putExtra(Constants.ShowMsgActivity.STitle, wxMsg.title);
-		intent.putExtra(Constants.ShowMsgActivity.SMessage, msg.toString());
-		intent.putExtra(Constants.ShowMsgActivity.BAThumbData, wxMsg.thumbData);
-		startActivity(intent);
-		finish();
-	}*/
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(WXEntryActivity.this, "登录失败2", Toast.LENGTH_SHORT).show();
+            }
+        };
+        OkHttpUtils.get(http, resultCallback);*/
+    }
 }

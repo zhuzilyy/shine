@@ -7,9 +7,6 @@ android {
             storeFile file('C:/Program Files/Java/jdk1.7.0_67/bin/android.keystore')
             storePassword '031424'
         }
-        debug {
-            storeFile file("C:/Program Files/Java/jdk1.7.0_67/bin/android.keystore")
-        }
     }
     compileSdkVersion 26
     defaultConfig {
@@ -68,8 +65,8 @@ dependencies {
     implementation project(':treeadapter')
     implementation files('libs/AMap_Location_V3.8.0_20180201.jar')
     compile 'org.xutils:xutils:3.5.0'
-    //微信
-    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     //gson
     compile 'io.github.openfeign:feign-gson:9.5.0'
+    //base64.jar
+    implementation files('libs/commons-codec.jar')
 }

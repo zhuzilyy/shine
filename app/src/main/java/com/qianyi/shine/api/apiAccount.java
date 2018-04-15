@@ -22,7 +22,7 @@ public class apiAccount {
      */
     public static void Login(String url,String account_mobile, String password, RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
-        params.put("account_mobile",account_mobile);
+        params.put("mobile",account_mobile);
         params.put("password",password);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
@@ -33,6 +33,5 @@ public class apiAccount {
         params.put("password",password);
         params.put("smscode",smscode);
         OkHttpManager.getInstance().postRequest(url,params,callback);
-        Log.i("tag","3333333333333333");
     }
 }

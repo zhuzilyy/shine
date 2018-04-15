@@ -1,20 +1,34 @@
 package com.qianyi.shine.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.util.Log;
 
-
+import com.orhanobut.logger.Logger;
 import com.qianyi.shine.application.MyApplication;
+import com.qianyi.shine.ui.account.bean.LoginBean;
 
+
+import org.apache.commons.codec.binary.Base64;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * ============================================================
@@ -150,5 +164,87 @@ public class Utils {
                 ((ip >> 8) & 0xFF) + "." +
                 ((ip >> 16) & 0xFF) + "." +
                 (ip >> 24 & 0xFF);
+    }
+
+    /***
+     * 登录成功后，将user对象存储在share中
+     * @param user
+     * @param context
+     */
+    public static void saveUser(LoginBean.LoginData.LoginInfo user, Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("User",MODE_PRIVATE);
+
+        // 创建字节输出流
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            // 创建对象输出流，并封装字节流
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            // 将对象写入字节流
+            oos.writeObject(user);
+            // 将字节流编码成base64的字符窜
+            String oAuth_Base64 = new String(Base64.encodeBase64(baos.toByteArray()));
+            Log.i("xxx","save的字符串=="+oAuth_Base64);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("uu", oAuth_Base64);
+            Logger.i("uu##@@@@@=="+oAuth_Base64);
+
+            editor.commit();
+            Logger.i("user存储成功");
+            Log.i("xxx","user存储成功");
+        } catch (IOException e) {
+            Logger.i("user存储失败");
+            Logger.i("存储失败==="+e);
+            Log.i("xxx","user存储失败"+e);
+        }
+
+    }
+
+    /****
+     * 从share中读取User
+     * @return
+     */
+
+    public static LoginBean.LoginData.LoginInfo readUser(Context context) {
+        LoginBean.LoginData.LoginInfo user = null;
+        Log.i("xxx","context@=="+context);
+        SharedPreferences preferences =context.getSharedPreferences("User",MODE_PRIVATE);
+
+        String productBase64 = preferences.getString("uu", "");
+        Log.i("xxx","productBase64=="+productBase64);
+
+        //读取字节
+        byte[] base64 =Base64.decodeBase64(productBase64.getBytes());
+
+        //封装到字节流
+        ByteArrayInputStream bais = new ByteArrayInputStream(base64);
+        try {
+            //再次封装
+            ObjectInputStream bis = new ObjectInputStream(bais);
+            try {
+                //读取对象
+                user = (LoginBean.LoginData.LoginInfo) bis.readObject();
+            } catch (ClassNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } catch (StreamCorruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            Log.i("xxx","有读取势必=="+e);
+        }
+        return user;
+    }
+    /****
+     * 清空sharedPreference中保存的用户信息
+     * @param context
+     * @return
+     */
+    public static void  clearSharedUser(Context context){
+        SharedPreferences preferences =context.getSharedPreferences("User",MODE_PRIVATE);
+        preferences.edit().clear().commit();
+        Log.i("clear","789");
     }
 }
