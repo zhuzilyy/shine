@@ -217,6 +217,9 @@ public class ScrollerNumberPicker extends View {
 	private void initData() {
 		isClearing = true;
 		itemList.clear();
+		if (dataList.size()==0){
+			return;
+		}
 		for (int i = 0; i < dataList.size(); i++) {
 			ItemObject itmItemObject = new ItemObject();
 			itmItemObject.id = i;

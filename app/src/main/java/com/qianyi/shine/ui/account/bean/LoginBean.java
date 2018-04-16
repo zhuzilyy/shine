@@ -56,7 +56,7 @@ public class LoginBean {
              public String sex;
              public String prov;
              public String city;
-             public String contry;
+             public String country;
              public String school;
              public String checkinfo;
              public String isdelete;
@@ -150,11 +150,11 @@ public class LoginBean {
             }
 
             public String getContry() {
-                return contry;
+                return country;
             }
 
             public void setContry(String contry) {
-                this.contry = contry;
+                this.country = contry;
             }
 
             public String getSchool() {

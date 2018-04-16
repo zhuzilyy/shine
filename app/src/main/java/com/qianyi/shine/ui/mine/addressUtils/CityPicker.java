@@ -144,7 +144,9 @@ public class CityPicker extends LinearLayout {
 					ArrayList<String> couny = citycodeUtil.getCouny(couny_map, citycodeUtil.getCity_list_code().get(1));
 					counyPicker.setData(couny);
 					counyPicker.setDefault(1);
-
+					if (citycodeUtil.getCouny_list_code().size()==0){
+						return;
+					}
 					city_code_string = citycodeUtil.getCouny_list_code().get(1);
 
 					int lastDay = Integer.valueOf(provincePicker.getListSize());
@@ -180,7 +182,6 @@ public class CityPicker extends LinearLayout {
 					counyPicker.setData(couny);
 					counyPicker.setDefault(1);
 					city_code_string = citycodeUtil.getCouny_list_code().get(1);
-
 					int lastDay = Integer.valueOf(cityPicker.getListSize());
 					if (id > lastDay) {
 						cityPicker.setDefault(lastDay - 1);
@@ -257,7 +258,7 @@ public class CityPicker extends LinearLayout {
 	}
 
 	public String getCity_string() {
-		city_string = provincePicker.getSelectedText() + cityPicker.getSelectedText() + counyPicker.getSelectedText();
+		city_string =provincePicker.getSelectedText()+","+cityPicker.getSelectedText()+","+counyPicker.getSelectedText();
 		return city_string;
 	}
 
