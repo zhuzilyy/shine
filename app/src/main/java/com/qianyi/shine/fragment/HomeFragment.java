@@ -234,6 +234,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                         if(homeBean!= null){
                             String code = homeBean.getCode();
                             if("0".equals(code)){
+
                                 HomeBean.HomeData homeData = homeBean.getData();
                                 if(homeData != null){
                                     HomeBean.HomeData.HomeInfo homeInfo = homeData.getInfo();
