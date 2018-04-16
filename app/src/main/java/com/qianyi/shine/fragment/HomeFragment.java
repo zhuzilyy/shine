@@ -120,7 +120,19 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void initListener() {
-
+        //高考头条条目点击
+        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
+                Toast.makeText(mActivity, articles.size()+"=======articles.size()=======", Toast.LENGTH_SHORT).show();
+                if(articles.size() >0 ){
+                    Intent intent = new Intent(getActivity(), WebviewActivity.class);
+                    intent.putExtra("title", "高考头条");
+                    intent.putExtra("url", articles.get(position).getWeburl());
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     private void initAdapter() {
@@ -134,9 +146,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
 //        mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
-
-
-
     }
 
     private void addHeadView() {
@@ -225,6 +234,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                         if(homeBean!= null){
                             String code = homeBean.getCode();
                             if("0".equals(code)){
+
                                 HomeBean.HomeData homeData = homeBean.getData();
                                 if(homeData != null){
                                     HomeBean.HomeData.HomeInfo homeInfo = homeData.getInfo();
@@ -245,19 +255,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                                             public void onItemClick(int position) {
                                                 Intent intent = new Intent(getActivity(), CollegeActivity.class);
                                                 startActivity(intent);
-                                            }
-                                        });
-                                        //高考头条条目点击
-                                        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
-                                            @Override
-                                            public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-                                                Intent intent = new Intent(getActivity(), WebviewActivity.class);
-                                                intent.putExtra("title", "高考头条");
-                                                if(articles.size() >0 ){
-                                                    intent.putExtra("url", articles.get(position).getWeburl());
-                                                    startActivity(intent);
-                                                }
-
                                             }
                                         });
                                     }
@@ -288,6 +285,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     //加载
     private void loadMore() {
+        Toast.makeText(mActivity, "mNextRequestPage"+ mNextRequestPage, Toast.LENGTH_SHORT).show();
         mNextRequestPage++;
         apiHome.loadMore(apiConstant.HOME, mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
@@ -304,7 +302,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                                 if(homeData != null){
                                     HomeBean.HomeData.HomeInfo homeInfo = homeData.getInfo();
                                     if(homeInfo != null){
-                                        articles = homeInfo.getArticleList();
+                                        //重新赋值了
+                                        articles .addAll(homeInfo.getArticleList()) ;
                                         universities = homeInfo.getRecommendUniversityList();
                                         setData(false, articles);
                                         mAdapter.setEnableLoadMore(true);
@@ -406,9 +405,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 break;
         }
     }
-
     private void getCityName() {
-
         //初始化定位
         mLocationClient = new AMapLocationClient(getActivity());
         mLocationOption = new AMapLocationClientOption();

@@ -18,14 +18,12 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!--用于写入缓存数据到扩展存储卡-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
     <!--用于申请调用A-GPS模块-->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
     <!--用于申请获取蓝牙信息进行室内定位-->
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-
-
-
     <application
         android:name=".application.MyApplication"
         android:allowBackup="true"
@@ -192,5 +190,9 @@
         <!--微信授权-->
         <activity android:name=".wxapi.WXEntryActivity"
             android:exported="true"/>
+        <!--浏览照片-->
+        <activity android:name=".ui.mine.activity.PreviewActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 </manifest>

@@ -3,6 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#1aa1f3</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="baseColor">#1aa1f3</color>
     <color name="light_gray">#dfdfdf</color>
     //*******************
     <color name="main_blue">#1aa1f3</color>
@@ -42,4 +43,17 @@
     <color name="btn_gradient_press">#CACACB</color>
     <color name="btn_gradient_normal">#EBEBEB</color>
     <color name="gray_light">#EBEDF0</color>
+
+
+    <!--选择照片时候的字体-->
+    <!-- 深色字体颜色 -->
+    <color name="text_color_deep">#333333</color>
+    <color name="text_color_deep2">#747474</color>
+    <!-- 深色字体颜色 -->
+    <color name="text_color_deep_middle">#666666</color>
+    <!-- 浅色字体颜色 -->
+    <color name="text_color_light">#999999</color>
+    <color name="text_color_light2">#acacac</color>
+    <color name="loading_color">#33222222</color>
+    <color name="color_line">#ececec</color>
 </resources>

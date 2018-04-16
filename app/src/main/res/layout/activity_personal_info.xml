@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
     <include layout="@layout/layout_title"/>
     <RelativeLayout
+        android:id="@+id/rl_photoChoice"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="80dp">
@@ -17,28 +18,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignParentRight="true"
-            android:id="@+id/mine_head"
+        <com.qianyi.shine.ui.mine.view.CircleImageView
             android:src="@mipmap/head"
-            android:scaleType="centerCrop"
-            app:riv_corner_radius="10dip"
-            app:riv_border_width="2dip"
-            app:riv_border_color="@color/blue_end"
-            app:riv_mutate_background="true"
-            app:riv_tile_mode="clamp"
-            app:riv_oval="true" />
+            android:id="@+id/iv_mine"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
     </RelativeLayout>
     <View
         android:background="@color/common_line"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"/>
-
-
     <!--昵称-->
     <RelativeLayout
         android:id="@+id/rl_nickName"
@@ -122,6 +114,7 @@
             android:text="省市区"
             />
         <TextView
+            android:id="@+id/tv_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
