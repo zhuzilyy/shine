@@ -1,6 +1,7 @@
 package com.qianyi.shine.ui.mine.activity;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -28,6 +30,7 @@ import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.dialog.PhotoChioceDialog;
 import com.qianyi.shine.dialog.SelfDialog;
 import com.qianyi.shine.ui.account.activity.LoginActivity;
+import com.qianyi.shine.ui.mine.addressUtils.LoginDialogFragment;
 import com.qianyi.shine.ui.mine.view.CircleImageView;
 import com.qianyi.shine.utils.BitmapToBase64;
 import com.qianyi.shine.utils.ListActivity;
@@ -45,7 +48,7 @@ import butterknife.OnClick;
  * Created by NEUNB on 2018/3/31.
  */
 
-public class PersonalInfoActivity extends BaseActivity {
+public class PersonalInfoActivity extends BaseActivity implements LoginDialogFragment.LoginInputListener {
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.iv_mine)
@@ -53,6 +56,8 @@ public class PersonalInfoActivity extends BaseActivity {
     private PhotoChioceDialog photoChioceDialog;
     private String localImg,strBase64;
     private DisplayImageOptions options;
+    @BindView(R.id.tv_address)
+    public TextView tv_address;
     @Override
     protected void initViews() {
         tv_title.setText("我的资料");
@@ -76,7 +81,7 @@ public class PersonalInfoActivity extends BaseActivity {
     protected void setStatusBarColor() {
 
     }
-    @OnClick({R.id.iv_back,R.id.tv_quit,R.id.rl_photoChoice})
+    @OnClick({R.id.iv_back,R.id.tv_quit,R.id.rl_photoChoice,R.id.rl_address})
     public void click(View view){
         switch (view.getId()){
             case R.id.iv_back:
@@ -102,7 +107,23 @@ public class PersonalInfoActivity extends BaseActivity {
                     }
                 });
                 break;
+            case R.id.rl_address:
+                //地区
+                showLoginDialog();
+                break;
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public void showLoginDialog() {
+        LoginDialogFragment dialog = new LoginDialogFragment();
+        dialog.show(getFragmentManager(), "loginDialog");
+    }
+
+    @Override
+    public void onLoginInputComplete(String username) {
+      tv_address.setText(username);
+
     }
     //跳转到拍照
     private void takePhoto() {
@@ -212,4 +233,6 @@ public class PersonalInfoActivity extends BaseActivity {
         });
         quitDialog.show();
     }
+
+
 }
