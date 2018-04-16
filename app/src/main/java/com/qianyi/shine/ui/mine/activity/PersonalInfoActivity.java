@@ -123,7 +123,6 @@ public class PersonalInfoActivity extends BaseActivity implements LoginDialogFra
     @Override
     public void onLoginInputComplete(String username) {
       tv_address.setText(username);
-
     }
     //跳转到拍照
     private void takePhoto() {

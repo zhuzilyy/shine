@@ -284,6 +284,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     //加载
     private void loadMore() {
+        Toast.makeText(mActivity, "mNextRequestPage"+ mNextRequestPage, Toast.LENGTH_SHORT).show();
         mNextRequestPage++;
         apiHome.loadMore(apiConstant.HOME, mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
@@ -300,7 +301,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                                 if(homeData != null){
                                     HomeBean.HomeData.HomeInfo homeInfo = homeData.getInfo();
                                     if(homeInfo != null){
-                                        articles = homeInfo.getArticleList();
+                                        //重新赋值了
+                                        articles .addAll(homeInfo.getArticleList()) ;
                                         universities = homeInfo.getRecommendUniversityList();
                                         setData(false, articles);
                                         mAdapter.setEnableLoadMore(true);
