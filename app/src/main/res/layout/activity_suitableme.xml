@@ -6,15 +6,141 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
    <include layout="@layout/layout_title"/>
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeLayout"
+    <RelativeLayout
+        android:layout_marginTop="@dimen/dp_25"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_list"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:id="@+id/flag"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@mipmap/crown"
+            android:layout_centerHorizontal="true"/>
+        <LinearLayout
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_below="@+id/flag"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <View
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:background="@color/black"
 
+                />
+            <TextView
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="VIP专属项"
+                />
+            <View
+                android:layout_width="40dp"
+                android:layout_height="2dp"
+                android:background="@color/black"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:orientation="horizontal"
+        >
+        <!--性格测试-->
+        <LinearLayout
+            android:id="@+id/text_Character"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:background="@drawable/shape_test_blue"
+            >
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@mipmap/aihao"
+                />
+            <TextView
+                android:gravity="center"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="测测你的性格"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+
+                />
+            <TextView
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:textSize="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+
+                android:text="MBTI性格测评，帮你清晰的认知自身性格优势"
+                android:textColor="@color/white"
+
+                />
+
+        </LinearLayout>
+        <!--兴趣测试-->
+        <LinearLayout
+            android:id="@+id/text_Interest"
+            android:layout_marginRight="@dimen/dp_12"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:background="@drawable/shape_test_orange"
+            >
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@mipmap/leguan"
+                />
+            <TextView
+                android:gravity="center"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="测测你的兴趣"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+
+                />
+            <TextView
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:textSize="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+
+                android:text="霍兰德兴趣测评，帮你发现自己的兴趣倾向"
+                android:textColor="@color/white"
+
+                />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

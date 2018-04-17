@@ -82,8 +82,10 @@
             android:name=".ui.gaokao_news.activity.GaoKaoNewsActivity"
             android:screenOrientation="portrait"
             />
+        <!--适合我的职业-->
         <activity android:name=".ui.career_planning.activity.SuitableForMyProfessionActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
         <!--注册-->
         <activity
             android:screenOrientation="portrait"
@@ -207,7 +209,20 @@
         <activity android:name=".ui.mine.activity.PreviewActivity"
             android:screenOrientation="portrait"
             />
-
+        <!--测试性格-->
+        <activity android:name=".ui.career_planning.activity.TestCharacterActivity"
+            android:screenOrientation="portrait"
+            />
+        <!--测试兴趣-->
+        <activity android:name=".ui.career_planning.activity.TestInterestActivity"
+            android:screenOrientation="portrait"
+            />
+        <!--测试答题页-->
+        <activity android:name=".ui.career_planning.activity.TestActivity"
+            android:screenOrientation="portrait"/>
+        <!--兴趣测试结果-->
+        <activity android:name=".ui.career_planning.activity.InterestResultActivity"
+            android:screenOrientation="portrait"/>
 
 
 
