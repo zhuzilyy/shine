@@ -43,6 +43,10 @@ public class PullToRefreshAdapter extends BaseQuickAdapter<HomeBean.HomeData.Hom
         ImageView imageView = helper.getView(R.id.item_img);
         Glide.with(mContext).load(item.getImage()).into(imageView);
         helper.setText(R.id.item_desc, item.getTitle());
+        helper.setText(R.id.time,item.getCreate_time());
+        helper.setText(R.id.readtimes,item.getHits()+"阅读");
+
+
 //        Toast.makeText(mContext, helper.getLayoutPosition()+"", Toast.LENGTH_SHORT).show();
 //        Log.i("ppp",item+"");
 //        helper.setImageResource(R.id.img,R.mipmap.animation_img1);

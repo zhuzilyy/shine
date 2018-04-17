@@ -72,8 +72,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public RecyclerView mRecyclerView;
     @BindView(R.id.swipeLayout)
     public SwipeRefreshLayout mSwipeRefreshLayout;
-    List<TestEntity> testEntities;
-    List<HomeBean.HomeData.HomeInfo.Article> articles;
+    List<HomeBean.HomeData.HomeInfo.Article> bigArticles = new ArrayList<>();
+
     List<HomeBean.HomeData.HomeInfo.RecommendUniversity> universities;
     private View view_home;
     private PullToRefreshAdapter mAdapter;
@@ -124,13 +124,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-                Toast.makeText(mActivity, articles.size()+"=======articles.size()=======", Toast.LENGTH_SHORT).show();
-                if(articles.size() >0 ){
+
+                    List<HomeBean.HomeData.HomeInfo.Article> articles=adapter.getData();
                     Intent intent = new Intent(getActivity(), WebviewActivity.class);
                     intent.putExtra("title", "高考头条");
                     intent.putExtra("url", articles.get(position).getWeburl());
                     startActivity(intent);
-                }
+
             }
         });
     }
@@ -196,7 +196,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         main_headRv.setLayoutManager(gridLayoutManager);
 
 
-
         //更多大学
         TextView moreCollege = headView.findViewById(R.id.moreCollege);
         View flag2 = headView.findViewById(R.id.flag2);
@@ -239,9 +238,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                                 if(homeData != null){
                                     HomeBean.HomeData.HomeInfo homeInfo = homeData.getInfo();
                                     if(homeInfo != null){
-                                        articles = homeInfo.getArticleList();
+                                     //   List<HomeBean.HomeData.HomeInfo.Article>  articles = homeInfo.getArticleList();
+//                                        bigArticles.addAll(articles);
                                         universities = homeInfo.getRecommendUniversityList();
-                                        setData(true, articles);
+                                        setData(true, homeInfo.getArticleList());
                                         mAdapter.setEnableLoadMore(true);
                                         mSwipeRefreshLayout.setRefreshing(false);
                                         /**
@@ -285,7 +285,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     //加载
     private void loadMore() {
-        Toast.makeText(mActivity, "mNextRequestPage"+ mNextRequestPage, Toast.LENGTH_SHORT).show();
         mNextRequestPage++;
         apiHome.loadMore(apiConstant.HOME, mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
@@ -302,10 +301,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                                 if(homeData != null){
                                     HomeBean.HomeData.HomeInfo homeInfo = homeData.getInfo();
                                     if(homeInfo != null){
-                                        //重新赋值了
-                                        articles .addAll(homeInfo.getArticleList()) ;
-                                        universities = homeInfo.getRecommendUniversityList();
-                                        setData(false, articles);
+                                        setData(false, homeInfo.getArticleList());
                                         mAdapter.setEnableLoadMore(true);
                                         mSwipeRefreshLayout.setRefreshing(false);
                                     }
