@@ -48,4 +48,23 @@ public class apiAccount {
         params.put("rank",rank);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+    /***
+     * 获取短信验证码
+     */
+    public static void getSmsCode(String url,String phoneStr,String type,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("mobile",phoneStr);
+        params.put("type",type);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    /***
+     * 更改密码
+     */
+    public static void changePwd(String url,String phoneStr,String codeStr,String pwdStr,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("mobile",phoneStr);
+        params.put("smscode",codeStr);
+        params.put("password",pwdStr);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 }

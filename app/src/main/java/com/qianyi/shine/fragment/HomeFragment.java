@@ -90,6 +90,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     //初始化AMapLocationClientOption对象
     private TextView cityname;
+
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_home = inflater.inflate(R.layout.fragment_home, null);
@@ -99,7 +100,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     protected void initViews() {
 
-        Log.i("loc",sHA1(getActivity()));
+        Log.i("loc", sHA1(getActivity()));
         //获取定位
         getCityName();
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
@@ -124,12 +125,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-
-                    List<HomeBean.HomeData.HomeInfo.Article> articles=adapter.getData();
-                    Intent intent = new Intent(getActivity(), WebviewActivity.class);
-                    intent.putExtra("title", "高考头条");
-                    intent.putExtra("url", articles.get(position).getWeburl());
-                    startActivity(intent);
+                List<HomeBean.HomeData.HomeInfo.Article> articles = adapter.getData();
+                Intent intent = new Intent(getActivity(), WebviewActivity.class);
+                intent.putExtra("title", "高考头条");
+                intent.putExtra("url", articles.get(position).getWeburl());
+                startActivity(intent);
 
             }
         });
@@ -163,14 +163,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         RelativeLayout rl_integenceFill = headView.findViewById(R.id.rl_integenceFill);
         RelativeLayout rl_majorPriority = headView.findViewById(R.id.rl_majorPriority);
         //主页搜索
-        LinearLayout homeSearchLin=headView.findViewById(R.id.homeSearch_ll);
+        LinearLayout homeSearchLin = headView.findViewById(R.id.homeSearch_ll);
         //goto院校优先填报
-        LinearLayout gotoCollege01=headView.findViewById(R.id.goto_college01);
-        LinearLayout gotoCollege02=headView.findViewById(R.id.goto_college02);
+        LinearLayout gotoCollege01 = headView.findViewById(R.id.goto_college01);
+        LinearLayout gotoCollege02 = headView.findViewById(R.id.goto_college02);
         //测试录取率
-        LinearLayout ll_acceptanceRate=headView.findViewById(R.id.ll_acceptanceRate);
+        LinearLayout ll_acceptanceRate = headView.findViewById(R.id.ll_acceptanceRate);
 
-        cityname=headView.findViewById(R.id.cityName);
+        cityname = headView.findViewById(R.id.cityName);
         //点击事件
         ll_findCollege.setOnClickListener(this);
         ll_employment.setOnClickListener(this);
@@ -230,15 +230,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                     public void run() {
                         Gson gson = new Gson();
                         HomeBean homeBean = gson.fromJson(s, HomeBean.class);
-                        if(homeBean!= null){
+                        if (homeBean != null) {
                             String code = homeBean.getCode();
-                            if("0".equals(code)){
+                            if ("0".equals(code)) {
 
                                 HomeBean.HomeData homeData = homeBean.getData();
-                                if(homeData != null){
+                                if (homeData != null) {
                                     HomeBean.HomeData.HomeInfo homeInfo = homeData.getInfo();
-                                    if(homeInfo != null){
-                                     //   List<HomeBean.HomeData.HomeInfo.Article>  articles = homeInfo.getArticleList();
+                                    if (homeInfo != null) {
+                                        //   List<HomeBean.HomeData.HomeInfo.Article>  articles = homeInfo.getArticleList();
 //                                        bigArticles.addAll(articles);
                                         universities = homeInfo.getRecommendUniversityList();
                                         setData(true, homeInfo.getArticleList());
@@ -259,8 +259,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                                         });
                                     }
                                 }
-                            }else {
-                                Toast.makeText(mActivity, ""+homeBean.getInfo(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(mActivity, "" + homeBean.getInfo(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -294,21 +294,21 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                     public void run() {
                         Gson gson = new Gson();
                         HomeBean homeBean = gson.fromJson(s, HomeBean.class);
-                        if(homeBean!= null){
+                        if (homeBean != null) {
                             String code = homeBean.getCode();
-                            if("0".equals(code)){
+                           // if ("0".equals(code)) {
                                 HomeBean.HomeData homeData = homeBean.getData();
-                                if(homeData != null){
+                                if (homeData != null) {
                                     HomeBean.HomeData.HomeInfo homeInfo = homeData.getInfo();
-                                    if(homeInfo != null){
+                                    if (homeInfo != null) {
                                         setData(false, homeInfo.getArticleList());
                                         mAdapter.setEnableLoadMore(true);
                                         mSwipeRefreshLayout.setRefreshing(false);
                                     }
                                 }
-                            }else {
-                                Toast.makeText(mActivity, ""+homeBean.getInfo(), Toast.LENGTH_SHORT).show();
-                            }
+//                            } else {
+//                                Toast.makeText(mActivity, "" + homeBean.getInfo(), Toast.LENGTH_SHORT).show();
+//                            }
                         }
                     }
                 });
@@ -389,18 +389,19 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.goto_college01:
             case R.id.goto_college02:
-                Intent intent=new Intent(getActivity(),PriorityCollegeActivity.class);
+                Intent intent = new Intent(getActivity(), PriorityCollegeActivity.class);
                 startActivity(intent);
                 break;
             case R.id.homeSearch_ll:
                 startActivity(new Intent(getActivity(), HomeSearchActivity.class));
                 break;
-                //测试录取率
+            //测试录取率
             case R.id.ll_acceptanceRate:
                 startActivity(new Intent(getActivity(), AcceptanceRateActivity.class));
                 break;
         }
     }
+
     private void getCityName() {
         //初始化定位
         mLocationClient = new AMapLocationClient(getActivity());
@@ -431,7 +432,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 if (aMapLocation.getErrorCode() == 0) {
                     double lat = aMapLocation.getLatitude();//维度
                     double log = aMapLocation.getLongitude();//经度
-                    if(!TextUtils.isEmpty(aMapLocation.getCity())){
+                    if (!TextUtils.isEmpty(aMapLocation.getCity())) {
                         cityname.setText(aMapLocation.getCity());
                     }
 //                    LatLng latLng=new LatLng(lat,log);
@@ -444,6 +445,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             }
         });
     }
+
     public static String sHA1(Context context) {
         try {
             PackageInfo info = context.getPackageManager().getPackageInfo(
@@ -461,7 +463,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 hexString.append(":");
             }
             String result = hexString.toString();
-            return result.substring(0, result.length()-1);
+            return result.substring(0, result.length() - 1);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {

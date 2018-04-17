@@ -16,6 +16,12 @@ public class apiConstant {
     public static final String HOME=BASE_URL+"default_index";
     //修改个人信息
     public static final String UPDATE_INFO=BASE_URL+"update_baseinfo";
+    //发送短信验证码
+    public static final String GETSMSCODE=BASE_URL+"sendsmscode";
+    //重置密码
+    public static final String CHANGEPWD=BASE_URL+"reset_password";
+    //高考头条更多
+    public static final String ARTICLEMORE=BASE_URL+"article_list_more";
 
 
 
