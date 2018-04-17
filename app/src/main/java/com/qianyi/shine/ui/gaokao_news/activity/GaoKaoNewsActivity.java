@@ -11,13 +11,19 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.gson.Gson;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
+import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.gaokao_news.adapter.GaokaoAdapter;
+import com.qianyi.shine.ui.gaokao_news.entivity.articleBean;
 import com.qianyi.shine.ui.gaokao_news.view.XTitleView;
+import com.qianyi.shine.ui.home.bean.HomeBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,17 +68,6 @@ public class GaoKaoNewsActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        testEntities = new ArrayList<>();
-        testEntities.add(new TestEntity(R.mipmap.toutiao, "福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
-        testEntities.add(new TestEntity(R.mipmap.tou2, "佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
-        testEntities.add(new TestEntity(R.mipmap.tou3, "FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
-        testEntities.add(new TestEntity(R.mipmap.toutiao, "福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
-        testEntities.add(new TestEntity(R.mipmap.tou2, "佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
-        testEntities.add(new TestEntity(R.mipmap.tou3, "FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
-        testEntities.add(new TestEntity(R.mipmap.toutiao, "福克斯的回复回复康师傅ISO花花覅会滴啊上花覅胡覅武器哈佛付款后覅if刚切完就看你看了 一和覅偶"));
-        testEntities.add(new TestEntity(R.mipmap.tou2, "佛菩萨的反馈ljkfosj jfoisjefoskjfpos 一和覅偶"));
-        testEntities.add(new TestEntity(R.mipmap.tou3, "FJSKLJFOFJOWIJOIJFOJFLSJFOSEJFOSJDLFOSFUOWEJOF JFOWJFOWJFOJHFKSHFIUHFIOWEHJO"));
-
     }
 
     @Override
@@ -96,12 +91,11 @@ public class GaoKaoNewsActivity extends BaseActivity {
     protected void setStatusBarColor() {
 
 
-
     }
 
     //****************************************
     private void initAdapter() {
-        mAdapter = new GaokaoAdapter(R.layout.layout_gaokao_item, testEntities);
+        mAdapter = new GaokaoAdapter(GaoKaoNewsActivity.this);
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
@@ -115,11 +109,11 @@ public class GaoKaoNewsActivity extends BaseActivity {
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-               Intent intent=new Intent(GaoKaoNewsActivity.this, WebviewActivity.class);
-               intent.putExtra("title","高考头条");
-               intent.putExtra("url","http://www.baidu.com");
+                Intent intent = new Intent(GaoKaoNewsActivity.this, WebviewActivity.class);
+                intent.putExtra("title", "高考头条");
+                intent.putExtra("url", "http://www.baidu.com");
 
-               startActivity(intent);
+                startActivity(intent);
             }
         });
 
@@ -130,16 +124,32 @@ public class GaoKaoNewsActivity extends BaseActivity {
     private void refresh() {
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.refresh(apiConstant.ARTICLEMORE, mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
+            public void onSuccess(Call call, Response response, final String s) {
                 Log.i("ppp", "131" + s);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true, testEntities);
-                        mAdapter.setEnableLoadMore(true);
-                        mSwipeRefreshLayout.setRefreshing(false);
+                        Gson gson = new Gson();
+                        articleBean articleB = gson.fromJson(s, articleBean.class);
+                        if (articleB != null) {
+                            String code = articleB.getCode();
+                            if ("0".equals(code)) {
+
+                                articleBean.articleData articleD = articleB.getData();
+                                if (articleD != null) {
+                                    articleBean.articleData.articleInfo article_info = articleD.getInfo();
+                                    if (article_info != null) {
+                                        setData(true, article_info.getArticleList());
+                                        mAdapter.setEnableLoadMore(true);
+                                        mSwipeRefreshLayout.setRefreshing(false);
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(GaoKaoNewsActivity.this, "" + articleB.getInfo(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     }
                 });
             }
@@ -147,14 +157,7 @@ public class GaoKaoNewsActivity extends BaseActivity {
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 Log.i("ppp", "132" + e);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        setData(true, testEntities);
-                        mAdapter.setEnableLoadMore(true);
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
-                });
+
 
 
             }
@@ -165,30 +168,50 @@ public class GaoKaoNewsActivity extends BaseActivity {
     //加载
     private void loadMore() {
 
-        apiHome.loadMore("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        mNextRequestPage++;
+        mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
+        apiHome.refresh(apiConstant.ARTICLEMORE, mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
+            public void onSuccess(Call call, Response response, final String s) {
+                Log.i("ppp", "131" + s);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(false, testEntities);
+                        Gson gson = new Gson();
+                        articleBean articleB = gson.fromJson(s, articleBean.class);
+                        if (articleB != null) {
+                            String code = articleB.getCode();
+                            if ("0".equals(code)) {
+
+                                articleBean.articleData articleD = articleB.getData();
+                                if (articleD != null) {
+                                    articleBean.articleData.articleInfo article_info = articleD.getInfo();
+                                    if (article_info != null) {
+                                        setData(false, article_info.getArticleList());
+                                        mAdapter.setEnableLoadMore(true);
+                                        mSwipeRefreshLayout.setRefreshing(false);
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(GaoKaoNewsActivity.this, "" + articleB.getInfo(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     }
                 });
-
             }
 
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mAdapter.loadMoreFail();
-                        Toast.makeText(GaoKaoNewsActivity.this, "网络错误", Toast.LENGTH_LONG).show();
-                    }
-                });
+                Log.i("ppp", "132" + e);
+
+
+
             }
         });
+
+
     }
+
     private void initRefreshLayout() {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -197,6 +220,7 @@ public class GaoKaoNewsActivity extends BaseActivity {
             }
         });
     }
+
     private void setData(boolean isRefresh, List data) {
         mNextRequestPage++;
         final int size = data == null ? 0 : data.size();
