@@ -229,6 +229,9 @@ public class PersonalInfoActivity extends BaseActivity implements LoginDialogFra
                                 try {
                                     //存储当前用户
                                     Utils.saveUser(user,PersonalInfoActivity.this);
+                                    Intent intent=new Intent();
+                                    intent.setAction("com.action.updateInfo");
+                                    sendBroadcast(intent);
                                     finish();
                                 }catch (Exception e){
                                     Log.i("excaption_shine",e.getMessage());

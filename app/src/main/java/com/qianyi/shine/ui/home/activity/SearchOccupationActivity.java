@@ -3,8 +3,12 @@ package com.qianyi.shine.ui.home.activity;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kanade.treeadapter.Node;
@@ -28,6 +32,8 @@ import butterknife.OnClick;
 public class SearchOccupationActivity extends BaseActivity {
     @BindView(R.id.rv)
     RecyclerView recyclerView;
+    @BindView(R.id.et_searchOccupation)
+    EditText et_searchOccupation;
     private List<Major> list;
     private String tag;
     private Intent intent;
@@ -93,11 +99,17 @@ public class SearchOccupationActivity extends BaseActivity {
                 }*/
                 int level = node.getLevel();
                 if (level==2){
-                    if (tag.equals("willingSetting")){
-                        Intent intent=new Intent();
-                        intent.putExtra("cccupationName",node.getName());
-                        setResult(3,intent);
-                        finish();
+                    if (!TextUtils.isEmpty(tag)){
+                        //意愿设置里面的查专业
+                        if (tag.equals("willingSetting")){
+                            Intent intent=new Intent();
+                            intent.putExtra("cccupationName",node.getName());
+                            setResult(3,intent);
+                            finish();
+                         //搜职业
+                        }else if (tag.equals("searchOccupation")){
+                            jumpActivity(SearchOccupationActivity.this,OccupationDetailActivity.class);
+                        }
                     }
                 }
             }
@@ -110,7 +122,16 @@ public class SearchOccupationActivity extends BaseActivity {
     }
     @Override
     protected void initListener() {
-
+        et_searchOccupation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                String keyWord=et_searchOccupation.getText().toString().trim();
+                if (!TextUtils.isEmpty(keyWord)){
+                    jumpActivity(SearchOccupationActivity.this,OccupationDetailActivity.class);
+                }
+                return false;
+            }
+        });
     }
     @Override
     protected void setStatusBarColor() {

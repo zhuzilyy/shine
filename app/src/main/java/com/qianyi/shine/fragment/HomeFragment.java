@@ -349,6 +349,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Intent intent=null;
         switch (v.getId()) {
             case R.id.gaokao_tv:
             case R.id.flag4:
@@ -369,13 +370,17 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 break;
             //查专业
             case R.id.ll_findMajor:
-                startActivity(new Intent(getActivity(), FindMajorActivity.class));
+                intent=new Intent(getActivity(), FindMajorActivity.class);
+                intent.putExtra("tag","searchMajor");
+                startActivity(intent);
                 break;
-            //查专业
+            //查职业
             case R.id.ll_search_occupation:
-                startActivity(new Intent(getActivity(), SearchOccupationActivity.class));
+                intent=new Intent(getActivity(), SearchOccupationActivity.class);
+                intent.putExtra("tag","searchOccupation");
+                startActivity(intent);
                 break;
-            //查专业
+            //优先大学
             case R.id.rl_priorityCollege:
                 startActivity(new Intent(getActivity(), PriorityCollegeActivity.class));
                 break;
@@ -385,11 +390,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 break;
             //专业优先
             case R.id.rl_majorPriority:
-                startActivity(new Intent(getActivity(), FindMajorActivity.class));
+                intent=new Intent(getActivity(), FindMajorActivity.class);
+                intent.putExtra("tag","majorPriority");
+                startActivity(intent);
                 break;
             case R.id.goto_college01:
             case R.id.goto_college02:
-                Intent intent=new Intent(getActivity(),PriorityCollegeActivity.class);
+                intent =new Intent(getActivity(),PriorityCollegeActivity.class);
                 startActivity(intent);
                 break;
             case R.id.homeSearch_ll:

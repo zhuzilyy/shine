@@ -34,6 +34,11 @@
             android:layout_width="match_parent"
             android:layout_height="30dp">
             <EditText
+                android:id="@+id/et_searchCollege"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
                 android:background="@null"
                 android:textSize="14sp"
                 android:hint="输入大学名称"
@@ -95,6 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp" />
             <LinearLayout
+                android:id="@+id/ll_collegeRank"
                 android:gravity="center"
                 android:layout_centerInParent="true"
                 android:orientation="vertical"
@@ -260,7 +266,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="100dp">
-        <!--本省-->
+        <!--一本-->
         <LinearLayout
             android:id="@+id/ll_yiBen"
             android:gravity="center"
@@ -285,7 +291,7 @@
             android:background="@color/common_line"
             android:layout_width="0.5dp"
             android:layout_height="match_parent"/>
-        <!--北上广-->
+        <!--二本-->
         <LinearLayout
             android:gravity="center"
             android:orientation="vertical"
@@ -309,7 +315,7 @@
             android:background="@color/common_line"
             android:layout_width="0.5dp"
             android:layout_height="match_parent"/>
-        <!--全国-->
+        <!--三本-->
         <LinearLayout
             android:gravity="center"
             android:orientation="vertical"
@@ -393,7 +399,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="100dp">
-        <!--本省-->
+        <!--985-->
         <LinearLayout
             android:id="@+id/ll_985"
             android:gravity="center"
@@ -418,7 +424,7 @@
             android:background="@color/common_line"
             android:layout_width="0.5dp"
             android:layout_height="match_parent"/>
-        <!--北上广-->
+        <!--211-->
         <LinearLayout
             android:gravity="center"
             android:orientation="vertical"
@@ -442,7 +448,7 @@
             android:background="@color/common_line"
             android:layout_width="0.5dp"
             android:layout_height="match_parent"/>
-        <!--全国-->
+        <!--卓越-->
         <LinearLayout
             android:gravity="center"
             android:orientation="vertical"
@@ -467,7 +473,7 @@
             android:background="@color/common_line"
             android:layout_width="0.5dp"
             android:layout_height="match_parent"/>
-        <!--专科-->
+        <!--省重点-->
         <LinearLayout
             android:gravity="center"
             android:orientation="vertical"
@@ -517,6 +523,7 @@
                     android:layout_height="0.5dp"/>
             </LinearLayout>
             <com.qianyi.shine.ui.home.view.MyGridView
+                android:listSelector="@android:color/transparent"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:horizontalSpacing="10dp"
@@ -527,8 +534,6 @@
                 android:id="@+id/gridview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -12,6 +12,9 @@ import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.career_planning.activity.SuitableForMyProfessionActivity;
+import com.qianyi.shine.ui.home.activity.CareerAndMajorActivity;
+import com.qianyi.shine.ui.home.activity.EmploymentActivity;
+import com.qianyi.shine.ui.home.activity.FindMajorActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,9 +71,11 @@ public class CareerFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.re_Professionalselection:
                 //按职业选专业
+                getActivity().startActivity(new Intent(getActivity(), CareerAndMajorActivity.class));
                 break;
             case R.id.re_professional_employment:
                 //看职业就业
+                getActivity().startActivity(new Intent(getActivity(), EmploymentActivity.class));
                 break;
             case R.id.re_benke10:
                 //本科毕业生从事的10个高薪工作

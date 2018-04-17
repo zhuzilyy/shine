@@ -56,6 +56,8 @@ public class SettingActivity extends BaseActivity{
                 break;
             case R.id.rl_userAgreement:
                 intent=new Intent(SettingActivity.this,WebviewActivity.class);
+                intent.putExtra("title","用户协议");
+                intent.putExtra("url","https://home.firefoxchina.cn/");
                 startActivity(intent);
                 break;
         }

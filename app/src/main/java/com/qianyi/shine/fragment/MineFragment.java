@@ -1,6 +1,9 @@
 package com.qianyi.shine.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -11,14 +14,18 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
+import com.bumptech.glide.Glide;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.base.BaseFragment;
+import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.mine.activity.FocusActivity;
 import com.qianyi.shine.ui.mine.activity.JoinUsActivity;
 import com.qianyi.shine.ui.mine.activity.MessageActivity;
 import com.qianyi.shine.ui.mine.activity.SettingActivity;
 import com.qianyi.shine.ui.mine.activity.VipActivity;
+import com.qianyi.shine.utils.Utils;
 import com.tencent.connect.share.QQShare;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
@@ -43,8 +50,11 @@ public class MineFragment extends BaseFragment {
     private View view_share;
     @BindView(R.id.ll_mine)
     LinearLayout ll_mine;
+    @BindView(R.id.mine_head)
+    RoundedImageView mine_head;
     private LinearLayout ll_wechat;
     private Tencent mTencent;
+    private MyReceiver myReceiver;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_mine=inflater.inflate(R.layout.fragment_mine,null);
@@ -54,6 +64,18 @@ public class MineFragment extends BaseFragment {
     protected void initViews() {
         view_share=LayoutInflater.from(getActivity()).inflate(R.layout.pw_share,null);
         ll_wechat=view_share.findViewById(R.id.ll_wechat);
+        //初始化数据
+        setValues();
+        //注册广播
+        myReceiver=new MyReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.updateInfo");
+        getActivity().registerReceiver(myReceiver,intentFilter);
+    }
+    private void setValues() {
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
+        String avatar = loginInfo.getAvatar();
+        Glide.with(getActivity()).load(avatar).into(mine_head);
     }
     @Override
     protected void initData() {
@@ -198,5 +220,20 @@ public class MineFragment extends BaseFragment {
         if (null != mTencent) {
             mTencent.onActivityResult(requestCode, resultCode, data);
         }
+    }
+    class MyReceiver extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("com.action.updateInfo")){
+                setValues();
+            }
+        }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(myReceiver);
     }
 }

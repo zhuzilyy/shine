@@ -1,5 +1,6 @@
 package com.qianyi.shine.ui.home.activity;
 
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +13,7 @@ import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.ui.home.adapter.HomeSearchCollegeAdapter;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2018/4/10.
@@ -46,7 +48,10 @@ public class AcceptanceRateActivity extends BaseActivity {
         et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                lv_college.setVisibility(View.VISIBLE);
+                String keyWord=et_search.getText().toString().trim();
+                if (!TextUtils.isEmpty(keyWord)){
+                    lv_college.setVisibility(View.VISIBLE);
+                }
                 return false;
             }
         });
@@ -57,5 +62,13 @@ public class AcceptanceRateActivity extends BaseActivity {
                 jumpActivity(AcceptanceRateActivity.this,PriorityCollegeDetailsActivity.class);
             }
         });
+    }
+    @OnClick({R.id.iv_back})
+    public void click(View view){
+        switch (view.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+        }
     }
 }
