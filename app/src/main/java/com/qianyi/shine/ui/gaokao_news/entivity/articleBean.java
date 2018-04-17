@@ -39,7 +39,6 @@ public class articleBean {
         public articleInfo getInfo() {
             return Info;
         }
-
         public void setInfo(articleInfo info) {
             Info = info;
         }

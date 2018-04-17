@@ -136,7 +136,6 @@ public class GaoKaoNewsActivity extends BaseActivity {
                         if (articleB != null) {
                             String code = articleB.getCode();
                             if ("0".equals(code)) {
-
                                 articleBean.articleData articleD = articleB.getData();
                                 if (articleD != null) {
                                     articleBean.articleData.articleInfo article_info = articleD.getInfo();
