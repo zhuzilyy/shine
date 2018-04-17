@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/title"
     android:background="@color/main_blue"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -21,5 +22,15 @@
         android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
+    <TextView
+        android:visibility="gone"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/white"
+        android:text="保存"
+        android:id="@+id/tv_right"
+        android:layout_centerInParent="true"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

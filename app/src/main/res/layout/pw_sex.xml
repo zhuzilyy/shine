@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#11ffffff">
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/free_dialog_bg"
+        android:orientation="vertical">
+        <TextView
+            android:background="@drawable/bg_warning_dialog"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="选择性别"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/rl_male"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:button="@drawable/bg_select_sex"
+                android:text="男"
+                android:id="@+id/rb_male"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp" />
+                <ImageView
+                    android:id="@+id/iv_male"
+                    android:layout_marginRight="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/pay_checked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <View
+                android:background="@color/common_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <RelativeLayout
+                android:id="@+id/rl_female"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:button="@drawable/bg_select_sex"
+                    android:text="女"
+                    android:id="@+id/rb_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp" />
+                <ImageView
+                    android:id="@+id/iv_female"
+                    android:layout_marginRight="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/bg_select_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
