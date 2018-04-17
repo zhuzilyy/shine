@@ -222,7 +222,6 @@ public class MineFragment extends BaseFragment {
         }
     }
     class MyReceiver extends BroadcastReceiver{
-
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
