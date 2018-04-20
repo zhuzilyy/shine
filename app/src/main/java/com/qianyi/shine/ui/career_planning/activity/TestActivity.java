@@ -102,7 +102,6 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
     private void getCharacterData() {
         final CustomLoadingDialog loadingDialog = new CustomLoadingDialog(TestActivity.this);
         loadingDialog.show();
-
         apiTest.getTestData(apiConstant.GETMBTDATA, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, String s) {
