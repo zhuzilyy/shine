@@ -143,7 +143,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 loadMore();
             }
         });
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
 //        mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -233,7 +233,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                         if (homeBean != null) {
                             String code = homeBean.getCode();
                             if ("0".equals(code)) {
-
                                 HomeBean.HomeData homeData = homeBean.getData();
                                 if (homeData != null) {
                                     HomeBean.HomeData.HomeInfo homeInfo = homeData.getInfo();
