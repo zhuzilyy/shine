@@ -231,7 +231,9 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
                     initQuestionOne(mitLists.get(currentNum));
                     //销毁当前题的答案
                     Log.i("sssssss",CharachorStringBuilder.toString());
-                    CharachorStringBuilder.delete(CharachorStringBuilder.length()-2,CharachorStringBuilder.length());
+                    if(CharachorStringBuilder.toString().length()>=2){
+                        CharachorStringBuilder.delete(CharachorStringBuilder.length()-2,CharachorStringBuilder.length());
+                    }
                     Log.i("sssssss",CharachorStringBuilder.toString());
                 }
                 break;
