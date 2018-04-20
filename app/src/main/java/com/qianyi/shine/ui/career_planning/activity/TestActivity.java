@@ -1,9 +1,12 @@
 package com.qianyi.shine.ui.career_planning.activity;
 
 import android.content.Intent;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -46,6 +49,21 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
     public TextView tv_total;
     @BindView(R.id.tv_current)
     public TextView tv_current;
+    @BindView(R.id.question_content)
+    public TextView question_content;
+    @BindView(R.id.ra_character_a)
+    public RadioButton ra_character_a;
+    @BindView(R.id.ra_character_b)
+    public RadioButton ra_character_b;
+    public int currentNum = 0;
+    @BindView(R.id.pre_question)
+    public TextView pre_question;
+    //用于记录性格测试答案的Stringbuilder
+    public StringBuilder CharachorStringBuilder = new StringBuilder();
+    //用于记录兴趣测试答案的Stringbuilder
+    public StringBuilder InterestStringBuilder = new StringBuilder();
+    //用于记录当前性格测试答案
+    public String currentCharactorAnswer;
 
     @Override
     protected void initViews() {
@@ -60,15 +78,16 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         title = findViewById(R.id.tv_title);
         title.setText("测试");
         pb.setDrawableIds(new int[]{R.drawable.i00, R.drawable.i01, R.drawable.i02, R.drawable.i03, R.drawable.i04, R.drawable.i05, R.drawable.i06});
+
         pb.setProgress(0);
     }
 
     @Override
     protected void initData() {
-        if("0".equals(testType)){
+        if ("0".equals(testType)) {
             hideShowAnswerType(testType);
             getCharacterData();
-        }else if("1".equals(testType)){
+        } else if ("1".equals(testType)) {
             hideShowAnswerType(testType);
             getInterestData();
         }
@@ -80,10 +99,10 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
      * @param testType
      */
     private void hideShowAnswerType(String testType) {
-        if("0".equals(testType)){
-          rg_character.setVisibility(View.VISIBLE);
-          rg_interest.setVisibility(View.GONE);
-        }else if("1".equals(testType)){
+        if ("0".equals(testType)) {
+            rg_character.setVisibility(View.VISIBLE);
+            rg_interest.setVisibility(View.GONE);
+        } else if ("1".equals(testType)) {
             rg_character.setVisibility(View.GONE);
             rg_interest.setVisibility(View.VISIBLE);
         }
@@ -108,14 +127,15 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
                 loadingDialog.dismiss();
                 Gson gson = new Gson();
                 MitBean mitBean = gson.fromJson(s, MitBean.class);
-                if(mitBean != null){
+                if (mitBean != null) {
                     String code = mitBean.getCode();
-                    if("0".equals(code)){
+                    if ("0".equals(code)) {
                         MitBean.MitData mitData = mitBean.getData();
-                        if(mitData != null){
+                        if (mitData != null) {
                             MitBean.MitData.MitInfo mitInfo = mitData.getInfo();
-                            if(mitInfo != null){
-                                totalNum= mitInfo.getListtotal();
+                            if (mitInfo != null) {
+                                totalNum = mitInfo.getListtotal();
+                                pb.setMax(Integer.parseInt(totalNum));
                                 mitLists = mitInfo.getQuestion_list();
                                 initQuestionOne(mitLists.get(0));
                             }
@@ -134,15 +154,19 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
     }
 
     /***
-     * 获取性格测试数据后，显示第一道题
+     * 获取性格测试数据后，显示题目详情
      * @param item
      */
     private void initQuestionOne(MitBean.MitData.MitInfo.MitList item) {
         tv_total.setText(totalNum);
         tv_current.setText(item.getOrder());
         pb.setProgress(Integer.parseInt(item.getOrder()));
+        question_content.setText(item.getQuetion());
 
-
+        ra_character_a.setText("A. " + item.getKey().getA());
+        ra_character_b.setText("B. " + item.getKey().getB());
+//        ra_character_a.setChecked(false);
+//        ra_character_b.setChecked(false);
 
 
     }
@@ -155,6 +179,40 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initListener() {
+        //性格测试
+        rg_character.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.ra_character_a:
+                        currentCharactorAnswer = "A";
+                        break;
+                    case R.id.ra_character_b:
+                        currentCharactorAnswer = "B";
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        });
+        //兴趣测试
+        rg_interest.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.ra_interest_a:
+                        break;
+                    case R.id.ra_interest_b:
+                        break;
+
+                    default:
+                        break;
+
+
+                }
+            }
+        });
 
     }
 
@@ -162,19 +220,52 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
     protected void setStatusBarColor() {
 
     }
-    @OnClick({R.id.next_question_btn})
+
+    @OnClick({R.id.next_question_btn, R.id.pre_question})
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.next_question_btn:
-                startActivity(new Intent(TestActivity.this,InterestResultActivity.class));
-            break;
+                if ("0".equals(testType)) {
+                    doCharactor();
+                } else if ("1".equals(testType)) {
+
+                }
+                break;
+            case R.id.pre_question:
+                if (currentNum > 0) {
+                    currentNum--;
+                    initQuestionOne(mitLists.get(currentNum));
+                    //销毁当前题的答案
+                    Log.i("sssssss",CharachorStringBuilder.toString());
+                    CharachorStringBuilder.delete(CharachorStringBuilder.length()-2,CharachorStringBuilder.length());
+                    Log.i("sssssss",CharachorStringBuilder.toString());
+                }
+                break;
 
             default:
-            break;
-
-
+                break;
         }
 
+    }
+
+    /****
+     * 处理性格测试
+     */
+    private void doCharactor() {
+        //记录答案
+        if(TextUtils.isEmpty(currentCharactorAnswer)){
+            CharachorStringBuilder.append(""+",");
+        }else {
+            CharachorStringBuilder.append(currentCharactorAnswer+",");
+        }
+        if (currentNum != Integer.parseInt(totalNum) - 1) {
+            currentNum++;
+            initQuestionOne(mitLists.get(currentNum));
+        } else {
+            Intent intent =new Intent(TestActivity.this, InterestResultActivity.class);
+            intent.putExtra("CharatorResult",CharachorStringBuilder.toString());
+            startActivity(intent);
+        }
     }
 }

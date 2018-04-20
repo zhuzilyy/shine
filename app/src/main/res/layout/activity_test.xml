@@ -90,13 +90,15 @@
                 />
             <!--题干-->
             <TextView
+                android:id="@+id/question_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/gray"
-                android:textSize="14sp"
+                android:textSize="16sp"
+                android:minHeight="100dp"
                 android:text="的就放鲁大师就是垃圾福克斯覅舒服分开发岁哦副科级师傅说发his和覅发货时肯定会覅书粉红色款到发货四粉红色客户发is峰会上方是否为啥佛为还发快手覅we回复后覅徽文化覅后方可为合肥哦凤凰网IE返回"
                 />
             <!--选项-性格测试-->
@@ -108,6 +110,7 @@
                 android:paddingRight="@dimen/dp_10"
                 android:layout_height="wrap_content">
                 <RadioButton
+                    android:id="@+id/ra_character_a"
                     android:paddingRight="@dimen/dp_10"
                     android:paddingLeft="@dimen/dp_10"
                     android:paddingTop="@dimen/dp_5"
@@ -120,6 +123,7 @@
                     android:text="A.的链接大力分类我就发了复健科色粉飞蛾金刚FKJSDJFL"
                     />
                 <RadioButton
+                    android:id="@+id/ra_character_b"
                     android:layout_marginTop="@dimen/dp_10"
                     android:paddingRight="@dimen/dp_10"
                     android:paddingLeft="@dimen/dp_10"
@@ -143,6 +147,7 @@
                 android:paddingRight="@dimen/dp_10"
                 android:layout_height="wrap_content">
                 <RadioButton
+                    android:id="@+id/ra_interest_a"
                     android:paddingRight="@dimen/dp_10"
                     android:paddingLeft="@dimen/dp_10"
                     android:paddingTop="@dimen/dp_8"
@@ -155,6 +160,7 @@
                     android:text="是"
                     />
                 <RadioButton
+                    android:id="@+id/ra_interest_b"
                     android:layout_marginTop="@dimen/dp_10"
                     android:paddingRight="@dimen/dp_10"
                     android:paddingLeft="@dimen/dp_10"
@@ -171,12 +177,14 @@
 
 
             <TextView
+                android:id="@+id/pre_question"
                 android:layout_marginTop="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                android:gravity="center"
                 android:text="上一题"
-                android:textSize="12sp"
+                android:textSize="14sp"
+                android:padding="@dimen/dp_10"
                 android:textColor="@color/main_blue"
                 />
             <Button
