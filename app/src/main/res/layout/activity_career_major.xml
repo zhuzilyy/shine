@@ -28,11 +28,11 @@
             android:layout_width="match_parent"
             android:layout_height="30dp">
             <EditText
-                android:imeOptions="actionSearch"
-                android:id="@+id/et_searchOccupation"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:singleLine="true"
+                android:id="@+id/et_searchOccupation"
+                android:imeOptions="actionSearch"
                 android:background="@null"
                 android:textSize="14sp"
                 android:hint="输入职业名称"

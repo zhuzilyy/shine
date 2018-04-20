@@ -22,6 +22,8 @@ public class apiConstant {
     public static final String CHANGEPWD=BASE_URL+"reset_password";
     //高考头条更多
     public static final String ARTICLEMORE=BASE_URL+"article_list_more";
+    //获取性格测试的数据
+    public static final String GETMBTDATA=BASE_URL+"getMBTItest";
 
 
 

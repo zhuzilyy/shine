@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2018/4/17.
  */
 
-public class articleBean {
+public class ArticleBean {
     public String getCode() {
         return code;
     }
@@ -23,41 +23,38 @@ public class articleBean {
         this.info = info;
     }
 
-    public articleData getData() {
+    public AriticleData getData() {
         return data;
     }
 
-    public void setData(articleData data) {
+    public void setData(AriticleData data) {
         this.data = data;
     }
 
     private String code;
     private String info;
-    private articleData data;
-
-    public class articleData{
-        public articleInfo getInfo() {
+    private AriticleData data;
+    public class AriticleData {
+        public AriticleInfo getInfo() {
             return Info;
         }
 
-        public void setInfo(articleInfo info) {
+        public void setInfo(AriticleInfo info) {
             Info = info;
         }
 
-        private articleInfo Info;
-
-        public class articleInfo{
-            public List<articleList> getArticleList() {
+        private AriticleInfo Info;
+        public class AriticleInfo {
+            public List<AriticleList> getArticleList() {
                 return ArticleList;
             }
 
-            public void setArticleList(List<articleList> articleList) {
+            public void setArticleList(List<AriticleList> articleList) {
                 ArticleList = articleList;
             }
 
-            private List<articleList> ArticleList;
-
-            public class articleList{
+            private List<AriticleList> ArticleList;
+            public class AriticleList{
                 public String getId() {
                     return id;
                 }
@@ -112,13 +109,11 @@ public class articleBean {
                 private String hits;
                 private String create_time;
                 private String weburl;
-
             }
 
 
         }
-
-
     }
+
 
 }

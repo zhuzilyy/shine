@@ -8,7 +8,10 @@ import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.qianyi.shine.R;
@@ -35,7 +38,10 @@ public class FindMajorActivity extends BaseActivity {
     View view_zhuanKe;
     @BindView(R.id.view_benKe)
     View view_benKe;
+    @BindView(R.id.et_search)
+    EditText et_search;
     private MyReceiver myReceiver;
+    private Intent intent;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
@@ -43,6 +49,16 @@ public class FindMajorActivity extends BaseActivity {
         benkeFragment=new MajorBenkeFragment();
         //初始化碎片
         initFragment();
+        //设置搜索框的提示
+        intent=getIntent();
+        if (intent!=null){
+            String tag=intent.getStringExtra("tag");
+            /*if (tag.equals("majorPriority")){
+                et_search.setHint("输入专业名称");
+            }else if(tag.equals("searchMajor")){
+                et_search.setHint("输入专业名称");
+            }*/
+        }
         //注册广播 点击选择专业的条目关闭专业选择的界面
         myReceiver=new MyReceiver();
         IntentFilter intentFilter=new IntentFilter();
@@ -60,7 +76,16 @@ public class FindMajorActivity extends BaseActivity {
     }
     @Override
     protected void initListener() {
-
+        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                String keyWord=et_search.getText().toString().trim();
+                if (!TextUtils.isEmpty(keyWord)){
+                    jumpActivity(FindMajorActivity.this,PriorityProfessionalDetailsActivity.class);
+                }
+                return false;
+            }
+        });
     }
     @Override
     protected void setStatusBarColor() {

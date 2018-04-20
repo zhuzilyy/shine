@@ -1,53 +1,39 @@
-package com.qianyi.shine.ui.home.fragment;
+package com.qianyi.shine.ui.home.activity;
 
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.kanade.treeadapter.Node;
 import com.kanade.treeadapter.TreeAdapter;
 import com.kanade.treeadapter.TreeItemClickListener;
 import com.qianyi.shine.R;
-import com.qianyi.shine.base.BaseFragment;
-import com.qianyi.shine.ui.college.activity.ProfessionalActivity;
-import com.qianyi.shine.ui.home.activity.PriorityProfessionalDetailsActivity;
-import com.qianyi.shine.ui.home.activity.SearchOccupationActivity;
-import com.qianyi.shine.ui.home.bean.Major;
+import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.ui.home.bean.Major;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
- * Created by Administrator on 2018/4/6.
+ * Created by Administrator on 2018/4/17.
  */
 
-public class MajorBenkeFragment extends BaseFragment {
+public class CareerAndMajorActivity extends BaseActivity {
     @BindView(R.id.rv)
     RecyclerView recyclerView;
-    private View view_benke;
+    @BindView(R.id.et_searchOccupation)
+    EditText et_searchOccupation;
     private List<Major> list;
-    private Intent intent;
-    private String tag;
-    @Override
-    protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
-        view_benke=inflater.inflate(R.layout.fragment_major_benke,null);
-        return view_benke;
-    }
     @Override
     protected void initViews() {
-        //majorList=new ArrayList<>();
-        intent=getActivity().getIntent();
-        if (intent!=null){
-            tag=intent.getStringExtra("tag");
-        }
+        BaseActivity.addActivity(this);
     }
     @Override
     protected void initData() {
@@ -92,39 +78,52 @@ public class MajorBenkeFragment extends BaseFragment {
             Major secondMajor=new Major(i,5,"工程经济学");
             list.add(secondMajor);
         }
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        final TreeAdapter<Major> adapter = new TreeAdapter<>(getActivity());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        final TreeAdapter<Major> adapter = new TreeAdapter<>(this);
         adapter.setNodes(list);
         adapter.setListener(new TreeItemClickListener() {
             @Override
             public void OnClick(Node node) {
-               /* if (node.getId() == 3) {
-                    adapter.addChildrenById(3, childs);
-                }*/
                 int level = node.getLevel();
                 if (level==2){
-                    //startActivity(new Intent(getActivity(), ProfessionalActivity.class));
-                    //意愿设置里面的专业设置
-                    if (!TextUtils.isEmpty(tag)){
-                        Intent intent=null;
-                        if (tag.equals("willingSetting")){
-                            intent=new Intent();
-                            intent.setAction("com.action.setwilling");
-                            intent.putExtra("majorName",node.getName());
-                            getActivity().sendBroadcast(intent);
-                         //专业优先跳转的界面  或是  查专业跳转过来的界面
-                        }else if(tag.equals("majorPriority") ||tag.equals("searchMajor")){
-                            intent=new Intent(getActivity(), PriorityProfessionalDetailsActivity.class);
-                            startActivity(intent);
-                        }
-                    }
+                    jumpActivity(CareerAndMajorActivity.this,OccupationDetailActivity.class);
                 }
+               /* if (level==2){
+                    if (tag.equals("willingSetting")){
+                        Intent intent=new Intent();
+                        intent.putExtra("cccupationName",node.getName());
+                        setResult(3,intent);
+                        finish();
+                    }
+                }*/
             }
         });
         recyclerView.setAdapter(adapter);
     }
     @Override
+    protected void getResLayout() {
+        setContentView(R.layout.activity_career_major);
+    }
+    @Override
     protected void initListener() {
+        et_searchOccupation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                jumpActivity(CareerAndMajorActivity.this,OccupationDetailActivity.class);
+                return false;
+            }
+        });
+    }
+    @Override
+    protected void setStatusBarColor() {
 
+    }
+    @OnClick({R.id.iv_back})
+    public void click(View view){
+        switch (view.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+        }
     }
 }

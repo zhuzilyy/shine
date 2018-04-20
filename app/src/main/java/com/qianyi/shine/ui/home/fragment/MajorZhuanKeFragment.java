@@ -3,6 +3,7 @@ package com.qianyi.shine.ui.home.fragment;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.kanade.treeadapter.TreeItemClickListener;
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.ui.college.activity.ProfessionalActivity;
+import com.qianyi.shine.ui.home.activity.PriorityProfessionalDetailsActivity;
 import com.qianyi.shine.ui.home.bean.Major;
 
 import java.util.ArrayList;
@@ -100,11 +102,20 @@ public class MajorZhuanKeFragment extends BaseFragment {
                 }*/
                 int level = node.getLevel();
                 if (level==2){
-                    if (tag.equals("willingSetting")){
-                        Intent intent=new Intent();
-                        intent.setAction("com.action.setwilling");
-                        intent.putExtra("majorName",node.getName());
-                        getActivity().sendBroadcast(intent);
+                    //startActivity(new Intent(getActivity(), ProfessionalActivity.class));
+                    //意愿设置里面的专业设置
+                    if (!TextUtils.isEmpty(tag)){
+                        Intent intent=null;
+                        if (tag.equals("willingSetting")){
+                            intent=new Intent();
+                            intent.setAction("com.action.setwilling");
+                            intent.putExtra("majorName",node.getName());
+                            getActivity().sendBroadcast(intent);
+                            //专业优先跳转的界面  或是  查专业跳转过来的界面
+                        }else if(tag.equals("majorPriority")||tag.equals("searchMajor")){
+                            intent=new Intent(getActivity(), PriorityProfessionalDetailsActivity.class);
+                            startActivity(intent);
+                        }
                     }
                 }
             }

@@ -57,6 +57,7 @@
                 android:orientation="horizontal"
                 >
                 <TextView
+                    android:id="@+id/tv_current"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1"
@@ -71,6 +72,7 @@
                     android:textColor="@color/main_blue"
                     />
                 <TextView
+                    android:id="@+id/tv_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="60"
@@ -88,27 +90,31 @@
                 />
             <!--题干-->
             <TextView
+                android:id="@+id/question_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/gray"
-                android:textSize="14sp"
+                android:textSize="16sp"
+                android:minHeight="100dp"
                 android:text="的就放鲁大师就是垃圾福克斯覅舒服分开发岁哦副科级师傅说发his和覅发货时肯定会覅书粉红色款到发货四粉红色客户发is峰会上方是否为啥佛为还发快手覅we回复后覅徽文化覅后方可为合肥哦凤凰网IE返回"
                 />
-            <!--选项a-->
+            <!--选项-性格测试-->
             <RadioGroup
+                android:id="@+id/rg_character"
                 android:layout_marginTop="@dimen/dp_25"
                 android:layout_width="match_parent"
                 android:paddingLeft="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_10"
                 android:layout_height="wrap_content">
                 <RadioButton
+                    android:id="@+id/ra_character_a"
                     android:paddingRight="@dimen/dp_10"
                     android:paddingLeft="@dimen/dp_10"
-                    android:paddingTop="@dimen/dp_3"
-                    android:paddingBottom="@dimen/dp_3"
+                    android:paddingTop="@dimen/dp_5"
+                    android:paddingBottom="@dimen/dp_5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:button="@null"
@@ -117,11 +123,12 @@
                     android:text="A.的链接大力分类我就发了复健科色粉飞蛾金刚FKJSDJFL"
                     />
                 <RadioButton
+                    android:id="@+id/ra_character_b"
                     android:layout_marginTop="@dimen/dp_10"
                     android:paddingRight="@dimen/dp_10"
                     android:paddingLeft="@dimen/dp_10"
-                    android:paddingTop="@dimen/dp_3"
-                    android:paddingBottom="@dimen/dp_3"
+                    android:paddingTop="@dimen/dp_5"
+                    android:paddingBottom="@dimen/dp_5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:button="@null"
@@ -129,42 +136,55 @@
                     android:text="B.的链接大力金刚FKJSDJFL"
                     android:background="@drawable/shape_stroke_check"
                     />
+            </RadioGroup>
+            <!--选项-兴趣测试-->
+            <RadioGroup
+                android:id="@+id/rg_interest"
+                android:visibility="visible"
+                android:layout_marginTop="@dimen/dp_25"
+                android:layout_width="match_parent"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:layout_height="wrap_content">
                 <RadioButton
+                    android:id="@+id/ra_interest_a"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingTop="@dimen/dp_8"
+                    android:paddingBottom="@dimen/dp_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:textColor="@color/color2"
+                    android:background="@drawable/shape_stroke_check"
+                    android:text="是"
+                    />
+                <RadioButton
+                    android:id="@+id/ra_interest_b"
                     android:layout_marginTop="@dimen/dp_10"
                     android:paddingRight="@dimen/dp_10"
                     android:paddingLeft="@dimen/dp_10"
-                    android:paddingTop="@dimen/dp_3"
-                    android:paddingBottom="@dimen/dp_3"
-                    android:textColor="@color/color2"
-                    android:layout_width="match_parent"
-                    android:background="@drawable/shape_stroke_check"
-                    android:layout_height="wrap_content"
-                    android:button="@null"
-                    android:text="C.的链接大力金刚防守反击房间卡洛斯甲方可适当房间开的附件为哦口FKJSDJFL"
-                    />
-                <RadioButton
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:paddingRight="@dimen/dp_10"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:paddingTop="@dimen/dp_3"
-                    android:paddingBottom="@dimen/dp_3"
-                    android:textColor="@color/color2"
+                    android:paddingTop="@dimen/dp_8"
+                    android:paddingBottom="@dimen/dp_8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_stroke_check"
                     android:button="@null"
-                    android:text="D.的链接大力金刚FKJSDJFL两地分居史莱克附件未见佛副经理开始的减肥减肥开始了的减肥费时间大佛废旧塑料大姐夫金佛山"
+                    android:textColor="@color/color2"
+                    android:text="不是"
+                    android:background="@drawable/shape_stroke_check"
                     />
-
             </RadioGroup>
 
+
             <TextView
+                android:id="@+id/pre_question"
                 android:layout_marginTop="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                android:gravity="center"
                 android:text="上一题"
-                android:textSize="12sp"
+                android:textSize="14sp"
+                android:padding="@dimen/dp_10"
                 android:textColor="@color/main_blue"
                 />
             <Button
