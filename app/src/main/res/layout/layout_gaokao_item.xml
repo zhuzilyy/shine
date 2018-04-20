@@ -5,11 +5,9 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
     android:layout_marginLeft="@dimen/dp_10"
     android:layout_marginRight="@dimen/dp_10"
     android:paddingTop="@dimen/dp_10"
-    android:foreground="?android:attr/selectableItemBackground"
     android:orientation="vertical">
 
     <LinearLayout
@@ -53,6 +51,7 @@
                 android:layout_weight="1"
                 >
                 <TextView
+                    android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="03-09"
@@ -60,6 +59,7 @@
                     android:gravity="center"
                     />
                 <TextView
+                    android:id="@+id/readtimes"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="859阅读"

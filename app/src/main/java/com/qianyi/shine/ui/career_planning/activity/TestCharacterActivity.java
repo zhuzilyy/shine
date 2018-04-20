@@ -57,6 +57,8 @@ public class TestCharacterActivity extends BaseActivity implements View.OnClickL
             break;
             case R.id.btn_startTest:
                 Intent intent = new Intent(TestCharacterActivity.this,TestActivity.class);
+                //testType  0:性格测试    1：兴趣测试
+                intent.putExtra("testType","0");
                 startActivity(intent);
                 break;
 

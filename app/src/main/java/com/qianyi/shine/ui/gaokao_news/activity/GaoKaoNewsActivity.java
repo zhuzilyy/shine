@@ -16,16 +16,12 @@ import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
-import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
-import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.gaokao_news.adapter.GaokaoAdapter;
-import com.qianyi.shine.ui.gaokao_news.entivity.articleBean;
+import com.qianyi.shine.ui.gaokao_news.entivity.ArticleBean;
 import com.qianyi.shine.ui.gaokao_news.view.XTitleView;
-import com.qianyi.shine.ui.home.bean.HomeBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -54,16 +50,12 @@ public class GaoKaoNewsActivity extends BaseActivity {
         BaseActivity.addActivity(this);
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(GaoKaoNewsActivity.this));
-
         //上拉加载
         initAdapter();
-
         //下拉刷新
         initRefreshLayout();
         mSwipeRefreshLayout.setRefreshing(true);
         refresh();
-
-
     }
 
     @Override
@@ -85,6 +77,19 @@ public class GaoKaoNewsActivity extends BaseActivity {
                 finish();
             }
         });
+        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
+                List<ArticleBean.AriticleData.AriticleInfo.AriticleList> ariticleList = adapter.getData();
+                Intent intent = new Intent(GaoKaoNewsActivity.this, WebviewActivity.class);
+                intent.putExtra("title", "高考头条");
+                intent.putExtra("url", ariticleList.get(position).getWeburl());
+
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override
@@ -106,17 +111,6 @@ public class GaoKaoNewsActivity extends BaseActivity {
 //        mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
 
-        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-                Intent intent = new Intent(GaoKaoNewsActivity.this, WebviewActivity.class);
-                intent.putExtra("title", "高考头条");
-                intent.putExtra("url", "http://www.baidu.com");
-
-                startActivity(intent);
-            }
-        });
-
 
     }
 
@@ -127,26 +121,28 @@ public class GaoKaoNewsActivity extends BaseActivity {
         apiHome.refresh(apiConstant.ARTICLEMORE, mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
-                Log.i("ppp", "131" + s);
+                Log.i("pppxzy", "131" + s);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Gson gson = new Gson();
-                        articleBean articleB = gson.fromJson(s, articleBean.class);
-                        if (articleB != null) {
-                            String code = articleB.getCode();
+                        ArticleBean articleBean = gson.fromJson(s, ArticleBean.class);
+                        if (articleBean != null) {
+                            String code = articleBean.getCode();
                             if ("0".equals(code)) {
-                                articleBean.articleData articleD = articleB.getData();
-                                if (articleD != null) {
-                                    articleBean.articleData.articleInfo article_info = articleD.getInfo();
-                                    if (article_info != null) {
-                                        setData(true, article_info.getArticleList());
+                                ArticleBean.AriticleData ariticleData = articleBean.getData();
+                                if (ariticleData != null) {
+                                    ArticleBean.AriticleData.AriticleInfo ariticleInfo = ariticleData.getInfo();
+                                    if(ariticleInfo != null){
+                                        setData(true, ariticleInfo.getArticleList());
                                         mAdapter.setEnableLoadMore(true);
                                         mSwipeRefreshLayout.setRefreshing(false);
                                     }
+
+
                                 }
                             } else {
-                                Toast.makeText(GaoKaoNewsActivity.this, "" + articleB.getInfo(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(GaoKaoNewsActivity.this, "" + articleBean.getInfo(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -156,7 +152,6 @@ public class GaoKaoNewsActivity extends BaseActivity {
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 Log.i("ppp", "132" + e);
-
 
 
             }
@@ -168,31 +163,31 @@ public class GaoKaoNewsActivity extends BaseActivity {
     private void loadMore() {
 
         mNextRequestPage++;
-        mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
+     //   mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
         apiHome.refresh(apiConstant.ARTICLEMORE, mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
-                Log.i("ppp", "131" + s);
+                Log.i("pppxzy", "131" + s);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Gson gson = new Gson();
-                        articleBean articleB = gson.fromJson(s, articleBean.class);
-                        if (articleB != null) {
-                            String code = articleB.getCode();
+                        ArticleBean articleBean = gson.fromJson(s, ArticleBean.class);
+                        if (articleBean != null) {
+                            String code = articleBean.getCode();
                             if ("0".equals(code)) {
-
-                                articleBean.articleData articleD = articleB.getData();
-                                if (articleD != null) {
-                                    articleBean.articleData.articleInfo article_info = articleD.getInfo();
-                                    if (article_info != null) {
-                                        setData(false, article_info.getArticleList());
+                                ArticleBean.AriticleData ariticleData = articleBean.getData();
+                                if (ariticleData != null) {
+                                    ArticleBean.AriticleData.AriticleInfo ariticleInfo = ariticleData.getInfo();
+                                    if(ariticleInfo != null){
+                                        setData(false, ariticleInfo.getArticleList());
                                         mAdapter.setEnableLoadMore(true);
                                         mSwipeRefreshLayout.setRefreshing(false);
                                     }
+
                                 }
                             } else {
-                                Toast.makeText(GaoKaoNewsActivity.this, "" + articleB.getInfo(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(GaoKaoNewsActivity.this, "" + articleBean.getInfo(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -202,7 +197,6 @@ public class GaoKaoNewsActivity extends BaseActivity {
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 Log.i("ppp", "132" + e);
-
 
 
             }
@@ -233,7 +227,6 @@ public class GaoKaoNewsActivity extends BaseActivity {
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
             mAdapter.loadMoreEnd(isRefresh);
-            Toast.makeText(GaoKaoNewsActivity.this, "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             mAdapter.loadMoreComplete();
         }

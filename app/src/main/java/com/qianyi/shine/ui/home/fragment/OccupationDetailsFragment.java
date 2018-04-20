@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiHome;
+import com.qianyi.shine.application.MyApplication;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
@@ -137,7 +138,7 @@ public class OccupationDetailsFragment extends BaseFragment {
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 Log.i("ppp", "132" + e);
-                getActivity().runOnUiThread(new Runnable() {
+               getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         setData(true, testEntities);
