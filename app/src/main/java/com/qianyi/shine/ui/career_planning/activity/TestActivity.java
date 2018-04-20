@@ -78,7 +78,6 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         title = findViewById(R.id.tv_title);
         title.setText("测试");
         pb.setDrawableIds(new int[]{R.drawable.i00, R.drawable.i01, R.drawable.i02, R.drawable.i03, R.drawable.i04, R.drawable.i05, R.drawable.i06});
-
         pb.setProgress(0);
     }
 
@@ -91,9 +90,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
             hideShowAnswerType(testType);
             getInterestData();
         }
-
     }
-
     /***
      * 根据题型显示不同的选项
      * @param testType
@@ -143,16 +140,12 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
                     }
                 }
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 loadingDialog.dismiss();
             }
         });
-
-
     }
-
     /***
      * 获取性格测试数据后，显示题目详情
      * @param item
@@ -165,8 +158,8 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
 
         ra_character_a.setText("A. " + item.getKey().getA());
         ra_character_b.setText("B. " + item.getKey().getB());
-//        ra_character_a.setChecked(false);
-//        ra_character_b.setChecked(false);
+//      ra_character_a.setChecked(false);
+//      ra_character_b.setChecked(false);
 
 
     }
