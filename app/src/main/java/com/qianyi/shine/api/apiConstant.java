@@ -24,6 +24,8 @@ public class apiConstant {
     public static final String ARTICLEMORE=BASE_URL+"article_list_more";
     //获取性格测试的数据
     public static final String GETMBTDATA=BASE_URL+"getMBTItest";
+    //获取性格测试结果
+    public static final String GETMBTRESULT=BASE_URL+"getMBTIanalyze";
 
 
 

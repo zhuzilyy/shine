@@ -118,7 +118,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
     private void getCharacterData() {
         final CustomLoadingDialog loadingDialog = new CustomLoadingDialog(TestActivity.this);
         loadingDialog.show();
-        apiTest.getTestData(apiConstant.GETMBTDATA, new RequestCallBack<String>() {
+        apiTest.getMIT_TestData(apiConstant.GETMBTDATA, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, String s) {
                 loadingDialog.dismiss();
@@ -258,7 +258,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
             currentNum++;
             initQuestionOne(mitLists.get(currentNum));
         } else {
-            Intent intent =new Intent(TestActivity.this, InterestResultActivity.class);
+            Intent intent =new Intent(TestActivity.this, CharacterResultActivity.class);
             intent.putExtra("CharatorResult",CharachorStringBuilder.toString());
             startActivity(intent);
         }

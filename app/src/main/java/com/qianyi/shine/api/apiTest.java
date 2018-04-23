@@ -11,8 +11,21 @@ import java.util.Map;
  */
 
 public class apiTest {
-    public static void getTestData(String url,RequestCallBack<String> callback){
+    //获取mit测试题数据
+    public static void getMIT_TestData(String url, RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+
+    //获取mit测试结果
+    public static void getMITResult(String url,String id,String keyString, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("id",id);
+        params.put("keystring",keyString);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+
+
+
+
 }

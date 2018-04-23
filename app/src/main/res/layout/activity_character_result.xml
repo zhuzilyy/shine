@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    >
+
+    <include layout="@layout/layout_title" />
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="60dp">
+            <!--head-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/shape_corner_small_blue"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_ABC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:gravity="center"
+                        android:text="A、B、C"
+                        android:textColor="@color/white"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/tv_keywords"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:gravity="center"
+                        android:text="主导兴趣为：艺术型"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:layout_marginRight="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:src="@mipmap/main_line" />
+
+                    <TextView
+                        android:id="@+id/tv_introduce"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:gravity="center"
+                        android:text="艺术、实际、传统"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:orientation="vertical">
+                <!--性格描述-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="5dp"
+                        android:layout_height="20dp"
+                        android:background="@color/main_blue" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:text="性格描述"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:text="(毕业薪酬超过87%的专业)"
+                        android:textColor="@color/gray"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+                </LinearLayout>
+                <!--content-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="我的性格测试的结果为"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:gravity="center"
+                        android:text="A、B、C"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_keywords2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:gravity="center"
+                        android:text="详尽、精确、系统、勤劳"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <!--对组织的贡献-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:layout_marginRight="@dimen/dp_8"
+                                android:text="对组织的贡献"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_Contribution_organization"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <!--领导模式-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:layout_marginRight="@dimen/dp_8"
+                                android:text="领导模式"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_LeadershipModel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <!--学习模式-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:layout_marginRight="@dimen/dp_8"
+                                android:text="学习模式"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_LearningMode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <!--倾向性顺序-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:layout_marginRight="@dimen/dp_8"
+                                android:text="倾向性顺序"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_TendentiousSequence"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <!--解决问题的模式-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:layout_marginRight="@dimen/dp_8"
+                                android:text="解决问题的模式"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_problemSolving"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <!--工作环境倾向性-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:layout_marginRight="@dimen/dp_8"
+                                android:text="工作环境倾向性"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_workingEnvironment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <!--潜在缺点-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:layout_marginRight="@dimen/dp_8"
+                                android:text="潜在缺点"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_PotentialDefect"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <!--发展建议-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_8"
+                                android:layout_marginRight="@dimen/dp_8"
+                                android:text="发展建议"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/yellow_circle" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_DevelopmentProposals"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/dp_10"
+                            android:paddingRight="@dimen/dp_10"
+                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
+                            android:textColor="@color/gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20">
+        <!--重新测评-->
+        <LinearLayout
+            android:id="@+id/TestAgain_ll"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/shape_stroke_circle"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="重新"
+                android:textColor="@color/main_blue"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="测评"
+                android:textColor="@color/main_blue"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+        <!--取消关注-->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:background="@drawable/shape_corner_stroke_blue"
+            android:text="取消关注"
+            android:textColor="@color/main_blue" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

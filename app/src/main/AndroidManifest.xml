@@ -223,6 +223,9 @@
         <!--兴趣测试结果-->
         <activity android:name=".ui.career_planning.activity.InterestResultActivity"
             android:screenOrientation="portrait"/>
+        <!--性格测试结果-->
+        <activity android:name=".ui.career_planning.activity.CharacterResultActivity"
+            android:screenOrientation="portrait"/>
         <!--按职业选专业-->
         <activity android:name=".ui.home.activity.CareerAndMajorActivity"
             android:screenOrientation="portrait"/>
