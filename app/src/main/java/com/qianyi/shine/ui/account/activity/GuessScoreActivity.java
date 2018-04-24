@@ -2,10 +2,16 @@ package com.qianyi.shine.ui.account.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,31 +52,13 @@ public class GuessScoreActivity extends BaseActivity {
     public EditText et_myrank;
     @BindView(R.id.et_myscore)
     public EditText et_myscore;
-
+    @BindView(R.id.ll_wraning)
+    public LinearLayout ll_wraning;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
         tv_title.setText("高考预估成绩");
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.rb_wenke:
-                        type = "2";
-                        break;
-                    case R.id.rb_like:
-                        type = "1";
-                        break;
-                    default:
-                        break;
-
-
-                }
-            }
-        });
-
     }
-
     @Override
     protected void initData() {
 
@@ -84,10 +72,21 @@ public class GuessScoreActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_wenke:
+                        type = "2";
+                        break;
+                    case R.id.rb_like:
+                        type = "1";
+                        break;
+                }
+            }
+        });
     }
-
-    @OnClick({R.id.btn_confirm, R.id.iv_back, R.id.tv_selectArea})
+    @OnClick({R.id.btn_confirm, R.id.iv_back, R.id.tv_selectArea,R.id.tv_know})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.btn_confirm:
@@ -115,6 +114,9 @@ public class GuessScoreActivity extends BaseActivity {
             case R.id.tv_selectArea:
                 Intent intent = new Intent(GuessScoreActivity.this, SelectCollegeAreaActivity.class);
                 startActivityForResult(intent, REQUESTCODE);
+                break;
+            case R.id.tv_know:
+                ll_wraning.setVisibility(View.GONE);
                 break;
         }
     }

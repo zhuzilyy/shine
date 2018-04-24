@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:focusableInTouchMode="true"
     android:focusable="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <include layout="@layout/layout_title"/>
     <View
         android:background="@color/common_line"
@@ -160,6 +164,14 @@
         android:background="@color/common_line"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"/>
+    <TextView
+        android:textColor="@color/cicle_red"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:text="注意:高考成绩只能修改2次,请您认真填写"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
     <Button
@@ -172,8 +184,47 @@
         android:text="启程"
         android:layout_width="300dp"
         android:layout_height="45dp" />
-
-
-
-
-</LinearLayout>
+    </LinearLayout>
+    <!--提示的内容-->
+    <LinearLayout
+        android:clickable="true"
+        android:id="@+id/ll_wraning"
+        android:background="#99989898"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:background="@drawable/bg_dialog"
+            android:padding="10dp"
+            android:orientation="vertical"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:text="注意"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp" />
+        <TextView
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="温馨提示：高考成绩公布前，请填写预估分数，高考出分后请尽快改为真实成绩，方便为您提供风精准的查询与填报服务"
+            />
+        <TextView
+            android:id="@+id/tv_know"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:text="知道了"
+            android:background="@drawable/bg_login"
+            android:layout_width="200dp"
+            android:layout_height="40dp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

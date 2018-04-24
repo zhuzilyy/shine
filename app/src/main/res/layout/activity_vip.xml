@@ -117,110 +117,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:text="根据院校历年招生计划和录取数据，预估考生被目标院校录取的概率，明确报考范围。"
                         android:layout_marginTop="3dp"
-                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
             </RelativeLayout>
 
-            <!--评选专业-->
-            <RelativeLayout
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/vip2"
-                    android:src="@mipmap/vip2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <LinearLayout
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/vip2"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textStyle="bold"
-                        android:textSize="15sp"
-                        android:text="做测评选专业"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_marginTop="3dp"
-                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/vip3"
-                    android:src="@mipmap/vip3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <LinearLayout
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/vip3"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textStyle="bold"
-                        android:textSize="15sp"
-                        android:text="智能填志愿"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_marginTop="3dp"
-                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </RelativeLayout>
-
-
-
-            <RelativeLayout
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/vip4"
-                    android:src="@mipmap/vip4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <LinearLayout
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/vip4"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textStyle="bold"
-                        android:textSize="15sp"
-                        android:text="按职业选专业"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_marginTop="3dp"
-                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </RelativeLayout>
-
+            <!--详尽的高校数据-->
             <RelativeLayout
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
@@ -245,47 +149,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:text="详细的高校历年录取数据、就业数据，帮助考生分析院校专业的录取趋势和就业趋势。"
                         android:layout_marginTop="3dp"
-                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
             </RelativeLayout>
-
-
-
+            <!--权威的就业榜单-->
             <RelativeLayout
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/vip6"
-                    android:src="@mipmap/vip6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <LinearLayout
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/vip6"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textStyle="bold"
-                        android:textSize="15sp"
-                        android:text="志愿表分析"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <TextView
-                        android:layout_marginTop="3dp"
-                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </RelativeLayout>
-            <RelativeLayout
-                android:paddingBottom="60dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
@@ -305,12 +176,107 @@
                     <TextView
                         android:textStyle="bold"
                         android:textSize="15sp"
-                        android:text="按公司推荐"
+                        android:text="权威的就业数据"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:text="各专业、职业详尽的就业前景分析，就业指标统计，权威的就业榜单，帮助考生了解专业、职业发展前景，选择志愿。"
                         android:layout_marginTop="3dp"
-                        android:text="雖然我們見面的時間很少 各有各忙 但是作為你的好朋友我真的真的打從心裏為你高興 你的努力你間會證明一切"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+            <!--自我测评-->
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/vip2"
+                    android:src="@mipmap/vip2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/vip2"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:text="做测评选专业"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="根据霍兰德职业兴趣测评和MBTI性格类型测评，让考生知道自己适合的专业与职业。"
+                        android:layout_marginTop="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!--智能填报-->
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/vip3"
+                    android:src="@mipmap/vip3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/vip3"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:text="智能填志愿"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="根据考生成绩、专业倾向、职业目标等意愿，一键生成志愿表单。"
+                        android:layout_marginTop="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+            <!--按职业选专业-->
+            <RelativeLayout
+                android:layout_marginBottom="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/vip4"
+                    android:src="@mipmap/vip4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/vip4"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:text="按职业选专业"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="查询目标职业的对口专业、工作内容、发展前景、职业去向等信息，帮助考生建立职业规划，明确专业方向。"
+                        android:layout_marginTop="3dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
