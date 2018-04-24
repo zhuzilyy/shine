@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#ff0000"
+    android:layout_width="300dp"
+    android:layout_height="match_parent">
+    <TextView
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:textSize="16sp"
+        android:text="注意"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp" />
+    <TextView
+        android:textSize="14sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="温馨提示：高考成绩公布前，请填写预估分数，高考出分后请尽快改为真实成绩，方便为您提供风精准的查询与填报服务"
+        />
+    <TextView
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="知道了"
+        android:background="@drawable/bg_login"
+        android:layout_width="200dp"
+        android:layout_height="30dp" />
+</LinearLayout>
