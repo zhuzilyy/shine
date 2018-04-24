@@ -60,6 +60,7 @@ public class TestCharacterActivity extends BaseActivity implements View.OnClickL
                 //testType  0:性格测试    1：兴趣测试
                 intent.putExtra("testType","0");
                 startActivity(intent);
+                finish();
                 break;
 
             default:
@@ -68,4 +69,6 @@ public class TestCharacterActivity extends BaseActivity implements View.OnClickL
 
         }
     }
+
+
 }

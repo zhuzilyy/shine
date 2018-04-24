@@ -17,6 +17,7 @@ import com.qianyi.shine.api.apiTest;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
+import com.qianyi.shine.ui.career_planning.entity.HLDBean;
 import com.qianyi.shine.ui.career_planning.entity.MitBean;
 import com.yanzhikai.pictureprogressbar.PictureProgressBar;
 
@@ -64,6 +65,9 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
     public StringBuilder InterestStringBuilder = new StringBuilder();
     //用于记录当前性格测试答案
     public String currentCharactorAnswer;
+    //用于记录当前兴趣测试答案
+    public String currentInterestAnswer;
+    private List<HLDBean.HLDData.HLDInfo.HLDQuestionLIST> hldQuestion; ;
 
     @Override
     protected void initViews() {
@@ -109,6 +113,48 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
      * 获取兴趣测试数据
      */
     private void getInterestData() {
+        final CustomLoadingDialog loadingDialog = new CustomLoadingDialog(TestActivity.this);
+        loadingDialog.show();
+        apiTest.getHLD_TestData(apiConstant.GETHLDINTERESTDDATA, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(Call call, Response response, String s) {
+                loadingDialog.dismiss();
+                Gson gson =new Gson();
+                HLDBean hldBean = gson.fromJson(s, HLDBean.class);
+                if(hldBean!=null){
+                   String code = hldBean.getCode();
+                   if("0" .equals(code)){
+                      HLDBean.HLDData hldData = hldBean.getData();
+                      if(hldData!=null){
+                          HLDBean.HLDData.HLDInfo hldInfo = hldData.getInfo();
+                          if(hldInfo != null){
+                              hldQuestion = hldInfo.getQuestion_list();
+                              totalNum = hldInfo.getListtotal();
+                              pb.setMax(Integer.parseInt(totalNum));
+                              initHLDQuestionOne(hldQuestion.get(0));
+                          }
+                      }
+                   }
+                }
+            }
+
+            @Override
+            public void onEror(Call call, int statusCode, Exception e) {
+                Log.i("yui",e.getMessage());
+                loadingDialog.dismiss();
+            }
+        });
+    }
+
+    /***
+     * 初始化兴趣测试
+     * @param item
+     */
+    private void initHLDQuestionOne(HLDBean.HLDData.HLDInfo.HLDQuestionLIST item) {
+        tv_total.setText(totalNum);
+        tv_current.setText(item.getOrder());
+        pb.setProgress(Integer.parseInt(item.getOrder()));
+        question_content.setText(item.getQuestion());
 
     }
 
@@ -195,8 +241,10 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.ra_interest_a:
+                        currentInterestAnswer = "1";
                         break;
                     case R.id.ra_interest_b:
+                        currentInterestAnswer = "0";
                         break;
 
                     default:
@@ -222,26 +270,61 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
                 if ("0".equals(testType)) {
                     doCharactor();
                 } else if ("1".equals(testType)) {
+                    doInterest();
 
                 }
                 break;
             case R.id.pre_question:
-                if (currentNum > 0) {
-                    currentNum--;
-                    initQuestionOne(mitLists.get(currentNum));
-                    //销毁当前题的答案
-                    Log.i("sssssss",CharachorStringBuilder.toString());
-                    if(CharachorStringBuilder.toString().length()>=2){
-                        CharachorStringBuilder.delete(CharachorStringBuilder.length()-2,CharachorStringBuilder.length());
+
+                if ("0".equals(testType)) {
+                    if (currentNum > 0) {
+                        currentNum--;
+                        initQuestionOne(mitLists.get(currentNum));
+                        //销毁当前题的答案
+                        if(CharachorStringBuilder.toString().length()>=2){
+                            CharachorStringBuilder.delete(CharachorStringBuilder.length()-2,CharachorStringBuilder.length());
+                        }
                     }
-                    Log.i("sssssss",CharachorStringBuilder.toString());
+                } else if ("1".equals(testType)) {
+                    if (currentNum > 0) {
+                        currentNum--;
+                        initHLDQuestionOne(hldQuestion.get(currentNum));
+                        //销毁当前题的答案
+                        if(InterestStringBuilder.toString().length()>=2){
+                            InterestStringBuilder.delete(InterestStringBuilder.length()-2,InterestStringBuilder.length());
+                        }
+                    }
+
                 }
+
+
                 break;
 
             default:
                 break;
         }
 
+    }
+
+    /***
+     * 处理兴趣测试结果
+     */
+    private void doInterest() {
+        //记录答案
+        if(TextUtils.isEmpty(currentInterestAnswer)){
+            InterestStringBuilder.append(""+",");
+        }else {
+            InterestStringBuilder.append(currentInterestAnswer+",");
+        }
+        if (currentNum != Integer.parseInt(totalNum) - 1) {
+            currentNum++;
+            initHLDQuestionOne(hldQuestion.get(currentNum));
+        } else {
+            Intent intent =new Intent(TestActivity.this, InterestResultActivity.class);
+            intent.putExtra("InterestResult",InterestStringBuilder.toString());
+            startActivity(intent);
+            finish();
+        }
     }
 
     /****
@@ -261,6 +344,9 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
             Intent intent =new Intent(TestActivity.this, CharacterResultActivity.class);
             intent.putExtra("CharatorResult",CharachorStringBuilder.toString());
             startActivity(intent);
+            finish();
         }
     }
+
+
 }

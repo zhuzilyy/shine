@@ -26,6 +26,8 @@ public class apiConstant {
     public static final String GETMBTDATA=BASE_URL+"getMBTItest";
     //获取性格测试结果
     public static final String GETMBTRESULT=BASE_URL+"getMBTIanalyze";
+    //获取霍兰德兴趣测试的数据
+    public static final String GETHLDINTERESTDDATA=BASE_URL+"getHLDtest";
 
 
 

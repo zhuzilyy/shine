@@ -17,6 +17,12 @@ public class apiTest {
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
 
+    //获取霍兰德测试题数据
+    public static void getHLD_TestData(String url, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+
     //获取mit测试结果
     public static void getMITResult(String url,String id,String keyString, RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();

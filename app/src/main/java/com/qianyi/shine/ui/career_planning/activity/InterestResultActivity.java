@@ -1,6 +1,7 @@
 package com.qianyi.shine.ui.career_planning.activity;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,8 +31,12 @@ public class InterestResultActivity extends BaseActivity implements View.OnClick
     public TextView title;
     @BindView(R.id.TestAgain_ll)
     public LinearLayout TestAgain_ll;
+
     @Override
     protected void initViews() {
+
+        String interestAnswer = getIntent().getStringExtra("InterestResult");
+        Log.i("YYYYYYY",interestAnswer);
         //玫瑰风向图
         List<RadarData> dataList = new ArrayList<>();
         for (int i = 1; i < 7; i++) {
