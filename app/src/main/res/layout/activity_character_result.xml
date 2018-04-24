@@ -22,7 +22,8 @@
             <!--head-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
+                android:minHeight="150dp"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
@@ -30,8 +31,10 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:layout_marginTop="@dimen/dp_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
@@ -42,9 +45,10 @@
                         android:gravity="center"
                         android:text="A、B、C"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="24sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tv_keywords"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -68,6 +72,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_6"
                         android:gravity="center"
+                        android:paddingRight="@dimen/dp_15"
+                        android:paddingLeft="@dimen/dp_15"
+
                         android:text="艺术、实际、传统"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
@@ -142,8 +149,10 @@
                         android:layout_marginTop="@dimen/dp_10"
                         android:gravity="center"
                         android:text="详尽、精确、系统、勤劳"
+                        android:paddingLeft="@dimen/dp_20"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:paddingRight="@dimen/dp_20"
+                        android:textSize="15sp" />
 
                     <!--对组织的贡献-->
                     <LinearLayout
@@ -180,15 +189,13 @@
 
                         </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tv_Contribution_organization"
+                        <com.qianyi.shine.ui.home.view.MyListView
+                            android:id="@+id/zzgxList"
+                            android:divider="#000000"
+                            android:dividerHeight="0dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/dp_10"
-                            android:paddingRight="@dimen/dp_10"
-                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
-                            android:textColor="@color/gray"
-                            android:textSize="12sp" />
+                            android:layout_height="wrap_content"/>
+
                     </LinearLayout>
                     <!--领导模式-->
                     <LinearLayout
@@ -225,15 +232,12 @@
 
                         </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tv_LeadershipModel"
+                        <com.qianyi.shine.ui.home.view.MyListView
+                            android:id="@+id/leaderList"
+                            android:divider="#000000"
+                            android:dividerHeight="0dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/dp_10"
-                            android:paddingRight="@dimen/dp_10"
-                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
-                            android:textColor="@color/gray"
-                            android:textSize="12sp" />
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
                     <!--学习模式-->
                     <LinearLayout
@@ -270,15 +274,12 @@
 
                         </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tv_LearningMode"
+                        <com.qianyi.shine.ui.home.view.MyListView
+                            android:id="@+id/LearnList"
+                            android:divider="#000000"
+                            android:dividerHeight="0dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/dp_10"
-                            android:paddingRight="@dimen/dp_10"
-                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
-                            android:textColor="@color/gray"
-                            android:textSize="12sp" />
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
                     <!--倾向性顺序-->
                     <LinearLayout
@@ -316,14 +317,13 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/tv_TendentiousSequence"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/dp_10"
+                            android:id="@+id/tendTv"
+                            android:paddingLeft="@dimen/dp_15"
                             android:paddingRight="@dimen/dp_10"
-                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
+                            android:textSize="14dp"
                             android:textColor="@color/gray"
-                            android:textSize="12sp" />
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
                     <!--解决问题的模式-->
                     <LinearLayout
@@ -360,15 +360,12 @@
 
                         </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tv_problemSolving"
+                        <com.qianyi.shine.ui.home.view.MyListView
+                            android:id="@+id/questionList"
+                            android:divider="#000000"
+                            android:dividerHeight="0dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/dp_10"
-                            android:paddingRight="@dimen/dp_10"
-                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
-                            android:textColor="@color/gray"
-                            android:textSize="12sp" />
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
                     <!--工作环境倾向性-->
                     <LinearLayout
@@ -405,15 +402,12 @@
 
                         </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tv_workingEnvironment"
+                        <com.qianyi.shine.ui.home.view.MyListView
+                            android:id="@+id/workingList"
+                            android:divider="#000000"
+                            android:dividerHeight="0dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/dp_10"
-                            android:paddingRight="@dimen/dp_10"
-                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
-                            android:textColor="@color/gray"
-                            android:textSize="12sp" />
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
                     <!--潜在缺点-->
                     <LinearLayout
@@ -450,15 +444,12 @@
 
                         </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tv_PotentialDefect"
+                        <com.qianyi.shine.ui.home.view.MyListView
+                            android:id="@+id/potentialList"
+                            android:divider="#000000"
+                            android:dividerHeight="0dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/dp_10"
-                            android:paddingRight="@dimen/dp_10"
-                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
-                            android:textColor="@color/gray"
-                            android:textSize="12sp" />
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
                     <!--发展建议-->
                     <LinearLayout
@@ -495,15 +486,12 @@
 
                         </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tv_DevelopmentProposals"
+                        <com.qianyi.shine.ui.home.view.MyListView
+                            android:id="@+id/devilopmentList"
+                            android:divider="#000000"
+                            android:dividerHeight="0dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/dp_10"
-                            android:paddingRight="@dimen/dp_10"
-                            android:text="经典款丽枫酒店福建省的放假了我可就否房间恐龙危机否无佛了我就否文件金佛我文件佛我我房间欧威且佛偈就否为佛我文件哦我金佛为奇偶房间欧威IE房间房间欧威就 房间欧威金佛违法加沃尔"
-                            android:textColor="@color/gray"
-                            android:textSize="12sp" />
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
                 </LinearLayout>
 

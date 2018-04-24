@@ -60,6 +60,7 @@ public class TestInterestActivity extends BaseActivity implements View.OnClickLi
                 //testType  0:性格测试    1：兴趣测试
                 intent.putExtra("testType","1");
                 startActivity(intent);
+                finish();
                 break;
 
             default:
@@ -68,4 +69,6 @@ public class TestInterestActivity extends BaseActivity implements View.OnClickLi
 
         }
     }
+
+
 }

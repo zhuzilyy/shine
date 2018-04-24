@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/item_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="金石可镂金刚狼十几个麓山国际欧尚国际搜合肥市科技佛寺附近"
+        android:textColor="@color/gray"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_3"
+        android:paddingTop="@dimen/dp_3"
+        android:textSize="14sp"
+        />
+
+</LinearLayout>

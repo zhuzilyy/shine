@@ -1,12 +1,15 @@
 package com.qianyi.shine.ui.career_planning.activity;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiTest;
@@ -14,8 +17,11 @@ import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.bean.LoginBean;
+import com.qianyi.shine.ui.career_planning.adapter.TextMySmpleAdapter;
+import com.qianyi.shine.ui.career_planning.entity.CharacterResultBean;
 import com.qianyi.shine.ui.career_planning.view.radarview.RadarData;
 import com.qianyi.shine.ui.career_planning.view.radarview.RadarView;
+import com.qianyi.shine.ui.home.view.MyListView;
 import com.qianyi.shine.utils.Utils;
 
 import java.util.ArrayList;
@@ -51,30 +57,32 @@ public class CharacterResultActivity extends BaseActivity implements View.OnClic
     @BindView(R.id.tv_keywords2)
     public TextView tv_keywords2;
     //对组织的贡献
-    @BindView(R.id.tv_Contribution_organization)
-    public TextView tv_Contribution_organization;
+    @BindView(R.id.zzgxList)
+    public MyListView zzgxList;
     //领导模式
-    @BindView(R.id.tv_LeadershipModel)
-    public TextView tv_LeadershipModel;
+    @BindView(R.id.leaderList)
+    public MyListView leaderList;
     //学习模式
-    @BindView(R.id.tv_LearningMode)
-    public TextView tv_LearningMode;
+    @BindView(R.id.LearnList)
+    public MyListView LearnList;
     //倾向性顺序
-    @BindView(R.id.tv_TendentiousSequence)
-    public TextView tv_TendentiousSequence;
+    @BindView(R.id.tendTv)
+    public TextView tendTv;
     //解决问题的模式
-    @BindView(R.id.tv_problemSolving)
-    public TextView tv_problemSolving;
+    @BindView(R.id.questionList)
+    public MyListView questionList;
     //工作环境倾向性
-    @BindView(R.id.tv_workingEnvironment)
-    public TextView tv_workingEnvironment;
+    @BindView(R.id.workingList)
+    public MyListView workingList;
     //潜在的缺点
-    @BindView(R.id.tv_PotentialDefect)
-    public TextView tv_PotentialDefect;
+    @BindView(R.id.potentialList)
+    public MyListView potentialList;
     //发展建议
-    @BindView(R.id.tv_DevelopmentProposals)
-    public TextView tv_DevelopmentProposals;
+    @BindView(R.id.devilopmentList)
+    public MyListView devilopmentList;
     private String keyStrings;
+
+    private TextMySmpleAdapter mySmpleAdapter ;
     @Override
     protected void initViews() {
 
@@ -94,7 +102,21 @@ public class CharacterResultActivity extends BaseActivity implements View.OnClic
                 @Override
                 public void onSuccess(Call call, Response response, String s) {
                     loadingDialog.dismiss();
-                    Log.i("()",s);
+                    Gson gson = new Gson();
+                    CharacterResultBean resultBean = gson.fromJson(s, CharacterResultBean.class);
+                    if(resultBean!=null){
+                        String code = resultBean.getCode();
+                        if("0".equals(code)){
+                            CharacterResultBean.CharacterResultData resultData =resultBean.getData();
+                            if(resultData!=null){
+                               CharacterResultBean.CharacterResultData.CharacterResultInfo resultInfo = resultData.getInfo();
+                               if(resultInfo !=null){
+                                  InitDataFromWeb(resultInfo);
+
+                               }
+                            }
+                        }
+                    }
                 }
 
                 @Override
@@ -105,8 +127,62 @@ public class CharacterResultActivity extends BaseActivity implements View.OnClic
             });
         }
 
+    }
+
+    /***
+     * 赋值数据
+     * @param info
+     */
+    private void InitDataFromWeb(CharacterResultBean.CharacterResultData.CharacterResultInfo info) {
+        tv_ABC.setText(info.getType());
+        tv_introduce.setText(info.getDecription());
+        tv_result.setText(info.getType());
+        tv_keywords2.setText(info.getDecription());
+        //对组织的贡献
+        TextMySmpleAdapter adapter_zzgx =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getZzgx().getValue()));
+        zzgxList.setAdapter(adapter_zzgx);
+        //领导模式
+        TextMySmpleAdapter adapter_llm  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getLdm().getValue()));
+        leaderList.setAdapter(adapter_llm);
+        //学习模式
+        TextMySmpleAdapter adapter_learn  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getXxm().getValue()));
+        LearnList.setAdapter(adapter_learn);
+        //倾向性顺序
+        String tentStr = info.getXxm().getExtend().getValue();
+        if(!TextUtils.isEmpty(tentStr)){
+            tendTv.setText(tentStr);
+        }
+        //解决问题
+        TextMySmpleAdapter adapter_question  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getJjm().getValue()));
+        questionList.setAdapter(adapter_question);
+        //工作环境
+        TextMySmpleAdapter adapter_working  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getGzhj().getValue()));
+        workingList.setAdapter(adapter_working);
+        //潜在的缺点
+        TextMySmpleAdapter adapter_potentail  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getQzqd().getValue()));
+        potentialList.setAdapter(adapter_potentail);
+        //发展建议
+        TextMySmpleAdapter adapter_development  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getQzqd().getValue()));
+        devilopmentList.setAdapter(adapter_development);
 
 
+
+    }
+
+    /***
+     * 返回List<Strng>
+     * @param value
+     * @return
+     */
+    private List<String> getListString(List<String> value) {
+        List<String> ListStr=new ArrayList<>();
+       String str = value.get(0);
+       String[] strings = str.split("Ø");
+       for (int i = 0; i< strings.length;i++){
+           ListStr.add(strings[i]);
+       }
+            ListStr.remove(0);
+            return ListStr;
 
     }
 
