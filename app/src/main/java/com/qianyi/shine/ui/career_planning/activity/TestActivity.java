@@ -310,6 +310,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
      * 处理兴趣测试结果
      */
     private void doInterest() {
+
         //记录答案
         if(TextUtils.isEmpty(currentInterestAnswer)){
             InterestStringBuilder.append(""+",");
