@@ -127,9 +127,6 @@ public class CharacterResultActivity extends BaseActivity implements View.OnClic
             });
         }
 
-
-
-
     }
 
     /***
