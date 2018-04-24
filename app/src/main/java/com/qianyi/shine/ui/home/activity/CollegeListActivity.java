@@ -306,6 +306,7 @@ public class CollegeListActivity extends BaseActivity {
                             mAdapter.setEnableLoadMore(true);
                             swipeRefreshLayout.setRefreshing(false);
                       //  }
+
                     }
                 });
             }
