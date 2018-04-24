@@ -11,18 +11,23 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.gson.Gson;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
 import com.qianyi.shine.ui.mine.adapter.CollegeAdapter;
 import com.qianyi.shine.ui.mine.bean.CollegeBean;
+import com.qianyi.shine.ui.mine.bean.UniversityInfo;
+import com.qianyi.shine.utils.Utils;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -58,15 +63,16 @@ public class CollegeListActivity extends BaseActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private CollegeAdapter mAdapter;
-    public List<CollegeBean> infoList;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
-
+    private Intent intent;
+    private String order,area,level,is_type,school_type,keyword;
+    private TextView reload;
+    private RelativeLayout no_internet_rl,no_data_rl;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
         tv_title.setText("大学列表");
-        infoList=new ArrayList<>();
         //省份
         final View areaView = getLayoutInflater().inflate(R.layout.custom_layout, null);
         GridView constellation = areaView.findViewById(R.id.constellation);
@@ -79,7 +85,6 @@ public class CollegeListActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 areaAdapter.setCheckItem(position);
                 constellationPosition = position;
-                Toast.makeText(CollegeListActivity.this, "星座条目", Toast.LENGTH_SHORT).show();
             }
         });
         ok.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +92,8 @@ public class CollegeListActivity extends BaseActivity {
             public void onClick(View v) {
                 mDropDownMenu.setTabText(constellationPosition == 0 ? headers[0] : citys[constellationPosition]);
                 mDropDownMenu.closeMenu();
-                Toast.makeText(CollegeListActivity.this, "ok", Toast.LENGTH_SHORT).show();
+                area=citys[constellationPosition];
+                refresh();
             }
         });
         //类型
@@ -115,10 +121,6 @@ public class CollegeListActivity extends BaseActivity {
         batchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-              /*  orderAdapter.setCheckItem(position);
-                mDropDownMenu.setTabText(position == 0 ? headers[2] : batch[position]);
-                mDropDownMenu.closeMenu();
-                Toast.makeText(CollegeListActivity.this, "排序条目", Toast.LENGTH_SHORT).show();*/
                 batchAdapter.setCheckItem(position);
                 mDropDownMenu.setTabText(batch[position]);
                 mDropDownMenu.closeMenu();
@@ -149,26 +151,48 @@ public class CollegeListActivity extends BaseActivity {
 
         //填充布局
         View contentView= LayoutInflater.from(CollegeListActivity.this).inflate(R.layout.layout_refresh,null);
+        reload=contentView.findViewById(R.id.reload);
+        no_internet_rl=contentView.findViewById(R.id.no_internet_rl);
+        no_data_rl=contentView.findViewById(R.id.no_data_rl);
+
         swipeRefreshLayout=contentView.findViewById(R.id.swipeLayout);
         recyclerView= contentView.findViewById(R.id.rv_list);
-        initContentView();
         //init dropdownview
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
         //清空popupviews,否则报tab的数量和popupviews的数量不相等的错
         popupViews.clear();
+        //网络错误时候的界面
+        if (!Utils.hasInternet()){
+            swipeRefreshLayout.setVisibility(View.GONE);
+            no_internet_rl.setVisibility(View.VISIBLE);
+            no_data_rl.setVisibility(View.GONE);
+        }
+        //点击重新加载数据
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refresh();
+            }
+        });
+        intent=getIntent();
+        if (intent!=null){
+            order=intent.getStringExtra("order");
+            area=intent.getStringExtra("area");
+            level=intent.getStringExtra("level");
+            is_type=intent.getStringExtra("is_type");
+            school_type=intent.getStringExtra("school_type");
+            keyword=intent.getStringExtra("keyword");
+        }
+        initContentView();
     }
     @Override
     protected void initData() {
-        for (int i = 0; i <10 ; i++) {
-            CollegeBean collegeBean=new CollegeBean();
-            infoList.add(collegeBean);
-        }
+        refresh();
     }
     @Override
     protected void getResLayout() {
         setContentView(R.layout.activity_college_list);
     }
-
     @Override
     protected void initListener() {
 
@@ -194,15 +218,15 @@ public class CollegeListActivity extends BaseActivity {
 
     }
     private void initAdapter() {
-        mAdapter = new CollegeAdapter(R.layout.item_college,infoList);
+        mAdapter = new CollegeAdapter(R.layout.item_college);
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 loadMore();
             }
         });
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
-//        mAdapter.setPreLoadNumber(3);
+        mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
+
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
@@ -224,54 +248,67 @@ public class CollegeListActivity extends BaseActivity {
     private void refresh() {
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.getCollegeList(apiConstant.FIND_COLLEGE,order,area,level,is_type,school_type,keyword,mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
-                Log.i("ppp","131"+s);
+            public void onSuccess(Call call, Response response, final String s) {
                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true,infoList);
+                        Gson gson=new Gson();
+                        CollegeBean collegeBean = gson.fromJson(s, CollegeBean.class);
+                        List<UniversityInfo> universityList = collegeBean.getData().getInfo().getRecommendUniversityList();
+                        //数据不为空
+                        if (universityList!=null){
+                            setData(true,universityList);
+                            swipeRefreshLayout.setVisibility(View.VISIBLE);
+                            no_internet_rl.setVisibility(View.GONE);
+                            no_data_rl.setVisibility(View.GONE);
+                        }else{
+                            swipeRefreshLayout.setVisibility(View.GONE);
+                            no_internet_rl.setVisibility(View.GONE);
+                            no_data_rl.setVisibility(View.VISIBLE);
+                        }
                         mAdapter.setEnableLoadMore(true);
                         swipeRefreshLayout.setRefreshing(false);
-
-
                     }
                 });
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
-                Log.i("ppp","132"+e);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true,infoList);
+                        swipeRefreshLayout.setVisibility(View.GONE);
+                        no_internet_rl.setVisibility(View.VISIBLE);
+                        no_data_rl.setVisibility(View.GONE);
                         mAdapter.setEnableLoadMore(true);
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });
-
-
             }
         });
-
     }
     //加载
     private void loadMore() {
-
-        apiHome.loadMore("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        mNextRequestPage++;
+        apiHome.getCollegeList(apiConstant.FIND_COLLEGE,order,area,level,is_type,school_type,keyword,mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
+            public void onSuccess(Call call, Response response,final  String s) {
                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(false, infoList);
+                        Gson gson=new Gson();
+                        CollegeBean collegeBean = gson.fromJson(s, CollegeBean.class);
+                        List<UniversityInfo> universityList = collegeBean.getData().getInfo().getRecommendUniversityList();
+                        //数据不为空
+                        //if (universityList!=null && universityList.size()>0){
+                            setData(false,universityList);
+                            mAdapter.setEnableLoadMore(true);
+                            swipeRefreshLayout.setRefreshing(false);
+                      //  }
                     }
                 });
-
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 runOnUiThread(new Runnable() {
@@ -287,10 +324,9 @@ public class CollegeListActivity extends BaseActivity {
     }
 
     private void setData(boolean isRefresh, List data) {
-        mNextRequestPage++;
+       // mNextRequestPage++;
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {
-            Log.i("uio","isisisojfsojf===()()()()()");
             mAdapter.setNewData(data);
         } else {
             if (size > 0) {
@@ -300,7 +336,6 @@ public class CollegeListActivity extends BaseActivity {
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
             mAdapter.loadMoreEnd(isRefresh);
-            Toast.makeText(CollegeListActivity.this, "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             mAdapter.loadMoreComplete();
         }

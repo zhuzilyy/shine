@@ -69,13 +69,16 @@ public class FindCollegeActivity extends BaseActivity {
     @OnClick({R.id.iv_back,R.id.ll_allCollege,R.id.ll_collegeRank,R.id.ll_benSheng,R.id.ll_beiShangGaung,R.id.ll_quanGuo,
             R.id.ll_yiBen,R.id.ll_erBen,R.id.ll_sanBen,R.id.ll_zhuanke,R.id.ll_985,R.id.ll_211,R.id.ll_zhuoYue,R.id.ll_shengZhongDian})
     public void click(View view){
+        Intent intent=null;
         switch (view.getId()){
             case R.id.iv_back:
                 finish();
                 break;
             //全部大学
             case R.id.ll_allCollege:
-                startActivity(new Intent(FindCollegeActivity.this,CollegeListActivity.class));
+                intent=new Intent(FindCollegeActivity.this,CollegeListActivity.class);
+                putValue(intent,"","","","","","");
+                startActivity(intent);
                 break;
             //大学排名
             case R.id.ll_collegeRank:
@@ -128,5 +131,13 @@ public class FindCollegeActivity extends BaseActivity {
 
 
         }
+    }
+    private void putValue(Intent intent,String order,String area,String level,String is_type,String school_type,String keyword) {
+       intent.putExtra("order",order);
+       intent.putExtra("area",area);
+       intent.putExtra("level",level);
+       intent.putExtra("is_type",is_type);
+       intent.putExtra("school_type",school_type);
+       intent.putExtra("keyword",keyword);
     }
 }

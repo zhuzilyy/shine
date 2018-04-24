@@ -34,4 +34,18 @@ public class apiHome {
         params.put("page",page+"");
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+
+    //获取大学列表
+    public static void getCollegeList(String url,String order,String area,String level,String is_type,String school_type,String keyword, int page, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("page",page+"");
+        params.put("order",order);
+        params.put("area",area);
+        params.put("level",level);
+        params.put("is_type",is_type);
+        params.put("school_type",school_type);
+        params.put("keyword",keyword);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+
 }

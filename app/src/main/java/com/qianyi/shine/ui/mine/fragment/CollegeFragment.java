@@ -17,6 +17,7 @@ import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.ui.mine.adapter.CollegeAdapter;
 import com.qianyi.shine.ui.mine.bean.CollegeBean;
+import com.qianyi.shine.ui.mine.bean.UniversityInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class CollegeFragment extends BaseFragment{
     @BindView(R.id.swipeLayout)
     public SwipeRefreshLayout mSwipeRefreshLayout;
     private CollegeAdapter collegeAdapter;
-    List<CollegeBean> infoList;
+    List<UniversityInfo> infoList;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private View view_college;
@@ -59,17 +60,17 @@ public class CollegeFragment extends BaseFragment{
 
     @Override
     protected void initData() {
-        for (int i = 0; i <10 ; i++) {
+      /*  for (int i = 0; i <10 ; i++) {
             CollegeBean collegeBean=new CollegeBean();
             infoList.add(collegeBean);
-        }
+        }*/
     }
     @Override
     protected void initListener() {
 
     }
     private void initAdapter() {
-        collegeAdapter = new CollegeAdapter(R.layout.item_college, infoList);
+        collegeAdapter = new CollegeAdapter(R.layout.item_college);
         collegeAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
@@ -78,7 +79,6 @@ public class CollegeFragment extends BaseFragment{
         });
         collegeAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rv_college.setAdapter(collegeAdapter);
-
         rv_college.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {

@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -26,10 +28,13 @@ import com.qianyi.shine.ui.mine.activity.MessageActivity;
 import com.qianyi.shine.ui.mine.activity.SettingActivity;
 import com.qianyi.shine.ui.mine.activity.VipActivity;
 import com.qianyi.shine.utils.Utils;
+import com.qianyi.shine.utils.WxBitmapUtil;
 import com.tencent.connect.share.QQShare;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.sdk.modelmsg.WXImageObject;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.modelmsg.WXTextObject;
+import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tencent.tauth.IUiListener;
@@ -89,7 +94,7 @@ public class MineFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 shareFriends();
-                shareToQQ();
+                //shareToQQ();
                 pw_share.dismiss();
             }
         });
@@ -97,7 +102,7 @@ public class MineFragment extends BaseFragment {
     //分享到QQ
     private void shareToQQ() {
         // 新建Tencent实例用于调用分享方法
-         mTencent = Tencent.createInstance("your APP ID",getActivity().getApplicationContext());
+        mTencent = Tencent.createInstance("your APP ID",getActivity().getApplicationContext());
         final Bundle params = new Bundle();
         params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);//分享的类型
         params.putString(QQShare.SHARE_TO_QQ_TITLE, "然了个然CSDN博客");//分享标题
@@ -106,41 +111,34 @@ public class MineFragment extends BaseFragment {
         params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://avatar.csdn.net/B/3/F/1_sandyran.jpg");//分享的图片URL
         params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "测试");//应用名称
         mTencent.shareToQQ(getActivity(), params, new ShareUiListener());
-
     }
-
     //分享到微信好友
     private void shareFriends() {
         IWXAPI mWxApi;
         mWxApi = WXAPIFactory.createWXAPI(getActivity(), apiConstant.APP_ID, false);
         // 将该app注册到微信
         mWxApi.registerApp(apiConstant.APP_ID);
-        WXTextObject textObj = new WXTextObject();
-        textObj.text = "dsfhsj";
-        // 用WXTextObject对象初始化一个WXMediaMessage对象
-        WXMediaMessage msg = new WXMediaMessage();
-        msg.mediaObject = textObj;
-        // 发送文本类型的消息时，title字段不起作用
-        msg.title = "Will be ignored";
-        msg.description = "hfahfhashfd";
-        // 构造一个Req
+        WXWebpageObject webpage = new WXWebpageObject();
+        webpage.webpageUrl = "http://www.baidu.com";
+        WXMediaMessage msg = new WXMediaMessage(webpage);
+        msg.title ="阳光志愿";
+        msg.description ="哈哈哈哈哈哈" ;
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.mipmap.logo);
+        Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, 100, 100, true);
+        msg.setThumbImage(thumbBmp);
+        bmp.recycle();
         SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = buildTransaction("text"); // transaction字段用于唯一标识一个请求
+        req.transaction = buildTransaction("webpage");
         req.message = msg;
-        /**
-         * 判断是否是朋友圈
-         */
-       // req.scene = isTimelineCb.isChecked() ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
+       // req.scene = sendtype==0?SendMessageToWX.Req.WXSceneSession:SendMessageToWX.Req.WXSceneTimeline;
         req.scene = SendMessageToWX.Req.WXSceneTimeline;
-        // 调用api接口发送数据到微信
         mWxApi.sendReq(req);
-    }
 
+
+    }
     public static String buildTransaction(final String type) {
         return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
     }
-
-
     @OnClick({R.id.rl_setting,R.id.rl_helpCenter,R.id.rl_vip,R.id.rl_focus,R.id.iv_message,R.id.iv_share})
     public void click(View view){
         switch (view.getId()){

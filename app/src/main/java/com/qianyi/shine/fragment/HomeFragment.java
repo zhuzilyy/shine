@@ -329,7 +329,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void setData(boolean isRefresh, List data) {
-        mNextRequestPage++;
+       // mNextRequestPage++;
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {
             mAdapter.setNewData(data);

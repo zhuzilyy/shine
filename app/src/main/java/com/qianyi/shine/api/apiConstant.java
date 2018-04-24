@@ -26,7 +26,8 @@ public class apiConstant {
     public static final String GETMBTDATA=BASE_URL+"getMBTItest";
     //获取性格测试结果
     public static final String GETMBTRESULT=BASE_URL+"getMBTIanalyze";
-
+    //查找大学列表
+    public static final String FIND_COLLEGE=BASE_URL+"university_list";
 
 
     //微信参数
