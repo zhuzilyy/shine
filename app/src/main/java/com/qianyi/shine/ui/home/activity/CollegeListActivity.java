@@ -61,6 +61,7 @@ public class CollegeListActivity extends BaseActivity {
     public DropDownMenu mDropDownMenu;
     @BindView(R.id.tv_title)
     public TextView tv_title;
+
     //**************
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
