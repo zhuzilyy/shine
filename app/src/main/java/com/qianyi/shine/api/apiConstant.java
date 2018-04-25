@@ -28,6 +28,10 @@ public class apiConstant {
     public static final String GETMBTRESULT=BASE_URL+"getMBTIanalyze";
     //查找大学列表
     public static final String FIND_COLLEGE=BASE_URL+"university_list";
+    //获取兴趣测试数据
+    public static final String GETHLDINTERESTDDATA=BASE_URL+"getHLDtest";
+
+
 
 
     //微信参数
