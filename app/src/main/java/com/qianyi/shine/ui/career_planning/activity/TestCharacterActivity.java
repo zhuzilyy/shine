@@ -21,10 +21,18 @@ public class TestCharacterActivity extends BaseActivity implements View.OnClickL
     private TextView title;
     @BindView(R.id.btn_startTest)
     public Button btn_start;
+    @BindView(R.id.tv_introduce)
+    public TextView tv_intrduce;
     @Override
     protected void initViews() {
         title = findViewById(R.id.tv_title);
         title.setText("性格");
+        tv_intrduce.setText("依据MBTI相关理论，人与世界互动的方式主要分为四个维度，每个维度又分为不相关的两类，它们分别是:" +
+                "精力energy：外向Extravert，内向Introvert；" +
+                "感知perception：感觉sensing，感觉iNtution;" +
+                "生活方式lifestyle:Judging，Perceiving；" +
+                "判断judgement：思考Thinking，情感Feeling" +
+                "*其中加粗字体为简写，即EISNJPTF八大方面。");
 
     }
 

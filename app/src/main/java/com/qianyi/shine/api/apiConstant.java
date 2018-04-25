@@ -30,6 +30,21 @@ public class apiConstant {
     public static final String FIND_COLLEGE=BASE_URL+"university_list";
     //获取兴趣测试数据
     public static final String GETHLDINTERESTDDATA=BASE_URL+"getHLDtest";
+    //获取兴趣测试结果
+    public static final String GETHLDRESULT=BASE_URL+"getHLDanalyze";
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

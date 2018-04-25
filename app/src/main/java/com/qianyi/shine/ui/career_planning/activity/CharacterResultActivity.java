@@ -139,13 +139,13 @@ public class CharacterResultActivity extends BaseActivity implements View.OnClic
         tv_result.setText(info.getType());
         tv_keywords2.setText(info.getDecription());
         //对组织的贡献
-        TextMySmpleAdapter adapter_zzgx =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getZzgx().getValue()));
+        TextMySmpleAdapter adapter_zzgx =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getZzgx().getValue()),1);
         zzgxList.setAdapter(adapter_zzgx);
         //领导模式
-        TextMySmpleAdapter adapter_llm  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getLdm().getValue()));
+        TextMySmpleAdapter adapter_llm  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getLdm().getValue()),1);
         leaderList.setAdapter(adapter_llm);
         //学习模式
-        TextMySmpleAdapter adapter_learn  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getXxm().getValue()));
+        TextMySmpleAdapter adapter_learn  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getXxm().getValue()),1);
         LearnList.setAdapter(adapter_learn);
         //倾向性顺序
         String tentStr = info.getXxm().getExtend().getValue();
@@ -153,16 +153,16 @@ public class CharacterResultActivity extends BaseActivity implements View.OnClic
             tendTv.setText(tentStr);
         }
         //解决问题
-        TextMySmpleAdapter adapter_question  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getJjm().getValue()));
+        TextMySmpleAdapter adapter_question  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getJjm().getValue()),1);
         questionList.setAdapter(adapter_question);
         //工作环境
-        TextMySmpleAdapter adapter_working  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getGzhj().getValue()));
+        TextMySmpleAdapter adapter_working  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getGzhj().getValue()),1);
         workingList.setAdapter(adapter_working);
         //潜在的缺点
-        TextMySmpleAdapter adapter_potentail  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getQzqd().getValue()));
+        TextMySmpleAdapter adapter_potentail  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getQzqd().getValue()),1);
         potentialList.setAdapter(adapter_potentail);
         //发展建议
-        TextMySmpleAdapter adapter_development  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getQzqd().getValue()));
+        TextMySmpleAdapter adapter_development  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getQzqd().getValue()),1);
         devilopmentList.setAdapter(adapter_development);
 
 

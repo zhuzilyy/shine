@@ -10,7 +10,7 @@
         android:id="@+id/title_content"
         android:layout_below="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="210dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:background="@color/main_blue"
@@ -24,6 +24,7 @@
             android:textSize="22sp"
             />
         <TextView
+            android:id="@+id/tv_introduce"
             android:layout_width="wrap_content"
             android:textSize="15dp"
             android:gravity="center"
