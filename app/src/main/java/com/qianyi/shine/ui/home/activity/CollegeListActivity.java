@@ -50,8 +50,10 @@ public class CollegeListActivity extends BaseActivity {
     private GirdDropDownAdapter typeAdapter;
     private GirdDropDownAdapter batchAdapter;
     private AreaAdapter areaAdapter;
-    private String[] citys = {"全国", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
-    private String[] types={"985","211","重点本科"};
+    private String[] citys = {"全国","北京","天津","上海","重庆","河北","山西","辽宁","吉林","黑龙江",
+            "江苏","浙江","安徽","福建","江西","山东","河南","湖北","湖南","广东","海南","四川","贵州",
+            "云南","陕西","甘肃","青海","内蒙古","广西","宁夏","新疆"};
+    private String[] types={"985","211","默认"};
     private String[] batch= {"提前批", "一本", "二本"};
     private String[] orderDatas = {"概率", "分数线", "排名"};
     private int constellationPosition = 0;
@@ -92,7 +94,11 @@ public class CollegeListActivity extends BaseActivity {
             public void onClick(View v) {
                 mDropDownMenu.setTabText(constellationPosition == 0 ? headers[0] : citys[constellationPosition]);
                 mDropDownMenu.closeMenu();
-                area=citys[constellationPosition];
+                if (citys[constellationPosition].equals("全国")){
+                    area="";
+                }else{
+                    area=citys[constellationPosition];
+                }
                 refresh();
             }
         });
@@ -104,13 +110,15 @@ public class CollegeListActivity extends BaseActivity {
         typeView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-               /* orderAdapter.setCheckItem(position);
-                mDropDownMenu.setTabText(position == 0 ? headers[1] : types[position]);
-                mDropDownMenu.closeMenu();*/
                 typeAdapter.setCheckItem(position);
                 mDropDownMenu.setTabText(types[position]);
                 mDropDownMenu.closeMenu();
-                Toast.makeText(CollegeListActivity.this, "排序条目", Toast.LENGTH_SHORT).show();
+                if (types[position].equals("默认")){
+                    is_type="";
+                }else{
+                    is_type=types[position];
+                }
+                refresh();
             }
         });
         //批次
