@@ -90,6 +90,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     //初始化AMapLocationClientOption对象
     private TextView cityname;
+    private String province;
 
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
@@ -361,7 +362,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 break;
             //找大学
             case R.id.ll_findCollege:
-                startActivity(new Intent(getActivity(), FindCollegeActivity.class));
+                intent = new Intent(getActivity(), FindCollegeActivity.class);
+                intent.putExtra("provice",province);
+                startActivity(intent);
                 break;
             //看就业
             case R.id.ll_employment:
@@ -423,7 +426,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         mLocationOption.setNeedAddress(true);
         //启动定位
         mLocationClient.startLocation();
-
         if (null != mLocationClient) {
             mLocationClient.setLocationOption(mLocationOption);
             //设置场景模式后最好调用一次stop，再调用start以保证场景模式生效
@@ -435,16 +437,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         mLocationClient.setLocationListener(new AMapLocationListener() {
             @Override
             public void onLocationChanged(AMapLocation aMapLocation) {
-                Log.i("xzy", "errcode==" + aMapLocation.getErrorCode());
                 if (aMapLocation.getErrorCode() == 0) {
                     double lat = aMapLocation.getLatitude();//维度
                     double log = aMapLocation.getLongitude();//经度
                     if (!TextUtils.isEmpty(aMapLocation.getCity())) {
                         cityname.setText(aMapLocation.getCity());
+                        province=aMapLocation.getProvince();
                     }
-//                    LatLng latLng=new LatLng(lat,log);
-//                    changeLocation(latLng);
-                    Log.i("xzy", "111111111111111111111111");
                 } else {
                     //定位失败
                     Log.i("xzy", "err+" + aMapLocation.getErrorCode() + "  info=" + aMapLocation.getErrorInfo());
