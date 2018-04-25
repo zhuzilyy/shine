@@ -262,11 +262,17 @@ public class CollegeListActivity extends BaseActivity {
                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.i("tag",s);
                         Gson gson=new Gson();
                         CollegeBean collegeBean = gson.fromJson(s, CollegeBean.class);
                         List<UniversityInfo> universityList = collegeBean.getData().getInfo().getRecommendUniversityList();
+                      /*  if (universityList.size()==0){
+                            swipeRefreshLayout.setVisibility(View.GONE);
+                            no_internet_rl.setVisibility(View.GONE);
+                            no_data_rl.setVisibility(View.VISIBLE);
+                        }*/
                         //数据不为空
-                        if (universityList!=null){
+                        if (universityList!=null && universityList.size()>0){
                             setData(true,universityList);
                             swipeRefreshLayout.setVisibility(View.VISIBLE);
                             no_internet_rl.setVisibility(View.GONE);

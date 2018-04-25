@@ -30,7 +30,7 @@ public class CollegeAdapter extends BaseQuickAdapter<UniversityInfo, BaseViewHol
         helper.setText(R.id.readtimes,item.getHits()+"阅读");*/
         //设置logo
         RoundedImageView iv_college=helper.getView(R.id.iv_college);
-        Glide.with(mContext).load(item.getLogo()).into(iv_college);
+        Glide.with(mContext).load(item.getLogo()).placeholder(R.mipmap.logo).into(iv_college);
         helper.setText(R.id.collegeName,item.getName());
         //设置等级
         String is_211 = item.getIs_211();

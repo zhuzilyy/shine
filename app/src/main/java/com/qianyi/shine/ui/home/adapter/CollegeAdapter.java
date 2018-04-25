@@ -14,9 +14,10 @@ import com.qianyi.shine.R;
  */
 public class CollegeAdapter extends BaseAdapter {
     private Context context;
-    private String[] collegeTypes={"综合","理工","财经","农林","医药","师范","体育","政法","艺术","民族","军事","语言"};
-    public CollegeAdapter(Context context) {
+    private String[] collegeTypes;
+    public CollegeAdapter(Context context,String[] collegeTypes) {
         this.context = context;
+        this.collegeTypes = collegeTypes;
     }
 
     @Override

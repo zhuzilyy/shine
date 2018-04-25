@@ -38,7 +38,6 @@ public class AreaAdapter extends BaseAdapter {
     public Object getItem(int position) {
         return null;
     }
-
     @Override
     public long getItemId(int position) {
         return position;
