@@ -24,6 +24,7 @@ public class TestInterestActivity extends BaseActivity implements View.OnClickLi
     @BindView(R.id.tv_introduce)
     public TextView tv_introduce;
 
+
     @Override
     protected void initViews() {
        title = findViewById(R.id.tv_title);
