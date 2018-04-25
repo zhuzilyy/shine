@@ -55,6 +55,7 @@ public class CollegeListActivity extends BaseActivity {
             "云南","陕西","甘肃","青海","内蒙古","广西","宁夏","新疆"};
     private String[] types={"985","211","默认"};
     private String[] batch= {"提前批", "一本", "二本"};
+
     private String[] orderDatas = {"概率", "分数线", "排名"};
     private int constellationPosition = 0;
     @BindView(R.id.dropDownMenu)
