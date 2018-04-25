@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.qianyi.shine.R;
+import com.qianyi.shine.ui.career_planning.activity.InterestResultActivity;
 
 import java.util.List;
 
@@ -19,10 +20,12 @@ import java.util.List;
 public class TextMySmpleAdapter extends BaseAdapter {
     private Context mContext;
     private List<String> stringList;
+    private int type;
 
-    public TextMySmpleAdapter(Context mContext, List<String> stringList) {
+    public TextMySmpleAdapter(Context mContext, List<String> stringList,int type) {
         this.mContext = mContext;
         this.stringList = stringList;
+        this.type = type;
     }
 
     @Override
@@ -44,7 +47,12 @@ public class TextMySmpleAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(mContext).inflate(R.layout.lay_item_tv,null);
         TextView textView = convertView.findViewById(R.id.item_tv);
-        textView.setText((position+1)+". "+stringList.get(position));
+        if(0 == type){
+            textView.setText(stringList.get(position));
+        }else {
+            textView.setText((position+1)+". "+stringList.get(position));
+        }
+
         return convertView;
     }
 }

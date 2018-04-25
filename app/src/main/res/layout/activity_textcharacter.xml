@@ -10,7 +10,7 @@
         android:id="@+id/title_content"
         android:layout_below="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="210dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:background="@color/main_blue"
@@ -24,16 +24,17 @@
             android:textSize="22sp"
             />
         <TextView
+            android:id="@+id/tv_introduce"
             android:layout_width="wrap_content"
             android:textSize="15dp"
             android:gravity="center"
             android:layout_marginRight="@dimen/dp_20"
             android:layout_marginLeft="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_8"
-            android:maxLines="5"
+            android:maxLines="7"
             android:ellipsize="end"
             android:textColor="@color/white"
-            android:text="到家了开发聚少离多福建省积的房间里的康师傅接受了发福建省的看法房间欧式分是咯金佛弗兰克斯的减肥类似放假了时间发烦死了快就放老司机副书记的弗兰克斯房间里上课的积分就分手了看得见风副书记的分离式即佛类似的纠纷浪费时间大佛发上来的积分"
+            android:text=""
             android:layout_height="wrap_content" />
 
     </LinearLayout>

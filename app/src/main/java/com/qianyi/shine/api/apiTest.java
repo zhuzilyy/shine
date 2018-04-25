@@ -30,6 +30,13 @@ public class apiTest {
         params.put("keystring",keyString);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+    //获取霍兰德测试结果
+    public static void getHLDResult(String url,String id,String keyString, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("id",id);
+        params.put("keystring",keyString);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 
 
 

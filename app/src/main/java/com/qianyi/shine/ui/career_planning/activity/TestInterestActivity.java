@@ -21,11 +21,14 @@ public class TestInterestActivity extends BaseActivity implements View.OnClickLi
     private TextView title;
     @BindView(R.id.btn_startTest)
     public Button btn_start;
+    @BindView(R.id.tv_introduce)
+    public TextView tv_introduce;
 
     @Override
     protected void initViews() {
        title = findViewById(R.id.tv_title);
         title.setText("兴趣");
+        tv_introduce.setText("霍兰德认为，个人职业兴趣特性与职业之间应有一种内在的对应关系。根据兴趣的不同，人格可分为研究型（I）、艺术型（A）、社会型（S）、企业型（E）、传统型（C）、现实型（R）六个维度，每个人的性格都是这六个维度的不同程度组合。");
     }
 
     @Override
