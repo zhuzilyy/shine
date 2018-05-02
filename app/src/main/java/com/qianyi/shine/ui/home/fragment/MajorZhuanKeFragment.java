@@ -51,7 +51,7 @@ public class MajorZhuanKeFragment extends BaseFragment {
     @Override
     protected void initData() {
         list=new ArrayList<>();
-        Major A=new Major(1,0,"教育学");
+      /*  Major A=new Major(1,0,"教育学");
         Major B=new Major(2,0,"教育学");
         Major C=new Major(3,0,"教育学");
         Major D=new Major(4,0,"教育学");
@@ -90,7 +90,7 @@ public class MajorZhuanKeFragment extends BaseFragment {
         for (int i = 22; i <26 ; i++) {
             Major secondMajor=new Major(i,5,"小学教育");
             list.add(secondMajor);
-        }
+        }*/
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         final TreeAdapter<Major> adapter = new TreeAdapter<>(getActivity());
         adapter.setNodes(list);
