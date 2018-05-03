@@ -184,7 +184,6 @@ public class GaoKaoNewsActivity extends BaseActivity {
                                         mAdapter.setEnableLoadMore(true);
                                         mSwipeRefreshLayout.setRefreshing(false);
                                     }
-
                                 }
                             } else {
                                 Toast.makeText(GaoKaoNewsActivity.this, "" + articleBean.getInfo(), Toast.LENGTH_SHORT).show();
@@ -215,7 +214,6 @@ public class GaoKaoNewsActivity extends BaseActivity {
     }
 
     private void setData(boolean isRefresh, List data) {
-        mNextRequestPage++;
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {
             mAdapter.setNewData(data);
