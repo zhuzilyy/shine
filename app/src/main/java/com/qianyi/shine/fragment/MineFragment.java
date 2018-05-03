@@ -173,8 +173,7 @@ public class MineFragment extends BaseFragment {
         pw_share.setFocusable(true);
         pw_share.setBackgroundDrawable(new BitmapDrawable());
         pw_share.setAnimationStyle(R.style.AnimBottom);
-        pw_share
-                .showAtLocation(ll_mine, Gravity.BOTTOM, 0, 0);
+        pw_share.showAtLocation(ll_mine, Gravity.BOTTOM, 0, 0);
         // 设置pw弹出时候的背景颜色的变化
         backgroundAlpha(0.5f);
         pw_share.setOnDismissListener(new PopupWindow.OnDismissListener() {
