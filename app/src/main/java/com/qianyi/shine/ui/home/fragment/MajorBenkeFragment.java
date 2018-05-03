@@ -129,7 +129,6 @@ public class MajorBenkeFragment extends BaseFragment {
             Major thirdMajor=new Major(i,6,"土木工程经济学");
             list.add(thirdMajor);
         }
-
         //第二层数据
         for (int i = 10; i <14 ; i++) {
             Major secondMajor=new Major(i,2,"工程经济学");
