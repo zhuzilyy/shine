@@ -9,8 +9,8 @@
     android:visibility="gone">
     <ImageView
         android:id="@+id/common_no__data_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:src="@mipmap/common_no_data"
         android:layout_centerHorizontal="true"/>
     <TextView

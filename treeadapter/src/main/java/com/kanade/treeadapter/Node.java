@@ -5,22 +5,30 @@ import java.util.List;
 
 public class Node<T> {
     private long id;
-    /** 根节点pId为0 */
+    /**
+     * 根节点pId为0
+     */
     private long pId = 0;
 
     private String name;
 
     private T item;
 
-    /** 是否展开 */
+    /**
+     * 是否展开
+     */
     private boolean isExpand = false;
 
     private int icon;
 
-    /** 下一级的子Node */
+    /**
+     * 下一级的子Node
+     */
     private List<Node<T>> children = new ArrayList<>();
 
-    /** 父Node */
+    /**
+     * 父Node
+     */
     private Node parent;
 
     private int resId;
@@ -88,7 +96,6 @@ public class Node<T> {
     public int getResId() {
         return resId;
     }
-
     public void setResId(int resId) {
         this.resId = resId;
     }
@@ -162,3 +169,4 @@ public class Node<T> {
         return result;
     }
 }
+

@@ -37,7 +37,7 @@ public class CareerAndMajorActivity extends BaseActivity {
     }
     @Override
     protected void initData() {
-        list=new ArrayList<>();
+       /* list=new ArrayList<>();
         Major A=new Major(1,0,"经济学");
         Major B=new Major(2,0,"经济学");
         Major C=new Major(3,0,"经济学");
@@ -77,7 +77,7 @@ public class CareerAndMajorActivity extends BaseActivity {
         for (int i = 22; i <26 ; i++) {
             Major secondMajor=new Major(i,5,"工程经济学");
             list.add(secondMajor);
-        }
+        }*/
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final TreeAdapter<Major> adapter = new TreeAdapter<>(this);
         adapter.setNodes(list);

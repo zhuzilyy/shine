@@ -3,7 +3,6 @@ package com.qianyi.shine.api;
 /**
  * Created by Administrator on 2018/4/10.
  */
-
 public class apiConstant {
     public static final String BASE_URL="http://39.104.109.53/api/";
     //注册
@@ -32,6 +31,12 @@ public class apiConstant {
     public static final String GETHLDINTERESTDDATA=BASE_URL+"getHLDtest";
     //获取兴趣测试结果
     public static final String GETHLDRESULT=BASE_URL+"getHLDanalyze";
+    //获取专业列表
+    public static final String MAJOR_LIST=BASE_URL+"major_list";
+    //看就业
+    public static final String EMPLOYER_BENKE_LIST=BASE_URL+"article_list_jiuye";
+    //搜职业
+    public static final String JOB_LIST=BASE_URL+"job_list";
 
 
 

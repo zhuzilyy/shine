@@ -5,19 +5,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     >
-    <com.qianyi.shine.ui.gaokao_news.view.XTitleView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        app:tv_left="专业优先"
-        app:graty_title="middle"
-        app:title_background_color="@android:color/transparent"
-        app:back_src="@mipmap/black_arrow"
-        app:isshow_right_tv="gone"
-        app:isshow_right_iv="gone"
-        app:titleSize="6.5sp"
-        app:titleColor="@color/black"
-        />
+   <include layout="@layout/layout_title"/>
 
     <com.yyydjk.library.DropDownMenu
         android:id="@+id/dropDownMenu"

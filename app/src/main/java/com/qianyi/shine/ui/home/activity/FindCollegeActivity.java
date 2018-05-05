@@ -68,8 +68,10 @@ public class FindCollegeActivity extends BaseActivity {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 String keyWords=et_searchCollege.getText().toString().trim();
-                if (!TextUtils.isEmpty(keyWords)){
-                    jumpActivity(FindCollegeActivity.this,CollegeListActivity.class);
+                if (TextUtils.isEmpty(keyWords)){
+                    Toast.makeText(FindCollegeActivity.this, "请输入搜索关键字", Toast.LENGTH_SHORT).show();
+                    //jumpActivity(FindCollegeActivity.this,CollegeListActivity.class);
+                    return false;
                 }
                 Intent intent=new Intent(FindCollegeActivity.this,CollegeListActivity.class);
                 putValue(intent,"","","","","",keyWords);

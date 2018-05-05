@@ -8,22 +8,39 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.kanade.treeadapter.Node;
 import com.kanade.treeadapter.TreeAdapter;
 import com.kanade.treeadapter.TreeItemClickListener;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
+import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
+import com.qianyi.shine.fragment.entity.FirstLevel;
+import com.qianyi.shine.fragment.entity.MajorBean;
+import com.qianyi.shine.fragment.entity.SecondLevel;
+import com.qianyi.shine.fragment.entity.ThirdLevel;
 import com.qianyi.shine.ui.college.activity.ProfessionalActivity;
+import com.qianyi.shine.ui.home.bean.FirstJob;
+import com.qianyi.shine.ui.home.bean.JobBean;
 import com.qianyi.shine.ui.home.bean.Major;
+import com.qianyi.shine.ui.home.bean.SecondJob;
+import com.qianyi.shine.ui.home.bean.ThirdJob;
+import com.qianyi.shine.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2018/4/7.
@@ -34,9 +51,14 @@ public class SearchOccupationActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.et_searchOccupation)
     EditText et_searchOccupation;
-    private List<Major> list;
+    @BindView(R.id.no_internet_rl)
+    RelativeLayout no_internet_rl;
+    @BindView(R.id.no_data_rl)
+    RelativeLayout no_data_rl;
     private String tag;
     private Intent intent;
+    private CustomLoadingDialog customLoadingDialog;
+    private List<Major> jobList;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
@@ -44,61 +66,96 @@ public class SearchOccupationActivity extends BaseActivity {
         if (intent!=null){
             tag=intent.getStringExtra("tag");
         }
+        customLoadingDialog=new CustomLoadingDialog(this);
+        jobList=new ArrayList<>();
     }
     @Override
     protected void initData() {
-        list=new ArrayList<>();
-        Major A=new Major(1,0,"经济学");
-        Major B=new Major(2,0,"经济学");
-        Major C=new Major(3,0,"经济学");
-        Major D=new Major(4,0,"经济学");
-        Major E=new Major(5,0,"经济学");
-        list.add(A);
-        list.add(B);
-        list.add(C);
-        list.add(D);
-        list.add(E);
-        //第二层数据
-        for (int i = 6; i <7 ; i++) {
-            Major secondMajor=new Major(i,1,"工程经济学",1);
-            list.add(secondMajor);
+        getData();
+    }
+    private void getData() {
+        //有网络
+        if (Utils.hasInternet()){
+            customLoadingDialog.show();
+            apiHome.getJobList(apiConstant.JOB_LIST, new RequestCallBack<String>() {
+                @Override
+                public void onSuccess(Call call, Response response, final String s) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Gson gson=new Gson();
+                            JobBean jobBean = gson.fromJson(s, JobBean.class);
+                            List<FirstJob> firstJobList = jobBean.getData().getInfo().getJobList();
+                            if (firstJobList.size()>0){
+                                recyclerView.setVisibility(View.VISIBLE);
+                                no_internet_rl.setVisibility(View.GONE);
+                                no_data_rl.setVisibility(View.GONE);
+                                //第一层数据
+                                for (int i = 0; i < firstJobList.size(); i++) {
+                                    FirstJob firstJob = firstJobList.get(i);
+                                    String cate_one_name =firstJob .getCate_one_name();
+                                    String cate_one_id=firstJob.getCate_one_id();
+                                    long firstLongId=Long.parseLong(cate_one_id);
+                                    Major firstMajor=new Major(firstLongId,0,cate_one_name,1);
+                                    jobList.add(firstMajor);
+                                    //Log.i("tag","111"+major_cate);
+                                    List<SecondJob> secondJobList = firstJob.getCate_two_lit();
+                                    for (int j = 0; j <secondJobList.size() ; j++) {
+                                        //第二层数据
+                                        SecondJob secondJob = secondJobList.get(j);
+                                        String cate_two_name = secondJob.getCate_two_name();
+                                        String cate_two_id = secondJob.getCate_two_id();
+                                        long secondLongId=Long.parseLong(cate_two_id);
+                                        List<ThirdJob> thirdJobList = secondJob.getCate_three_lit();
+                                        Major secondMajor=new Major(secondLongId,firstLongId,cate_two_name);
+                                        jobList.add(secondMajor);
+                                        for (int k = 0; k <thirdJobList.size() ; k++) {
+                                            ThirdJob thirdJob = thirdJobList.get(k);
+                                            String name = thirdJob.getCate_three_name();
+                                            String id = thirdJob.getCate_three_id();
+                                            long thirdLongId=Long.parseLong(id);
+                                            Major thirdMajor=new Major(thirdLongId,secondLongId,name);
+                                            jobList.add(thirdMajor);
+                                        }
+                                    }
+                                }
+                            }else{
+                                recyclerView.setVisibility(View.GONE);
+                                no_internet_rl.setVisibility(View.GONE);
+                                no_data_rl.setVisibility(View.VISIBLE);
+                            }
+                            //设置适配器
+                            setAdapter(jobList);
+                        }
+                    });
+                }
+                @Override
+                public void onEror(Call call, int statusCode, Exception e) {
+                    customLoadingDialog.dismiss();
+                    recyclerView.setVisibility(View.GONE);
+                    no_internet_rl.setVisibility(View.VISIBLE);
+                    no_data_rl.setVisibility(View.GONE);
+                }
+            });
+        }else{
+            recyclerView.setVisibility(View.GONE);
+            no_internet_rl.setVisibility(View.VISIBLE);
+            no_data_rl.setVisibility(View.GONE);
         }
-        //第三层数据
-        for (int i = 26; i <30 ; i++) {
-            Major thirdMajor=new Major(i,6,"土木工程经济学");
-            list.add(thirdMajor);
-        }
-        //第二层数据
-        for (int i = 10; i <14 ; i++) {
-            Major secondMajor=new Major(i,2,"工程经济学");
-            list.add(secondMajor);
-        }
-        //第二层数据
-        for (int i = 14; i <18 ; i++) {
-            Major secondMajor=new Major(i,3,"工程经济学");
-            list.add(secondMajor);
-        }
-        //第二层数据
-        for (int i = 18; i <22 ; i++) {
-            Major secondMajor=new Major(i,4,"工程经济学");
-            list.add(secondMajor);
-        }
-        //第二层数据
-        for (int i = 22; i <26 ; i++) {
-            Major secondMajor=new Major(i,5,"工程经济学");
-            list.add(secondMajor);
-        }
+    }
+
+    //加载适配器
+    private void setAdapter(List<Major> majorList) {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final TreeAdapter<Major> adapter = new TreeAdapter<>(this);
-        adapter.setNodes(list);
+        adapter.setNodes(majorList);
+        recyclerView.setAdapter(adapter);
+        customLoadingDialog.dismiss();
         adapter.setListener(new TreeItemClickListener() {
             @Override
             public void OnClick(Node node) {
-               /* if (node.getId() == 3) {
-                    adapter.addChildrenById(3, childs);
-                }*/
-                int level = node.getLevel();
-                if (level==2){
+                boolean leaf = node.isLeaf();
+                if (leaf){
                     if (!TextUtils.isEmpty(tag)){
                         //意愿设置里面的查专业
                         if (tag.equals("willingSetting")){
@@ -106,7 +163,7 @@ public class SearchOccupationActivity extends BaseActivity {
                             intent.putExtra("cccupationName",node.getName());
                             setResult(3,intent);
                             finish();
-                         //搜职业
+                            //搜职业
                         }else if (tag.equals("searchOccupation")){
                             jumpActivity(SearchOccupationActivity.this,OccupationDetailActivity.class);
                         }
@@ -114,8 +171,9 @@ public class SearchOccupationActivity extends BaseActivity {
                 }
             }
         });
-        recyclerView.setAdapter(adapter);
     }
+
+
     @Override
     protected void getResLayout() {
         setContentView(R.layout.activity_search_occpation);

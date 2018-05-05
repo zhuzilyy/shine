@@ -8,5 +8,6 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
+    <include layout="@layout/common_wrong_intert"/>
+    <include layout="@layout/common_no_data"/>
 </LinearLayout>

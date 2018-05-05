@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.TextView;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseActivity;
@@ -18,6 +19,7 @@ import com.qianyi.shine.ui.home.fragment.OccupationDetailsFragment;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2018/4/7.
@@ -28,20 +30,15 @@ public class OccupationDetailActivity extends BaseActivity {
     public TabLayout tab;
     @BindView(R.id.view_pager)
     public ViewPager viewPager;
-    @BindView(R.id.titile)
-    public XTitleView title;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
 
     public MyPageAdapter myPageAdapter;
 
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
-        title.setBackListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        tv_title.setText("职业介绍");
 
         myPageAdapter = new MyPageAdapter(getSupportFragmentManager());
         ArrayList<Fragment> datas = new ArrayList<Fragment>();
@@ -79,5 +76,13 @@ public class OccupationDetailActivity extends BaseActivity {
     @Override
     protected void setStatusBarColor() {
 
+    }
+    @OnClick({R.id.iv_back})
+    public void click(View view){
+        switch (view.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+        }
     }
 }

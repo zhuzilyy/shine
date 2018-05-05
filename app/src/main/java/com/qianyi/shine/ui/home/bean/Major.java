@@ -6,14 +6,12 @@ import com.qianyi.shine.R;
 /**
  * Created by Administrator on 2018/4/6.
  */
-
 public class Major implements RvTree {
     private long id;
     private long pid;
     private String title;
     private int resId;
     private String tag;
-
     public Major(){}
 
     public Major(long id, long pid, String title) {
@@ -27,7 +25,6 @@ public class Major implements RvTree {
         this.title = title;
         this.resId = resId;
     }
-
     @Override
     public long getNid() {
         return id;

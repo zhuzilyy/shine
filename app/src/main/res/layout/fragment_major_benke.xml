@@ -7,4 +7,6 @@
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <include layout="@layout/common_wrong_intert"/>
+    <include layout="@layout/common_no_data"/>
 </LinearLayout>

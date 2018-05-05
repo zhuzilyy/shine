@@ -53,7 +53,7 @@ public class TreeAdapter<T extends RvTree> extends RecyclerView.Adapter<TreeAdap
      */
     public T getItemById(int id) {
         for (Node<T> node : mNodes) {
-            if (node.getId() == id) {
+            if (node.getId()==(id)) {
                 return node.getItem();
             }
         }
@@ -113,7 +113,7 @@ public class TreeAdapter<T extends RvTree> extends RecyclerView.Adapter<TreeAdap
         int size = mNodes.size();
         for (int i = 0; i < size; i++) {
             Node node = mNodes.get(i);
-            if (node.getId() == id) {
+            if (node.getId()==(id)) {
                 return i;
             }
         }
@@ -195,11 +195,16 @@ public class TreeAdapter<T extends RvTree> extends RecyclerView.Adapter<TreeAdap
             //设置点击最后一层条目
             if (view.getId()==R.id.item){
                 if (mListener!=null){
+                    mListener.OnClick(node);
+                }
+            }
+           /* if (view.getId()==R.id.item){
+                if (mListener!=null){
                     if (node.getLevel()==2){
                         mListener.OnClick(node);
                     }
                 }
-            }
+            }*/
 
             if (node != null && !node.isLeaf()) {
                 long lastClickTime = (long) itemView.getTag();

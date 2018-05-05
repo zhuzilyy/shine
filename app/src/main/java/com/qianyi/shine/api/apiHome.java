@@ -47,5 +47,22 @@ public class apiHome {
         params.put("keyword",keyword);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+    //获取专业列表
+    public static void getMajorList(String url,String diploma_id, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("diploma_id",diploma_id);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    //获取就业列表
+    public static void getEmployerList(String url,String type, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("type",type);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    //获取职业列表
+    public static void getJobList(String url,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 
 }

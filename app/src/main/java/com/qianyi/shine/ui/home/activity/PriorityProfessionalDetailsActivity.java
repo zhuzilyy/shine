@@ -31,6 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -53,7 +54,8 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     private int constellationPosition = 0;
     @BindView(R.id.dropDownMenu)
     public DropDownMenu mDropDownMenu;
-
+    @BindView(R.id.tv_title)
+    TextView tv_title;
     //**************
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
@@ -61,18 +63,12 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     public List<SuitableForMeEntity> list_temp;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
-    @BindView(R.id.title)
-    public XTitleView title;
+
 
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
-        title.setBackListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        tv_title.setText("专业优先");
 
         //省份
         final View areaView = getLayoutInflater().inflate(R.layout.custom_layout, null);
@@ -302,6 +298,14 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
             Toast.makeText(PriorityProfessionalDetailsActivity.this, "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             mAdapter.loadMoreComplete();
+        }
+    }
+    @OnClick({R.id.iv_back})
+    public void click(View view){
+        switch (view.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
         }
     }
 
