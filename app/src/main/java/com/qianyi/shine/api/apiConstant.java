@@ -37,6 +37,8 @@ public class apiConstant {
     public static final String EMPLOYER_BENKE_LIST=BASE_URL+"article_list_jiuye";
     //搜职业
     public static final String JOB_LIST=BASE_URL+"job_list";
+    //获取大学详情
+    public static final String COLLEGE_DETAILS = BASE_URL+"university_info";
 
 
 

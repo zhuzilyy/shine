@@ -65,4 +65,11 @@ public class apiHome {
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
 
+    //获取大学详情
+    public static void getCollegeData(String url,String id,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("id",id);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+
 }

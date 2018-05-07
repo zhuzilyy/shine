@@ -228,5 +228,8 @@
         <!--按职业选专业-->
         <activity android:name=".ui.home.activity.CareerAndMajorActivity"
             android:screenOrientation="portrait"/>
+        <!--大学详情大图展示-->
+        <activity android:name=".ui.college.activity.BigImgActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

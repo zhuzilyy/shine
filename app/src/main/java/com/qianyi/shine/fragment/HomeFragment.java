@@ -254,6 +254,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                                             @Override
                                             public void onItemClick(int position) {
                                                 Intent intent = new Intent(getActivity(), CollegeActivity.class);
+                                                intent.putExtra("id",universities.get(position).getId());
                                                 startActivity(intent);
                                             }
                                         });

@@ -2,10 +2,13 @@ package com.qianyi.shine.ui.college.fragments;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -15,7 +18,10 @@ import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
+import com.qianyi.shine.ui.college.activity.BigImgActivity;
+import com.qianyi.shine.ui.college.activity.CollegePicBean;
 import com.qianyi.shine.ui.college.adapter.PicCollegeAdapter;
+import com.qianyi.shine.ui.home.bean.CollegeDetailsBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,14 +38,23 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
     public RecyclerView PicCollege_rv;
     private PicCollegeAdapter adapter;
     //空数据
-    private List<CollegeEntity> listCollege=new ArrayList<>();
+    private List<CollegePicBean> listCollege=new ArrayList<>();
     //食宿条件
     @BindView(R.id.Accommodation_re)
     public RelativeLayout Accommodation_re;
     //奖学金设置
     @BindView(R.id.Scholarship_re)
     public RelativeLayout Scholarship_re;
-
+    private CollegeDetailsBean.CollegeDetailsData.CollegeDetailsInfo collegeDetailsInfo;
+    //*****************************
+    @BindView(R.id.tv_collegeName) public TextView tv_collegeName;
+    @BindView(R.id.tv_introduce) public TextView tv_introduce;
+    @BindView(R.id.tv_college_tel) public TextView tv_college_tel;
+    @BindView(R.id.tv_college_webset) public TextView tv_college_webset;
+    @BindView(R.id.tv_college_address) public TextView tv_college_address;
+    @BindView(R.id.tv_nan) public TextView tv_nan;
+    @BindView(R.id.tv_nv) public TextView tv_nv;
+    @BindView(R.id.id_progress) public ProgressBar progress;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         View layoutRes= inflater.inflate(R.layout.fragment_college_introduction,null);
@@ -90,4 +105,76 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
                 break;
         }
     }
+
+    /**
+     * 从根部获取数据
+     * @param collegeDetailsInfo
+     */
+    public void setCollegeDataFromRoot(CollegeDetailsBean.CollegeDetailsData.CollegeDetailsInfo collegeDetailsInfo){
+        this.collegeDetailsInfo = collegeDetailsInfo;
+        if(this.collegeDetailsInfo != null){
+            initTransData(this.collegeDetailsInfo);
+        }
+
+    }
+
+    /**
+     * 赋值数据
+     * @param info
+     */
+    private void initTransData(final CollegeDetailsBean.CollegeDetailsData.CollegeDetailsInfo info) {
+        //学校名称
+        tv_collegeName.setText(info.getName());
+        //学校简介
+        tv_introduce.setText(info.getIntroduction());
+        //学校图片
+        listCollege= getSchoolPic(info.getSchool_scenery());
+        adapter=new PicCollegeAdapter(getActivity(),listCollege);
+        PicCollege_rv.setAdapter(adapter);
+        adapter.setOnItemClickListener(new PicCollegeAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getActivity(), BigImgActivity.class);
+                intent.putExtra("bigUrl",listCollege.get(position).getImage_url());
+                startActivity(intent);
+            }
+        });
+        //学校电话
+        tv_college_tel.setText(info.getPhone());
+        //学校网址
+        tv_college_webset.setText(info.getWebsite());
+        //学校地址
+        tv_college_address.setText(info.getAddress());
+        //男女比例
+        String[]  nannv = getRatil(info.getSexual_ratio());
+        tv_nan.setText(nannv[0]);
+        tv_nv.setText(nannv[1]);
+        progress.setMax(100);
+        progress.setProgress(Integer.parseInt(nannv[0]));
+
+
+
+
+    }
+
+    /***
+     * 获取男女人数
+     * @param sexual_ratio
+     * @return
+     */
+    private String[] getRatil(String sexual_ratio) {
+
+       return sexual_ratio.split(":");
+    }
+
+    private List<CollegePicBean> getSchoolPic(List<CollegeDetailsBean.CollegeDetailsData.CollegeDetailsInfo.SchoolScenery> school_scenery) {
+        List<CollegePicBean> collegeEntities = new ArrayList<>();
+        for (int i = 0; i <school_scenery.size() ; i++) {
+            CollegePicBean bean = new CollegePicBean(school_scenery.get(i).getThumbnail_url(),school_scenery.get(i).getImage_url());
+            collegeEntities.add(bean);
+        }
+        return collegeEntities;
+    }
+
+
 }

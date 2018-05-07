@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.qianyi.shine.R;
 import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
+import com.qianyi.shine.ui.college.activity.CollegePicBean;
 
 import java.util.List;
 
@@ -22,7 +24,7 @@ import java.util.List;
 public class PicCollegeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
-    private List<CollegeEntity> datas;//数据
+    private List<CollegePicBean> datas;//数据
 
     //自定义监听事件
     public static interface OnRecyclerViewItemClickListener {
@@ -38,7 +40,7 @@ public class PicCollegeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     //适配器初始化
-    public PicCollegeAdapter(Context context, List<CollegeEntity> datas) {
+    public PicCollegeAdapter(Context context, List<CollegePicBean> datas) {
         mContext = context;
         this.datas = datas;
     }
@@ -73,8 +75,9 @@ public class PicCollegeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //将数据与item视图进行绑定，如果是MyViewHolder就加载网络图片，如果是MyViewHolder2就显示页数
         if (holder instanceof PicCollegeAdapter.MyViewHolder) {
-
-            // Picasso.with(mContext).load(datas.get(position).getUrl()).into(((MyViewHolder) holder).iv);//加载网络图片
+            if(datas.size()>0){
+                Glide.with(mContext).load(datas.get(position).getThumbnail_url()).into(((MyViewHolder) holder).pic_item);//加载网络图片
+            }
             if(mOnItemClickListener!=null){
                 ((PicCollegeAdapter.MyViewHolder) holder).pic_item.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -91,7 +94,7 @@ public class PicCollegeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        return datas.size() == 0? 9:0;//获取数据的个数
+        return datas.size()>=9?9:datas.size();//获取数据的个数
     }
 
 

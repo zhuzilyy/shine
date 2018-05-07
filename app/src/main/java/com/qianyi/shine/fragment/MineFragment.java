@@ -112,7 +112,7 @@ public class MineFragment extends BaseFragment {
         params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "测试");//应用名称
         mTencent.shareToQQ(getActivity(), params, new ShareUiListener());
     }
-    //分享到微信好友
+    //分享到微信
     private void shareFriends() {
         IWXAPI mWxApi;
         mWxApi = WXAPIFactory.createWXAPI(getActivity(), apiConstant.APP_ID, false);
@@ -131,7 +131,7 @@ public class MineFragment extends BaseFragment {
         req.transaction = buildTransaction("webpage");
         req.message = msg;
        // req.scene = sendtype==0?SendMessageToWX.Req.WXSceneSession:SendMessageToWX.Req.WXSceneTimeline;
-        req.scene = SendMessageToWX.Req.WXSceneTimeline;
+        req.scene = SendMessageToWX.Req.WXSceneSession;
         mWxApi.sendReq(req);
 
 

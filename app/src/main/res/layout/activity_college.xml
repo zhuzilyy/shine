@@ -17,7 +17,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:background="@mipmap/college_gate">
+            android:background="@color/main_blue">
 
             <ImageView
                 android:id="@+id/back"
@@ -29,11 +29,12 @@
                 android:src="@mipmap/back" />
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true">
 
                 <com.makeramen.roundedimageview.RoundedImageView
+
                     android:id="@+id/college_logo"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -46,13 +47,19 @@
                     />
 
                 <TextView
-                    android:layout_width="28dp"
+                    android:id="@+id/collegeOrder"
+                    android:layout_width="wrap_content"
+                    android:paddingTop="@dimen/dp_2"
+                    android:layout_marginBottom="@dimen/dp_2"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_10"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="-20dp"
                     android:layout_alignBottom="@+id/college_logo"
-                    android:layout_alignRight="@+id/college_logo"
+                    android:layout_toRightOf="@+id/college_logo"
                     android:background="@drawable/shape_corner_blue"
                     android:gravity="center"
-                    android:text="1"
+                    android:text="1000"
                     android:textColor="@color/white" />
 
                 <TextView
