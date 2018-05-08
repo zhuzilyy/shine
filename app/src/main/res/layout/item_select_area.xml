@@ -10,5 +10,4 @@
         android:id="@+id/tv_area"
         android:layout_width="70dp"
         android:layout_height="30dp" />
-
 </LinearLayout>

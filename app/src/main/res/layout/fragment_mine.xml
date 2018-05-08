@@ -67,10 +67,9 @@
                 android:layout_height="35dp"
                 android:src="@mipmap/crown_"
                 />
-
         </RelativeLayout>
-
         <ImageView
+            android:visibility="gone"
             android:layout_width="22dp"
             android:layout_height="22dp"
             android:layout_alignEnd="@+id/iv_share"
