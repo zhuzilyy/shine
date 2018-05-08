@@ -42,6 +42,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_collegeArea"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="北京"
@@ -64,6 +65,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_collegeType"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="综合"
@@ -86,6 +88,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_collegePici"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="本一"
@@ -110,6 +113,7 @@
                         android:gravity="center">
 
                         <TextView
+                            android:id="@+id/tv_collegeRecommed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="推荐指数："
@@ -124,6 +128,7 @@
                         android:gravity="center">
 
                         <TextView
+                            android:id="@+id/tv_collegeSitisfied"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="满意度："
@@ -291,6 +296,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_masterPoints"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
@@ -315,6 +321,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_doctorPoints"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
@@ -339,6 +346,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_advantage_majors_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
@@ -363,6 +371,7 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_labs_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"

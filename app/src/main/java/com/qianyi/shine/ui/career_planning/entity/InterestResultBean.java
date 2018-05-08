@@ -71,13 +71,7 @@ public class InterestResultBean {
                 this.color = color;
             }
 
-            public Intereting getIntereting() {
-                return intereting;
-            }
 
-            public void setIntereting(Intereting intereting) {
-                this.intereting = intereting;
-            }
 
             public ZYFW getZyfw() {
                 return zyfw;
@@ -98,7 +92,16 @@ public class InterestResultBean {
             private String type;
             private String decription;
             private mColor color;
-            private Intereting intereting;
+
+            public Intereting getInteresting() {
+                return interesting;
+            }
+
+            public void setInteresting(Intereting interesting) {
+                this.interesting = interesting;
+            }
+
+            private Intereting interesting;
             private ZYFW zyfw;
             private JTZY jtzy;
 

@@ -54,13 +54,7 @@ public class CharacterResultBean {
                 this.type = type;
             }
 
-            public String getDecription() {
-                return decription;
-            }
 
-            public void setDecription(String decription) {
-                this.decription = decription;
-            }
 
             public ZZGX getZzgx() {
                 return zzgx;
@@ -70,29 +64,10 @@ public class CharacterResultBean {
                 this.zzgx = zzgx;
             }
 
-            public LDM getLdm() {
-                return ldm;
-            }
 
-            public void setLdm(LDM ldm) {
-                this.ldm = ldm;
-            }
 
-            public XXM getXxm() {
-                return xxm;
-            }
 
-            public void setXxm(XXM xxm) {
-                this.xxm = xxm;
-            }
 
-            public JJM getJjm() {
-                return jjm;
-            }
-
-            public void setJjm(JJM jjm) {
-                this.jjm = jjm;
-            }
 
             public GZHJ getGzhj() {
                 return gzhj;
@@ -119,11 +94,47 @@ public class CharacterResultBean {
             }
 
             private String type;
-            private String decription;
+
+            public String getDescription() {
+                return description;
+            }
+
+            public void setDescription(String description) {
+                this.description = description;
+            }
+
+            private String description;
             private ZZGX zzgx;
-            private LDM ldm;
-            private XXM xxm;
-            private JJM jjm;
+
+            public LDMS getLdms() {
+                return ldms;
+            }
+
+            public void setLdms(LDMS ldms) {
+                this.ldms = ldms;
+            }
+
+            private LDMS ldms;
+
+            public XXM getXxms() {
+                return xxms;
+            }
+
+            public void setXxms(XXM xxms) {
+                this.xxms = xxms;
+            }
+
+            private XXM xxms;
+
+            public JJM getJjms() {
+                return jjms;
+            }
+
+            public void setJjms(JJM jjms) {
+                this.jjms = jjms;
+            }
+
+            private JJM jjms;
             private GZHJ gzhj;
             private QZQD qzqd;
             private FZJY fzjy;
@@ -152,7 +163,7 @@ public class CharacterResultBean {
                 private List<String> value;
             }
             //领导模式
-            public class LDM{
+            public class LDMS{
                 public String getName() {
                     return name;
                 }
