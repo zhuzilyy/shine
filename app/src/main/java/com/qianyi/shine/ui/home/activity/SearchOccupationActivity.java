@@ -100,22 +100,26 @@ public class SearchOccupationActivity extends BaseActivity {
                                     jobList.add(firstMajor);
                                     //Log.i("tag","111"+major_cate);
                                     List<SecondJob> secondJobList = firstJob.getCate_two_lit();
-                                    for (int j = 0; j <secondJobList.size() ; j++) {
-                                        //第二层数据
-                                        SecondJob secondJob = secondJobList.get(j);
-                                        String cate_two_name = secondJob.getCate_two_name();
-                                        String cate_two_id = secondJob.getCate_two_id();
-                                        long secondLongId=Long.parseLong(cate_two_id);
-                                        List<ThirdJob> thirdJobList = secondJob.getCate_three_lit();
-                                        Major secondMajor=new Major(secondLongId,firstLongId,cate_two_name);
-                                        jobList.add(secondMajor);
-                                        for (int k = 0; k <thirdJobList.size() ; k++) {
-                                            ThirdJob thirdJob = thirdJobList.get(k);
-                                            String name = thirdJob.getCate_three_name();
-                                            String id = thirdJob.getCate_three_id();
-                                            long thirdLongId=Long.parseLong(id);
-                                            Major thirdMajor=new Major(thirdLongId,secondLongId,name);
-                                            jobList.add(thirdMajor);
+                                    if (secondJobList!=null && secondJobList.size()>0){
+                                        for (int j = 0; j <secondJobList.size() ; j++) {
+                                            //第二层数据
+                                            SecondJob secondJob = secondJobList.get(j);
+                                            String cate_two_name = secondJob.getCate_two_name();
+                                            String cate_two_id = secondJob.getCate_two_id();
+                                            long secondLongId=Long.parseLong(cate_two_id);
+                                            List<ThirdJob> thirdJobList = secondJob.getCate_three_lit();
+                                            Major secondMajor=new Major(secondLongId,firstLongId,cate_two_name);
+                                            jobList.add(secondMajor);
+                                            if (thirdJobList!=null && thirdJobList.size()>0){
+                                                for (int k = 0; k <thirdJobList.size() ; k++) {
+                                                    ThirdJob thirdJob = thirdJobList.get(k);
+                                                    String name = thirdJob.getCate_three_name();
+                                                    String id = thirdJob.getCate_three_id();
+                                                    long thirdLongId=Long.parseLong(id);
+                                                    Major thirdMajor=new Major(thirdLongId,secondLongId,name);
+                                                    jobList.add(thirdMajor);
+                                                }
+                                            }
                                         }
                                     }
                                 }
