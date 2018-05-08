@@ -40,7 +40,6 @@ import okhttp3.Response;
 /**
  * Created by Administrator on 2018/4/6.
  */
-
 public class MajorBenkeFragment extends BaseFragment {
     @BindView(R.id.rv)
     RecyclerView recyclerView;
@@ -99,24 +98,28 @@ public class MajorBenkeFragment extends BaseFragment {
                                     majorList.add(firstMajor);
                                     //Log.i("tag","111"+major_cate);
                                     List<SecondLevel> secondList = firstLevel.getMajor_second_list();
-                                    for (int j = 0; j <secondList.size() ; j++) {
-                                        //第二层数据
-                                        SecondLevel secondLevel = secondList.get(j);
-                                        String secondLevelName = secondLevel.getMajor_second_cate();
-                                        String secondLevleId = secondLevel.getMajor_second_cate_id();
-                                        long secondLongId=Long.parseLong(secondLevleId);
-                                        Major secondMajor=new Major(secondLongId,firstLongId,secondLevelName);
-                                        majorList.add(secondMajor);
-                                        Log.i("tag","222"+secondLevelName);
-                                        List<ThirdLevel> thirdList = secondList.get(j).getMajor_list();
-                                        for (int k = 0; k <thirdList.size() ; k++) {
-                                            ThirdLevel thirdLevel = thirdList.get(k);
-                                            String name = thirdLevel.getName();
-                                            String id = thirdLevel.getId();
-                                            long thirdLongId=Long.parseLong(id);
-                                            Major thirdMajor=new Major(thirdLongId,secondLongId,name);
-                                            majorList.add(thirdMajor);
-                                            Log.i("tag","333"+name);
+                                    if (secondList!=null && secondList.size()>0){
+                                        for (int j = 0; j <secondList.size() ; j++) {
+                                            //第二层数据
+                                            SecondLevel secondLevel = secondList.get(j);
+                                            String secondLevelName = secondLevel.getMajor_second_cate();
+                                            String secondLevleId = secondLevel.getMajor_second_cate_id();
+                                            long secondLongId=Long.parseLong(secondLevleId);
+                                            Major secondMajor=new Major(secondLongId,firstLongId,secondLevelName);
+                                            majorList.add(secondMajor);
+                                            Log.i("tag","222"+secondLevelName);
+                                            List<ThirdLevel> thirdList = secondList.get(j).getMajor_list();
+                                            if (thirdList!=null && thirdList.size()>0){
+                                                for (int k = 0; k <thirdList.size() ; k++) {
+                                                    ThirdLevel thirdLevel = thirdList.get(k);
+                                                    String name = thirdLevel.getName();
+                                                    String id = thirdLevel.getId();
+                                                    long thirdLongId=Long.parseLong(id);
+                                                    Major thirdMajor=new Major(thirdLongId,secondLongId,name);
+                                                    majorList.add(thirdMajor);
+                                                    Log.i("tag","333"+name);
+                                                }
+                                            }
                                         }
                                     }
                                 }

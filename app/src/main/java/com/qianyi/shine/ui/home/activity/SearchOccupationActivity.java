@@ -99,7 +99,6 @@ public class SearchOccupationActivity extends BaseActivity {
                                     Major firstMajor=new Major(firstLongId,0,cate_one_name,1);
                                     jobList.add(firstMajor);
                                     //非空判断防止崩溃
-
                                     //Log.i("tag","111"+major_cate);
                                     List<SecondJob> secondJobList = firstJob.getCate_two_lit();
                                     if (secondJobList!=null && secondJobList.size()>0){
