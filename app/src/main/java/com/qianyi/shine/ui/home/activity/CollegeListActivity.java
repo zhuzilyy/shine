@@ -241,7 +241,9 @@ public class CollegeListActivity extends BaseActivity {
         recyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                List<UniversityInfo> infos =adapter.getData();
                 Intent intent=new Intent(CollegeListActivity.this, com.qianyi.shine.ui.college.activity.CollegeActivity.class);
+                intent.putExtra("id",infos.get(position).getId());
                 startActivity(intent);
             }
         });

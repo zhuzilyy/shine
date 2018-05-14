@@ -159,10 +159,15 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
         tv_college_address.setText(info.getAddress());
         //男女比例
         String[]  nannv = getRatil(info.getSexual_ratio());
-        tv_nan.setText(nannv[0]);
-        tv_nv.setText(nannv[1]);
-        progress.setMax(100);
-        progress.setProgress(Integer.parseInt(nannv[0]));
+        if(nannv.length>=2){
+            tv_nan.setText(nannv[0]);
+            tv_nv.setText(nannv[1]);
+        }
+
+        if(nannv.length>=2){
+            progress.setProgress(Integer.parseInt(nannv[0]));
+        }
+
 
          tv_labs_count.setText(info.getUniversity_research().getLabs_count()); //重点实验室
          tv_masterPoints.setText(info.getUniversity_research().getMaster_points());  //硕士点

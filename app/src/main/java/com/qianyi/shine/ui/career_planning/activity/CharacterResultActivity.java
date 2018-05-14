@@ -138,7 +138,6 @@ public class CharacterResultActivity extends BaseActivity implements View.OnClic
         tv_introduce.setText(info.getDescription());
         tv_result.setText(info.getType());
         tv_keywords2.setText(info.getDescription());
-
         //对组织的贡献
         TextMySmpleAdapter adapter_zzgx =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getZzgx().getValue()),1);
         zzgxList.setAdapter(adapter_zzgx);
@@ -165,8 +164,6 @@ public class CharacterResultActivity extends BaseActivity implements View.OnClic
         //发展建议
         TextMySmpleAdapter adapter_development  =new TextMySmpleAdapter(CharacterResultActivity.this,getListString(info.getQzqd().getValue()),1);
         devilopmentList.setAdapter(adapter_development);
-
-
 
     }
 
