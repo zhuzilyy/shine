@@ -135,6 +135,13 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
      * @param info
      */
     private void initTransData(final CollegeDetailsBean.CollegeDetailsData.CollegeDetailsInfo info) {
+        //地区
+        tv_collegeArea.setText(info.getArea());
+        //类型
+        tv_collegeType.setText(info.getType());
+        //批次
+        tv_collegePici.setText(info.getLevel());
+        //
         //学校名称
         tv_collegeName.setText(info.getName());
         //学校简介
@@ -167,8 +174,6 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
         if(nannv.length>=2){
             progress.setProgress(Integer.parseInt(nannv[0]));
         }
-
-
          tv_labs_count.setText(info.getUniversity_research().getLabs_count()); //重点实验室
          tv_masterPoints.setText(info.getUniversity_research().getMaster_points());  //硕士点
          tv_doctorPoints.setText(info.getUniversity_research().getDoctor_points());  //博士点

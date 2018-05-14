@@ -39,25 +39,27 @@ public class apiConstant {
     public static final String JOB_LIST=BASE_URL+"job_list";
     //获取大学详情
     public static final String COLLEGE_DETAILS = BASE_URL+"university_info";
-
-
-
-
-
-
-
-
-
-
-
-
+    //微信支付
+    public static final String WXPAY=BASE_URL+"wxpay";
+    //支付宝支付
+    public static final String ALIPAY=BASE_URL+"alipay";
 
 
 
 
 
     //微信参数
-    public static final String APP_ID="wxf51a00546d18489f";
-    public static final String APP_SECRET="ed6e15ab8d28ca6dd3b024f1ffedbec9";
+    public static  String APP_ID="wxf51a00546d18489f";
+    public static  String APP_SECRET="ed6e15ab8d28ca6dd3b024f1ffedbec9";
+    //apikey
+    public static  String API_KEY="";
+    //商户号
+    public static  String MCH_ID = "1494262522";
+    //订单号
+    public static String OUT_TRADE_NO;
+    //价格
+    public static String TOTAL_FEE;
+    //通知Url
+    public static String NOTIFY_URL;
 
 }
