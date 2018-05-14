@@ -100,7 +100,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void initViews() {
-
         Log.i("loc", sHA1(getActivity()));
         //获取定位
         getCityName();
@@ -433,7 +432,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             mLocationClient.stopLocation();
             mLocationClient.startLocation();
         }
-
         //设置定位回调监听
         mLocationClient.setLocationListener(new AMapLocationListener() {
             @Override
@@ -452,7 +450,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             }
         });
     }
-
     public static String sHA1(Context context) {
         try {
             PackageInfo info = context.getPackageManager().getPackageInfo(

@@ -86,7 +86,7 @@ public class CareerAndMajorActivity extends BaseActivity {
                                     Major firstMajor=new Major(firstLongId,0,cate_one_name,1);
                                     jobList.add(firstMajor);
                                     //Log.i("tag","111"+major_cate);
-                                    List<SecondJob> secondJobList = firstJob.getCate_two_lit();
+                                    List<SecondJob> secondJobList = firstJob.getCate_two_list();
                                     if (secondJobList!=null && secondJobList.size()>0){
                                         for (int j = 0; j <secondJobList.size() ; j++) {
                                             //第二层数据
@@ -94,7 +94,7 @@ public class CareerAndMajorActivity extends BaseActivity {
                                             String cate_two_name = secondJob.getCate_two_name();
                                             String cate_two_id = secondJob.getCate_two_id();
                                             long secondLongId=Long.parseLong(cate_two_id);
-                                            List<ThirdJob> thirdJobList = secondJob.getCate_three_lit();
+                                            List<ThirdJob> thirdJobList = secondJob.getCate_three_list();
                                             Major secondMajor=new Major(secondLongId,firstLongId,cate_two_name);
                                             jobList.add(secondMajor);
                                             if (thirdJobList!=null && thirdJobList.size()>0){
