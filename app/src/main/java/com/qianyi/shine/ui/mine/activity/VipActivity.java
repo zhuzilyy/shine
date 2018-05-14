@@ -267,7 +267,6 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
                             }
                         }
                     }
-
                     @Override
                     public void onEror(Call call, int statusCode, Exception e) {
                         loadingDialog.dismiss();
