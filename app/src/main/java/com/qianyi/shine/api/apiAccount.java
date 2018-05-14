@@ -1,7 +1,5 @@
 package com.qianyi.shine.api;
 
-import android.util.Log;
-
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.utils.OkHttpManager;
 

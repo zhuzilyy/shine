@@ -9,7 +9,7 @@ import java.util.List;
 public class SecondJob {
     private String cate_two_name;
     private String cate_two_id;
-    private List<ThirdJob> cate_three_lit;
+    private List<ThirdJob> cate_three_list;
 
     public String getCate_two_name() {
         return cate_two_name;
@@ -26,12 +26,11 @@ public class SecondJob {
     public void setCate_two_id(String cate_two_id) {
         this.cate_two_id = cate_two_id;
     }
-
-    public List<ThirdJob> getCate_three_lit() {
-        return cate_three_lit;
+    public List<ThirdJob> getCate_three_list() {
+        return cate_three_list;
     }
 
-    public void setCate_three_lit(List<ThirdJob> cate_three_lit) {
-        this.cate_three_lit = cate_three_lit;
+    public void setCate_three_list(List<ThirdJob> cate_three_list) {
+        this.cate_three_list = cate_three_list;
     }
 }
