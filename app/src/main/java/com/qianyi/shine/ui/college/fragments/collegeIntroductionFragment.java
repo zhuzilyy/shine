@@ -55,6 +55,18 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
     @BindView(R.id.tv_nan) public TextView tv_nan;
     @BindView(R.id.tv_nv) public TextView tv_nv;
     @BindView(R.id.id_progress) public ProgressBar progress;
+    @BindView(R.id.tv_collegeSitisfied) public TextView tv_collegeSitisfied;
+    @BindView(R.id.tv_collegeArea) public TextView tv_collegeArea;
+    @BindView(R.id.tv_collegeType) public TextView tv_collegeType;
+    @BindView(R.id.tv_collegePici) public TextView tv_collegePici;
+    @BindView(R.id.tv_collegeRecommed) public TextView tv_collegeRecommed;
+
+    @BindView(R.id.tv_labs_count) public TextView tv_labs_count; //重点实验室
+    @BindView(R.id.tv_masterPoints) public TextView tv_masterPoints;  //硕士点
+    @BindView(R.id.tv_doctorPoints) public TextView tv_doctorPoints;  //博士点
+    @BindView(R.id.tv_advantage_majors_count) public TextView tv_advantage_majors_count;  //重点专业
+
+
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         View layoutRes= inflater.inflate(R.layout.fragment_college_introduction,null);
@@ -147,10 +159,20 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
         tv_college_address.setText(info.getAddress());
         //男女比例
         String[]  nannv = getRatil(info.getSexual_ratio());
-        tv_nan.setText(nannv[0]);
-        tv_nv.setText(nannv[1]);
-        progress.setMax(100);
-        progress.setProgress(Integer.parseInt(nannv[0]));
+        if(nannv.length>=2){
+            tv_nan.setText(nannv[0]);
+            tv_nv.setText(nannv[1]);
+        }
+
+        if(nannv.length>=2){
+            progress.setProgress(Integer.parseInt(nannv[0]));
+        }
+
+
+         tv_labs_count.setText(info.getUniversity_research().getLabs_count()); //重点实验室
+         tv_masterPoints.setText(info.getUniversity_research().getMaster_points());  //硕士点
+         tv_doctorPoints.setText(info.getUniversity_research().getDoctor_points());  //博士点
+         tv_advantage_majors_count.setText(info.getUniversity_research().getAdvantage_majors_count());  //重点专业
 
 
 

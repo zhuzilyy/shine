@@ -143,7 +143,6 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void loginWX() {
-
         IWXAPI mWxApi = WXAPIFactory.createWXAPI(this, apiConstant.APP_ID, false);
         // 将该app注册到微信
         mWxApi.registerApp(apiConstant.APP_ID);

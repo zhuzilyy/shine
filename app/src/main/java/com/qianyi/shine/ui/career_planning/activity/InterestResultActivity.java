@@ -95,6 +95,7 @@ public class InterestResultActivity extends BaseActivity implements View.OnClick
             apiTest.getHLDResult(apiConstant.GETHLDRESULT, user.getId(), keyStrings, new RequestCallBack<String>() {
                 @Override
                 public void onSuccess(Call call, Response response, String s) {
+                    Log.i("tag",s);
                     loadingDialog.dismiss();
                     Gson gson = new Gson();
                     InterestResultBean resultBean = gson.fromJson(s, InterestResultBean.class);
@@ -128,6 +129,10 @@ public class InterestResultActivity extends BaseActivity implements View.OnClick
      */
     private void InitDataFromWeb(InterestResultBean.InterestResultData.InterestResultInfo info) {
 
+        if(info == null){
+            return;
+        }
+
         tv_type.setText(info.getType());
         tv_majorInterest.setText("主导兴趣为： "+info.getDecription());
         tv_color.setText(info.getColor().getName()+" : "+info.getColor().getValue());
@@ -135,8 +140,10 @@ public class InterestResultActivity extends BaseActivity implements View.OnClick
         tv_type3.setText(info.getDecription());
         tv_color2.setText(info.getColor().getName()+" : "+info.getColor().getValue());
         tv_type4.setText(info.getDecription());
-        tv_title01.setText(info.getIntereting().getName());
-        TextMySmpleAdapter adapter_zzgx =new TextMySmpleAdapter(InterestResultActivity.this,info.getIntereting().getValue(),0);
+
+            tv_title01.setText(info.getInteresting().getName());
+
+        TextMySmpleAdapter adapter_zzgx =new TextMySmpleAdapter(InterestResultActivity.this,info.getInteresting().getValue(),0);
         InterestLv.setAdapter(adapter_zzgx);
 
         tv_title02.setText(info.getZyfw().getName());
