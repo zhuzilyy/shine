@@ -225,9 +225,11 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
                 if(0==currentPayMethod){
                     //微信支付
                     wxPay();
+                    pw_payMethod.dismiss();
                 }else if(1==currentPayMethod){
                     //支付宝支付
                     zfbPay();
+                    pw_payMethod.dismiss();
                 }
             break;
 
