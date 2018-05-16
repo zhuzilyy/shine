@@ -88,5 +88,15 @@ public class apiHome {
         params.put("school_type",school_type);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+    //推荐大学更多
+    public static void recommendMoreCollege(String url,String member_id,int page,String order,String area,String school_type,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",member_id);
+        params.put("page",page+"");
+        params.put("order",order);
+        params.put("area",area);
+        params.put("school_type",school_type);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 
 }

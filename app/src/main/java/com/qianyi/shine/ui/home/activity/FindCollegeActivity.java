@@ -2,12 +2,10 @@ package com.qianyi.shine.ui.home.activity;
 
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +13,6 @@ import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.ui.home.adapter.CollegeAdapter;
 import com.qianyi.shine.ui.home.view.MyGridView;
-import com.qianyi.shine.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;

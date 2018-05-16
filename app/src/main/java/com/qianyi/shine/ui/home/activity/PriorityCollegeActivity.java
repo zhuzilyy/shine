@@ -46,7 +46,7 @@ import okhttp3.Response;
  */
 
 public class PriorityCollegeActivity extends BaseActivity {
-    private String[] headers = {"排序","省份","类型"};
+    private String[] headers = {"排名","全国","综合"};
     private List<View> popupViews = new ArrayList<>();
     private GirdDropDownAdapter orderAdapter;
     private AreaAdapter areaAdapter,typeAdapter;
@@ -117,7 +117,7 @@ public class PriorityCollegeActivity extends BaseActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDropDownMenu.setTabText(constellationPosition == 0 ? headers[0] : citys[constellationPosition]);
+                mDropDownMenu.setTabText(constellationPosition == 0 ? "全国" : citys[constellationPosition]);
                 mDropDownMenu.closeMenu();
                 if (citys[constellationPosition].equals("全国")){
                     area="";
@@ -133,7 +133,7 @@ public class PriorityCollegeActivity extends BaseActivity {
         typeAdapter = new AreaAdapter(PriorityCollegeActivity.this, Arrays.asList(types));
         type.setAdapter(typeAdapter);
         TextView confirm = typeView.findViewById(R.id.confirm);
-        /*地区点击选择事件*/
+        /*类型点击选择事件*/
         type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -144,7 +144,7 @@ public class PriorityCollegeActivity extends BaseActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDropDownMenu.setTabText(typeConstellationPosition == 0 ? headers[0] : types[typeConstellationPosition]);
+                mDropDownMenu.setTabText(typeConstellationPosition == 0 ?"综合" : types[typeConstellationPosition]);
                 mDropDownMenu.closeMenu();
                 school_type=types[typeConstellationPosition];
                 if (school_type.equals("综合")){

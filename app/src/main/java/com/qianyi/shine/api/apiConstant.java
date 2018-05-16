@@ -47,6 +47,8 @@ public class apiConstant {
     public static final String SCORE_LEVEL=BASE_URL+"get_scoreline_info";
     //院校优先填报
     public static final String SCHOOL_PRiOR=BASE_URL+"prior_school";
+    //推荐大学更多
+    public static final String RECOMMEND_MORE_COLLEGE=BASE_URL+"recommend_university_more";
 
 
 

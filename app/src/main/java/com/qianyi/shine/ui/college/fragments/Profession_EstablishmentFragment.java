@@ -25,6 +25,7 @@ import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.EstablishAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
+import com.qianyi.shine.ui.home.bean.SchoolInfo;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class Profession_EstablishmentFragment extends BaseFragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private EstablishAdapter mAdapter;
-    public List<SuitableForMeEntity> list_temp;
+    public List<SchoolInfo> list_temp;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
 
@@ -172,24 +173,6 @@ public class Profession_EstablishmentFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        list_temp=new ArrayList<>();
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
 
 
     }
