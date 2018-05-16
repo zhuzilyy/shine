@@ -31,11 +31,14 @@ import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
+import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.fragment.entity.TestEntity;
+import com.qianyi.shine.ui.account.activity.LoginActivity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
+import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.college.activity.MoreCollegeActivity;
 import com.qianyi.shine.ui.gaokao_news.activity.GaoKaoNewsActivity;
@@ -48,7 +51,12 @@ import com.qianyi.shine.ui.home.activity.IntelligentFillCollegeActivity;
 import com.qianyi.shine.ui.home.activity.PriorityCollegeActivity;
 import com.qianyi.shine.ui.home.activity.SearchOccupationActivity;
 import com.qianyi.shine.ui.home.bean.HomeBean;
+import com.qianyi.shine.utils.ToastUtils;
+import com.qianyi.shine.utils.Utils;
 
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -89,9 +97,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public AMapLocationClientOption mLocationOption = null;
 
     //初始化AMapLocationClientOption对象
-    private TextView cityname;
-    private String province;
-
+    private TextView cityname,tv_chongCi,tv_baoShou,tv_wenTuo;
+    private String province,memberId;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_home = inflater.inflate(R.layout.fragment_home, null);
@@ -112,13 +119,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         //下拉刷新
         initRefreshLayout();
         mSwipeRefreshLayout.setRefreshing(true);
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
+        memberId= loginInfo.getId();
         refresh();
     }
 
     @Override
     protected void initData() {
+        //获取保守稳妥冲刺的数据
+        getLevelData();
     }
-
     @Override
     protected void initListener() {
         //高考头条条目点击
@@ -152,9 +162,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         Typeface typeface1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/bebas.ttf");
         View headView = getLayoutInflater().inflate(R.layout.head_view, (ViewGroup) mRecyclerView.getParent(), false);
         TextView count = headView.findViewById(R.id.suitCount);
-        TextView count2 = headView.findViewById(R.id.count2);
-        TextView count3 = headView.findViewById(R.id.count3);
-        TextView count4 = headView.findViewById(R.id.count4);
+        tv_chongCi = headView.findViewById(R.id.tv_chongCi);
+        tv_baoShou = headView.findViewById(R.id.tv_baoShou);
+        tv_wenTuo = headView.findViewById(R.id.tv_wenTuo);
         LinearLayout ll_findCollege = headView.findViewById(R.id.ll_findCollege);
         LinearLayout ll_employment = headView.findViewById(R.id.ll_employment);
         LinearLayout ll_findMajor = headView.findViewById(R.id.ll_findMajor);
@@ -185,9 +195,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         ll_acceptanceRate.setOnClickListener(this);
 
         count.setTypeface(typeface1);
-        count2.setTypeface(typeface1);
-        count3.setTypeface(typeface1);
-        count4.setTypeface(typeface1);
+        tv_chongCi.setTypeface(typeface1);
+        tv_wenTuo.setTypeface(typeface1);
+        tv_baoShou.setTypeface(typeface1);
         //大学推荐[横向滑动的recyclerView]
         main_headRv = headView.findViewById(R.id.main_headRv);
         editText = headView.findViewById(R.id.main_search);
@@ -217,12 +227,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             }
         });
     }
-
     //刷新
     private void refresh() {
+        getLevelData();
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh(apiConstant.HOME, mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.refresh(apiConstant.HOME, mNextRequestPage,memberId, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 getActivity().runOnUiThread(new Runnable() {
@@ -346,7 +356,36 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             mAdapter.loadMoreComplete();
         }
     }
+    //获取各个层次的数据
+    private void getLevelData() {
+        Log.i("tag",memberId+"=======memberId========");
+        apiHome.getScoreLevel(apiConstant.SCORE_LEVEL, memberId, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(Call call, Response response,final String s) {
+                Log.i("tag","2222"+s);
+                try {
+                    JSONObject jsonObject=new JSONObject(s);
+                    JSONObject data = jsonObject.getJSONObject("data");
+                    JSONObject info = data.getJSONObject("Info");
+                    String chongCi = info.getString("CC");
+                    String baoShou = info.getString("BS");
+                    String wenTuo = info.getString("WT");
+                    Log.i("tag",chongCi+"=======chongCi111111111========");
+                    Log.i("tag",baoShou+"=======baoShou11111111111========");
+                    Log.i("tag",wenTuo+"=======wenTuo11111111111========");
+                    tv_chongCi.setText(chongCi);
+                    tv_baoShou.setText(baoShou);
+                    tv_wenTuo.setText(wenTuo);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onEror(Call call, int statusCode, Exception e) {
 
+            }
+        });
+    }
     @Override
     public void onClick(View v) {
         Intent intent=null;

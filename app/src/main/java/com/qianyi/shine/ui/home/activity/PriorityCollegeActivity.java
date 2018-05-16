@@ -11,18 +11,25 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.gson.Gson;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
 import com.qianyi.shine.ui.home.adapter.PriorityCollegeAdapter;
-import com.qianyi.shine.ui.home.bean.PriorityCollegeBean;
+import com.qianyi.shine.ui.home.bean.SchoolInfo;
+import com.qianyi.shine.ui.home.bean.UniversityBean;
+import com.qianyi.shine.utils.Utils;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -43,8 +50,10 @@ public class PriorityCollegeActivity extends BaseActivity {
     private List<View> popupViews = new ArrayList<>();
     private GirdDropDownAdapter orderAdapter;
     private AreaAdapter areaAdapter,typeAdapter;
-    private String[] orderDatas = {"概率", "分数线", "排名"};
-    private String[] citys = {"全国", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
+    private String[] orderDatas = {"排名","录取率","分数线"};
+    private String[] citys =  {"全国","北京","天津","上海","重庆","河北","山西","辽宁","吉林","黑龙江",
+            "江苏","浙江","安徽","福建","江西","山东","河南","湖北","湖南","广东","海南","四川","贵州",
+            "云南","陕西","甘肃","青海","内蒙古","广西","宁夏","新疆"};
     private String[] types={"综合","理工","财经","农林","医药","师范","体育","政法","艺术","民族","军事","语言"};
     private int constellationPosition = 0;
     private int typeConstellationPosition = 0;
@@ -56,10 +65,13 @@ public class PriorityCollegeActivity extends BaseActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private PriorityCollegeAdapter mAdapter;
-    public List<PriorityCollegeBean> infoList;
+    public List<SchoolInfo> infoList;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private View view_header;
+    private String member_id,order="rank",area="",school_type="";
+    private TextView reload;
+    private RelativeLayout no_internet_rl,no_data_rl;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
@@ -74,13 +86,18 @@ public class PriorityCollegeActivity extends BaseActivity {
         orderView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-              /*  orderAdapter.setCheckItem(position);
-                mDropDownMenu.setTabText(position == 0 ? headers[3] : orderDatas[position]);
-                mDropDownMenu.closeMenu();*/
                 orderAdapter.setCheckItem(position);
                 mDropDownMenu.setTabText(orderDatas[position]);
                 mDropDownMenu.closeMenu();
-                Toast.makeText(PriorityCollegeActivity.this, "排序条目", Toast.LENGTH_SHORT).show();
+                String selectOrder=orderDatas[position];
+                if (selectOrder.equals("排名")){
+                    order="rank";
+                }else if(selectOrder.equals("录取率")){
+                    order="rate";
+                }else if(selectOrder.equals("分数线")){
+                    order="difen";
+                }
+                refresh();
             }
         });
         //省份
@@ -95,7 +112,6 @@ public class PriorityCollegeActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 areaAdapter.setCheckItem(position);
                 constellationPosition = position;
-                Toast.makeText(PriorityCollegeActivity.this, "星座条目", Toast.LENGTH_SHORT).show();
             }
         });
         ok.setOnClickListener(new View.OnClickListener() {
@@ -103,12 +119,17 @@ public class PriorityCollegeActivity extends BaseActivity {
             public void onClick(View v) {
                 mDropDownMenu.setTabText(constellationPosition == 0 ? headers[0] : citys[constellationPosition]);
                 mDropDownMenu.closeMenu();
-                Toast.makeText(PriorityCollegeActivity.this, "ok", Toast.LENGTH_SHORT).show();
+                if (citys[constellationPosition].equals("全国")){
+                    area="";
+                }else{
+                    area=citys[constellationPosition];
+                }
+                refresh();
             }
         });
         /*类型*/
         final View typeView = getLayoutInflater().inflate(R.layout.layout_type_menu, null);
-        GridView type = typeView.findViewById(R.id.type);
+        final GridView type = typeView.findViewById(R.id.type);
         typeAdapter = new AreaAdapter(PriorityCollegeActivity.this, Arrays.asList(types));
         type.setAdapter(typeAdapter);
         TextView confirm = typeView.findViewById(R.id.confirm);
@@ -118,7 +139,6 @@ public class PriorityCollegeActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 typeAdapter.setCheckItem(position);
                 typeConstellationPosition = position;
-                Toast.makeText(PriorityCollegeActivity.this, "星座条目", Toast.LENGTH_SHORT).show();
             }
         });
         confirm.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +146,12 @@ public class PriorityCollegeActivity extends BaseActivity {
             public void onClick(View v) {
                 mDropDownMenu.setTabText(typeConstellationPosition == 0 ? headers[0] : types[typeConstellationPosition]);
                 mDropDownMenu.closeMenu();
-                Toast.makeText(PriorityCollegeActivity.this, "ok", Toast.LENGTH_SHORT).show();
+                school_type=types[typeConstellationPosition];
+                if (school_type.equals("综合")){
+                    school_type="";
+                }
+                refresh();
+
             }
         });
         //init popupViews{添加的顺序决定展示的条目类型}
@@ -137,18 +162,32 @@ public class PriorityCollegeActivity extends BaseActivity {
         View contentView= LayoutInflater.from(PriorityCollegeActivity.this).inflate(R.layout.layout_refresh,null);
         swipeRefreshLayout=contentView.findViewById(R.id.swipeLayout);
         recyclerView= contentView.findViewById(R.id.rv_list);
+        reload=contentView.findViewById(R.id.reload);
+        no_internet_rl=contentView.findViewById(R.id.no_internet_rl);
+        no_data_rl=contentView.findViewById(R.id.no_data_rl);
+        //点击重新加载数据
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refresh();
+            }
+        });
         initContentView();
         //init dropdownview
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
         //清空popupviews,否则报tab的数量和popupviews的数量不相等的错
         popupViews.clear();
+
+
+
     }
     @Override
     protected void initData() {
-        for (int i = 0; i <10 ; i++) {
-            PriorityCollegeBean collegeBean=new PriorityCollegeBean();
-            infoList.add(collegeBean);
-        }
+       if (!Utils.hasInternet()){
+           swipeRefreshLayout.setVisibility(View.GONE);
+           no_internet_rl.setVisibility(View.VISIBLE);
+           no_data_rl.setVisibility(View.GONE);
+       }
     }
 
     @Override
@@ -188,7 +227,7 @@ public class PriorityCollegeActivity extends BaseActivity {
                 loadMore();
             }
         });
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
 //        mAdapter.setPreLoadNumber(3);
         recyclerView.setAdapter(mAdapter);
         mAdapter.addHeaderView(view_header);
@@ -210,53 +249,70 @@ public class PriorityCollegeActivity extends BaseActivity {
     }
     //刷新
     private void refresh() {
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        member_id=loginInfo.getId();
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
-            @Override
-            public void onSuccess(Call call, Response response, String s) {
-                Log.i("ppp","131"+s);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        setData(true,infoList);
-                        mAdapter.setEnableLoadMore(true);
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                });
-            }
-            @Override
-            public void onEror(Call call, int statusCode, Exception e) {
-                Log.i("ppp","132"+e);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        setData(true,infoList);
-                        mAdapter.setEnableLoadMore(true);
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                });
-
-
-            }
-        });
-
+       apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, order,area ,school_type, new RequestCallBack<String>() {
+           @Override
+           public void onSuccess(Call call, Response response, final String s) {
+               Log.i("tag",s);
+               runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       Gson gson=new Gson();
+                       UniversityBean universityBean = gson.fromJson(s, UniversityBean.class);
+                       List<SchoolInfo> priorSchoolList =universityBean.getData().getInfo().getPriorSchoolList();
+                       if (priorSchoolList!=null && priorSchoolList.size()>0){
+                           setData(true,priorSchoolList);
+                           swipeRefreshLayout.setVisibility(View.VISIBLE);
+                           no_internet_rl.setVisibility(View.GONE);
+                           no_data_rl.setVisibility(View.GONE);
+                       }else{
+                           swipeRefreshLayout.setVisibility(View.GONE);
+                           no_internet_rl.setVisibility(View.GONE);
+                           no_data_rl.setVisibility(View.VISIBLE);
+                       }
+                       mAdapter.setEnableLoadMore(true);
+                       swipeRefreshLayout.setRefreshing(false);
+                   }
+               });
+           }
+           @Override
+           public void onEror(Call call, int statusCode, Exception e) {
+               runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       swipeRefreshLayout.setVisibility(View.GONE);
+                       no_internet_rl.setVisibility(View.VISIBLE);
+                       no_data_rl.setVisibility(View.GONE);
+                       mAdapter.setEnableLoadMore(true);
+                       swipeRefreshLayout.setRefreshing(false);
+                   }
+               });
+           }
+       });
     }
     //加载
     private void loadMore() {
-
-        apiHome.loadMore("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        mNextRequestPage++;
+        apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, "","" , "", new RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
+            public void onSuccess(Call call, Response response, final String s) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(false, infoList);
+                        Gson gson=new Gson();
+                        UniversityBean universityBean = gson.fromJson(s, UniversityBean.class);
+                        List<SchoolInfo> universityList = universityBean.getData().getInfo().getPriorSchoolList();
+                        //数据不为空
+                        setData(false,universityList);
+                        mAdapter.setEnableLoadMore(true);
+                        swipeRefreshLayout.setRefreshing(false);
+
                     }
                 });
-
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 runOnUiThread(new Runnable() {
@@ -266,9 +322,9 @@ public class PriorityCollegeActivity extends BaseActivity {
                         Toast.makeText(PriorityCollegeActivity.this, "网络错误", Toast.LENGTH_LONG).show();
                     }
                 });
-
             }
         });
+
     }
 
     private void setData(boolean isRefresh, List data) {
@@ -285,7 +341,7 @@ public class PriorityCollegeActivity extends BaseActivity {
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
             mAdapter.loadMoreEnd(isRefresh);
-            Toast.makeText(PriorityCollegeActivity.this, "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(PriorityCollegeActivity.this, "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             mAdapter.loadMoreComplete();
         }

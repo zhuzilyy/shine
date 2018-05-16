@@ -17,9 +17,10 @@ public class apiHome {
      * @param page
      * @param callback
      */
-    public static void refresh(String url,int page, RequestCallBack<String> callback){
+    public static void refresh(String url,int page,String member_id, RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
         params.put("page",page+"");
+        params.put("member_id",member_id);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
 
@@ -69,6 +70,22 @@ public class apiHome {
     public static void getCollegeData(String url,String id,RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
         params.put("id",id);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    //获取首页的分数数据
+    public static void getScoreLevel(String url,String member_id,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",member_id);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    //院校优先填报
+    public static void schoolPrior(String url,String member_id,int page,String order,String area,String school_type,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",member_id);
+        params.put("page",page+"");
+        params.put("order",order);
+        params.put("area",area);
+        params.put("school_type",school_type);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
 

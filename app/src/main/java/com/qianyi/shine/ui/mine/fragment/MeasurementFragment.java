@@ -91,7 +91,7 @@ public class MeasurementFragment extends BaseFragment {
     private void refresh() {
         mNextRequestPage = 1;
         measurementAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.refresh("http://www.baidu.com", mNextRequestPage,"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, String s) {
                 Log.i("ppp", "131" + s);

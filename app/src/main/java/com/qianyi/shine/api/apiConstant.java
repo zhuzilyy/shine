@@ -43,6 +43,13 @@ public class apiConstant {
     public static final String WXPAY=BASE_URL+"wxpay";
     //支付宝支付
     public static final String ALIPAY=BASE_URL+"alipay";
+    //首页获取各个参数的数据
+    public static final String SCORE_LEVEL=BASE_URL+"get_scoreline_info";
+    //院校优先填报
+    public static final String SCHOOL_PRiOR=BASE_URL+"prior_school";
+
+
+
 
 
 

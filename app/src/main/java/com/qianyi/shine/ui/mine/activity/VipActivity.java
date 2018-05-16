@@ -22,7 +22,6 @@ import com.qianyi.shine.api.apiPay;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
-import com.qianyi.shine.ui.account.activity.LoginActivity;
 import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.mine.bean.AliBean;
 import com.qianyi.shine.ui.mine.bean.WXPayBean;
@@ -31,7 +30,6 @@ import com.tencent.mm.sdk.modelpay.PayReq;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xutils.http.RequestParams;
 
 import java.util.Map;
 

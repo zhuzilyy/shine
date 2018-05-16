@@ -118,7 +118,7 @@ public class GaoKaoNewsActivity extends BaseActivity {
     private void refresh() {
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh(apiConstant.ARTICLEMORE, mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.refresh(apiConstant.ARTICLEMORE, mNextRequestPage,"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 Log.i("pppxzy", "131" + s);
@@ -164,7 +164,7 @@ public class GaoKaoNewsActivity extends BaseActivity {
 
         mNextRequestPage++;
      //   mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh(apiConstant.ARTICLEMORE, mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.refresh(apiConstant.ARTICLEMORE, mNextRequestPage,"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 Log.i("pppxzy", "131" + s);
