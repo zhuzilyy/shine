@@ -145,7 +145,7 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
                         loadingDialog.dismiss();
                     }
                 });
-
+                Log.i("tt",e.getMessage());
             }
         });
     }

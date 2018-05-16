@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"/>
     <RelativeLayout
+        android:id="@+id/re_payway_zfb"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
@@ -38,8 +39,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageView
+            android:id="@+id/iv_payway_select_zfb"
             android:layout_centerVertical="true"
-            android:src="@mipmap/pay_checked"
+            android:src="@mipmap/pay_nochecked"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -50,6 +52,7 @@
         android:layout_height="0.5dp"/>
 
     <RelativeLayout
+        android:id="@+id/re_payway_wx"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
@@ -64,12 +67,13 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/iv_wechatPay"
             android:layout_marginLeft="20dp"
-            android:text="支付宝"
+            android:text="微信"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageView
+            android:id="@+id/iv_payway_select_wx"
             android:layout_centerVertical="true"
-            android:src="@mipmap/pay_nochecked"
+            android:src="@mipmap/pay_checked"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -79,6 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"/>
     <TextView
+        android:id="@+id/tv_gotoPay"
         android:gravity="center"
         android:text="立即支付"
         android:layout_marginTop="50dp"

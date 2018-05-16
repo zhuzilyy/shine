@@ -24,7 +24,7 @@
                 <!--001-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_15"
                     android:layout_marginRight="@dimen/dp_15"
                     android:orientation="horizontal">   <!--地区-->
@@ -99,6 +99,7 @@
                 </LinearLayout>
                 <!--002-->
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginLeft="@dimen/dp_15"
@@ -107,6 +108,7 @@
                     android:orientation="horizontal">
                     <!--推荐指数-->
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_weight="1"
@@ -122,6 +124,7 @@
                     </LinearLayout>
                     <!--满意程度-->
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_weight="1"
