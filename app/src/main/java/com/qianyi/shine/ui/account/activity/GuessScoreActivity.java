@@ -153,10 +153,7 @@ public class GuessScoreActivity extends BaseActivity {
                            }catch (Exception e){
                                Log.i("exception",e.getMessage());
                            }
-
                        }
-
-
                     }else {
                         Toast.makeText(GuessScoreActivity.this, ""+loginBean.getInfo(), Toast.LENGTH_SHORT).show();
                     }

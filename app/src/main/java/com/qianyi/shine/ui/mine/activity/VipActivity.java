@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -29,6 +30,7 @@ public class VipActivity extends BaseActivity {
     private PopupWindow pw_buyVip,pw_payMethod;
     private View view_buyVip,view_payMethod;
     private TextView tv_confirmOrder;
+    private CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
@@ -36,6 +38,7 @@ public class VipActivity extends BaseActivity {
         view_buyVip=LayoutInflater.from(this).inflate(R.layout.pw_buy_vip,null);
         view_payMethod=LayoutInflater.from(this).inflate(R.layout.pw_pay_method,null);
         tv_confirmOrder=view_buyVip.findViewById(R.id.tv_confirmOrder);
+        customLoadingDialog=new CustomLoadingDialog(this);
     }
     @Override
     protected void initData() {
@@ -87,9 +90,14 @@ public class VipActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.tv_openVip:
+                getVipData();
                 showPopWindow();
                 break;
         }
+    }
+    //获取vip数据
+    private void getVipData() {
+
     }
     //出现提示的pw
     private void showPopWindow() {
