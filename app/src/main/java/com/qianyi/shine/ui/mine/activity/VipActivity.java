@@ -253,6 +253,7 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
                     @Override
                     public void onSuccess(Call call, Response response, String s) {
                         loadingDialog.dismiss();
+
                         Gson gson = new Gson();
                         AliBean aliBean = gson.fromJson(s, AliBean.class);
                         if(aliBean!=null){
