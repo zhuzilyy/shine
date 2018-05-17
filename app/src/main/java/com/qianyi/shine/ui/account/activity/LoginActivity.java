@@ -110,7 +110,9 @@ public class LoginActivity extends BaseActivity {
                               try {
                                   //存储当前用户
                                   Utils.saveUser(user,LoginActivity.this);
-                                  startActivity(new Intent(LoginActivity.this, GuessScoreActivity.class));
+                                  Intent intent=new Intent(LoginActivity.this, GuessScoreActivity.class);
+                                  intent.putExtra("tag","setScore");
+                                  startActivity(intent);
                                   finish();
                               }catch (Exception e){
                                   Log.i("excaption_shine",e.getMessage());

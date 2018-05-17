@@ -5,22 +5,33 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
+import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
+import com.qianyi.shine.ui.account.activity.GuessScoreActivity;
+import com.qianyi.shine.ui.account.activity.LoginActivity;
+import com.qianyi.shine.ui.account.bean.LoginBean;
+import com.qianyi.shine.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2018/4/8.
  */
 
 public class WillingsSettingActivity extends BaseActivity {
-    private IntelligentFillCollegeActivity activity = new IntelligentFillCollegeActivity();
     @BindView(R.id.tv_title)
     TextView tv_title;
     @BindView(R.id.tv_area)
@@ -30,7 +41,8 @@ public class WillingsSettingActivity extends BaseActivity {
     @BindView(R.id.tv_occupationName)
     TextView tv_occupationName;
     private MyReceiver myReceiver;
-    private String majorName,area,occupationName;
+    private String majorName="",area="",occupationName="";
+    CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
@@ -41,6 +53,8 @@ public class WillingsSettingActivity extends BaseActivity {
         IntentFilter intentFilter=new IntentFilter();
         intentFilter.addAction("com.action.setwilling");
         registerReceiver(myReceiver,intentFilter);
+
+        customLoadingDialog=new CustomLoadingDialog(this);
     }
 
     @Override
@@ -67,7 +81,6 @@ public class WillingsSettingActivity extends BaseActivity {
         switch (view.getId()){
             case R.id.btn_confirm:
                 int count=0;
-                intent=new Intent();
                 if (!TextUtils.isEmpty(area)){
                     count++;
                 }
@@ -81,12 +94,7 @@ public class WillingsSettingActivity extends BaseActivity {
                     Toast.makeText(WillingsSettingActivity.this, "请至少设置1项意愿", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                intent.putExtra("willing",count);
-                intent.putExtra("area",area);
-                intent.putExtra("majorName",majorName);
-                intent.putExtra("occupationName",occupationName);
-                setResult(1,intent);
-                finish();
+                setWillings(count);
                 break;
             case R.id.iv_back:
                 finish();
@@ -105,6 +113,51 @@ public class WillingsSettingActivity extends BaseActivity {
                 startActivityForResult(intent,3);
                 break;
         }
+    }
+    //意愿设置
+    private void setWillings(final int count) {
+        customLoadingDialog.show();
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        String memberId= loginInfo.getId();
+        apiHome.willingSet(apiConstant.WILLING_SETTING, memberId, area, majorName, occupationName, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(Call call, Response response, final String s) {
+                customLoadingDialog.dismiss();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Gson gson = new Gson();
+                        LoginBean loginBean=gson.fromJson(s, LoginBean.class);
+                        if(loginBean != null){
+                            String code = loginBean.getCode();
+                            if("0" .equals(code)){
+                                LoginBean.LoginData.LoginInfo user = loginBean.getData().getInfo();
+                                try {
+                                    //存储当前用户
+                                    Utils.saveUser(user,WillingsSettingActivity.this);
+                                    Intent intent=new Intent();
+                                    intent.putExtra("willing",count);
+                                    intent.putExtra("area",area);
+                                    intent.putExtra("majorName",majorName);
+                                    intent.putExtra("occupationName",occupationName);
+                                    setResult(1,intent);
+                                    finish();
+                                }catch (Exception e){
+                                    Log.i("excaption_shine",e.getMessage());
+                                }
+                            }else {
+                                Toast.makeText(WillingsSettingActivity.this, ""+loginBean.getInfo(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+            }
+            @Override
+            public void onEror(Call call, int statusCode, Exception e) {
+                customLoadingDialog.dismiss();
+                Toast.makeText(WillingsSettingActivity.this, "网络错误意愿设置失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

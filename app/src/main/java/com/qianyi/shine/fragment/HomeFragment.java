@@ -36,6 +36,7 @@ import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.fragment.entity.TestEntity;
+import com.qianyi.shine.ui.account.activity.GuessScoreActivity;
 import com.qianyi.shine.ui.account.activity.LoginActivity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.account.bean.LoginBean;
@@ -51,6 +52,7 @@ import com.qianyi.shine.ui.home.activity.IntelligentFillCollegeActivity;
 import com.qianyi.shine.ui.home.activity.PriorityCollegeActivity;
 import com.qianyi.shine.ui.home.activity.SearchOccupationActivity;
 import com.qianyi.shine.ui.home.bean.HomeBean;
+import com.qianyi.shine.utils.SPUtils;
 import com.qianyi.shine.utils.ToastUtils;
 import com.qianyi.shine.utils.Utils;
 
@@ -97,7 +99,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public AMapLocationClientOption mLocationOption = null;
 
     //初始化AMapLocationClientOption对象
-    private TextView cityname,tv_chongCi,tv_baoShou,tv_wenTuo;
+    private TextView cityname,tv_chongCi,tv_baoShou,tv_wenTuo,tv_totalCount,tv_subjectType,tv_score,tv_level;
     private String province,memberId;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
@@ -161,10 +163,21 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private void addHeadView() {
         Typeface typeface1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/bebas.ttf");
         View headView = getLayoutInflater().inflate(R.layout.head_view, (ViewGroup) mRecyclerView.getParent(), false);
-        TextView count = headView.findViewById(R.id.suitCount);
+        tv_totalCount = headView.findViewById(R.id.suitCount);
         tv_chongCi = headView.findViewById(R.id.tv_chongCi);
         tv_baoShou = headView.findViewById(R.id.tv_baoShou);
         tv_wenTuo = headView.findViewById(R.id.tv_wenTuo);
+        tv_subjectType = headView.findViewById(R.id.tv_subjectType);
+        tv_score = headView.findViewById(R.id.tv_score);
+        tv_level = headView.findViewById(R.id.tv_level);
+        String score= (String) SPUtils.get(getActivity(),"score","");
+        String type= (String) SPUtils.get(getActivity(),"type","");
+        String level= (String) SPUtils.get(getActivity(),"level","");
+        tv_subjectType.setText(score);
+        tv_score.setText(type);
+        tv_level.setText(level);
+
+
         LinearLayout ll_findCollege = headView.findViewById(R.id.ll_findCollege);
         LinearLayout ll_employment = headView.findViewById(R.id.ll_employment);
         LinearLayout ll_findMajor = headView.findViewById(R.id.ll_findMajor);
@@ -194,7 +207,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         homeSearchLin.setOnClickListener(this);
         ll_acceptanceRate.setOnClickListener(this);
 
-        count.setTypeface(typeface1);
+        tv_totalCount.setTypeface(typeface1);
         tv_chongCi.setTypeface(typeface1);
         tv_wenTuo.setTypeface(typeface1);
         tv_baoShou.setTypeface(typeface1);
@@ -370,12 +383,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                     String chongCi = info.getString("CC");
                     String baoShou = info.getString("BS");
                     String wenTuo = info.getString("WT");
-                    Log.i("tag",chongCi+"=======chongCi111111111========");
-                    Log.i("tag",baoShou+"=======baoShou11111111111========");
-                    Log.i("tag",wenTuo+"=======wenTuo11111111111========");
                     tv_chongCi.setText(chongCi);
                     tv_baoShou.setText(baoShou);
                     tv_wenTuo.setText(wenTuo);
+                    int intChongCi = Integer.parseInt(chongCi);
+                    int intBaoShou = Integer.parseInt(baoShou);
+                    int intWenTuo = Integer.parseInt(wenTuo);
+                    tv_totalCount.setText((intBaoShou+intChongCi+intWenTuo)+"");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

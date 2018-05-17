@@ -16,6 +16,7 @@
             android:paddingBottom="10dp">
 
             <RelativeLayout
+                android:id="@+id/rl_setScore"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="10dp"
@@ -32,13 +33,15 @@
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-
                 <TextView
+                    android:id="@+id/tv_collegeData"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
+                    android:layout_alignBottom="@+id/iv_right"
+                    android:layout_marginEnd="11dp"
+                    android:layout_marginRight="11dp"
                     android:layout_toLeftOf="@+id/iv_right"
+                    android:layout_toStartOf="@+id/iv_right"
                     android:text="内蒙古/理科/504"
                     android:textColor="@color/white" />
 

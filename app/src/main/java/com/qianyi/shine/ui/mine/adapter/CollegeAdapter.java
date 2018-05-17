@@ -32,6 +32,8 @@ public class CollegeAdapter extends BaseQuickAdapter<UniversityInfo, BaseViewHol
         RoundedImageView iv_college=helper.getView(R.id.iv_college);
         Glide.with(mContext).load(item.getLogo()).placeholder(R.mipmap.logo).into(iv_college);
         helper.setText(R.id.collegeName,item.getName());
+        helper.setText(R.id.tv_area,item.getLevel());
+        helper.setText(R.id.tv_type,item.getSchool_type());
         //设置等级
         String is_211 = item.getIs_211();
         String is_985 = item.getIs_985();
@@ -47,6 +49,10 @@ public class CollegeAdapter extends BaseQuickAdapter<UniversityInfo, BaseViewHol
         }
         helper.setText(R.id.tv_level,is_211+"/"+is_985);
         //综合排名
-        helper.setText(R.id.tv_rank,item.getRank());
+        if (item.getRank().equals("0")){
+            helper.setText(R.id.tv_rank,"暂无数据");
+        }else{
+            helper.setText(R.id.tv_rank,item.getRank());
+        }
     }
 }

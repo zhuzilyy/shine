@@ -49,8 +49,8 @@ public class apiConstant {
     public static final String SCHOOL_PRiOR=BASE_URL+"prior_school";
     //推荐大学更多
     public static final String RECOMMEND_MORE_COLLEGE=BASE_URL+"recommend_university_more";
-
-
+    //意愿设置
+    public static final String WILLING_SETTING=BASE_URL+"insert_intentioninfo";
 
 
 

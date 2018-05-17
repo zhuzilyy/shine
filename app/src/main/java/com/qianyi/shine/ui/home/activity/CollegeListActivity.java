@@ -44,7 +44,7 @@ import okhttp3.Response;
  */
 
 public class CollegeListActivity extends BaseActivity {
-    private String[] headers = {"地区", "类型", "批次","位次"};
+    private String[] headers = {"全国", "类型", "批次","位次"};
     private List<View> popupViews = new ArrayList<>();
     private GirdDropDownAdapter orderAdapter;
     private GirdDropDownAdapter typeAdapter;
@@ -54,8 +54,7 @@ public class CollegeListActivity extends BaseActivity {
             "江苏","浙江","安徽","福建","江西","山东","河南","湖北","湖南","广东","海南","四川","贵州",
             "云南","陕西","甘肃","青海","内蒙古","广西","宁夏","新疆"};
     private String[] types={"985","211","默认"};
-    private String[] batch= {"提前批", "一本", "二本"};
-
+    private String[] batch= {"本科", "专科"};
     private String[] orderDatas = {"概率", "分数线", "排名"};
     private int constellationPosition = 0;
     @BindView(R.id.dropDownMenu)

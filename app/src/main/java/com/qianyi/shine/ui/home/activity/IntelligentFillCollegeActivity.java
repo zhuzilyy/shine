@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,9 +17,13 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.ui.account.activity.GuessScoreActivity;
+import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.home.adapter.IntellgenceFillAdapter;
 import com.qianyi.shine.ui.home.bean.IntellgenceFillBean;
+import com.qianyi.shine.utils.SPUtils;
+import com.qianyi.shine.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +53,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     private  String area;
     private  String majorName;
     private  String occupationName;
+    private TextView tv_collegeData;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
@@ -99,6 +105,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
         View view_header=getLayoutInflater().inflate(R.layout.header_intelligence_fill,null);
         tv_willings=view_header.findViewById(R.id.tv_willings);
         mAdapter.addHeaderView(view_header);
+        setHeaderData(view_header);
         //点击事件
         view_header.findViewById(R.id.rl_willing).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +117,38 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent=new Intent(IntelligentFillCollegeActivity.this, com.qianyi.shine.ui.college.activity.CollegeActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    //设置头部的一些信息
+    private void setHeaderData(View view_header) {
+        tv_collegeData=view_header.findViewById(R.id.tv_collegeData);
+        RelativeLayout rl_setScore=view_header.findViewById(R.id.rl_setScore);
+        String area = (String) SPUtils.get(IntelligentFillCollegeActivity.this, "area", "");
+        String type = (String) SPUtils.get(IntelligentFillCollegeActivity.this, "type", "");
+        String score = (String) SPUtils.get(IntelligentFillCollegeActivity.this, "score", "");
+        tv_collegeData.setText(area+"/"+type+"/"+score);
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        String intention_area = loginInfo.getMember_scoreinfo().getIntention_area();
+        String intention_job = loginInfo.getMember_scoreinfo().getIntention_job();
+        String intention_major = loginInfo.getMember_scoreinfo().getIntention_major();
+        int count=0;
+        if (!TextUtils.isEmpty(intention_area)){
+            count++;
+        }
+        if (!TextUtils.isEmpty(intention_job)){
+            count++;
+        }
+        if (!TextUtils.isEmpty(intention_major)){
+            count++;
+        }
+        tv_willings.setText("已经设置"+count+"个意愿");
+        rl_setScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(IntelligentFillCollegeActivity.this,GuessScoreActivity.class);
+                intent.putExtra("tag","intelligentFill");
                 startActivity(intent);
             }
         });
