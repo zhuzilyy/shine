@@ -52,7 +52,6 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 	}
 	@Override
 	public void onResp(BaseResp resp) {
-
 		if (resp.errCode == BaseResp.ErrCode.ERR_OK) {
 			//֧支付成功
 			Toast.makeText(this, "xxx,chengggong百元", Toast.LENGTH_SHORT).show();
@@ -92,12 +91,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 					}
 				});
 			}
-
-
 		}else{
 			finish();
 		}
 	}
-
-
 }
