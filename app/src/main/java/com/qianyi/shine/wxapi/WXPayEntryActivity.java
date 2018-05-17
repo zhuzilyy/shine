@@ -57,7 +57,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 			Toast.makeText(this, "xxx,chengggong百元", Toast.LENGTH_SHORT).show();
 			LoginBean.LoginData.LoginInfo user = Utils.readUser(WXPayEntryActivity.this);
 			if(user!=null){
-				apiAccount.Login(apiConstant.LOGIN, user.getMobile(), user.getPassword(), new RequestCallBack<String>() {
+				apiAccount.updateUserInfo(apiConstant.GETMEMBERINFO, user.getId(), new RequestCallBack<String>() {
 					@Override
 					public void onSuccess(Call call, Response response, final String s) {
 						runOnUiThread(new Runnable() {

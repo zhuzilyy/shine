@@ -72,5 +72,7 @@ public class apiConstant {
     public static String NOTIFY_URL;
     //获取支付参数
     public static String VIP_CONFIG=BASE_URL+"vip_config";
+    //获取个人资料
+    public static String GETMEMBERINFO=  BASE_URL+"get_memberinfo";
 
 }

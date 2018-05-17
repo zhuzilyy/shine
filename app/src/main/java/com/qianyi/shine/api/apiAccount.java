@@ -65,4 +65,13 @@ public class apiAccount {
         params.put("password",pwdStr);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+
+    /***
+     * 更新用户信息
+     */
+    public static void updateUserInfo(String url,String memberId,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",memberId);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 }
