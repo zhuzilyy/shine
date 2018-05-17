@@ -26,6 +26,7 @@ import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.home.activity.SelectCollegeAreaActivity;
+import com.qianyi.shine.utils.SPUtils;
 import com.qianyi.shine.utils.SetStatusBarColor;
 import com.qianyi.shine.utils.Utils;
 
@@ -54,16 +55,28 @@ public class GuessScoreActivity extends BaseActivity {
     public EditText et_myscore;
     @BindView(R.id.ll_wraning)
     public LinearLayout ll_wraning;
+    private Intent intent;
+    private String tag;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
         tv_title.setText("高考预估成绩");
+        boolean isFirst= (boolean) SPUtils.get(GuessScoreActivity.this,"isFirst",true);
+        if (isFirst){
+            ll_wraning.setVisibility(View.VISIBLE);
+        }else{
+            ll_wraning.setVisibility(View.GONE);
+        }
+
+        intent=getIntent();
+        if (intent!=null){
+            tag=intent.getStringExtra("tag");
+        }
     }
     @Override
     protected void initData() {
 
     }
-
     @Override
     protected void getResLayout() {
         setContentView(R.layout.activity_guess_score);
@@ -105,6 +118,12 @@ public class GuessScoreActivity extends BaseActivity {
                     Toast.makeText(this, "请输入分数", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+                String limit = loginInfo.getMember_scoreinfo().getLimit();
+                if (limit.equals("0")){
+                    Toast.makeText(this, "非vip只能填写2次高考信息", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String id = Utils.readUser(GuessScoreActivity.this).getId();
                 goToMain(id,type,prov,myScore,myRank);
                 break;
@@ -117,6 +136,7 @@ public class GuessScoreActivity extends BaseActivity {
                 break;
             case R.id.tv_know:
                 ll_wraning.setVisibility(View.GONE);
+                SPUtils.put(GuessScoreActivity.this,"isFirst",false);
                 break;
         }
     }
@@ -143,13 +163,24 @@ public class GuessScoreActivity extends BaseActivity {
                     if("0".equals(code)){
                        LoginBean.LoginData loginData =  loginBean.getData();
                        LoginBean.LoginData.LoginInfo loginInfo = loginData.getInfo();
-                       if(loginInfo != null){
+                        String score = loginInfo.getMember_scoreinfo().getScore();
+                        String type = loginInfo.getMember_scoreinfo().getType();
+                        String level = loginInfo.getMember_scoreinfo().getLevel();
+                        String area = loginInfo.getMember_scoreinfo().getProv();
+                        SPUtils.put(GuessScoreActivity.this,"score",score);
+                        SPUtils.put(GuessScoreActivity.this,"type",type);
+                        SPUtils.put(GuessScoreActivity.this,"level",level);
+                        SPUtils.put(GuessScoreActivity.this,"area",area);
+                        if(loginInfo != null){
                            try{
                                Utils.clearSharedUser(GuessScoreActivity.this);
                                Utils.saveUser(loginInfo,GuessScoreActivity.this);
-                               startActivity(new Intent(GuessScoreActivity.this,MainActivity.class));
-                               finish();
-
+                               if (tag.equals("setScore")){
+                                   startActivity(new Intent(GuessScoreActivity.this,MainActivity.class));
+                                   finish();
+                               }else if (tag.equals("intelligentFill")){
+                                   finish();
+                               }
                            }catch (Exception e){
                                Log.i("exception",e.getMessage());
                            }
@@ -184,8 +215,6 @@ public class GuessScoreActivity extends BaseActivity {
                 if (!TextUtils.isEmpty(arer)) {
                     tv_selectArea.setText(arer);
                 }
-
-
                 break;
 
             default:
