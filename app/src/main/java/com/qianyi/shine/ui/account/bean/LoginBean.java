@@ -245,58 +245,25 @@ public class LoginBean {
                 public String score;
                 public String rank;
                 public String create_time;
+
+                public String getLevel() {
+                    return level;
+                }
+
+                public void setLevel(String level) {
+                    this.level = level;
+                }
+
                 public String level;
                 public String intention_major;
                 public String intention_job;
                 public String intention_area;
                 public String limit;
-                public String getIntention_major() {
-                    return intention_major;
-                }
 
-                public void setIntention_major(String intention_major) {
-                    this.intention_major = intention_major;
-                }
 
-                public String getIntention_job() {
-                    return intention_job;
-                }
 
-                public void setIntention_job(String intention_job) {
-                    this.intention_job = intention_job;
-                }
 
-                public String getIntention_area() {
-                    return intention_area;
-                }
 
-                public void setIntention_area(String intention_area) {
-                    this.intention_area = intention_area;
-                }
-
-                public String getLimit() {
-                    return limit;
-                }
-
-                public void setLimit(String limit) {
-                    this.limit = limit;
-                }
-
-                public String getLevel() {
-                    return level;
-                }
-
-                public void setLevel(String level) {
-                    this.level = level;
-                }
-
-                public String getLevel() {
-                    return level;
-                }
-
-                public void setLevel(String level) {
-                    this.level = level;
-                }
 
                 public String getIntention_major() {
                     return intention_major;
@@ -330,11 +297,7 @@ public class LoginBean {
                     this.limit = limit;
                 }
 
-                public String level;
-                public String intention_major;
-                public String intention_job;
-                public String intention_area;
-                public String limit;
+
 
 
                 public String getId() {
