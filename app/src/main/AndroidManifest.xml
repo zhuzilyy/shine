@@ -42,6 +42,12 @@
                 android:resource="@xml/file_paths"
                 />
         </provider>
+        <!--微信支付开始-->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        <!-- 微信支付结束-->
 
         <!--高德定位开始-->
         <meta-data

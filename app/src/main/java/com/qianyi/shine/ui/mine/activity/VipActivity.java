@@ -24,6 +24,7 @@ import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.mine.bean.AliBean;
+import com.qianyi.shine.ui.mine.bean.VipCongBean;
 import com.qianyi.shine.ui.mine.bean.WXPayBean;
 import com.qianyi.shine.utils.Utils;
 import com.tencent.mm.sdk.modelpay.PayReq;
@@ -55,6 +56,11 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
     private TextView tv_gotoPay;
     private PayReq req;
     private String mOrderstr;
+    //
+    private String vipMoney;
+    private String vipLimit;
+    private TextView tv_vipMoney;
+    private TextView tv_totalMoney;
 
 
     @Override
@@ -67,6 +73,9 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
 
         final ImageView iv_wx = view_payMethod.findViewById(R.id.iv_payway_select_wx);
         final ImageView iv_zfb = view_payMethod.findViewById(R.id.iv_payway_select_zfb);
+
+        tv_vipMoney = view_buyVip.findViewById(R.id.tv_vipMoney);
+        tv_totalMoney=view_buyVip.findViewById(R.id.tv_totalMoney);
         tv_gotoPay=view_payMethod.findViewById(R.id.tv_gotoPay);
         tv_gotoPay.setOnClickListener(this);
         //选择方式
@@ -173,16 +182,56 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.tv_openVip:
-                showPopWindow();
+                getVipConf();
                 break;
         }
     }
+
+    /***
+     * 获取支付参数
+     */
+    private void getVipConf() {
+        final CustomLoadingDialog loadingDialog = new CustomLoadingDialog(VipActivity.this);
+        loadingDialog.show();
+        apiPay.getPayConf(apiConstant.VIP_CONFIG, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(Call call, Response response, String s) {
+                loadingDialog.dismiss();
+                Gson gson = new Gson();
+                VipCongBean vipCongBean = gson.fromJson(s, VipCongBean.class);
+                if(vipCongBean!=null){
+                    VipCongBean.VipCongData vipCongData = vipCongBean.getData();
+                    if(vipCongData!=null){
+                        VipCongBean.VipCongData.VipCongInfo vipCongInfo = vipCongData.getInfo();
+                        if(vipCongInfo!=null){
+                            vipMoney = vipCongInfo.getLimit();
+                            vipLimit = vipCongInfo.getMoney();
+                            if(!TextUtils.isEmpty(vipMoney)){
+                                showPopWindow(vipMoney);
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onEror(Call call, int statusCode, Exception e) {
+                loadingDialog.dismiss();
+            }
+        });
+
+
+    }
+
     //出现提示的pw
-    private void showPopWindow() {
+    private void showPopWindow(String vipMoney) {
         pw_buyVip = new PopupWindow(this);
         pw_buyVip.setContentView(view_buyVip);
         pw_buyVip.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
         pw_buyVip.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        tv_vipMoney.setText("￥"+vipMoney);
+        tv_totalMoney.setText("￥"+vipMoney);
         pw_buyVip.setTouchable(true);
         pw_buyVip.setFocusable(true);
         pw_buyVip.setBackgroundDrawable(new BitmapDrawable());
@@ -251,7 +300,6 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
                     @Override
                     public void onSuccess(Call call, Response response, String s) {
                         loadingDialog.dismiss();
-
                         Gson gson = new Gson();
                         AliBean aliBean = gson.fromJson(s, AliBean.class);
                         if(aliBean!=null){
@@ -263,7 +311,6 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
                                     if(!TextUtils.isEmpty(mOrderstr)){
                                         alipay2(mOrderstr);
                                     }
-
                                 }
                             }
                         }
