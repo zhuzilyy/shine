@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
+import com.qianyi.shine.ui.home.bean.SalaryMajorInfo;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ import java.util.List;
 
 public class Prospect_MoneyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     private Context mContext;
-    private List<CollegeEntity> datas;//数据
+    private List<SalaryMajorInfo> datas;//数据
 
     //自定义监听事件
     public static interface OnRecyclerViewItemClickListener {
@@ -34,7 +36,7 @@ public class Prospect_MoneyAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     //适配器初始化
-    public Prospect_MoneyAdapter(Context context, List<CollegeEntity> datas) {
+    public Prospect_MoneyAdapter(Context context, List<SalaryMajorInfo> datas) {
         mContext = context;
         this.datas = datas;
     }
@@ -57,9 +59,6 @@ public class Prospect_MoneyAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             ).inflate(R.layout.lay_hightmoney_item, parent,
                     false);//这个布局就是一个imageview用来显示图片
             Prospect_MoneyAdapter.MyViewHolder holder = new Prospect_MoneyAdapter.MyViewHolder(view);
-
-
-
             return holder;
         }
         return null;
@@ -69,7 +68,9 @@ public class Prospect_MoneyAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //将数据与item视图进行绑定，如果是MyViewHolder就加载网络图片，如果是MyViewHolder2就显示页数
         if (holder instanceof Prospect_MoneyAdapter.MyViewHolder) {
-
+            ((MyViewHolder) holder).tv_index.setText((position+1)+"");
+            ((MyViewHolder) holder).tv_name.setText((datas.get(position).getMajor_name()));
+            ((MyViewHolder) holder).tv_salary.setText(datas.get(position).getSalary5());
             // Picasso.with(mContext).load(datas.get(position).getUrl()).into(((MyViewHolder) holder).iv);//加载网络图片
             if(mOnItemClickListener!=null){
                 ((Prospect_MoneyAdapter.MyViewHolder) holder).pic_item.setOnClickListener(new View.OnClickListener() {
@@ -90,20 +91,15 @@ public class Prospect_MoneyAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return this.datas.size();//获取数据的个数
     }
 
-
-
-
-
     //自定义ViewHolder，用于加载图片
     class MyViewHolder extends RecyclerView.ViewHolder {
         private ImageView pic_item;
-
-
-
+        private TextView tv_name,tv_index,tv_salary;
         public MyViewHolder(View view) {
             super(view);
-            pic_item = view.findViewById(R.id.pic_item);
-
+            tv_name=view.findViewById(R.id.tv_name);
+            tv_index=view.findViewById(R.id.tv_index);
+            tv_salary=view.findViewById(R.id.tv_salary);
         }
     }
 }

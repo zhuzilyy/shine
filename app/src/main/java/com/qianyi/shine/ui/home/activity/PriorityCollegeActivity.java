@@ -69,11 +69,15 @@ public class PriorityCollegeActivity extends BaseActivity {
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private View view_header;
-    private String member_id,order="rank",area="",school_type="";
+    private String member_id,order="rank",area="",school_type="",rate_type="";
     private TextView reload;
     private RelativeLayout no_internet_rl,no_data_rl;
     @Override
     protected void initViews() {
+        Intent intent=getIntent();
+        if (intent!=null){
+            rate_type=intent.getStringExtra("risk");
+        }
         BaseActivity.addActivity(this);
         view_header=getLayoutInflater().inflate(R.layout.header_priority_college,null);
         tv_title.setText("院校优先填报");
@@ -253,7 +257,7 @@ public class PriorityCollegeActivity extends BaseActivity {
         member_id=loginInfo.getId();
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-       apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, order,area ,school_type, new RequestCallBack<String>() {
+       apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, order,area ,school_type,rate_type, new RequestCallBack<String>() {
            @Override
            public void onSuccess(Call call, Response response, final String s) {
                Log.i("tag",s);
@@ -296,7 +300,7 @@ public class PriorityCollegeActivity extends BaseActivity {
     //加载
     private void loadMore() {
         mNextRequestPage++;
-        apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, "","" , "", new RequestCallBack<String>() {
+        apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, order,area , school_type, rate_type,new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 runOnUiThread(new Runnable() {

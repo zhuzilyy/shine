@@ -193,6 +193,7 @@
                 android:orientation="horizontal">
                 <!--冲刺-->
                 <LinearLayout
+                    android:id="@+id/ll_chongci"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -238,6 +239,7 @@
                     android:background="@color/gray" />
                 <!--保守-->
                 <LinearLayout
+                    android:id="@+id/ll_baoshou"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -283,6 +285,7 @@
                     android:background="@color/gray" />
                 <!--稳妥-->
                 <LinearLayout
+                    android:id="@+id/ll_wentuo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

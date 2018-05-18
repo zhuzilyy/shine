@@ -67,7 +67,7 @@ public class MoreCollegeActivity extends BaseActivity {
     private static final int PAGE_SIZE = 6;
     @BindView(R.id.tv_title)
     TextView tv_title;
-    private String member_id,order="rank",area="",school_type="";
+    private String member_id,order="rank",area="",school_type="",rate_type="";
     private TextView reload;
     private RelativeLayout no_internet_rl,no_data_rl;
     private int constellationPosition = 0;
@@ -297,7 +297,7 @@ public class MoreCollegeActivity extends BaseActivity {
     //加载
     private void loadMore() {
         mNextRequestPage++;
-        apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, "","" , "", new RequestCallBack<String>() {
+        apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, order,area, school_type,rate_type, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 runOnUiThread(new Runnable() {

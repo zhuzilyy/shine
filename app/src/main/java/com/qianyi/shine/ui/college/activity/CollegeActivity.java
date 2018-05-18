@@ -28,6 +28,7 @@ import com.qianyi.shine.ui.college.fragments.collegeIntroductionFragment;
 import com.qianyi.shine.ui.college.fragments.collegeProfessionalSettingsFragment;
 import com.qianyi.shine.ui.college.fragments.collegeScoreFragment;
 import com.qianyi.shine.ui.home.bean.CollegeDetailsBean;
+import com.qianyi.shine.utils.SPUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,10 +78,6 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
     @BindView(R.id.college_logo) public RoundedImageView college_logo;
     @BindView(R.id.collegeName) public TextView collegeName;
     @BindView(R.id.collegeOrder) public TextView collegeOrder;
-
-
-
-
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
@@ -126,6 +123,8 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
                                     CollegeDetailsBean.CollegeDetailsData.CollegeDetailsInfo detailsInfo = detailsData.getInfo();
                                     if(detailsInfo!=null){
                                         //赋值界面数据
+                                        String wmzyId=detailsInfo.getWmzy_school_id();
+                                        SPUtils.put(CollegeActivity.this,"wmzyId",wmzyId);
                                         setCollegeData(detailsInfo);
                                         introductionFragment.setCollegeDataFromRoot(detailsInfo);
                                     }

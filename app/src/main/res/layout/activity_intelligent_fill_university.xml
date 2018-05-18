@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingBottom="60dp"
-        >
-    <include layout="@layout/layout_title"/>
+        android:paddingBottom="60dp">
+        <include layout="@layout/layout_title" />
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_college"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </android.support.v4.widget.SwipeRefreshLayout>
+        <include layout="@layout/common_wrong_intert" />
+        <include layout="@layout/common_no_data" />
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="55dp">
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true">
         <Button
+            android:visibility="gone"
             android:id="@+id/btn_comfirm_"
             android:layout_width="match_parent"
-            android:layout_centerInParent="true"
             android:layout_height="45dp"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="@dimen/dp_40"
             android:layout_marginRight="@dimen/dp_40"
-            android:text="生成志愿表"
             android:background="@drawable/shape_corner_blue"
-            android:textSize="16sp"
+            android:text="生成志愿表"
             android:textColor="@color/white"
-            />
-
+            android:textSize="16sp" />
     </RelativeLayout>
 </RelativeLayout>

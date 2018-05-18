@@ -15,9 +15,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             >
             <TextView
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="临床医疗"
@@ -26,7 +27,8 @@
 
                 />
             <TextView
-                android:layout_marginLeft="@dimen/dp_10"
+                android:id="@+id/tv_salary"
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="毕业5年后的月薪 ￥5432"
@@ -35,14 +37,13 @@
                 />
         </LinearLayout>
         <TextView
+            android:id="@+id/tv_zhineng"
             android:layout_marginTop="@dimen/dp_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="职业方向介绍：语言病理学专家/职业医疗师等"
             android:textSize="12sp"
             />
-
-
     </LinearLayout>
     <ImageView
         android:layout_width="25dp"

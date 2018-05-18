@@ -9,16 +9,27 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.gson.Gson;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
+import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.career_planning.entity.SuitableForMeEntity;
 import com.qianyi.shine.ui.college.activity.ProfessionalActivity;
 import com.qianyi.shine.ui.college.adapter.ProfessionAdapter;
+import com.qianyi.shine.ui.home.bean.CollegeMajorBean;
+import com.qianyi.shine.ui.home.bean.SchoolInfo;
+import com.qianyi.shine.ui.home.bean.UniversityBean;
+import com.qianyi.shine.ui.home.bean.UniversityMajorInfo;
+import com.qianyi.shine.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +47,19 @@ public class collegeProfessionalSettingsFragment extends BaseFragment {
     public SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.rv_list)
     public RecyclerView mRecyclerView;
+    @BindView(R.id.no_data_rl)
+    RelativeLayout no_data_rl;
+    @BindView(R.id.no_internet_rl)
+    RelativeLayout no_internet_rl;
+    @BindView(R.id.reload)
+    TextView reload;
     public ProfessionAdapter mAdapter;
-    public List<SuitableForMeEntity> list_temp;
+    public List<UniversityMajorInfo> list_temp;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
-
+    private Intent intent;
+    private String universityId;
+    private CustomLoadingDialog customLoadingDialog;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         View layoutRes= inflater.inflate(R.layout.fragment_college_professionalsettings,null);
@@ -49,55 +68,52 @@ public class collegeProfessionalSettingsFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
+        customLoadingDialog=new CustomLoadingDialog(getActivity());
+        intent=getActivity().getIntent();
+        if (intent!=null){
+            universityId=intent.getStringExtra("id");
+        }
+        list_temp=new ArrayList<>();
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //上拉加载
         initAdapter();
-
         //下拉刷新
         initRefreshLayout();
         mSwipeRefreshLayout.setRefreshing(true);
-        refresh();
 
     }
 
     @Override
     protected void initData() {
-        list_temp=new ArrayList<>();
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-        list_temp.add(new SuitableForMeEntity("积分上飞机","斐林试剂佛我文件佛if我欧文覅积分","发链接非叫我佛教佛为我金佛我我飞机哦我IE见覅欧文"));
-
+        if (Utils.hasInternet()){
+            refresh();
+        }else{
+            mSwipeRefreshLayout.setVisibility(View.GONE);
+            no_data_rl.setVisibility(View.GONE);
+            no_internet_rl.setVisibility(View.VISIBLE);
+        }
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refresh();
+            }
+        });
     }
 
     @Override
     protected void initListener() {
 
     }
-
     private void initAdapter() {
         mAdapter = new ProfessionAdapter(R.layout.professional_item,list_temp);
-        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+       /* mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 loadMore();
             }
-        });
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        });*/
+        mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
 //        mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
@@ -108,8 +124,6 @@ public class collegeProfessionalSettingsFragment extends BaseFragment {
                 getActivity().startActivity(intent);
             }
         });
-
-
     }
     private void initRefreshLayout() {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -121,41 +135,43 @@ public class collegeProfessionalSettingsFragment extends BaseFragment {
     }
     //刷新
     private void refresh() {
-        Toast.makeText(mActivity, "1346458465", Toast.LENGTH_SHORT).show();
+        customLoadingDialog.show();
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh("http://www.baidu.com", mNextRequestPage,"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.majorSetting(apiConstant.MAJOR_SETTING, universityId, new RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
-                Log.i("ppp","131"+s);
+            public void onSuccess(Call call, Response response, final String s) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true,list_temp);
+                        customLoadingDialog.dismiss();
+                        Gson gson=new Gson();
+                        CollegeMajorBean collegeMajorBean = gson.fromJson(s, CollegeMajorBean.class);
+                        List<UniversityMajorInfo> universityList = collegeMajorBean.getData().getInfo().getMajor();
+                        //数据不为空
+                        if (universityList!=null && universityList.size()>0){
+                            setData(true,universityList);
+                            mSwipeRefreshLayout.setVisibility(View.VISIBLE);
+                            no_internet_rl.setVisibility(View.GONE);
+                            no_data_rl.setVisibility(View.GONE);
+                        }else{
+                            mSwipeRefreshLayout.setVisibility(View.GONE);
+                            no_internet_rl.setVisibility(View.GONE);
+                            no_data_rl.setVisibility(View.VISIBLE);
+                        }
                         mAdapter.setEnableLoadMore(true);
                         mSwipeRefreshLayout.setRefreshing(false);
-
-
                     }
                 });
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
-                Log.i("ppp","132"+e);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        setData(true,list_temp);
-                        mAdapter.setEnableLoadMore(true);
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
-                });
-
-
+                customLoadingDialog.dismiss();
+                mSwipeRefreshLayout.setVisibility(View.GONE);
+                no_internet_rl.setVisibility(View.VISIBLE);
+                no_data_rl.setVisibility(View.GONE);
             }
         });
-
     }
     //加载
     private void loadMore() {
@@ -200,7 +216,6 @@ public class collegeProfessionalSettingsFragment extends BaseFragment {
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
             mAdapter.loadMoreEnd(isRefresh);
-            Toast.makeText(getActivity(), "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             mAdapter.loadMoreComplete();
         }

@@ -79,13 +79,14 @@ public class apiHome {
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
     //院校优先填报
-    public static void schoolPrior(String url,String member_id,int page,String order,String area,String school_type,RequestCallBack<String> callback){
+    public static void schoolPrior(String url,String member_id,int page,String order,String area,String school_type,String rate_type,RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
         params.put("member_id",member_id);
         params.put("page",page+"");
         params.put("order",order);
         params.put("area",area);
         params.put("school_type",school_type);
+        params.put("rate_type",rate_type);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
     //推荐大学更多
@@ -105,6 +106,26 @@ public class apiHome {
         params.put("intention_area",intention_area);
         params.put("intention_major",intention_major);
         params.put("intention_job",intention_job);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    //智能填报
+    public static void intellgentFill(String url,int page,String member_id,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",member_id);
+        params.put("page",page+"");
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    //专业设置
+    public static void majorSetting(String url,String id,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("id",id);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    //就业前景
+    public static void majorProspects(String url,String wmzyId,String id,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("wmzy_school_id",wmzyId);
+        params.put("id",id);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
 
