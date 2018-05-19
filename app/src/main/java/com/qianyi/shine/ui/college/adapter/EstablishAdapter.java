@@ -42,6 +42,10 @@ public class EstablishAdapter extends BaseQuickAdapter<SchoolInfo, BaseViewHolde
         }
         helper.setText(R.id.tv_level,is_211+"/"+is_985);
         //综合排名
-        helper.setText(R.id.tv_rank,item.getRank());
+        helper.setText(R.id.tv_rank,"综合排名:"+item.getRank());
+        //录取分数线
+        helper.setText(R.id.tv_area,"2017录取线:"+item.getDifen());
+        //院校类型
+        helper.setText(R.id.tv_type,item.getSchool_type());
     }
 }

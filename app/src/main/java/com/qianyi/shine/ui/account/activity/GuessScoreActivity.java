@@ -178,7 +178,7 @@ public class GuessScoreActivity extends BaseActivity {
                                if (tag.equals("setScore")){
                                    startActivity(new Intent(GuessScoreActivity.this,MainActivity.class));
                                    finish();
-                               }else if (tag.equals("intelligentFill")){
+                               }else if (tag.equals("intelligentFill")||tag.equals("homePage")){
                                    finish();
                                }
                            }catch (Exception e){

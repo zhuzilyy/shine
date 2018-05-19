@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center"
-                android:text="适合您的大学(所)"
+                android:text="点击进入保守界面"
                 android:textColor="@color/white" />
             <TextView
                 android:id="@+id/suitCount"
@@ -113,14 +113,13 @@
                 android:src="@mipmap/main_line" />
 
             <LinearLayout
+                android:id="@+id/ll_scoreInfo"
                 android:layout_width="168dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/shape_stroke"
                 android:orientation="horizontal"
-
                 >
-
                 <TextView
                     android:id="@+id/tv_subjectType"
                     android:layout_width="0dp"
@@ -175,7 +174,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/main_sectionOne"
-        android:layout_marginTop="-25dp"
+        android:layout_marginTop="-40dp"
         android:orientation="vertical"
         android:visibility="visible">
         <!--冲刺，保守，稳妥-->
@@ -185,7 +184,6 @@
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
             app:cardCornerRadius="@dimen/dp_8">
-
             <LinearLayout
                 android:id="@+id/goto_college02"
                 android:layout_width="match_parent"
@@ -332,9 +330,9 @@
             android:id="@+id/rl_priorityCollege"
             android:layout_width="match_parent"
             android:layout_height="75dp"
+            android:layout_marginTop="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_10"
             android:background="@mipmap/main_bg01">
 
             <ImageView
@@ -372,7 +370,6 @@
             android:layout_height="75dp"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_10"
             android:background="@mipmap/main_bg02">
 
             <ImageView
@@ -410,7 +407,6 @@
             android:layout_height="75dp"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_10"
             android:background="@mipmap/main_bg03">
 
             <ImageView

@@ -23,6 +23,7 @@ import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.EstablishAdapter;
@@ -72,10 +73,12 @@ public class MoreCollegeActivity extends BaseActivity {
     private RelativeLayout no_internet_rl,no_data_rl;
     private int constellationPosition = 0;
     private int typeConstellationPosition = 0;
+    private CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
         tv_title.setText("大学列表");
         BaseActivity.addActivity(this);
+        customLoadingDialog=new CustomLoadingDialog(this);
         final ListView orderView = new ListView(MoreCollegeActivity.this);
         orderAdapter = new GirdDropDownAdapter(MoreCollegeActivity.this, Arrays.asList(orderDatas));
         orderView.setDividerHeight(0);
@@ -199,21 +202,23 @@ public class MoreCollegeActivity extends BaseActivity {
     private void initContentView() {
         swipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         recyclerView.setLayoutManager(new LinearLayoutManager(MoreCollegeActivity.this));
-
         //上拉加载
         initAdapter();
-
         //下拉刷新
         initRefreshLayout();
         swipeRefreshLayout.setRefreshing(true);
-        refresh();
-
     }
 
     @Override
     protected void initData() {
-
-
+        if (Utils.hasInternet()){
+            customLoadingDialog.show();
+            refresh();
+        }else{
+            swipeRefreshLayout.setVisibility(View.GONE);
+            no_internet_rl.setVisibility(View.VISIBLE);
+            no_data_rl.setVisibility(View.GONE);
+        }
     }
     private void initAdapter() {
         infoList=new ArrayList<>();
@@ -260,6 +265,7 @@ public class MoreCollegeActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        customLoadingDialog.dismiss();
                         Gson gson=new Gson();
                         UniversityBean universityBean = gson.fromJson(s, UniversityBean.class);
                         List<SchoolInfo> recommendUniversityList = universityBean.getData().getInfo().getPriorSchoolList();
@@ -283,6 +289,7 @@ public class MoreCollegeActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        customLoadingDialog.dismiss();
                         swipeRefreshLayout.setVisibility(View.GONE);
                         no_internet_rl.setVisibility(View.VISIBLE);
                         no_data_rl.setVisibility(View.GONE);

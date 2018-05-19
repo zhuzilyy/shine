@@ -22,6 +22,7 @@ import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.activity.GuessScoreActivity;
 import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.activity.CollegeActivity;
@@ -63,16 +64,23 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     public List<SchoolInfo> infoList;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
-    private TextView tv_willings;
     //=========意愿设置========================
     private  String area;
     private  String majorName;
     private  String occupationName,memberId;
-    private TextView tv_collegeData;
+    private TextView tv_collegeData,tv_willings;
     private View view_header;
+    @BindView(R.id.tv_collegeData)
+    TextView tv_noDataCollegeData;
+    @BindView(R.id.tv_willings)
+    TextView tv_noDataWillings;
+    @BindView(R.id.ll_nodataCollegeData)
+    LinearLayout ll_nodataCollegeData;
     private boolean isHasHeader;
+    private CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
+        customLoadingDialog=new CustomLoadingDialog(this);
         BaseActivity.addActivity(this);
         tv_title.setText("智能填报");
         infoList=new ArrayList<>();
@@ -89,6 +97,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     }
     @Override
     protected void initData() {
+
     }
     @Override
     protected void getResLayout() {
@@ -117,7 +126,6 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
         //添加headerView
         view_header=getLayoutInflater().inflate(R.layout.header_intelligence_fill,null);
         tv_willings=view_header.findViewById(R.id.tv_willings);
-        mAdapter.addHeaderView(view_header);
         setHeaderData(view_header);
         //点击事件
         view_header.findViewById(R.id.rl_willing).setOnClickListener(new View.OnClickListener() {
@@ -138,6 +146,18 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     private void setHeaderData(View view_header) {
         tv_collegeData=view_header.findViewById(R.id.tv_collegeData);
         RelativeLayout rl_setScore=view_header.findViewById(R.id.rl_setScore);
+        setWillingData(tv_collegeData,tv_willings);
+        rl_setScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(IntelligentFillCollegeActivity.this,GuessScoreActivity.class);
+                intent.putExtra("tag","intelligentFill");
+                startActivity(intent);
+            }
+        });
+    }
+    //设置意愿的数据
+    private void setWillingData(TextView tv_collegeData,TextView tv_willings) {
         String area = (String) SPUtils.get(IntelligentFillCollegeActivity.this, "area", "");
         String type = (String) SPUtils.get(IntelligentFillCollegeActivity.this, "type", "");
         String score = (String) SPUtils.get(IntelligentFillCollegeActivity.this, "score", "");
@@ -157,14 +177,6 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
             count++;
         }
         tv_willings.setText("已经设置"+count+"个意愿");
-        rl_setScore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(IntelligentFillCollegeActivity.this,GuessScoreActivity.class);
-                intent.putExtra("tag","intelligentFill");
-                startActivity(intent);
-            }
-        });
     }
     private void initRefreshLayout() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -176,27 +188,37 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     }
     //刷新
     private void refresh() {
+        if (!isHasHeader){
+            customLoadingDialog.show();
+        }
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
         apiHome.intellgentFill(apiConstant.INTELLGENT_FILL, mNextRequestPage, memberId, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
-                Log.i("tag",memberId+"=======memberId=======");
-                Log.i("tag",s);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        customLoadingDialog.dismiss();
                         Gson gson=new Gson();
                         UniversityBean universityBean = gson.fromJson(s, UniversityBean.class);
                         List<SchoolInfo> universityList = universityBean.getData().getInfo().getPriorSchoolList();
                         //数据不为空
                         if (universityList!=null && universityList.size()>0){
                             setData(true,universityList);
+                            ll_nodataCollegeData.setVisibility(View.GONE);
                             swipeRefreshLayout.setVisibility(View.VISIBLE);
                             btn_comfirm_.setVisibility(View.VISIBLE);
                             no_internet_rl.setVisibility(View.GONE);
                             no_data_rl.setVisibility(View.GONE);
+                            if (!isHasHeader){
+                                isHasHeader=true;
+                                mAdapter.addHeaderView(view_header);
+                            }
                         }else{
+                            //在这里显示一下逻辑
+                            ll_nodataCollegeData.setVisibility(View.VISIBLE);
+                            setWillingData(tv_noDataCollegeData,tv_noDataCollegeData);
                             swipeRefreshLayout.setVisibility(View.GONE);
                             btn_comfirm_.setVisibility(View.GONE);
                             no_internet_rl.setVisibility(View.GONE);
@@ -212,6 +234,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        customLoadingDialog.dismiss();
                         swipeRefreshLayout.setVisibility(View.GONE);
                         no_internet_rl.setVisibility(View.VISIBLE);
                         no_data_rl.setVisibility(View.GONE);
