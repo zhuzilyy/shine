@@ -187,4 +187,47 @@ public class apiHome {
         params.put("intro",intro);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ///**************************************************
+    //关注专业
+    public static void attentionMajor(String url,String member_id,String major_id,String major_name, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",member_id);
+        params.put("major_id",major_id);
+        params.put("major_name",major_name);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    //专业详情
+    public static void majorDetails(String urlString,String major_id,String major_name, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("major_id",major_id);
+        params.put("major_name",major_name);
+        OkHttpManager.getInstance().postRequest(urlString,params,callback);
+    }
+
+
+
+
+
+
+
+
+
+
 }

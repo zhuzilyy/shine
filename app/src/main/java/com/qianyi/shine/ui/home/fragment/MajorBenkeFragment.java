@@ -177,8 +177,10 @@ public class MajorBenkeFragment extends BaseFragment {
                         }else if(tag.equals("searchMajor")){
                             //查专业跳转过来的界面
                             String id = node.getId()+"";
+                            String name=node.getName();
                             intent=new Intent(getActivity(), ProfessionalActivity.class);
                             intent.putExtra("id",id);
+                            intent.putExtra("name",name);
                             startActivity(intent);
                         }
                     }

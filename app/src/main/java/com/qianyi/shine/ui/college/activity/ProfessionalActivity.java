@@ -66,10 +66,15 @@ public class ProfessionalActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void initViews() {
-
         BaseActivity.addActivity(this);
         id= getIntent().getStringExtra("id");
-        MajorName = getIntent().getStringExtra("professionName");
+        MajorName = getIntent().getStringExtra("name");
+        if(TextUtils.isEmpty(id)){
+            id="";
+        }
+        if(TextUtils.isEmpty(MajorName)){
+            MajorName="";
+        }
         title.setText("专业详情");
 
 
@@ -103,9 +108,12 @@ public class ProfessionalActivity extends BaseActivity implements View.OnClickLi
     protected void initData() {
 
         if(!TextUtils.isEmpty(id)||!TextUtils.isEmpty(MajorName)){
+            Log.i("ssss",id);
+            Log.i("ssss",MajorName);
+
             final CustomLoadingDialog loadingDialog = new CustomLoadingDialog(ProfessionalActivity.this);
             loadingDialog.show();
-            apiHome.majorDetails(apiConstant.ZHUANYEDETAILS, id==null?"":id,MajorName==null?"":MajorName, new RequestCallBack<String>() {
+            apiHome.majorDetails(apiConstant.ZHUANYEDETAILS,id,MajorName, new RequestCallBack<String>() {
                 @Override
                 public void onSuccess(Call call, Response response, String s) {
                     loadingDialog.dismiss();
@@ -176,7 +184,7 @@ public class ProfessionalActivity extends BaseActivity implements View.OnClickLi
                 if(user!=null&& !TextUtils.isEmpty(Major_name)){
                     final CustomLoadingDialog loadingDialog =new CustomLoadingDialog(ProfessionalActivity.this);
                     loadingDialog.show();
-                    apiHome.attentionMajor(apiConstant.ATTENTIONMAJOR, user.getId(), id, Major_name, new RequestCallBack<String>() {
+                    apiHome.attentionMajor(apiConstant.ATTENTIONMAJOR,user.getId(), id, Major_name, new RequestCallBack<String>() {
                         @Override
                         public void onSuccess(Call call, Response response, final String s) {
                           runOnUiThread(new Runnable() {

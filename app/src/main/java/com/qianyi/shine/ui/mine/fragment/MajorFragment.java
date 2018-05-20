@@ -1,5 +1,6 @@
 package com.qianyi.shine.ui.mine.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,7 +23,9 @@ import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.bean.LoginBean;
+import com.qianyi.shine.ui.college.activity.ProfessionalActivity;
 import com.qianyi.shine.ui.home.bean.CollegeMajorBean;
+import com.qianyi.shine.ui.home.bean.MajorListInfo;
 import com.qianyi.shine.ui.home.bean.UniversityMajorInfo;
 import com.qianyi.shine.ui.mine.adapter.MajorAdapter;
 import com.qianyi.shine.ui.mine.bean.CollectionJobBean;
@@ -121,7 +124,11 @@ public class MajorFragment extends BaseFragment {
         rv_major.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-                Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_LONG).show();
+                List<CollectionMajorListInfo> list_temp= majorAdapter.getData();
+                Intent intent=new Intent(getActivity(),ProfessionalActivity.class);
+                intent.putExtra("name",list_temp.get(position).getMajor_name());
+                intent.putExtra("id",list_temp.get(position).getMajor_id());
+                getActivity().startActivity(intent);
             }
         });
     }

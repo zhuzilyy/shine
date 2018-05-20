@@ -74,6 +74,7 @@ public class MeasurementFragment extends BaseFragment {
     @Override
     protected void initListener() {
 
+
     }
     private void initAdapter() {
         measurementAdapter = new MeasurementAdapter(R.layout.item_measurement, infoList);
@@ -83,8 +84,12 @@ public class MeasurementFragment extends BaseFragment {
                 loadMore();
             }
         });
-        measurementAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        measurementAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
         rv_measurement.setAdapter(measurementAdapter);
+
+
+
+
 
 
     }
@@ -120,16 +125,16 @@ public class MeasurementFragment extends BaseFragment {
                                     rv_measurement.addOnItemTouchListener(new OnItemClickListener() {
                                         @Override
                                         public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-                                         if("0".equals(measurementInfo.getCollectionJobList().get(0).getType())){
+                                         if("1".equals(measurementInfo.getCollectionJobList().get(position).getType())){
                                              //霍兰德须兴趣测评
                                              Intent intent =new Intent(getActivity(), InterestResultActivity.class);
-                                             intent.putExtra("InterestResult",measurementInfo.getCollectionJobList().get(0).getKeystring());
+                                             intent.putExtra("InterestResult",measurementInfo.getCollectionJobList().get(position).getKeystring());
                                              startActivity(intent);
 
-                                         }else if("1".equals(measurementInfo.getCollectionJobList().get(0).getType())){
+                                         }else if("0".equals(measurementInfo.getCollectionJobList().get(position).getType())){
                                              //性格
                                              Intent intent =new Intent(getActivity(), CharacterResultActivity.class);
-                                             intent.putExtra("CharatorResult",measurementInfo.getCollectionJobList().get(0).getKeystring());
+                                             intent.putExtra("CharatorResult",measurementInfo.getCollectionJobList().get(position).getKeystring());
                                              startActivity(intent);
                                          }
 
@@ -235,7 +240,6 @@ public class MeasurementFragment extends BaseFragment {
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
             measurementAdapter.loadMoreEnd(isRefresh);
-            Toast.makeText(getActivity(), "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             measurementAdapter.loadMoreComplete();
         }
