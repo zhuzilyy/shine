@@ -116,11 +116,16 @@ public class collegeProfessionalSettingsFragment extends BaseFragment {
         mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
 //        mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
+
+
+
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(mActivity, "专业设置", Toast.LENGTH_SHORT).show();
+                List<UniversityMajorInfo> list_temp= mAdapter.getData();
                 Intent intent=new Intent(getActivity(),ProfessionalActivity.class);
+                intent.putExtra("professionName",list_temp.get(position).getMajor_name());
                 getActivity().startActivity(intent);
             }
         });

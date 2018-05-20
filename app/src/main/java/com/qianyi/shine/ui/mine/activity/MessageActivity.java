@@ -207,7 +207,6 @@ public class MessageActivity extends BaseActivity {
                     @Override
                     public void run() {
                         messageAdapter.loadMoreFail();
-                        Toast.makeText(MessageActivity.this, "网络错误", Toast.LENGTH_LONG).show();
                     }
                 });
             }

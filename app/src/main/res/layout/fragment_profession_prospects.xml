@@ -39,6 +39,7 @@
                         android:textSize="16sp"
                         />
                     <TextView
+                        android:id="@+id/tv_over"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="(毕业薪酬超过87%的专业)"
@@ -72,6 +73,7 @@
                         android:orientation="vertical"
                         >
                         <TextView
+                            android:id="@+id/tv_moneyOrder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="33"
@@ -79,6 +81,7 @@
                             android:textColor="@color/orange"
                             />
                         <TextView
+
                             android:layout_marginTop="@dimen/dp_10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -97,6 +100,7 @@
                         android:orientation="vertical"
                         >
                         <TextView
+                            android:id="@+id/tv_fiveyearMoney"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="￥15000~8000"
@@ -122,6 +126,7 @@
                         android:orientation="vertical"
                         >
                         <TextView
+                            android:id="@+id/tv_moreIndutory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="互联网"
@@ -147,6 +152,7 @@
                         android:orientation="vertical"
                         >
                         <TextView
+                            android:id="@+id/tv_moreCity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="北京"
@@ -207,7 +213,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="就业去向"
+                    android:text="行业去向"
                     android:textSize="16sp"
                     android:gravity="center"
                     android:paddingTop="@dimen/dp_10"
@@ -226,7 +232,7 @@
                     android:paddingRight="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_5"
                     android:layout_marginBottom="@dimen/dp_15"
-                    android:text="就看了几个垃圾费文件分解机否王发了健身房发挥我一万佛佛为奇偶凤凰网刘发货文件会服务号非回味非额返回恢复为非文件哦分解为"
+                    android:text=""
                     />
 
             </LinearLayout>
@@ -248,7 +254,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="行业去向"
+                    android:text="职能方向"
                     android:textSize="16sp"
                     android:gravity="center"
                     android:paddingTop="@dimen/dp_10"
@@ -267,7 +273,7 @@
                     android:paddingRight="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_12"
                     android:layout_marginBottom="@dimen/dp_15"
-                    android:text="就看了几个垃圾费文件分解机否王发了健身房发挥我一万佛佛为奇偶凤凰网刘发货文件会服务号非回味非额返回恢复为非文件哦分解为"
+                    android:text=""
                     />
             </LinearLayout>
             <View
@@ -307,7 +313,7 @@
                     android:paddingRight="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_12"
                     android:layout_marginBottom="@dimen/dp_15"
-                    android:text="就看了几个垃圾费文件分解机否王发了健身房发挥我一万佛佛为奇偶凤凰网刘发货文件会服务号非回味非额返回恢复为非文件哦分解为"
+                    android:text=""
                     />
             </LinearLayout>
 

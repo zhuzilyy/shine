@@ -215,7 +215,6 @@ public class Profession_EstablishmentFragment extends BaseFragment {
     }
     //刷新
     private void refresh() {
-        Toast.makeText(mActivity, "1346458465", Toast.LENGTH_SHORT).show();
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
         apiHome.refresh("http://www.baidu.com", mNextRequestPage,"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {
@@ -272,7 +271,6 @@ public class Profession_EstablishmentFragment extends BaseFragment {
                     @Override
                     public void run() {
                         mAdapter.loadMoreFail();
-                        Toast.makeText(getActivity(), "网络错误", Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -294,7 +292,6 @@ public class Profession_EstablishmentFragment extends BaseFragment {
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
             mAdapter.loadMoreEnd(isRefresh);
-            Toast.makeText(getActivity(), "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             mAdapter.loadMoreComplete();
         }

@@ -91,5 +91,12 @@ public class apiConstant {
     public static String VIP_CONFIG=BASE_URL+"vip_config";
     //获取个人资料
     public static String GETMEMBERINFO=  BASE_URL+"get_memberinfo";
+    //专业详情
+    public static String ZHUANYEDETAILS=  BASE_URL+"major_info";
+
+    //关注专业
+    public static String ATTENTIONMAJOR=  BASE_URL+"insert_collection_major";
+    //我的关注测评报告
+    public static String Evaluationeport= BASE_URL+"get_test_record";
 
 }
