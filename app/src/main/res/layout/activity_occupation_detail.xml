@@ -23,6 +23,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="能源/矿产/地质勘查"
@@ -46,6 +47,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="所属类别：能源/环保/农业/科研"

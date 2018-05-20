@@ -130,12 +130,10 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
                                     }
                                 }
                             }
-
                         }
                     }
                 });
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 runOnUiThread(new Runnable() {

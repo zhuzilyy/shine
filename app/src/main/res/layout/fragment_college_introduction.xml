@@ -718,5 +718,5 @@
                 android:textSize="14sp" />
         </LinearLayout>
     </com.qianyi.shine.ui.college.view.MyScrollview>
-
+    <include layout="@layout/common_wrong_intert"/>
 </LinearLayout>

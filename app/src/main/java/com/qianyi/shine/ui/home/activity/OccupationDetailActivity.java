@@ -1,5 +1,9 @@
 package com.qianyi.shine.ui.home.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -32,9 +36,12 @@ public class OccupationDetailActivity extends BaseActivity {
     public ViewPager viewPager;
     @BindView(R.id.tv_title)
     TextView tv_title;
-
+    @BindView(R.id.tv_name)
+    TextView tv_name;
+    @BindView(R.id.tv_category)
+    TextView tv_category;
     public MyPageAdapter myPageAdapter;
-
+    private MyReceiver myReceiver;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
@@ -54,7 +61,11 @@ public class OccupationDetailActivity extends BaseActivity {
         viewPager.setAdapter(myPageAdapter);
         // 将ViewPager与TabLayout相关联
         tab.setupWithViewPager(viewPager);
-
+        //注册广播
+        myReceiver=new MyReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.occupation");
+        registerReceiver(myReceiver,intentFilter);
 
     }
 
@@ -83,6 +94,25 @@ public class OccupationDetailActivity extends BaseActivity {
             case R.id.iv_back:
                 finish();
                 break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myReceiver);
+    }
+
+    class MyReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("com.action.occupation")){
+                String name=intent.getStringExtra("name");
+                String category=intent.getStringExtra("category");
+                tv_name.setText(name);
+                tv_category.setText(category);
+            }
         }
     }
 }

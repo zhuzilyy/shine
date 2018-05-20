@@ -170,7 +170,9 @@ public class SearchOccupationActivity extends BaseActivity {
                             finish();
                             //搜职业
                         }else if (tag.equals("searchOccupation")){
-                            jumpActivity(SearchOccupationActivity.this,OccupationDetailActivity.class);
+                            Intent intent=new Intent(SearchOccupationActivity.this,OccupationDetailActivity.class);
+                            intent.putExtra("occupationName",node.getName());
+                            startActivity(intent);
                         }
                     }
                 }
@@ -190,7 +192,9 @@ public class SearchOccupationActivity extends BaseActivity {
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 String keyWord=et_searchOccupation.getText().toString().trim();
                 if (!TextUtils.isEmpty(keyWord)){
-                    jumpActivity(SearchOccupationActivity.this,OccupationDetailActivity.class);
+                    Intent intent=new Intent(SearchOccupationActivity.this,OccupationDetailActivity.class);
+                    intent.putExtra("occupationName",keyWord);
+                    startActivity(intent);
                 }
                 return false;
             }

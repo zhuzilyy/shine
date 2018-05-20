@@ -57,10 +57,8 @@ public class apiConstant {
     public static final String MAJOR_SETTING=BASE_URL+"university_majorinfo";
     //就业前景
     public static final String MAJOR_PROSPECTS=BASE_URL+"university_prospect";
-
-
-
-
+    //职业详情
+    public static final String OCCUPATION_DETAIL=BASE_URL+"job_info";
 
 
     //微信参数

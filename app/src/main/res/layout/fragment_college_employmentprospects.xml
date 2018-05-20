@@ -446,4 +446,5 @@
         </LinearLayout>
     </com.qianyi.shine.ui.college.view.MyScrollview>
     <include layout="@layout/common_wrong_intert"/>
+    <include layout="@layout/common_no_data"/>
 </LinearLayout>

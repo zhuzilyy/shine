@@ -128,5 +128,10 @@ public class apiHome {
         params.put("id",id);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
-
+    //就业前景
+    public static void occupationDetail(String url,String name,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("name",name);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 }
