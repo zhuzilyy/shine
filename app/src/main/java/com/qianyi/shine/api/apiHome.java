@@ -171,4 +171,20 @@ public class apiHome {
         params.put("page",page+"");
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+    //获取我关注的专业
+    public static void messageList(String url,String member_id,int page,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",member_id);
+        params.put("page",page+"");
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    //加入我们
+    public static void joinUs(String url,String member_id,String  name,String  phone,String  intro,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",member_id);
+        params.put("name",name);
+        params.put("phone",phone);
+        params.put("intro",intro);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 }

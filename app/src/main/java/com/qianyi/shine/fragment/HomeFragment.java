@@ -162,7 +162,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 intent.putExtra("title", "高考头条");
                 intent.putExtra("url", articles.get(position).getWeburl());
                 startActivity(intent);
-
             }
         });
     }
@@ -187,6 +186,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         tv_chongCi = headView.findViewById(R.id.tv_chongCi);
         tv_baoShou = headView.findViewById(R.id.tv_baoShou);
         tv_wenTuo = headView.findViewById(R.id.tv_wenTuo);
+        String chongCi= (String) SPUtils.get(getActivity(),"chongCi","");
+        String baoShou= (String) SPUtils.get(getActivity(),"baoShou","");
+        String wenTuo= (String) SPUtils.get(getActivity(),"wenTuo","");
+        if (!TextUtils.isEmpty(chongCi)){
+            tv_chongCi.setText(chongCi);
+            tv_baoShou.setText(baoShou);
+            tv_wenTuo.setText(wenTuo);
+            tv_totalCount.setText(baoShou);
+        }
         ll_chongci = headView.findViewById(R.id.ll_chongci);
         ll_wentuo = headView.findViewById(R.id.ll_wentuo);
         ll_baoshou = headView.findViewById(R.id.ll_baoshou);
@@ -412,6 +420,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                     String chongCi = info.getString("CC");
                     String baoShou = info.getString("BS");
                     String wenTuo = info.getString("WT");
+                    SPUtils.put(getActivity(),"chongCi",chongCi);
+                    SPUtils.put(getActivity(),"baoShou",baoShou);
+                    SPUtils.put(getActivity(),"wenTuo",wenTuo);
                     tv_chongCi.setText(chongCi);
                     tv_baoShou.setText(baoShou);
                     tv_wenTuo.setText(wenTuo);

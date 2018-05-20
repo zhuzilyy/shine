@@ -16,5 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </android.support.v4.widget.SwipeRefreshLayout>
+    <include layout="@layout/common_wrong_intert"/>
+    <include layout="@layout/common_no_data"/>
 
 </LinearLayout>

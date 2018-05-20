@@ -45,7 +45,7 @@ import okhttp3.Response;
  */
 
 public class CollegeListActivity extends BaseActivity {
-    private String[] headers = {"全国", "类型", "批次","位次"};
+    private String[] headers = {"全国", "类型", "批次"/*,"位次"*/};
     private List<View> popupViews = new ArrayList<>();
     private GirdDropDownAdapter orderAdapter;
     private GirdDropDownAdapter typeAdapter;
@@ -54,9 +54,9 @@ public class CollegeListActivity extends BaseActivity {
     private String[] citys = {"全国","北京","天津","上海","重庆","河北","山西","辽宁","吉林","黑龙江",
             "江苏","浙江","安徽","福建","江西","山东","河南","湖北","湖南","广东","海南","四川","贵州",
             "云南","陕西","甘肃","青海","内蒙古","广西","宁夏","新疆"};
-    private String[] types={"985","211","默认"};
+    private String[] types={"默认","985","211"};
     private String[] batch= {"本科", "专科"};
-    private String[] orderDatas = {"概率", "分数线", "排名"};
+    //private String[] orderDatas = {"概率", "分数线", "排名"};
     private int constellationPosition = 0;
     @BindView(R.id.dropDownMenu)
     public DropDownMenu mDropDownMenu;
@@ -117,11 +117,7 @@ public class CollegeListActivity extends BaseActivity {
                 typeAdapter.setCheckItem(position);
                 mDropDownMenu.setTabText(types[position]);
                 mDropDownMenu.closeMenu();
-                if (types[position].equals("默认")){
-                    is_type="";
-                }else{
-                    is_type=types[position];
-                }
+                level=batch[position];
                 refresh();
             }
         });
@@ -136,11 +132,17 @@ public class CollegeListActivity extends BaseActivity {
                 batchAdapter.setCheckItem(position);
                 mDropDownMenu.setTabText(batch[position]);
                 mDropDownMenu.closeMenu();
+                if (types[position].equals("默认")){
+                    is_type="";
+                }else{
+                    is_type=types[position];
+                }
+                refresh();
             }
         });
         /*位次*/
         final ListView orderView = new ListView(CollegeListActivity.this);
-        orderAdapter = new GirdDropDownAdapter(CollegeListActivity.this, Arrays.asList(orderDatas));
+        //orderAdapter = new GirdDropDownAdapter(CollegeListActivity.this, Arrays.asList(orderDatas));
         orderView.setDividerHeight(0);
         orderView.setAdapter(orderAdapter);
         orderView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -150,7 +152,7 @@ public class CollegeListActivity extends BaseActivity {
                 mDropDownMenu.setTabText(position == 0 ? headers[3] : orderDatas[position]);
                 mDropDownMenu.closeMenu();*/
                 orderAdapter.setCheckItem(position);
-                mDropDownMenu.setTabText(orderDatas[position]);
+                //mDropDownMenu.setTabText(orderDatas[position]);
                 mDropDownMenu.closeMenu();
                 Toast.makeText(CollegeListActivity.this, "排序条目", Toast.LENGTH_SHORT).show();
             }
@@ -159,7 +161,7 @@ public class CollegeListActivity extends BaseActivity {
         popupViews.add(areaView);
         popupViews.add(typeView);
         popupViews.add(batchView);
-        popupViews.add(orderView);
+       // popupViews.add(orderView);
 
         //填充布局
         View contentView= LayoutInflater.from(CollegeListActivity.this).inflate(R.layout.layout_refresh,null);

@@ -57,9 +57,10 @@ public class MineFragment extends BaseFragment {
     LinearLayout ll_mine;
     @BindView(R.id.mine_head)
     RoundedImageView mine_head;
-    private LinearLayout ll_wechat;
+    private LinearLayout ll_wechat,ll_friendCircle;
     private Tencent mTencent;
     private MyReceiver myReceiver;
+    private IWXAPI mWxApi;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_mine=inflater.inflate(R.layout.fragment_mine,null);
@@ -69,6 +70,7 @@ public class MineFragment extends BaseFragment {
     protected void initViews() {
         view_share=LayoutInflater.from(getActivity()).inflate(R.layout.pw_share,null);
         ll_wechat=view_share.findViewById(R.id.ll_wechat);
+        ll_friendCircle=view_share.findViewById(R.id.ll_friendCircle);
         //初始化数据
         setValues();
         //注册广播
@@ -76,6 +78,11 @@ public class MineFragment extends BaseFragment {
         IntentFilter intentFilter=new IntentFilter();
         intentFilter.addAction("com.action.updateInfo");
         getActivity().registerReceiver(myReceiver,intentFilter);
+
+
+        mWxApi = WXAPIFactory.createWXAPI(getActivity(), apiConstant.APP_ID, false);
+        // 将该app注册到微信
+        mWxApi.registerApp(apiConstant.APP_ID);
     }
     private void setValues() {
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
@@ -98,7 +105,35 @@ public class MineFragment extends BaseFragment {
                 pw_share.dismiss();
             }
         });
+        //朋友圈分享
+        ll_friendCircle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareFriendCircle();
+                //shareToQQ();
+                pw_share.dismiss();
+            }
+        });
     }
+
+    private void shareFriendCircle() {
+        WXWebpageObject webpage = new WXWebpageObject();
+        webpage.webpageUrl = "http://www.baidu.com";
+        WXMediaMessage msg = new WXMediaMessage(webpage);
+        msg.title ="阳光志愿";
+        msg.description ="测试" ;
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.mipmap.logo);
+        Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, 100, 100, true);
+        msg.setThumbImage(thumbBmp);
+        bmp.recycle();
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = buildTransaction("webpage");
+        req.message = msg;
+        // req.scene = sendtype==0?SendMessageToWX.Req.WXSceneSession:SendMessageToWX.Req.WXSceneTimeline;
+        req.scene = SendMessageToWX.Req.WXSceneTimeline;
+        mWxApi.sendReq(req);
+    }
+
     //分享到QQ
     private void shareToQQ() {
         // 新建Tencent实例用于调用分享方法
@@ -114,15 +149,11 @@ public class MineFragment extends BaseFragment {
     }
     //分享到微信
     private void shareFriends() {
-        IWXAPI mWxApi;
-        mWxApi = WXAPIFactory.createWXAPI(getActivity(), apiConstant.APP_ID, false);
-        // 将该app注册到微信
-        mWxApi.registerApp(apiConstant.APP_ID);
         WXWebpageObject webpage = new WXWebpageObject();
         webpage.webpageUrl = "http://www.baidu.com";
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title ="阳光志愿";
-        msg.description ="哈哈哈哈哈哈" ;
+        msg.description ="测试" ;
         Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.mipmap.logo);
         Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, 100, 100, true);
         msg.setThumbImage(thumbBmp);

@@ -5,4 +5,13 @@ package com.qianyi.shine.ui.mine.bean;
  */
 
 public class MessageBean {
+    private MessageData data;
+
+    public MessageData getData() {
+        return data;
+    }
+
+    public void setData(MessageData data) {
+        this.data = data;
+    }
 }

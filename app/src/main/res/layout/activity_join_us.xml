@@ -49,6 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <EditText
+            android:id="@+id/tv_name"
             android:textSize="15sp"
             android:hint="点击输入"
             android:background="@null"
@@ -74,6 +75,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <EditText
+            android:maxLength="11"
+            android:id="@+id/tv_num"
             android:inputType="number"
             android:textSize="15sp"
             android:hint="点击输入"
@@ -100,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp" />
         <EditText
+            android:id="@+id/tv_desc"
             android:maxLines="8"
             android:paddingLeft="5dp"
             android:paddingTop="5dp"

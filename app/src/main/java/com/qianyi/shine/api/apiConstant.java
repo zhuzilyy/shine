@@ -69,7 +69,10 @@ public class apiConstant {
     public static final String FOCUS_JOB_LIST=BASE_URL+"get_collection_job";
     //关注的专业
     public static final String FOCUS_MAJOR_LIST=BASE_URL+"get_collection_major";
-
+    //消息列表
+    public static final String MESSAGE_LIST=BASE_URL+"message_list";
+    //消息列表
+    public static final String JOIN_US=BASE_URL+"feedback";
 
     //微信参数
     public static  String APP_ID="wxf51a00546d18489f";

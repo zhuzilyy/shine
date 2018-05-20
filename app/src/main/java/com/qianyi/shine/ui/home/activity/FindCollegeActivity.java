@@ -106,9 +106,9 @@ public class FindCollegeActivity extends BaseActivity {
                 break;
             //大学排名
             case R.id.ll_collegeRank:
-              /*  intent=new Intent(FindCollegeActivity.this,CollegeListActivity.class);
-                putValue(intent,"",subProvice,"","","","");
-                startActivity(intent);*/
+                intent=new Intent(FindCollegeActivity.this,CollegeListActivity.class);
+                putValue(intent,"rank","","","","","");
+                startActivity(intent);
                 break;
             //本省
             case R.id.ll_benSheng:
