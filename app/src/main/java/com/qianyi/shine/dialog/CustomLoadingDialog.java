@@ -36,7 +36,7 @@ public class CustomLoadingDialog extends Dialog {
         super(context, R.style.loadingDialogStyle);
         /** 设置触摸外面的取消为false */
         setCanceledOnTouchOutside(false);
-        setCancelable(false);
+        setCancelable(true);
     }
 
     @Override

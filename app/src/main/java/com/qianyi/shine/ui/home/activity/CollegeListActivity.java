@@ -22,6 +22,7 @@ import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
 import com.qianyi.shine.ui.mine.adapter.CollegeAdapter;
@@ -72,10 +73,12 @@ public class CollegeListActivity extends BaseActivity {
     private String order,area,level,is_type,school_type,keyword;
     private TextView reload;
     private RelativeLayout no_internet_rl,no_data_rl;
+    private CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
         tv_title.setText("大学列表");
+        customLoadingDialog=new CustomLoadingDialog(this);
         //省份
         final View areaView = getLayoutInflater().inflate(R.layout.custom_layout, null);
         GridView constellation = areaView.findViewById(R.id.constellation);
@@ -170,19 +173,6 @@ public class CollegeListActivity extends BaseActivity {
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
         //清空popupviews,否则报tab的数量和popupviews的数量不相等的错
         popupViews.clear();
-        //网络错误时候的界面
-        if (!Utils.hasInternet()){
-            swipeRefreshLayout.setVisibility(View.GONE);
-            no_internet_rl.setVisibility(View.VISIBLE);
-            no_data_rl.setVisibility(View.GONE);
-        }
-        //点击重新加载数据
-        reload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                refresh();
-            }
-        });
         intent=getIntent();
         if (intent!=null){
             order=intent.getStringExtra("order");
@@ -196,7 +186,22 @@ public class CollegeListActivity extends BaseActivity {
     }
     @Override
     protected void initData() {
-        refresh();
+        //网络错误时候的界面
+        if (!Utils.hasInternet()){
+            swipeRefreshLayout.setVisibility(View.GONE);
+            no_internet_rl.setVisibility(View.VISIBLE);
+            no_data_rl.setVisibility(View.GONE);
+        }else{
+            customLoadingDialog.show();
+            refresh();
+        }
+        //点击重新加载数据
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refresh();
+            }
+        });
     }
     @Override
     protected void getResLayout() {
@@ -206,7 +211,6 @@ public class CollegeListActivity extends BaseActivity {
     protected void initListener() {
 
     }
-
     @Override
     protected void setStatusBarColor() {
 
@@ -265,6 +269,7 @@ public class CollegeListActivity extends BaseActivity {
                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        customLoadingDialog.dismiss();
                         Log.i("tag",s);
                         Gson gson=new Gson();
                         CollegeBean collegeBean = gson.fromJson(s, CollegeBean.class);
@@ -295,6 +300,7 @@ public class CollegeListActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        customLoadingDialog.dismiss();
                         swipeRefreshLayout.setVisibility(View.GONE);
                         no_internet_rl.setVisibility(View.VISIBLE);
                         no_data_rl.setVisibility(View.GONE);

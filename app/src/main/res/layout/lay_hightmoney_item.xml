@@ -15,6 +15,7 @@
             android:background="@color/light_gray" />
 
         <TextView
+            android:id="@+id/tv_index"
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_weight="1"
@@ -29,6 +30,7 @@
             android:background="@color/light_gray" />
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_weight="5"
@@ -45,6 +47,7 @@
             android:background="@color/light_gray" />
 
         <TextView
+            android:id="@+id/tv_salary"
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_weight="2.3"
@@ -58,7 +61,6 @@
             android:layout_height="45dp"
             android:background="@color/light_gray" />
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"

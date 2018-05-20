@@ -23,6 +23,7 @@ import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
@@ -69,11 +70,17 @@ public class PriorityCollegeActivity extends BaseActivity {
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private View view_header;
-    private String member_id,order="rank",area="",school_type="";
+    private String member_id,order="rank",area="",school_type="",rate_type="";
     private TextView reload;
     private RelativeLayout no_internet_rl,no_data_rl;
+    private CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
+        customLoadingDialog=new CustomLoadingDialog(this);
+        Intent intent=getIntent();
+        if (intent!=null){
+            rate_type=intent.getStringExtra("risk");
+        }
         BaseActivity.addActivity(this);
         view_header=getLayoutInflater().inflate(R.layout.header_priority_college,null);
         tv_title.setText("院校优先填报");
@@ -177,9 +184,6 @@ public class PriorityCollegeActivity extends BaseActivity {
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
         //清空popupviews,否则报tab的数量和popupviews的数量不相等的错
         popupViews.clear();
-
-
-
     }
     @Override
     protected void initData() {
@@ -187,6 +191,9 @@ public class PriorityCollegeActivity extends BaseActivity {
            swipeRefreshLayout.setVisibility(View.GONE);
            no_internet_rl.setVisibility(View.VISIBLE);
            no_data_rl.setVisibility(View.GONE);
+       }else{
+           customLoadingDialog.show();
+           refresh();
        }
     }
 
@@ -216,8 +223,6 @@ public class PriorityCollegeActivity extends BaseActivity {
         //下拉刷新
         initRefreshLayout();
         swipeRefreshLayout.setRefreshing(true);
-        refresh();
-
     }
     private void initAdapter() {
         mAdapter = new PriorityCollegeAdapter(R.layout.item_priority_college,infoList);
@@ -253,13 +258,14 @@ public class PriorityCollegeActivity extends BaseActivity {
         member_id=loginInfo.getId();
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-       apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, order,area ,school_type, new RequestCallBack<String>() {
+       apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, order,area ,school_type,rate_type, new RequestCallBack<String>() {
            @Override
            public void onSuccess(Call call, Response response, final String s) {
                Log.i("tag",s);
                runOnUiThread(new Runnable() {
                    @Override
                    public void run() {
+                       customLoadingDialog.dismiss();
                        Gson gson=new Gson();
                        UniversityBean universityBean = gson.fromJson(s, UniversityBean.class);
                        List<SchoolInfo> priorSchoolList =universityBean.getData().getInfo().getPriorSchoolList();
@@ -283,6 +289,7 @@ public class PriorityCollegeActivity extends BaseActivity {
                runOnUiThread(new Runnable() {
                    @Override
                    public void run() {
+                       customLoadingDialog.dismiss();
                        swipeRefreshLayout.setVisibility(View.GONE);
                        no_internet_rl.setVisibility(View.VISIBLE);
                        no_data_rl.setVisibility(View.GONE);
@@ -296,7 +303,7 @@ public class PriorityCollegeActivity extends BaseActivity {
     //加载
     private void loadMore() {
         mNextRequestPage++;
-        apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, "","" , "", new RequestCallBack<String>() {
+        apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, order,area , school_type, rate_type,new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 runOnUiThread(new Runnable() {

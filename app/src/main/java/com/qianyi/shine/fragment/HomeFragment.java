@@ -32,10 +32,10 @@ import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.SelfDialog;
 import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
-import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.ui.account.activity.GuessScoreActivity;
 import com.qianyi.shine.ui.account.activity.LoginActivity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
@@ -52,10 +52,10 @@ import com.qianyi.shine.ui.home.activity.IntelligentFillCollegeActivity;
 import com.qianyi.shine.ui.home.activity.PriorityCollegeActivity;
 import com.qianyi.shine.ui.home.activity.SearchOccupationActivity;
 import com.qianyi.shine.ui.home.bean.HomeBean;
+import com.qianyi.shine.ui.mine.activity.PersonalInfoActivity;
+import com.qianyi.shine.utils.ListActivity;
 import com.qianyi.shine.utils.SPUtils;
-import com.qianyi.shine.utils.ToastUtils;
 import com.qianyi.shine.utils.Utils;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -80,6 +80,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private static final int PAGE_SIZE = 6;
     @BindView(R.id.rv_list)
     public RecyclerView mRecyclerView;
+    @BindView(R.id.no_internet_rl)
+    RelativeLayout no_internet_rl;
+    @BindView(R.id.reload)
+    TextView reload;
     @BindView(R.id.swipeLayout)
     public SwipeRefreshLayout mSwipeRefreshLayout;
     List<HomeBean.HomeData.HomeInfo.Article> bigArticles = new ArrayList<>();
@@ -101,6 +105,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     //初始化AMapLocationClientOption对象
     private TextView cityname,tv_chongCi,tv_baoShou,tv_wenTuo,tv_totalCount,tv_subjectType,tv_score,tv_level;
     private String province,memberId;
+    private LinearLayout ll_chongci,ll_wentuo,ll_baoshou,ll_scoreInfo;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_home = inflater.inflate(R.layout.fragment_home, null);
@@ -123,13 +128,24 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         mSwipeRefreshLayout.setRefreshing(true);
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
         memberId= loginInfo.getId();
-        refresh();
     }
-
     @Override
     protected void initData() {
         //获取保守稳妥冲刺的数据
         getLevelData();
+        //检查网络
+        if (Utils.hasInternet()){
+            refresh();
+        }else{
+            mSwipeRefreshLayout.setVisibility(View.GONE);
+            no_internet_rl.setVisibility(View.VISIBLE);
+        }
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refresh();
+            }
+        });
     }
     @Override
     protected void initListener() {
@@ -167,6 +183,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         tv_chongCi = headView.findViewById(R.id.tv_chongCi);
         tv_baoShou = headView.findViewById(R.id.tv_baoShou);
         tv_wenTuo = headView.findViewById(R.id.tv_wenTuo);
+        ll_chongci = headView.findViewById(R.id.ll_chongci);
+        ll_wentuo = headView.findViewById(R.id.ll_wentuo);
+        ll_baoshou = headView.findViewById(R.id.ll_baoshou);
+        ll_scoreInfo = headView.findViewById(R.id.ll_scoreInfo);
         tv_subjectType = headView.findViewById(R.id.tv_subjectType);
         tv_score = headView.findViewById(R.id.tv_score);
         tv_level = headView.findViewById(R.id.tv_level);
@@ -206,6 +226,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         gotoCollege02.setOnClickListener(this);
         homeSearchLin.setOnClickListener(this);
         ll_acceptanceRate.setOnClickListener(this);
+        ll_chongci.setOnClickListener(this);
+        ll_wentuo.setOnClickListener(this);
+        ll_baoshou.setOnClickListener(this);
+        ll_scoreInfo.setOnClickListener(this);
+
 
         tv_totalCount.setTypeface(typeface1);
         tv_chongCi.setTypeface(typeface1);
@@ -256,12 +281,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                         if (homeBean != null) {
                             String code = homeBean.getCode();
                             if ("0".equals(code)) {
+                                mSwipeRefreshLayout.setVisibility(View.VISIBLE);
+                                no_internet_rl.setVisibility(View.GONE);
                                 HomeBean.HomeData homeData = homeBean.getData();
                                 if (homeData != null) {
                                     HomeBean.HomeData.HomeInfo homeInfo = homeData.getInfo();
                                     if (homeInfo != null) {
-                                        //   List<HomeBean.HomeData.HomeInfo.Article>  articles = homeInfo.getArticleList();
-//                                        bigArticles.addAll(articles);
                                         universities = homeInfo.getRecommendUniversityList();
                                         setData(true, homeInfo.getArticleList());
                                         mAdapter.setEnableLoadMore(true);
@@ -296,11 +321,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(mActivity, "网络错误", Toast.LENGTH_SHORT).show();
+                        mSwipeRefreshLayout.setVisibility(View.GONE);
+                        no_internet_rl.setVisibility(View.VISIBLE);
                     }
                 });
-
-
             }
         });
 
@@ -386,10 +410,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                     tv_chongCi.setText(chongCi);
                     tv_baoShou.setText(baoShou);
                     tv_wenTuo.setText(wenTuo);
-                    int intChongCi = Integer.parseInt(chongCi);
                     int intBaoShou = Integer.parseInt(baoShou);
-                    int intWenTuo = Integer.parseInt(wenTuo);
-                    tv_totalCount.setText((intBaoShou+intChongCi+intWenTuo)+"");
+                    tv_totalCount.setText(intBaoShou+"");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -430,18 +452,23 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 //startActivity(new Intent(getActivity(), FindMajorActivity.class));
                 break;
-            //查专业
+            //查职业
             case R.id.ll_search_occupation:
                 intent=new Intent(getActivity(), SearchOccupationActivity.class);
                 intent.putExtra("tag","searchOccupation");
                 startActivity(intent);
                 break;
-            //查专业
+            //院校优先填报
             case R.id.rl_priorityCollege:
-                startActivity(new Intent(getActivity(), PriorityCollegeActivity.class));
+                intent=new Intent(getActivity(), PriorityCollegeActivity.class);
+                intent.putExtra("risk","");
+                startActivity(intent);
                 break;
             //智能填报
             case R.id.rl_integenceFill:
+               /* intent=new Intent(getActivity(), IntelligentFillCollegeActivity.class);
+                intent.putExtra("risk","");
+                startActivity(intent);*/
                 startActivity(new Intent(getActivity(), IntelligentFillCollegeActivity.class));
                 break;
             //专业优先填报
@@ -451,8 +478,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.goto_college01:
+                intent = new Intent(getActivity(), PriorityCollegeActivity.class);
+                intent.putExtra("risk","2");
+                startActivity(intent);
+                break;
             case R.id.goto_college02:
                 intent = new Intent(getActivity(), PriorityCollegeActivity.class);
+                intent.putExtra("risk","");
                 startActivity(intent);
                 break;
             case R.id.homeSearch_ll:
@@ -461,6 +493,26 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             //测试录取率
             case R.id.ll_acceptanceRate:
                 startActivity(new Intent(getActivity(), AcceptanceRateActivity.class));
+                break;
+            case R.id.ll_chongci:
+                intent=new Intent(getActivity(),PriorityCollegeActivity.class);
+                intent.putExtra("risk","1");
+                startActivity(intent);
+                break;
+            case R.id.ll_baoshou:
+                intent=new Intent(getActivity(),PriorityCollegeActivity.class);
+                intent.putExtra("risk","2");
+                startActivity(intent);
+                break;
+            case R.id.ll_wentuo:
+                intent=new Intent(getActivity(),PriorityCollegeActivity.class);
+                intent.putExtra("risk","3");
+                startActivity(intent);
+                break;
+            case R.id.ll_scoreInfo:
+                intent=new Intent(getActivity(),GuessScoreActivity.class);
+                intent.putExtra("tag","homePage");
+                startActivity(intent);
                 break;
         }
     }

@@ -53,6 +53,28 @@ public class WillingsSettingActivity extends BaseActivity {
         IntentFilter intentFilter=new IntentFilter();
         intentFilter.addAction("com.action.setwilling");
         registerReceiver(myReceiver,intentFilter);
+        //读取已经设置的意愿
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        LoginBean.LoginData.LoginInfo.MemberScoreInfo member_scoreinfo = loginInfo.getMember_scoreinfo();
+        String intention_area = member_scoreinfo.getIntention_area();
+        String intention_job = member_scoreinfo.getIntention_job();
+        String intention_major = member_scoreinfo.getIntention_major();
+        if (TextUtils.isEmpty(intention_area)){
+            tv_area.setText("点击选择");
+        }else{
+            tv_area.setText(intention_area);
+        }
+        if (TextUtils.isEmpty(intention_job)){
+            tv_occupationName.setText("点击选择");
+        }else{
+            tv_occupationName.setText(intention_job);
+        }
+        if (TextUtils.isEmpty(intention_major)){
+            tv_majorName.setText("点击选择");
+        }else{
+            tv_majorName.setText(intention_major);
+        }
+
 
         customLoadingDialog=new CustomLoadingDialog(this);
     }

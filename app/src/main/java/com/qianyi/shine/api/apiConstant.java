@@ -51,6 +51,12 @@ public class apiConstant {
     public static final String RECOMMEND_MORE_COLLEGE=BASE_URL+"recommend_university_more";
     //意愿设置
     public static final String WILLING_SETTING=BASE_URL+"insert_intentioninfo";
+    //智能填报
+    public static final String INTELLGENT_FILL=BASE_URL+"prior_noopsyche";
+    //专业设置
+    public static final String MAJOR_SETTING=BASE_URL+"university_majorinfo";
+    //就业前景
+    public static final String MAJOR_PROSPECTS=BASE_URL+"university_prospect";
 
 
 

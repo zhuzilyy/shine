@@ -15,26 +15,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             >
             <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/tv_majorName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="临床医疗"
                 android:textColor="@color/dark_gray"
                 android:textSize="18sp"
-
                 />
             <TextView
-                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_5"
+                android:maxLines="2"
+                android:id="@+id/tv_salary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="毕业5年后的月薪 ￥5432"
                 android:textSize="12sp"
                 android:textColor="@color/main_blue"
+                android:layout_marginRight="30dp"
                 />
         </LinearLayout>
         <TextView
+            android:id="@+id/tv_zhineng"
             android:layout_marginTop="@dimen/dp_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

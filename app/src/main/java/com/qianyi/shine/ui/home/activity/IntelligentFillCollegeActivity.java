@@ -8,20 +8,30 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.gson.Gson;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.activity.GuessScoreActivity;
 import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.home.adapter.IntellgenceFillAdapter;
 import com.qianyi.shine.ui.home.bean.IntellgenceFillBean;
+import com.qianyi.shine.ui.home.bean.SchoolInfo;
+import com.qianyi.shine.ui.home.bean.UniversityBean;
+import com.qianyi.shine.ui.mine.bean.CollegeBean;
+import com.qianyi.shine.ui.mine.bean.UniversityInfo;
 import com.qianyi.shine.utils.SPUtils;
 import com.qianyi.shine.utils.Utils;
 
@@ -44,18 +54,33 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     RecyclerView rv_college;
     @BindView(R.id.swipeLayout)
     SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.no_internet_rl)
+    RelativeLayout no_internet_rl;
+    @BindView(R.id.no_data_rl)
+    RelativeLayout no_data_rl;
+    @BindView(R.id.btn_comfirm_)
+    Button btn_comfirm_;
     private IntellgenceFillAdapter mAdapter;
-    public List<IntellgenceFillBean> infoList;
+    public List<SchoolInfo> infoList;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
-    private TextView tv_willings;
     //=========意愿设置========================
     private  String area;
     private  String majorName;
-    private  String occupationName;
-    private TextView tv_collegeData;
+    private  String occupationName,memberId;
+    private TextView tv_collegeData,tv_willings;
+    private View view_header;
+    @BindView(R.id.tv_collegeData)
+    TextView tv_noDataCollegeData;
+    @BindView(R.id.tv_willings)
+    TextView tv_noDataWillings;
+    @BindView(R.id.ll_nodataCollegeData)
+    LinearLayout ll_nodataCollegeData;
+    private boolean isHasHeader;
+    private CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
+        customLoadingDialog=new CustomLoadingDialog(this);
         BaseActivity.addActivity(this);
         tv_title.setText("智能填报");
         infoList=new ArrayList<>();
@@ -66,16 +91,13 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
         //下拉刷新
         initRefreshLayout();
         swipeRefreshLayout.setRefreshing(true);
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        memberId= loginInfo.getId();
         refresh();
-        //初始化头布局
     }
     @Override
     protected void initData() {
-        for (int i = 0; i <10 ; i++) {
-            IntellgenceFillBean intellgenceFillBean=new IntellgenceFillBean();
-            infoList.add(intellgenceFillBean);
-        }
-        mAdapter.notifyDataSetChanged();
+
     }
     @Override
     protected void getResLayout() {
@@ -102,9 +124,8 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rv_college.setAdapter(mAdapter);
         //添加headerView
-        View view_header=getLayoutInflater().inflate(R.layout.header_intelligence_fill,null);
+        view_header=getLayoutInflater().inflate(R.layout.header_intelligence_fill,null);
         tv_willings=view_header.findViewById(R.id.tv_willings);
-        mAdapter.addHeaderView(view_header);
         setHeaderData(view_header);
         //点击事件
         view_header.findViewById(R.id.rl_willing).setOnClickListener(new View.OnClickListener() {
@@ -125,6 +146,18 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     private void setHeaderData(View view_header) {
         tv_collegeData=view_header.findViewById(R.id.tv_collegeData);
         RelativeLayout rl_setScore=view_header.findViewById(R.id.rl_setScore);
+        setWillingData(tv_collegeData,tv_willings);
+        rl_setScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(IntelligentFillCollegeActivity.this,GuessScoreActivity.class);
+                intent.putExtra("tag","intelligentFill");
+                startActivity(intent);
+            }
+        });
+    }
+    //设置意愿的数据
+    private void setWillingData(TextView tv_collegeData,TextView tv_willings) {
         String area = (String) SPUtils.get(IntelligentFillCollegeActivity.this, "area", "");
         String type = (String) SPUtils.get(IntelligentFillCollegeActivity.this, "type", "");
         String score = (String) SPUtils.get(IntelligentFillCollegeActivity.this, "score", "");
@@ -144,14 +177,6 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
             count++;
         }
         tv_willings.setText("已经设置"+count+"个意愿");
-        rl_setScore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(IntelligentFillCollegeActivity.this,GuessScoreActivity.class);
-                intent.putExtra("tag","intelligentFill");
-                startActivity(intent);
-            }
-        });
     }
     private void initRefreshLayout() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -163,56 +188,83 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     }
     //刷新
     private void refresh() {
+        if (!isHasHeader){
+            customLoadingDialog.show();
+        }
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh("http://www.baidu.com", mNextRequestPage, "",new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.intellgentFill(apiConstant.INTELLGENT_FILL, mNextRequestPage, memberId, new RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
-                Log.i("ppp","131"+s);
+            public void onSuccess(Call call, Response response, final String s) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true,infoList);
+                        customLoadingDialog.dismiss();
+                        Gson gson=new Gson();
+                        UniversityBean universityBean = gson.fromJson(s, UniversityBean.class);
+                        List<SchoolInfo> universityList = universityBean.getData().getInfo().getPriorSchoolList();
+                        //数据不为空
+                        if (universityList!=null && universityList.size()>0){
+                            setData(true,universityList);
+                            ll_nodataCollegeData.setVisibility(View.GONE);
+                            swipeRefreshLayout.setVisibility(View.VISIBLE);
+                            btn_comfirm_.setVisibility(View.VISIBLE);
+                            no_internet_rl.setVisibility(View.GONE);
+                            no_data_rl.setVisibility(View.GONE);
+                            if (!isHasHeader){
+                                isHasHeader=true;
+                                mAdapter.addHeaderView(view_header);
+                            }
+                        }else{
+                            //在这里显示一下逻辑
+                            ll_nodataCollegeData.setVisibility(View.VISIBLE);
+                            setWillingData(tv_noDataCollegeData,tv_noDataCollegeData);
+                            swipeRefreshLayout.setVisibility(View.GONE);
+                            btn_comfirm_.setVisibility(View.GONE);
+                            no_internet_rl.setVisibility(View.GONE);
+                            no_data_rl.setVisibility(View.VISIBLE);
+                        }
                         mAdapter.setEnableLoadMore(true);
                         swipeRefreshLayout.setRefreshing(false);
-
-
                     }
                 });
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
-                Log.i("ppp","132"+e);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true,infoList);
+                        customLoadingDialog.dismiss();
+                        swipeRefreshLayout.setVisibility(View.GONE);
+                        no_internet_rl.setVisibility(View.VISIBLE);
+                        no_data_rl.setVisibility(View.GONE);
                         mAdapter.setEnableLoadMore(true);
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });
-
-
             }
         });
-
     }
     //加载
     private void loadMore() {
-
-        apiHome.loadMore("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        mNextRequestPage++;
+        apiHome.intellgentFill(apiConstant.INTELLGENT_FILL, mNextRequestPage,memberId,new RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
+            public void onSuccess(Call call, Response response, final String s) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(false, infoList);
+                        Gson gson=new Gson();
+                        UniversityBean universityBean = gson.fromJson(s, UniversityBean.class);
+                        List<SchoolInfo> universityList = universityBean.getData().getInfo().getPriorSchoolList();
+                        //数据不为空
+                        setData(false,universityList);
+                        mAdapter.setEnableLoadMore(true);
+                        swipeRefreshLayout.setRefreshing(false);
+
                     }
                 });
-
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 runOnUiThread(new Runnable() {
@@ -222,7 +274,6 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
                         Toast.makeText(IntelligentFillCollegeActivity.this, "网络错误", Toast.LENGTH_LONG).show();
                     }
                 });
-
             }
         });
     }
@@ -241,7 +292,6 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
             mAdapter.loadMoreEnd(isRefresh);
-            Toast.makeText(IntelligentFillCollegeActivity.this, "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             mAdapter.loadMoreComplete();
         }
