@@ -49,7 +49,6 @@ public class Profession_BaseInfoFragment extends BaseFragment {
         professionAdapter=new RightProfessionAdapter(getActivity(),null);
         rightprofession_rv.setAdapter(professionAdapter);
         //点击事件有问题
-
 //        professionAdapter.setOnItemClickListener(new RightProfessionAdapter.OnRecyclerViewItemClickListener() {
 //            @Override
 //            public void onItemClick(int position) {
