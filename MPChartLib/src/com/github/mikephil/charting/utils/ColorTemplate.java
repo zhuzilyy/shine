@@ -37,7 +37,9 @@ public class ColorTemplate {
     };
     public static final int[] VORDIPLOM_COLORS = {
             Color.rgb(192, 255, 140), Color.rgb(255, 247, 140), Color.rgb(255, 208, 140),
-            Color.rgb(140, 234, 255), Color.rgb(255, 140, 157)
+            Color.rgb(140, 234, 255), Color.rgb(255, 140, 157),Color.rgb(146, 23, 209),
+            Color.rgb(23, 209, 89), Color.rgb(239, 84, 0),
+            Color.rgb(105, 176, 140), Color.rgb(251, 30, 207)
     };
 
     // public static final int[] FRESH_COLORS = {

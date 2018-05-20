@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
@@ -69,6 +70,8 @@ public class RightProfessionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //将数据与item视图进行绑定，如果是MyViewHolder就加载网络图片，如果是MyViewHolder2就显示页数
         if (holder instanceof RightProfessionAdapter.MyViewHolder) {
+            ((MyViewHolder) holder).title.setText(datas.get(position).getCollegeName());
+            ((MyViewHolder) holder).des.setText(datas.get(position).getCollegeDes());
 
             // Picasso.with(mContext).load(datas.get(position).getUrl()).into(((MyViewHolder) holder).iv);//加载网络图片
             if(mOnItemClickListener!=null){
@@ -87,7 +90,7 @@ public class RightProfessionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public int getItemCount() {
-        return 7;//获取数据的个数
+        return datas.size();//获取数据的个数
     }
 
 
@@ -97,13 +100,16 @@ public class RightProfessionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     //自定义ViewHolder，用于加载图片
     class MyViewHolder extends RecyclerView.ViewHolder {
         private ImageView pic_item;
+        private TextView title;
+        private TextView des;
 
 
 
         public MyViewHolder(View view) {
             super(view);
             pic_item = view.findViewById(R.id.pic_item);
-
+            title= view.findViewById(R.id.tv_rightprofess_title);
+            des=view.findViewById(R.id.tv_rightprofess_desc);
         }
     }
 }

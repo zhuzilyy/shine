@@ -206,7 +206,6 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     }
     //刷新
     private void refresh() {
-        //Toast.makeText(PriorityProfessionalDetailsActivity.this, "1346458465", Toast.LENGTH_SHORT).show();
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
         apiHome.refresh("http://www.baidu.com", mNextRequestPage,"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {

@@ -1,5 +1,6 @@
 package com.qianyi.shine.ui.mine.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,11 +13,19 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.gson.Gson;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
+import com.qianyi.shine.api.apiMine;
 import com.qianyi.shine.base.BaseFragment;
+import com.qianyi.shine.ui.account.bean.LoginBean;
+import com.qianyi.shine.ui.career_planning.activity.CharacterResultActivity;
+import com.qianyi.shine.ui.career_planning.activity.InterestResultActivity;
+import com.qianyi.shine.ui.career_planning.activity.TestActivity;
 import com.qianyi.shine.ui.mine.adapter.MeasurementAdapter;
 import com.qianyi.shine.ui.mine.bean.MeasurementBean;
+import com.qianyi.shine.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +44,7 @@ public class MeasurementFragment extends BaseFragment {
     @BindView(R.id.swipeLayout)
     public SwipeRefreshLayout mSwipeRefreshLayout;
     private MeasurementAdapter measurementAdapter;
-    List<MeasurementBean> infoList;
+    List<MeasurementBean.MeasurementData.MeasurementInfo.CollectionJobList> infoList;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private View view_measurement;
@@ -59,10 +68,7 @@ public class MeasurementFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        for (int i = 0; i <10 ; i++) {
-            MeasurementBean measurementBean=new MeasurementBean();
-            infoList.add(measurementBean);
-        }
+
     }
 
     @Override
@@ -80,27 +86,65 @@ public class MeasurementFragment extends BaseFragment {
         measurementAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rv_measurement.setAdapter(measurementAdapter);
 
-        rv_measurement.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-                Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_LONG).show();
-            }
-        });
+
     }
     //刷新
     private void refresh() {
+
+        LoginBean.LoginData.LoginInfo user = Utils.readUser(getActivity());
+        if(user== null){
+            return;
+        }
+
         mNextRequestPage = 1;
         measurementAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh("http://www.baidu.com", mNextRequestPage,"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiMine.measurementReport(apiConstant.Evaluationeport,user.getId(), mNextRequestPage+"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
+            public void onSuccess(Call call, Response response, final String s) {
                 Log.i("ppp", "131" + s);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true, infoList);
-                        measurementAdapter.setEnableLoadMore(true);
-                        mSwipeRefreshLayout.setRefreshing(false);
+                        Log.i("ss",s);
+                        Gson gson =new Gson();
+                        MeasurementBean measurementBean = gson.fromJson(s,MeasurementBean.class);
+                        if(measurementBean!=null){
+                            MeasurementBean.MeasurementData measurementData= measurementBean.getData();
+                            if(measurementData!=null){
+                                final MeasurementBean.MeasurementData.MeasurementInfo measurementInfo =measurementData.getInfo();
+                                if(measurementInfo!=null){
+                                    setData(true,  measurementInfo.getCollectionJobList());
+                                    measurementAdapter.setEnableLoadMore(true);
+                                    mSwipeRefreshLayout.setRefreshing(false);
+
+                                    rv_measurement.addOnItemTouchListener(new OnItemClickListener() {
+                                        @Override
+                                        public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
+                                         if("0".equals(measurementInfo.getCollectionJobList().get(0).getType())){
+                                             //霍兰德须兴趣测评
+                                             Intent intent =new Intent(getActivity(), InterestResultActivity.class);
+                                             intent.putExtra("InterestResult",measurementInfo.getCollectionJobList().get(0).getKeystring());
+                                             startActivity(intent);
+
+                                         }else if("1".equals(measurementInfo.getCollectionJobList().get(0).getType())){
+                                             //性格
+                                             Intent intent =new Intent(getActivity(), CharacterResultActivity.class);
+                                             intent.putExtra("CharatorResult",measurementInfo.getCollectionJobList().get(0).getKeystring());
+                                             startActivity(intent);
+                                         }
+
+
+
+                                        }
+                                    });
+
+                                }
+
+                            }
+                        }
+
+
+
                     }
                 });
             }
@@ -122,25 +166,49 @@ public class MeasurementFragment extends BaseFragment {
     //加载
     private void loadMore() {
 
-        apiHome.loadMore("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        LoginBean.LoginData.LoginInfo user = Utils.readUser(getActivity());
+        if(user== null){
+            return;
+        }
+        apiMine.measurementReport(apiConstant.Evaluationeport,user.getId(), mNextRequestPage+"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
+            public void onSuccess(Call call, Response response, final String s) {
+                Log.i("ppp", "131" + s);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(false, infoList);
+                        Log.i("ss",s);
+                        Gson gson =new Gson();
+                        MeasurementBean measurementBean = gson.fromJson(s,MeasurementBean.class);
+                        if(measurementBean!=null){
+                            MeasurementBean.MeasurementData measurementData= measurementBean.getData();
+                            if(measurementData!=null){
+                                MeasurementBean.MeasurementData.MeasurementInfo measurementInfo =measurementData.getInfo();
+                                if(measurementInfo!=null){
+                                    setData(false,  measurementInfo.getCollectionJobList());
+                                    measurementAdapter.setEnableLoadMore(true);
+                                    mSwipeRefreshLayout.setRefreshing(false);
+
+                                }
+
+                            }
+                        }
+
+
+
                     }
                 });
-
             }
 
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
+                Log.i("ppp", "132" + e);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        measurementAdapter.loadMoreFail();
-                        Toast.makeText(getActivity(), "网络错误", Toast.LENGTH_LONG).show();
+                        setData(true, infoList);
+                        measurementAdapter.setEnableLoadMore(true);
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
             }

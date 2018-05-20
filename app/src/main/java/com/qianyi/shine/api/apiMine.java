@@ -31,4 +31,20 @@ public class apiMine {
         params.put("school",school);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+
+
+    /***
+     *
+        获取测评报告
+     */
+    public static void measurementReport(String url,String member_id, String page,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+
+        params.put("member_id",member_id);
+        params.put("page",page);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+
+
+
 }

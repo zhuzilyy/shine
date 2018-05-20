@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp">
         <TextView
+            android:id="@+id/tv_name"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
             android:textStyle="bold"
@@ -17,10 +18,11 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp" />
         <TextView
+            android:id="@+id/tv_time"
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:drawablePadding="10dp"
-            android:text="共一份报告"
+            android:text=""
             android:drawableRight="@mipmap/arrow_right"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -28,6 +30,7 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
     <TextView
+        android:id="@+id/tv_content"
         android:text="有道翻译提供即时免费的中文、英语、日语、韩语、法语、俄语、西班牙语、葡萄牙语、越南语全文翻译、网页翻译、文档翻译服务。"
         android:maxLines="4"
         android:layout_marginRight="10dp"

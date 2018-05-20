@@ -154,7 +154,6 @@ public class MessageActivity extends BaseActivity {
                     @Override
                     public void run() {
                         messageAdapter.loadMoreFail();
-                        Toast.makeText(MessageActivity.this, "网络错误", Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -181,7 +180,6 @@ public class MessageActivity extends BaseActivity {
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
             messageAdapter.loadMoreEnd(isRefresh);
-            Toast.makeText(MessageActivity.this, "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             messageAdapter.loadMoreComplete();
         }
