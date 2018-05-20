@@ -171,9 +171,13 @@ public class MajorZhuanKeFragment extends BaseFragment {
                             intent.setAction("com.action.setwilling");
                             intent.putExtra("majorName",node.getName());
                             getActivity().sendBroadcast(intent);
-                            //专业优先跳转的界面  或是  查专业跳转过来的界面
-                        }else if(tag.equals("majorPriority") ||tag.equals("searchMajor")){
+                            //专业优先跳转的界面  或是
+                        }else if(tag.equals("majorPriority") ){
                             intent=new Intent(getActivity(), PriorityProfessionalDetailsActivity.class);
+                            startActivity(intent);
+                        }else if(tag.equals("searchMajor")){
+                            //查专业跳转过来的界面
+                            intent=new Intent(getActivity(), ProfessionalActivity.class);
                             startActivity(intent);
                         }
                     }

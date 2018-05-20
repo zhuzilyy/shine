@@ -25,6 +25,7 @@ import com.qianyi.shine.fragment.entity.FirstLevel;
 import com.qianyi.shine.fragment.entity.MajorBean;
 import com.qianyi.shine.fragment.entity.SecondLevel;
 import com.qianyi.shine.fragment.entity.ThirdLevel;
+import com.qianyi.shine.ui.college.activity.ProfessionalActivity;
 import com.qianyi.shine.ui.home.activity.PriorityProfessionalDetailsActivity;
 import com.qianyi.shine.ui.home.bean.Major;
 import com.qianyi.shine.utils.Utils;
@@ -169,9 +170,13 @@ public class MajorBenkeFragment extends BaseFragment {
                             intent.setAction("com.action.setwilling");
                             intent.putExtra("majorName",node.getName());
                             getActivity().sendBroadcast(intent);
-                            //专业优先跳转的界面  或是  查专业跳转过来的界面
-                        }else if(tag.equals("majorPriority") ||tag.equals("searchMajor")){
+                            //专业优先跳转的界面
+                        }else if(tag.equals("majorPriority") ){
                             intent=new Intent(getActivity(), PriorityProfessionalDetailsActivity.class);
+                            startActivity(intent);
+                        }else if(tag.equals("searchMajor")){
+                            //查专业跳转过来的界面
+                            intent=new Intent(getActivity(), ProfessionalActivity.class);
                             startActivity(intent);
                         }
                     }
