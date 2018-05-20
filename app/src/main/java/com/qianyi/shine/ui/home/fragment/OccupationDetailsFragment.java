@@ -1,14 +1,23 @@
 package com.qianyi.shine.ui.home.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -21,6 +30,8 @@ import com.qianyi.shine.fragment.entity.TestEntity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
 
 import com.qianyi.shine.ui.home.adapter.OccupationDetailsAdapter;
+import com.qianyi.shine.utils.SPUtils;
+import com.qianyi.shine.utils.WebviewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +53,14 @@ public class OccupationDetailsFragment extends BaseFragment {
     List<TestEntity> testEntities;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
-    
+    @BindView(R.id.wv_webview)
+    WebView wv_webview;
+    @BindView(R.id.pb_webview)
+    ProgressBar pb_webview;
+    @BindView(R.id.no_data_rl)
+    RelativeLayout no_data_rl;
+    private WebSettings webSettings;
+    private MyReceiver myReceiver;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_occupation_details,null);
@@ -50,9 +68,14 @@ public class OccupationDetailsFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
+        String weburl= (String) SPUtils.get(getActivity(),"weburl","");
+        if (!TextUtils.isEmpty(weburl)){
+            webSettings=wv_webview.getSettings();
+            WebviewUtil.setWebview(wv_webview, webSettings);
+            loadingWebview();
+        }
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         //上拉加载
         initAdapter();
 
@@ -61,6 +84,24 @@ public class OccupationDetailsFragment extends BaseFragment {
         mSwipeRefreshLayout.setRefreshing(true);
         refresh();
 
+        myReceiver=new MyReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.occupation");
+        getActivity().registerReceiver(myReceiver,intentFilter);
+    }
+    private void loadingWebview() {
+        wv_webview.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                if (pb_webview!=null){
+                    pb_webview.setProgress(newProgress);
+                    if(newProgress==100){
+                        pb_webview.setVisibility(View.GONE);
+                    }
+                }
+            }
+        });
     }
 
    
@@ -204,6 +245,24 @@ public class OccupationDetailsFragment extends BaseFragment {
             Toast.makeText(getActivity(), "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             mAdapter.loadMoreComplete();
+        }
+    }
+
+    class MyReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("com.action.occupation")){
+                String weburl=intent.getStringExtra("weburl");
+                if (TextUtils.isEmpty(weburl)){
+                    wv_webview.setVisibility(View.GONE);
+                    no_data_rl.setVisibility(View.VISIBLE);
+                }else{
+                    wv_webview.setVisibility(View.VISIBLE);
+                    no_data_rl.setVisibility(View.GONE);
+                    wv_webview.loadUrl(weburl);
+                }
+            }
         }
     }
 }

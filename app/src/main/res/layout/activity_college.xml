@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_gray"
@@ -71,12 +70,12 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/tv_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/collegeName"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/dp_6"
-                    android:text="·985、211、研隶属·"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -218,6 +217,7 @@
         android:gravity="center">
 
         <TextView
+            android:id="@+id/tv_addFocus"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="45dp"

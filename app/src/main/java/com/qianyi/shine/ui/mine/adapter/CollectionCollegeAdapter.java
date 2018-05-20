@@ -5,18 +5,20 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.qianyi.shine.R;
+import com.qianyi.shine.ui.home.bean.CollectionCollegeInfo;
+import com.qianyi.shine.ui.home.bean.CollectionSchoolInfo;
 import com.qianyi.shine.ui.mine.bean.UniversityInfo;
 
 /**
  * Created by Administrator on 2018/4/3.
  */
 
-public class CollegeAdapter extends BaseQuickAdapter<UniversityInfo, BaseViewHolder> {
-    public CollegeAdapter(int layoutResId) {
+public class CollectionCollegeAdapter extends BaseQuickAdapter<CollectionSchoolInfo, BaseViewHolder> {
+    public CollectionCollegeAdapter(int layoutResId) {
         super(layoutResId);
     }
     @Override
-    protected void convert(BaseViewHolder helper, UniversityInfo item) {
+    protected void convert(BaseViewHolder helper, CollectionSchoolInfo item) {
       /*  ImageView imageView = helper.getView(R.id.item_img);
         Glide.with(mContext).load(item.getImage()).into(imageView);
         helper.setText(R.id.item_desc, item.getTitle());

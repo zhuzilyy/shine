@@ -40,8 +40,6 @@ public class WebviewActivity extends BaseActivity {
             WebviewUtil.setWebview(wv_webview, webSettings);
             wv_webview.loadUrl(url);
         }
-
-
     }
 
     @Override

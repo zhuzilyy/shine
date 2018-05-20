@@ -7,6 +7,8 @@
     android:paddingBottom="55dp">
 
     <com.qianyi.shine.ui.college.view.MyScrollview
+        android:visibility="gone"
+        android:id="@+id/myScrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

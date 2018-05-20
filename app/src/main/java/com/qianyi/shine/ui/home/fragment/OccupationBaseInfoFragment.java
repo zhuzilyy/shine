@@ -24,6 +24,7 @@ import com.qianyi.shine.ui.college.view.MyScrollview;
 import com.qianyi.shine.ui.home.bean.JobInfoBean;
 import com.qianyi.shine.ui.home.bean.JobMajor;
 import com.qianyi.shine.ui.home.bean.OccupationInnerInfo;
+import com.qianyi.shine.utils.SPUtils;
 import com.qianyi.shine.utils.Utils;
 
 import java.security.acl.LastOwnerException;
@@ -59,6 +60,7 @@ public class OccupationBaseInfoFragment extends BaseFragment {
     private Intent intent;
     private String occupationName;
     private CustomLoadingDialog customLoadingDialog;
+
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_occupation_baseinfo,null);
@@ -112,12 +114,16 @@ public class OccupationBaseInfoFragment extends BaseFragment {
                             tv_workingContent.setText(job_info.getContent());
                             tv_female.setText(job_info.getFemalte_ratio());
                             tv_male.setText(job_info.getMale_ratio());
+                            String weburl = job_info.getWeburl();
                             //发送广播
                             String name = job_info.getName();
                             String category = job_info.getCategory();
+                            String occupationId=job_info.getZhineng_id();
                             Intent intent=new Intent();
                             intent.putExtra("name",name);
                             intent.putExtra("category",category);
+                            intent.putExtra("occupationId",occupationId);
+                            intent.putExtra("weburl",weburl);
                             intent.setAction("com.action.occupation");
                             getActivity().sendBroadcast(intent);
                             //对口职业
@@ -131,6 +137,8 @@ public class OccupationBaseInfoFragment extends BaseFragment {
                             Intent intent=new Intent();
                             intent.putExtra("name",occupationName);
                             intent.putExtra("category","暂无数据");
+                            intent.putExtra("occupationId","");
+                            intent.putExtra("weburl","");
                             intent.setAction("com.action.occupation");
                             getActivity().sendBroadcast(intent);
                             myScrollview.setVisibility(View.GONE);

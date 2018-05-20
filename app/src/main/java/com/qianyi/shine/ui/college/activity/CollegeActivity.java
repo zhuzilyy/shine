@@ -1,5 +1,6 @@
 package com.qianyi.shine.ui.college.activity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,12 +24,18 @@ import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.fragment.HomeFragment;
 import com.qianyi.shine.ui.account.activity.FindPwdActiviy;
+import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.fragments.collegeEmploymentProspectsFragment;
 import com.qianyi.shine.ui.college.fragments.collegeIntroductionFragment;
 import com.qianyi.shine.ui.college.fragments.collegeProfessionalSettingsFragment;
 import com.qianyi.shine.ui.college.fragments.collegeScoreFragment;
 import com.qianyi.shine.ui.home.bean.CollegeDetailsBean;
 import com.qianyi.shine.utils.SPUtils;
+import com.qianyi.shine.utils.ToastUtils;
+import com.qianyi.shine.utils.Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,23 +78,30 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
     public TextView collete_tv03;
     @BindView(R.id.collete_tv04)
     public TextView collete_tv04;
+    @BindView(R.id.tv_tag)
+    public TextView tv_tag;
     @BindView(R.id.back)
     public ImageView back;
-    private String collegeId;
+    private String collegeId,universityName,memberId;
     //==================================================
     @BindView(R.id.college_logo) public RoundedImageView college_logo;
     @BindView(R.id.collegeName) public TextView collegeName;
     @BindView(R.id.collegeOrder) public TextView collegeOrder;
+    private CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
         collegeId=getIntent().getStringExtra("id");
+        universityName=getIntent().getStringExtra("name");
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        memberId= loginInfo.getId();
         setStatusColor();
         ButterKnife.bind(this);
         fragmentManager=getSupportFragmentManager();
         introductionFragment=new collegeIntroductionFragment();
         FragmentTransaction ft=fragmentManager.beginTransaction();
         AddOrShowFra(ft,introductionFragment);
+        customLoadingDialog=new CustomLoadingDialog(this);
 
     }
 
@@ -124,9 +138,27 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
                                     if(detailsInfo!=null){
                                         //赋值界面数据
                                         String wmzyId=detailsInfo.getWmzy_school_id();
+                                        String is_211 = detailsInfo.getIs_211();
+                                        String is_985 = detailsInfo.getIs_985();
+                                        String level_211;
+                                        String level_985;
+                                        if (is_211.equals("1")){
+                                            level_211="211";
+                                        }else{
+                                            level_211="非211";
+                                        }
+                                        if (is_985.equals("1")){
+                                            level_985="985";
+                                        }else{
+                                            level_985="非985";
+                                        }
+                                        tv_tag.setText(level_211+" "+level_985);
                                         SPUtils.put(CollegeActivity.this,"wmzyId",wmzyId);
                                         setCollegeData(detailsInfo);
                                         introductionFragment.setCollegeDataFromRoot(detailsInfo);
+                                        Intent intent=new Intent();
+                                        intent.setAction("com.action.introduce.success");
+                                        sendBroadcast(intent);
                                     }
                                 }
                             }
@@ -183,14 +215,12 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
     }
 
     @OnClick({R.id.college_Introduction, R.id.college_ProfessionalSettings, R.id.college_Score,
-            R.id.college_EmploymentProspects,R.id.back})
+            R.id.college_EmploymentProspects,R.id.back,R.id.tv_addFocus})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.back:
                 finish();
-
-
                 break;
             case R.id.college_Introduction:
                 showIndicator(0);
@@ -224,12 +254,38 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
                 FragmentTransaction ft_employmentProspects=fragmentManager.beginTransaction();
                 AddOrShowFra(ft_employmentProspects,employmentProspectsFragment);
                 break;
-
-            default:
+            case R.id.tv_addFocus:
+                focusCollege();
                 break;
-
-
         }
+    }
+    //关注学校
+    private void focusCollege() {
+        customLoadingDialog.show();
+        apiHome.focusCollege(apiConstant.FOCUS_COLLEGE, memberId, collegeId, universityName, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(Call call, Response response, final String s) {
+                Log.i("tag",s);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        customLoadingDialog.dismiss();
+                        try {
+                            JSONObject jsonObject=new JSONObject(s);
+                            String info = jsonObject.getString("info");
+                            Toast.makeText(CollegeActivity.this, info, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+            @Override
+            public void onEror(Call call, int statusCode, Exception e) {
+                        customLoadingDialog.dismiss();
+                Toast.makeText(CollegeActivity.this, "网络错误关注失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /***

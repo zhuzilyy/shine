@@ -87,6 +87,7 @@
         android:gravity="center">
 
         <TextView
+            android:id="@+id/tv_addFocus"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="45dp"

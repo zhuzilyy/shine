@@ -7,23 +7,34 @@ import android.content.IntentFilter;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
+import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
+import com.qianyi.shine.ui.account.bean.LoginBean;
+import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.college.adapter.MyPageAdapter;
-import com.qianyi.shine.ui.college.fragments.Profession_BaseInfoFragment;
-import com.qianyi.shine.ui.college.fragments.Profession_EstablishmentFragment;
-import com.qianyi.shine.ui.college.fragments.Profession_ProspectsFragment;
-import com.qianyi.shine.ui.gaokao_news.view.XTitleView;
 import com.qianyi.shine.ui.home.fragment.OccupationBaseInfoFragment;
 import com.qianyi.shine.ui.home.fragment.OccupationDetailsFragment;
+import com.qianyi.shine.utils.Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2018/4/7.
@@ -42,11 +53,12 @@ public class OccupationDetailActivity extends BaseActivity {
     TextView tv_category;
     public MyPageAdapter myPageAdapter;
     private MyReceiver myReceiver;
+    private String occupationId,memberId,name;
+    private CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
         tv_title.setText("职业介绍");
-
         myPageAdapter = new MyPageAdapter(getSupportFragmentManager());
         ArrayList<Fragment> datas = new ArrayList<Fragment>();
         datas.add(new OccupationBaseInfoFragment());
@@ -67,6 +79,9 @@ public class OccupationDetailActivity extends BaseActivity {
         intentFilter.addAction("com.action.occupation");
         registerReceiver(myReceiver,intentFilter);
 
+        customLoadingDialog=new CustomLoadingDialog(this);
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        memberId= loginInfo.getId();
     }
 
     @Override
@@ -88,15 +103,49 @@ public class OccupationDetailActivity extends BaseActivity {
     protected void setStatusBarColor() {
 
     }
-    @OnClick({R.id.iv_back})
+    @OnClick({R.id.iv_back,R.id.tv_addFocus})
     public void click(View view){
         switch (view.getId()){
             case R.id.iv_back:
                 finish();
                 break;
+            case R.id.tv_addFocus:
+                if (TextUtils.isEmpty(occupationId)){
+                    Toast.makeText(this, "网络错误", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                addFocus();
+                break;
         }
     }
-
+    //关注职业
+    private void addFocus() {
+        customLoadingDialog.show();
+        apiHome.focusOccupation(apiConstant.FOCUS_OCCUPATION, memberId, occupationId,name, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(Call call, Response response, final String s) {
+                Log.i("tag",s);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        customLoadingDialog.dismiss();
+                        try {
+                            JSONObject jsonObject=new JSONObject(s);
+                            String info = jsonObject.getString("info");
+                            Toast.makeText(OccupationDetailActivity.this, info, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+            @Override
+            public void onEror(Call call, int statusCode, Exception e) {
+                customLoadingDialog.dismiss();
+                Toast.makeText(OccupationDetailActivity.this, "网络错误关注失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -108,8 +157,9 @@ public class OccupationDetailActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals("com.action.occupation")){
-                String name=intent.getStringExtra("name");
+                name=intent.getStringExtra("name");
                 String category=intent.getStringExtra("category");
+                occupationId=intent.getStringExtra("occupationId");
                 tv_name.setText(name);
                 tv_category.setText(category);
             }
