@@ -7,6 +7,8 @@
     android:background="@color/white"
     >
     <com.qianyi.shine.ui.college.view.MyScrollview
+        android:visibility="gone"
+        android:id="@+id/myScrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -38,10 +40,7 @@
                         android:layout_marginLeft="@dimen/dp_10"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-
                         />
-
-
                 </LinearLayout>
                 <View
                     android:layout_marginLeft="@dimen/dp_10"
@@ -51,6 +50,7 @@
                     android:background="@color/light_gray"
                     />
                 <TextView
+                    android:id="@+id/tv_workingContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
@@ -127,6 +127,7 @@
                             android:src="@mipmap/nan" />
 
                         <TextView
+                            android:id="@+id/tv_male"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -146,6 +147,7 @@
                             android:src="@mipmap/nv" />
 
                         <TextView
+                            android:id="@+id/tv_female"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -179,11 +181,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="对口职业"
+                        android:text="对口专业"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-
                         />
 
 
@@ -206,11 +207,8 @@
                         android:layout_height="wrap_content"/>
                 </RelativeLayout>
             </LinearLayout>
-
-
-
-
         </LinearLayout>
     </com.qianyi.shine.ui.college.view.MyScrollview>
-
+    <include layout="@layout/common_wrong_intert"/>
+    <include layout="@layout/common_no_data"/>
 </LinearLayout>

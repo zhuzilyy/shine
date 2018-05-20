@@ -86,7 +86,7 @@ public class Prospect_allreportAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public int getItemCount() {
-        return 7;//获取数据的个数
+        return datas.size();//获取数据的个数
     }
     //自定义ViewHolder，用于加载图片
     class MyViewHolder extends RecyclerView.ViewHolder {

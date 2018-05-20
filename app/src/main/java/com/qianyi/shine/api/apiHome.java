@@ -128,72 +128,47 @@ public class apiHome {
         params.put("id",id);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //就业前景
-    public static void majorDetails(String url,String id,String major_name,RequestCallBack<String> callback){
+    public static void occupationDetail(String url,String name,RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
-        params.put("id",id);
-        params.put("major_name",major_name);
+        params.put("name",name);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
-
-    //关注专业
-    public static void attentionMajor(String url,String member_id,String major_id,String major_name,RequestCallBack<String> callback){
+    //关注大学
+    public static void focusCollege(String url,String member_id,String school_id,String school_name,RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
         params.put("member_id",member_id);
-        params.put("major_id",major_id);
-        params.put("major_name",major_name);
+        params.put("school_id",school_id);
+        params.put("school_name",school_name);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
-
-
-
-
-
-
-
-
+    //关注职业
+    public static void focusOccupation(String url,String member_id,String job_id,String job_name,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",member_id);
+        params.put("job_id",job_id);
+        params.put("job_name",job_name);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    //获取我关注的大学
+    public static void focusCollegeList(String url,String member_id,int page,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",member_id);
+        params.put("page",page+"");
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    //获取我关注的职业
+    public static void focusJobList(String url,String member_id,int page,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",member_id);
+        params.put("page",page+"");
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    //获取我关注的专业
+    public static void focusMajorList(String url,String member_id,int page,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",member_id);
+        params.put("page",page+"");
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 }

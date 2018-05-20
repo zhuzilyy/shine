@@ -1,22 +1,34 @@
 package com.qianyi.shine.ui.mine.fragment;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.gson.Gson;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
+import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
+import com.qianyi.shine.ui.account.bean.LoginBean;
+import com.qianyi.shine.ui.home.activity.OccupationDetailActivity;
 import com.qianyi.shine.ui.mine.adapter.ProfessionAdapter;
+import com.qianyi.shine.ui.mine.bean.CollectionJobBean;
+import com.qianyi.shine.ui.mine.bean.CollectionJobListInfo;
 import com.qianyi.shine.ui.mine.bean.ProfessionBean;
+import com.qianyi.shine.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +46,19 @@ public class ProfessionFragment extends BaseFragment {
     public RecyclerView rv_profession;
     @BindView(R.id.swipeLayout)
     public SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.no_internet_rl)
+    RelativeLayout no_internet_rl;
+    @BindView(R.id.no_data_rl)
+    RelativeLayout no_data_rl;
+    @BindView(R.id.reload)
+    TextView reload;
     private ProfessionAdapter professionAdapter;
     List<ProfessionBean> infoList;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private View view_profession;
+    private CustomLoadingDialog customLoadingDialog;
+    private String memberId;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_profession=inflater.inflate(R.layout.fragment_profession,null);
@@ -54,34 +74,52 @@ public class ProfessionFragment extends BaseFragment {
         //下拉刷新
         initRefreshLayout();
         mSwipeRefreshLayout.setRefreshing(true);
-        refresh();
+       // refresh();
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
+        memberId= loginInfo.getId();
+
+        customLoadingDialog=new CustomLoadingDialog(getActivity());
     }
     @Override
     protected void initData() {
-        for (int i = 0; i <10 ; i++) {
-            ProfessionBean professionBean=new ProfessionBean();
-            infoList.add(professionBean);
+        if (!Utils.hasInternet()){
+            mSwipeRefreshLayout.setVisibility(View.GONE);
+            no_data_rl.setVisibility(View.GONE);
+            no_internet_rl.setVisibility(View.VISIBLE);
+        }else{
+            customLoadingDialog.show();
+            refresh();
         }
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customLoadingDialog.show();
+                refresh();
+            }
+        });
     }
     @Override
     protected void initListener() {
 
     }
     private void initAdapter() {
-        professionAdapter = new ProfessionAdapter(R.layout.item_major, infoList);
+        professionAdapter = new ProfessionAdapter(R.layout.item_major);
         professionAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 loadMore();
             }
         });
-        professionAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        professionAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
         rv_profession.setAdapter(professionAdapter);
 
         rv_profession.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-                Toast.makeText(getActivity(), Integer.toString(position), Toast.LENGTH_LONG).show();
+                List<CollectionJobListInfo> data = professionAdapter.getData();
+                Intent intent=new Intent(getActivity(), OccupationDetailActivity.class);
+                intent.putExtra("occupationName",data.get(position).getJob_name());
+                getActivity().startActivity(intent);
             }
         });
     }
@@ -89,29 +127,40 @@ public class ProfessionFragment extends BaseFragment {
     private void refresh() {
         mNextRequestPage = 1;
         professionAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh("http://www.baidu.com", mNextRequestPage,"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.focusJobList(apiConstant.FOCUS_JOB_LIST, memberId, mNextRequestPage, new RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
-                Log.i("ppp", "131" + s);
+            public void onSuccess(Call call, Response response, final String s) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true, infoList);
+                        customLoadingDialog.dismiss();
+                        Gson gson=new Gson();
+                        CollectionJobBean collectionJobBean = gson.fromJson(s, CollectionJobBean.class);
+                        List<CollectionJobListInfo> collectionJobList = collectionJobBean.getData().getInfo().getCollectionJobList();
+                        if (collectionJobList!=null && collectionJobList.size()>0){
+                            setData(true,collectionJobList);
+                            mSwipeRefreshLayout.setVisibility(View.VISIBLE);
+                            no_data_rl.setVisibility(View.GONE);
+                            no_internet_rl.setVisibility(View.GONE);
+                        }else{
+                            mSwipeRefreshLayout.setVisibility(View.GONE);
+                            no_data_rl.setVisibility(View.VISIBLE);
+                            no_internet_rl.setVisibility(View.GONE);
+                        }
                         professionAdapter.setEnableLoadMore(true);
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
-                Log.i("ppp", "132" + e);
+                customLoadingDialog.dismiss();
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true, infoList);
-                        professionAdapter.setEnableLoadMore(true);
-                        mSwipeRefreshLayout.setRefreshing(false);
+                        mSwipeRefreshLayout.setVisibility(View.GONE);
+                        no_data_rl.setVisibility(View.GONE);
+                        no_internet_rl.setVisibility(View.VISIBLE);
                     }
                 });
             }
@@ -119,19 +168,23 @@ public class ProfessionFragment extends BaseFragment {
     }
     //加载
     private void loadMore() {
-
-        apiHome.loadMore("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        mNextRequestPage++;
+        apiHome.focusJobList(apiConstant.FOCUS_JOB_LIST, memberId, mNextRequestPage, new RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
+            public void onSuccess(Call call, Response response, final String s) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(false, infoList);
+                        Gson gson=new Gson();
+                        CollectionJobBean collectionJobBean = gson.fromJson(s, CollectionJobBean.class);
+                        List<CollectionJobListInfo> collectionJobList = collectionJobBean.getData().getInfo().getCollectionJobList();
+                        //数据不为空
+                        setData(false,collectionJobList);
+                        professionAdapter.setEnableLoadMore(true);
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
-
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 getActivity().runOnUiThread(new Runnable() {
@@ -143,6 +196,7 @@ public class ProfessionFragment extends BaseFragment {
                 });
             }
         });
+
     }
     private void initRefreshLayout() {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -165,7 +219,6 @@ public class ProfessionFragment extends BaseFragment {
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
             professionAdapter.loadMoreEnd(isRefresh);
-            Toast.makeText(getActivity(), "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             professionAdapter.loadMoreComplete();
         }

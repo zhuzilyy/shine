@@ -7,6 +7,8 @@
     android:paddingBottom="55dp">
 
     <com.qianyi.shine.ui.college.view.MyScrollview
+        android:visibility="gone"
+        android:id="@+id/myScrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -718,5 +720,5 @@
                 android:textSize="14sp" />
         </LinearLayout>
     </com.qianyi.shine.ui.college.view.MyScrollview>
-
+    <include layout="@layout/common_wrong_intert"/>
 </LinearLayout>

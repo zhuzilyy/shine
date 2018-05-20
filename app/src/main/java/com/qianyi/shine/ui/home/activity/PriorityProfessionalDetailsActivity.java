@@ -151,10 +151,8 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     private void initContentView() {
         swipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         recyclerView.setLayoutManager(new LinearLayoutManager(PriorityProfessionalDetailsActivity.this));
-
         //上拉加载
         initAdapter();
-
         //下拉刷新
         initRefreshLayout();
         swipeRefreshLayout.setRefreshing(true);

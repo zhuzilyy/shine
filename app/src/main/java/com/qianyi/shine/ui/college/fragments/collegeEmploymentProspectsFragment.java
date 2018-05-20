@@ -29,14 +29,12 @@ import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
-import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.ui.college.adapter.Prospect_MoneyAdapter;
 import com.qianyi.shine.ui.college.adapter.Prospect_allreportAdapter;
 import com.qianyi.shine.ui.college.view.MyScrollview;
 import com.qianyi.shine.ui.home.bean.MajorListInfo;
 import com.qianyi.shine.ui.home.bean.Prospect;
 import com.qianyi.shine.ui.home.bean.ProspectBean;
-import com.qianyi.shine.ui.home.bean.ProspectInfo;
 import com.qianyi.shine.ui.home.bean.SalaryMajorInfo;
 import com.qianyi.shine.utils.SPUtils;
 import com.qianyi.shine.utils.Utils;
@@ -59,7 +57,6 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
     public RecyclerView rv_allreport;
     private Prospect_MoneyAdapter moneyAdapter;
     private List<SalaryMajorInfo> list;
-    private List<MajorListInfo> majorList;
     @BindView(R.id.chat_Industry)
     public PieChart mPieChartIndustry;
     @BindView(R.id.chat_Area)
@@ -81,6 +78,8 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
     TextView reload;
     @BindView(R.id.myScrollview)
     MyScrollview myScrollview;
+    @BindView(R.id.no_data_rl)
+    RelativeLayout no_data_rl;
     private Intent intent;
     private String universityId;
     private CustomLoadingDialog customLoadingDialog;
@@ -97,7 +96,6 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
             universityId=intent.getStringExtra("id");
         }
         list=new ArrayList<>();
-        majorList=new ArrayList<>();
         //设置行业去向
         setPieChart(mPieChartIndustry);
         loadPieChartData(mPieChartIndustry);
@@ -117,6 +115,7 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
         }else{
             myScrollview.setVisibility(View.GONE);
             no_internet_rl.setVisibility(View.VISIBLE);
+            no_data_rl.setVisibility(View.GONE);
         }
         reload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +128,7 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
     private void getData() {
         customLoadingDialog.show();
         String wmzyId= (String) SPUtils.get(getActivity(),"wmzyId","");
+        Log.i("tag",wmzyId+"=========wmzyId==========");
         apiHome.majorProspects(apiConstant.MAJOR_PROSPECTS, wmzyId,universityId, new RequestCallBack<String>() {
             @Override
             public void onSuccess(final Call call, Response response, final String s) {
@@ -139,9 +139,11 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
                     public void run() {
                         myScrollview.setVisibility(View.VISIBLE);
                         no_internet_rl.setVisibility(View.GONE);
+                        no_data_rl.setVisibility(View.GONE);
                         Gson gson=new Gson();
                         ProspectBean prospectBean = gson.fromJson(s, ProspectBean.class);
                         String code = prospectBean.getCode();
+                        Log.i("tag",code+"======code========");
                         if (code.equals("0")){
                             Prospect prospect = prospectBean.getData().getInfo().getProspect();
                             String salary_factor_rank_index = prospect.getSalary_factor_rank_index();
@@ -161,12 +163,16 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
                                 moneyAdapter.notifyDataSetChanged();
                             }
                             //就业报告
-                            List<MajorListInfo> major_list = prospect.getMajor_list();
-                            if (major_list!=null && major_list.size()>0){
+                            List<MajorListInfo> majorList = prospect.getMajor_list();
+                            if (majorList!=null && majorList.size()>0){
                                 rv_allreport.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                allreportAdapter=new Prospect_allreportAdapter(getActivity(),major_list);
+                                allreportAdapter=new Prospect_allreportAdapter(getActivity(),majorList);
                                 rv_allreport.setAdapter(allreportAdapter);
                             }
+                        }else {
+                            myScrollview.setVisibility(View.GONE);
+                            no_internet_rl.setVisibility(View.GONE);
+                            no_data_rl.setVisibility(View.VISIBLE);
                         }
                     }
                 });
@@ -176,6 +182,7 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
                 customLoadingDialog.dismiss();
                 myScrollview.setVisibility(View.GONE);
                 no_internet_rl.setVisibility(View.VISIBLE);
+                no_data_rl.setVisibility(View.GONE);
             }
         });
     }

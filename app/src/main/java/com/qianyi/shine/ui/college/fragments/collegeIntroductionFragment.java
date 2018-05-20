@@ -1,5 +1,8 @@
 package com.qianyi.shine.ui.college.fragments;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -21,7 +24,9 @@ import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.college.activity.BigImgActivity;
 import com.qianyi.shine.ui.college.activity.CollegePicBean;
 import com.qianyi.shine.ui.college.adapter.PicCollegeAdapter;
+import com.qianyi.shine.ui.college.view.MyScrollview;
 import com.qianyi.shine.ui.home.bean.CollegeDetailsBean;
+import com.qianyi.shine.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +50,8 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
     //奖学金设置
     @BindView(R.id.Scholarship_re)
     public RelativeLayout Scholarship_re;
+    @BindView(R.id.myScrollview)
+    MyScrollview myScrollview;
     private CollegeDetailsBean.CollegeDetailsData.CollegeDetailsInfo collegeDetailsInfo;
     //*****************************
     @BindView(R.id.tv_collegeName) public TextView tv_collegeName;
@@ -64,8 +71,13 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
     @BindView(R.id.tv_labs_count) public TextView tv_labs_count; //重点实验室
     @BindView(R.id.tv_masterPoints) public TextView tv_masterPoints;  //硕士点
     @BindView(R.id.tv_doctorPoints) public TextView tv_doctorPoints;  //博士点
-    @BindView(R.id.tv_advantage_majors_count) public TextView tv_advantage_majors_count;  //重点专业
-
+    @BindView(R.id.tv_advantage_majors_count)
+    public TextView tv_advantage_majors_count;  //重点专业
+    @BindView(R.id.no_internet_rl)
+    RelativeLayout no_internet_wrong;
+    @BindView(R.id.reload)
+    TextView reload;
+    private MyReceiver myReceiver;
 
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
@@ -83,14 +95,21 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
         adapter.setOnItemClickListener(new PicCollegeAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(mActivity, "pp"+position, Toast.LENGTH_SHORT).show();
             }
         });
+        myReceiver=new MyReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.introduce.success");
+        getActivity().registerReceiver(myReceiver,intentFilter);
     }
 
     @Override
     protected void initData() {
+        if (Utils.hasInternet()){
 
+        }else{
+
+        }
     }
 
     @Override
@@ -202,6 +221,15 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
         }
         return collegeEntities;
     }
+    class MyReceiver extends BroadcastReceiver{
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("com.action.introduce.success")){
+                myScrollview.setVisibility(View.VISIBLE);
+            }
+        }
+    }
 
 }

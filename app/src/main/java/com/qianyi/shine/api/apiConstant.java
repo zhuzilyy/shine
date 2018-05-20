@@ -57,10 +57,18 @@ public class apiConstant {
     public static final String MAJOR_SETTING=BASE_URL+"university_majorinfo";
     //就业前景
     public static final String MAJOR_PROSPECTS=BASE_URL+"university_prospect";
-
-
-
-
+    //职业详情
+    public static final String OCCUPATION_DETAIL=BASE_URL+"job_info";
+    //关注学校
+    public static final String FOCUS_COLLEGE=BASE_URL+"insert_collection_school";
+    //关注职业
+    public static final String FOCUS_OCCUPATION=BASE_URL+"insert_collection_job";
+    //关注的大学
+    public static final String FOCUS_COLLEGE_LIST=BASE_URL+"get_collection_school";
+    //关注的职业
+    public static final String FOCUS_JOB_LIST=BASE_URL+"get_collection_job";
+    //关注的专业
+    public static final String FOCUS_MAJOR_LIST=BASE_URL+"get_collection_major";
 
 
     //微信参数

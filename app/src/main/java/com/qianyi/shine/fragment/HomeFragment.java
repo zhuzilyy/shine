@@ -32,6 +32,7 @@ import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.dialog.SelfDialog;
 import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
@@ -106,6 +107,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private TextView cityname,tv_chongCi,tv_baoShou,tv_wenTuo,tv_totalCount,tv_subjectType,tv_score,tv_level;
     private String province,memberId;
     private LinearLayout ll_chongci,ll_wentuo,ll_baoshou,ll_scoreInfo;
+    private CustomLoadingDialog customLoadingDialog;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_home = inflater.inflate(R.layout.fragment_home, null);
@@ -115,6 +117,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     protected void initViews() {
         Log.i("loc", sHA1(getActivity()));
+        customLoadingDialog=new CustomLoadingDialog(getActivity());
         //获取定位
         getCityName();
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
@@ -143,6 +146,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 refresh();
             }
         });
@@ -302,6 +306,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                                             public void onItemClick(int position) {
                                                 Intent intent = new Intent(getActivity(), CollegeActivity.class);
                                                 intent.putExtra("id",universities.get(position).getId());
+                                                intent.putExtra("name",universities.get(position).getName());
                                                 startActivity(intent);
                                             }
                                         });

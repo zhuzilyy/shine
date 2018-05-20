@@ -8,15 +8,29 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.gson.Gson;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
+import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
+import com.qianyi.shine.ui.account.bean.LoginBean;
+import com.qianyi.shine.ui.home.bean.CollegeMajorBean;
+import com.qianyi.shine.ui.home.bean.UniversityMajorInfo;
 import com.qianyi.shine.ui.mine.adapter.MajorAdapter;
+import com.qianyi.shine.ui.mine.bean.CollectionJobBean;
+import com.qianyi.shine.ui.mine.bean.CollectionJobListInfo;
+import com.qianyi.shine.ui.mine.bean.CollectionMajorBean;
+import com.qianyi.shine.ui.mine.bean.CollectionMajorListInfo;
 import com.qianyi.shine.ui.mine.bean.MajorBean;
+import com.qianyi.shine.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +48,19 @@ public class MajorFragment extends BaseFragment {
     public RecyclerView rv_major;
     @BindView(R.id.swipeLayout)
     public SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.no_internet_rl)
+    RelativeLayout no_internet_rl;
+    @BindView(R.id.no_data_rl)
+    RelativeLayout no_data_rl;
+    @BindView(R.id.reload)
+    TextView reload;
     private MajorAdapter majorAdapter;
     List<MajorBean> infoList;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private View view_major;
+    private CustomLoadingDialog customLoadingDialog;
+    private String memberId;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_major=inflater.inflate(R.layout.fragment_major,null);
@@ -55,15 +77,30 @@ public class MajorFragment extends BaseFragment {
         //下拉刷新
         initRefreshLayout();
         mSwipeRefreshLayout.setRefreshing(true);
-        refresh();
+       // refresh();
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
+        memberId= loginInfo.getId();
+
+        customLoadingDialog=new CustomLoadingDialog(getActivity());
     }
 
     @Override
     protected void initData() {
-        for (int i = 0; i <10 ; i++) {
-            MajorBean majorBean=new MajorBean();
-            infoList.add(majorBean);
+        if (!Utils.hasInternet()){
+            mSwipeRefreshLayout.setVisibility(View.GONE);
+            no_data_rl.setVisibility(View.GONE);
+            no_internet_rl.setVisibility(View.VISIBLE);
+        }else{
+            customLoadingDialog.show();
+            refresh();
         }
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customLoadingDialog.show();
+                refresh();
+            }
+        });
     }
 
     @Override
@@ -71,14 +108,14 @@ public class MajorFragment extends BaseFragment {
 
     }
     private void initAdapter() {
-        majorAdapter = new MajorAdapter(R.layout.item_major, infoList);
+        majorAdapter = new MajorAdapter(R.layout.item_major);
         majorAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 loadMore();
             }
         });
-        majorAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        majorAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
         rv_major.setAdapter(majorAdapter);
 
         rv_major.addOnItemTouchListener(new OnItemClickListener() {
@@ -92,29 +129,40 @@ public class MajorFragment extends BaseFragment {
     private void refresh() {
         mNextRequestPage = 1;
         majorAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh("http://www.baidu.com", mNextRequestPage, "",new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.focusMajorList(apiConstant.FOCUS_MAJOR_LIST, memberId, mNextRequestPage, new RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
-                Log.i("ppp", "131" + s);
+            public void onSuccess(Call call, Response response, final String s) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true, infoList);
+                        customLoadingDialog.dismiss();
+                        Gson gson=new Gson();
+                        CollectionMajorBean collectionMajorBean = gson.fromJson(s, CollectionMajorBean.class);
+                        List<CollectionMajorListInfo> collectionMajorList = collectionMajorBean.getData().getInfo().getCollectionMajorList();
+                        if (collectionMajorList!=null && collectionMajorList.size()>0){
+                            setData(true,collectionMajorList);
+                            mSwipeRefreshLayout.setVisibility(View.VISIBLE);
+                            no_data_rl.setVisibility(View.GONE);
+                            no_internet_rl.setVisibility(View.GONE);
+                        }else{
+                            mSwipeRefreshLayout.setVisibility(View.GONE);
+                            no_data_rl.setVisibility(View.VISIBLE);
+                            no_internet_rl.setVisibility(View.GONE);
+                        }
                         majorAdapter.setEnableLoadMore(true);
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
-                Log.i("ppp", "132" + e);
+                customLoadingDialog.dismiss();
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true, infoList);
-                        majorAdapter.setEnableLoadMore(true);
-                        mSwipeRefreshLayout.setRefreshing(false);
+                        mSwipeRefreshLayout.setVisibility(View.GONE);
+                        no_data_rl.setVisibility(View.GONE);
+                        no_internet_rl.setVisibility(View.VISIBLE);
                     }
                 });
             }
@@ -122,19 +170,23 @@ public class MajorFragment extends BaseFragment {
     }
     //加载
     private void loadMore() {
-
-        apiHome.loadMore("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        mNextRequestPage++;
+        apiHome.focusMajorList(apiConstant.FOCUS_MAJOR_LIST, memberId, mNextRequestPage, new RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
+            public void onSuccess(Call call, Response response, final String s) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(false, infoList);
+                        Gson gson=new Gson();
+                        CollectionMajorBean collegeMajorBean = gson.fromJson(s, CollectionMajorBean.class);
+                        List<CollectionMajorListInfo> collectionMajorList = collegeMajorBean.getData().getInfo().getCollectionMajorList();
+                        //数据不为空
+                        setData(false,collectionMajorList);
+                        majorAdapter.setEnableLoadMore(true);
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
-
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 getActivity().runOnUiThread(new Runnable() {
@@ -146,6 +198,8 @@ public class MajorFragment extends BaseFragment {
                 });
             }
         });
+
+
     }
     private void initRefreshLayout() {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -168,7 +222,6 @@ public class MajorFragment extends BaseFragment {
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
             majorAdapter.loadMoreEnd(isRefresh);
-            Toast.makeText(getActivity(), "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             majorAdapter.loadMoreComplete();
         }

@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
+import com.qianyi.shine.ui.home.bean.JobMajor;
 
 import java.util.List;
 
@@ -18,8 +20,7 @@ import java.util.List;
 
 public class OccupationRightProfessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     private Context mContext;
-    private List<CollegeEntity> datas;//数据
-
+    private List<JobMajor> datas;
     //自定义监听事件
     public static interface OnRecyclerViewItemClickListener {
         void onItemClick(int position);
@@ -34,11 +35,10 @@ public class OccupationRightProfessionAdapter extends RecyclerView.Adapter<Recyc
     }
 
     //适配器初始化
-    public OccupationRightProfessionAdapter(Context context, List<CollegeEntity> datas) {
+    public OccupationRightProfessionAdapter(Context context, List<JobMajor> datas) {
         mContext = context;
         this.datas = datas;
     }
-
     @Override
     public int getItemViewType(int position) {
         //判断item类别，是图还是显示页数（图片有URL）
@@ -69,9 +69,10 @@ public class OccupationRightProfessionAdapter extends RecyclerView.Adapter<Recyc
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //将数据与item视图进行绑定，如果是MyViewHolder就加载网络图片，如果是MyViewHolder2就显示页数
         if (holder instanceof OccupationRightProfessionAdapter.MyViewHolder) {
-
+            ((MyViewHolder) holder).tv_name.setText(datas.get(position).getMajor_name());
+            ((MyViewHolder) holder).tv_matchRate.setText("匹配度:"+datas.get(position).getMatch_ratio());
             // Picasso.with(mContext).load(datas.get(position).getUrl()).into(((MyViewHolder) holder).iv);//加载网络图片
-            if(mOnItemClickListener!=null){
+            /*if(mOnItemClickListener!=null){
                 ((OccupationRightProfessionAdapter.MyViewHolder) holder).pic_item.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -79,7 +80,7 @@ public class OccupationRightProfessionAdapter extends RecyclerView.Adapter<Recyc
                         mOnItemClickListener.onItemClick(position);
                     }
                 });
-            }
+            }*/
 
         }
 
@@ -87,7 +88,7 @@ public class OccupationRightProfessionAdapter extends RecyclerView.Adapter<Recyc
 
     @Override
     public int getItemCount() {
-        return 7;//获取数据的个数
+        return datas.size();//获取数据的个数
     }
 
 
@@ -96,14 +97,11 @@ public class OccupationRightProfessionAdapter extends RecyclerView.Adapter<Recyc
 
     //自定义ViewHolder，用于加载图片
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private ImageView pic_item;
-
-
-
+        private TextView tv_name,tv_matchRate;
         public MyViewHolder(View view) {
             super(view);
-            pic_item = view.findViewById(R.id.pic_item);
-
+            tv_name = view.findViewById(R.id.tv_name);
+            tv_matchRate = view.findViewById(R.id.tv_matchRate);
         }
     }
 }

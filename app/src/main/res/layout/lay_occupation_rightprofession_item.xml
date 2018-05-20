@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp">
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -17,17 +18,20 @@
             android:text="采矿专业"
             />
         <TextView
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_matchRate"
             android:layout_toLeftOf="@+id/rightback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="22sp"
+            android:textSize="14sp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_10"
             android:text="23%"
             android:layout_marginRight="@dimen/dp_10"
             />
         <ImageView
+            android:visibility="gone"
             android:id="@+id/rightback"
             android:layout_width="25dp"
             android:layout_height="25dp"
