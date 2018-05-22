@@ -30,6 +30,7 @@ import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.EstablishAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
 import com.qianyi.shine.ui.college.entivity.ProfessionBean;
+import com.qianyi.shine.ui.home.activity.CollegeListActivity;
 import com.qianyi.shine.ui.home.bean.MajorSchoolInfo;
 import com.qianyi.shine.ui.home.bean.SchoolInfo;
 import com.qianyi.shine.ui.home.bean.SchoolMajorBean;
@@ -79,6 +80,7 @@ public class Profession_EstablishmentFragment extends BaseFragment {
     private RelativeLayout no_internet_rl,no_data_rl;
     private TextView reload;
     private CustomLoadingDialog customLoadingDialog;
+    private String area="",is_type="";
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_profession_establish,null);
@@ -126,16 +128,15 @@ public class Profession_EstablishmentFragment extends BaseFragment {
             public void onClick(View v) {
                 mDropDownMenu.setTabText(constellationPosition == 0 ? headers[1] : citys[constellationPosition]);
                 mDropDownMenu.closeMenu();
-                Toast.makeText(mActivity, "ok", Toast.LENGTH_SHORT).show();
+                String province=citys[constellationPosition];
+                if (province.equals("全国")){
+                    area="";
+                }else{
+                    area=province;
+                }
+                refresh();
             }
         });
-
-        //排序
-       /* final ListView orderView = new ListView(getActivity());
-        orderAdapter = new GirdDropDownAdapter(getActivity(), Arrays.asList(orderDatas));
-        orderView.setDividerHeight(0);
-        orderView.setAdapter(orderAdapter);*/
-
         //类型
         final ListView typeView = new ListView(getActivity());
         typeView.setDividerHeight(0);
@@ -146,26 +147,19 @@ public class Profession_EstablishmentFragment extends BaseFragment {
        // popupViews.add(orderView);
         popupViews.add(areaView);
         popupViews.add(typeView);
-
-
-        //add item click event
-       /* orderView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                orderAdapter.setCheckItem(position);
-                mDropDownMenu.setTabText(position == 0 ? headers[0] : orderDatas[position]);
-                mDropDownMenu.closeMenu();
-                Toast.makeText(mActivity, "排序条目", Toast.LENGTH_SHORT).show();
-            }
-        });
-*/
         typeView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 typeAdapter.setCheckItem(position);
-                mDropDownMenu.setTabText(position == 0 ? headers[2] : types[position]);
+                mDropDownMenu.setTabText(position == 0 ? headers[1] : types[position]);
                 mDropDownMenu.closeMenu();
-                Toast.makeText(mActivity, "类型条目", Toast.LENGTH_SHORT).show();
+                String type = types[position];
+                if (type.equals("默认")){
+                    is_type="";
+                }else{
+                    is_type=type;
+                }
+                refresh();
 
             }
         });
@@ -174,7 +168,6 @@ public class Profession_EstablishmentFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 areaAdapter.setCheckItem(position);
                 constellationPosition = position;
-                Toast.makeText(mActivity, "星座条目", Toast.LENGTH_SHORT).show();
             }
         });
 //填充布局
@@ -256,7 +249,7 @@ public class Profession_EstablishmentFragment extends BaseFragment {
     private void refresh() {
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.majorSchoolList(apiConstant.MAJOR_SCHOOL_LIST, major_name, new RequestCallBack<String>() {
+        apiHome.majorSchoolList(apiConstant.MAJOR_SCHOOL_LIST, major_name,area,is_type, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 getActivity().runOnUiThread(new Runnable() {
@@ -307,30 +300,36 @@ public class Profession_EstablishmentFragment extends BaseFragment {
     }
     //加载
     private void loadMore() {
-
-        apiHome.loadMore("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        mNextRequestPage++;
+        apiHome.majorSchoolList(apiConstant.MAJOR_SCHOOL_LIST, major_name,area,is_type, new RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
+            public void onSuccess(Call call, Response response, final String s) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(false, list_temp);
+                        Gson gson=new Gson();
+                        SchoolMajorBean schoolMajorBean = gson.fromJson(s, SchoolMajorBean.class);
+                        List<MajorSchoolInfo> universityList = schoolMajorBean.getData().getMajorSchoolList();
+                        //数据不为空
+                        setData(false,universityList);
+                        mAdapter.setEnableLoadMore(true);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
-
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
-                getActivity().runOnUiThread(new Runnable() {
+                getActivity(). runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mAdapter.loadMoreFail();
+                        Toast.makeText(getActivity(), "网络错误", Toast.LENGTH_LONG).show();
                     }
                 });
-
             }
         });
+
+
     }
 
     private void setData(boolean isRefresh, List data) {

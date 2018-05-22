@@ -17,13 +17,12 @@ import butterknife.BindView;
 
 public class SearchHomeProfessionFragment extends BaseFragment {
     private HomeSearchProfessionAdapter professionAdapter;
-    @BindView(R.id.mList)
+    @BindView(R.id.listView)
     public ListView mList;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_search_homeprofession,null);
     }
-
     @Override
     protected void initViews() {
         professionAdapter = new HomeSearchProfessionAdapter(getActivity());

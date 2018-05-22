@@ -237,5 +237,10 @@
         <!--大学详情大图展示-->
         <activity android:name=".ui.college.activity.BigImgActivity"
             android:screenOrientation="portrait"/>
+        <receiver android:name=".receiver.MyReceiver">
+            <intent-filter>
+                <action android:name="com.action.search"/>
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>

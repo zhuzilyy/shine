@@ -53,7 +53,7 @@ public class OccupationDetailActivity extends BaseActivity {
     TextView tv_category;
     public MyPageAdapter myPageAdapter;
     private MyReceiver myReceiver;
-    private String occupationId,memberId,name;
+    private String occupationId,memberId,name,occupationName,occupationParentName;
     private CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
@@ -82,13 +82,16 @@ public class OccupationDetailActivity extends BaseActivity {
         customLoadingDialog=new CustomLoadingDialog(this);
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
         memberId= loginInfo.getId();
+        Intent intent = getIntent();
+        if (intent!=null){
+            occupationName=intent.getStringExtra("occupationName");
+            occupationParentName=intent.getStringExtra("occupationParentName");
+        }
     }
-
     @Override
     protected void initData() {
 
     }
-
     @Override
     protected void getResLayout() {
         setContentView(R.layout.activity_occupation_detail);
@@ -121,7 +124,7 @@ public class OccupationDetailActivity extends BaseActivity {
     //关注职业
     private void addFocus() {
         customLoadingDialog.show();
-        apiHome.focusOccupation(apiConstant.FOCUS_OCCUPATION, memberId, occupationId,name, new RequestCallBack<String>() {
+        apiHome.focusOccupation(apiConstant.FOCUS_OCCUPATION, memberId, occupationId,occupationParentName,occupationName, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 Log.i("tag",s);
