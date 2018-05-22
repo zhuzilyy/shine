@@ -144,11 +144,12 @@ public class apiHome {
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
     //关注职业
-    public static void focusOccupation(String url,String member_id,String job_id,String job_name,RequestCallBack<String> callback){
+    public static void focusOccupation(String url,String member_id,String job_id,String job_name,String job_cate_two_name,RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
         params.put("member_id",member_id);
         params.put("job_id",job_id);
         params.put("job_name",job_name);
+        params.put("job_cate_two_name",job_cate_two_name);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
     //获取我关注的大学
@@ -172,7 +173,7 @@ public class apiHome {
         params.put("page",page+"");
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
-    //获取我关注的专业
+    //消息列表
     public static void messageList(String url,String member_id,int page,RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
         params.put("member_id",member_id);
@@ -222,9 +223,18 @@ public class apiHome {
         OkHttpManager.getInstance().postRequest(urlString,params,callback);
     }
     //专业详情开设院校
-    public static void majorSchoolList(String url,String major_name, RequestCallBack<String> callback){
+    public static void majorSchoolList(String url,String major_name,String area,String is_type, RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
         params.put("major_name",major_name);
+        params.put("area",area);
+        params.put("is_type",is_type);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+    //首页搜索大学
+    public static void searchCollege(String url,String keyword,int page, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("keyword",keyword);
+        params.put("page",page+"");
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
 

@@ -1,5 +1,6 @@
 package com.qianyi.shine.ui.home.activity;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -22,6 +23,7 @@ import com.qianyi.shine.ui.college.fragments.Profession_EstablishmentFragment;
 import com.qianyi.shine.ui.college.fragments.Profession_ProspectsFragment;
 import com.qianyi.shine.ui.home.fragment.SearchHomeCollegeFragment;
 import com.qianyi.shine.ui.home.fragment.SearchHomeProfessionFragment;
+import com.qianyi.shine.utils.SPUtils;
 
 import java.util.ArrayList;
 
@@ -55,7 +57,6 @@ public class HomeSearchActivity extends BaseActivity implements View.OnClickList
         titles.add("大学");
         titles.add("专业");
         myPageAdapter.setTitles(titles);
-
         viewPager.setAdapter(myPageAdapter);
         // 将ViewPager与TabLayout相关联
         tab.setupWithViewPager(viewPager);
@@ -64,9 +65,17 @@ public class HomeSearchActivity extends BaseActivity implements View.OnClickList
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     if(!TextUtils.isEmpty(v.getText())){
+                        String keyWord=v.getText().toString().trim();
+                        SPUtils.put(HomeSearchActivity.this,"keyWord",keyWord);
                         tab.setVisibility(View.VISIBLE);
                         viewPager.setVisibility(View.VISIBLE);
+                        SearchHomeCollegeFragment searchHomeCollegeFragment=new SearchHomeCollegeFragment();
+                        searchHomeCollegeFragment.setKeyWord(keyWord);
                         //查询数据，显示内容
+                        Intent intent=new Intent();
+                        sendBroadcast(intent);
+                        intent.putExtra("keyWord",v.getText().toString().trim());
+                        intent.setAction("com.action.search");
                     }
                 return false;
             }

@@ -9,7 +9,16 @@ public class CollectionJobListInfo {
     private String member_id;
     private String job_id;
     private String job_name;
+    private String job_cate_two_name;
     private String create_time;
+    public String getJob_cate_two_name() {
+        return job_cate_two_name;
+    }
+
+    public void setJob_cate_two_name(String job_cate_two_name) {
+        this.job_cate_two_name = job_cate_two_name;
+    }
+
     public String getId() {
         return id;
     }

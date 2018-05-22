@@ -9,7 +9,6 @@ public class CollectionJobBean {
     public CollectionJobData getData() {
         return data;
     }
-
     public void setData(CollectionJobData data) {
         this.data = data;
     }
