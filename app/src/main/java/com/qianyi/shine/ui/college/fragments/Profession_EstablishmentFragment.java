@@ -94,6 +94,22 @@ public class Profession_EstablishmentFragment extends BaseFragment {
 
     private void initMdata(ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo majorInfo) {
         major_name= majorInfo.getMajor_name();
+        //网络错误时候的界面
+        if (!Utils.hasInternet()){
+            swipeRefreshLayout.setVisibility(View.GONE);
+            no_internet_rl.setVisibility(View.VISIBLE);
+            no_data_rl.setVisibility(View.GONE);
+        }else{
+            customLoadingDialog.show();
+            refresh();
+        }
+        //点击重新加载数据
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refresh();
+            }
+        });
     }
 
     @Override
@@ -196,22 +212,7 @@ public class Profession_EstablishmentFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        //网络错误时候的界面
-        if (!Utils.hasInternet()){
-            swipeRefreshLayout.setVisibility(View.GONE);
-            no_internet_rl.setVisibility(View.VISIBLE);
-            no_data_rl.setVisibility(View.GONE);
-        }else{
-            customLoadingDialog.show();
-            refresh();
-        }
-        //点击重新加载数据
-        reload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                refresh();
-            }
-        });
+
 
     }
 

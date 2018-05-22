@@ -135,7 +135,7 @@ public class ProfessionalActivity extends BaseActivity implements View.OnClickLi
                                         //赋值专业基本信息和就业前景数据
                                         profession_baseInfoFragment.setMajorInfo(majorInfo);
                                         profession_prospectsFragment.setMajorInfo(majorInfo);
-
+                                        profession_establishmentFragment.setMajorInfo(majorInfo);
                                     }
 
                                 }

@@ -230,13 +230,7 @@ public class CollegeDetailsBean {
                 this.university_research = university_research;
             }
 
-            public UniversitySatisfaction getUniversity_satisfaction() {
-                return university_satisfaction;
-            }
 
-            public void setUniversity_satisfaction(UniversitySatisfaction university_satisfaction) {
-                this.university_satisfaction = university_satisfaction;
-            }
 
             public MajorRecommend getMajor_recommend() {
                 return major_recommend;
@@ -270,7 +264,7 @@ public class CollegeDetailsBean {
             private List<SchoolScenery> school_scenery;
             private List<Major> major ;
             private UniversityResearch university_research;
-            private UniversitySatisfaction university_satisfaction;
+            private String university_satisfaction;
             private MajorRecommend major_recommend;
 
 
@@ -504,7 +498,7 @@ public class CollegeDetailsBean {
                 private String faculty;
             }
             //大学满意度
-            public class UniversitySatisfaction{
+          /*  public class UniversitySatisfaction{
                 public String getId() {
                     return id;
                 }
@@ -650,7 +644,7 @@ public class CollegeDetailsBean {
                     }
                 }
 
-            }
+            }*/
             //专业推荐
             public class MajorRecommend{
                 public String getType() {
