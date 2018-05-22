@@ -228,6 +228,14 @@ public class apiHome {
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
 
+    //专业优先填报P
+    public static void majorPriorMajor(String url,String memberId,String majorId, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",memberId);
+        params.put("major_id",majorId);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+
 
 
 

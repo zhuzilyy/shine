@@ -2,9 +2,6 @@ package com.qianyi.shine.ui.college.fragments;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -32,6 +28,8 @@ import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.college.adapter.Prospect_MoneyAdapter;
 import com.qianyi.shine.ui.college.adapter.Prospect_allreportAdapter;
 import com.qianyi.shine.ui.college.view.MyScrollview;
+import com.qianyi.shine.ui.home.bean.CityListInfo;
+import com.qianyi.shine.ui.home.bean.IndInfo;
 import com.qianyi.shine.ui.home.bean.MajorListInfo;
 import com.qianyi.shine.ui.home.bean.Prospect;
 import com.qianyi.shine.ui.home.bean.ProspectBean;
@@ -99,18 +97,172 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
             universityId=intent.getStringExtra("id");
         }
         list=new ArrayList<>();
-        //设置行业去向
-        setPieChart(mPieChartIndustry);
-        loadPieChartData(mPieChartIndustry);
-        //设置地区去向
-        setPieChart(mPieChartArea);
-        loadPieChartData(mPieChartArea);
+
+
 
         //高薪行业列表
         rv_money.setLayoutManager(new LinearLayoutManager(getActivity()));
         moneyAdapter=new Prospect_MoneyAdapter(getActivity(),list);
         rv_money.setAdapter(moneyAdapter);
     }
+
+    //**************************************************
+
+    /**
+     * 设置饼形图样式
+     * @param chart
+     */
+    /**
+     * 设置饼形图样式
+     * @param chart
+     * @param name
+     */
+    private void setPieChart(PieChart chart, String name) {
+        // apply styling
+        chart.setDescription("");
+        chart.setHoleRadius(52f);
+        chart.setTransparentCircleRadius(57f);
+        chart.setCenterText("MPChart\nAndroid");
+//        chart.setCenterTextTypeface(mTf);
+        chart.setCenterTextSize(18f);
+        chart.setUsePercentValues(true);
+
+        //中心文字颜色
+        chart.setCenterTextColor(Color.GREEN);
+    }
+
+    /***
+     * 行业去向
+     * @param
+     * @param ind_info_list
+     */
+    private void loadPieIndChartData(PieChart chart, List<IndInfo> ind_info_list) {
+        ArrayList<Entry> entries = new ArrayList<Entry>();
+
+        for (int i = 0; i <ind_info_list.size(); i++) {
+            String ratio = ind_info_list.get(i).getRatio();
+            float nn = Float.parseFloat(ratio);
+            float mm=nn*100+10;
+
+            entries.add(new Entry((int)(mm), i));
+        }
+
+
+
+        PieDataSet mPieDataSet = new PieDataSet(entries, "");
+
+        // space between slices
+        mPieDataSet.setSliceSpace(2f);
+        mPieDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+
+        PieData mPieChartData = new PieData(getQuarters(ind_info_list),mPieDataSet);
+
+        // set data
+        chart.setData( mPieChartData);
+
+        //设置动画
+        chart.animateXY(900, 900);
+
+        Legend l = chart.getLegend();
+        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART_INSIDE);
+
+        mPieChartData.setValueFormatter(new PercentFormatter());//设置显示成百分比
+//        mChartData.setValueTypeface(mTf);
+        mPieChartData.setValueTextSize(11f);//设置文字大小
+        mPieChartData.setValueTextColor(Color.BLACK);
+        //设置中心数据
+        chart.setCenterText("行业去向");
+    }
+
+
+    /***
+     * 地区去向
+     * @param chart
+     * @param city_list
+     */
+    private void loadPieCityChartData(PieChart chart, List<CityListInfo> city_list) {
+        ArrayList<Entry> entries = new ArrayList<Entry>();
+
+        for (int i = 0; i <city_list.size(); i++) {
+            String ratio = city_list.get(i).getRatio();
+            float nn = Float.parseFloat(ratio);
+            float mm=nn*100+10;
+
+            entries.add(new Entry((int)(mm), i));
+        }
+
+        PieDataSet mPieDataSet = new PieDataSet(entries, "");
+
+        // space between slices
+        mPieDataSet.setSliceSpace(2f);
+        mPieDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+
+        PieData mPieChartData = new PieData(getAreaQuarters(city_list),mPieDataSet);
+
+        // set data
+        chart.setData(mPieChartData);
+
+        //设置动画
+        chart.animateXY(900, 900);
+
+        Legend l = chart.getLegend();
+        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART_INSIDE);
+
+        mPieChartData.setValueFormatter(new PercentFormatter());//设置显示成百分比
+//        mChartData.setValueTypeface(mTf);
+        mPieChartData.setValueTextSize(11f);//设置文字大小
+        mPieChartData.setValueTextColor(Color.BLACK);
+
+        //设置中心数据
+        chart.setCenterText("地区去向");
+    }
+
+    /**
+     * 饼形图的划分
+     * @return
+     * @param ind_info_list
+     */
+    private ArrayList<String> getQuarters(List<IndInfo> ind_info_list) {
+
+
+
+        ArrayList<String> q = new ArrayList<String>();
+
+        for (int i = 1; i <=ind_info_list.size() ; i++) {
+            q.add(i+""+ind_info_list.get(i-1).getIndustry_name());
+
+
+        }
+
+        return q;
+    }
+
+
+
+    /**
+     * 饼形图的划分
+     * @return
+     */
+    /**
+     * 地区饼形图的划分
+     * @return
+     * @param city_list
+     */
+    private ArrayList<String> getAreaQuarters(List<CityListInfo> city_list) {
+
+        ArrayList<String> q = new ArrayList<String>();
+
+        for (int i = 1; i <=city_list.size() ; i++) {
+            q.add(i+""+city_list.get(i-1).getLoc_name());
+        }
+
+        return q;
+    }
+
+
+
+
+    //***************************************************
     @Override
     protected void initData() {
         if (Utils.hasInternet()){
@@ -175,6 +327,17 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
                                         allreportAdapter=new Prospect_allreportAdapter(getActivity(),majorList);
                                         rv_allreport.setAdapter(allreportAdapter);
                                     }
+
+                                    //饼图--就业方向
+                                    setPieChart(mPieChartIndustry,"就业方向");
+                                    loadPieIndChartData(mPieChartIndustry,prospect.getInd_info_list());
+                                    //设置地区去向
+                                    setPieChart(mPieChartArea,"");
+                                    loadPieCityChartData(mPieChartArea,prospect.getCity_list());
+
+
+
+
                                 }
                             }  else if(code.equals("-100")){
                                 myScrollview.setVisibility(View.GONE);
@@ -200,66 +363,5 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
     protected void initListener() {
 
     }
-    /**
-     * 设置饼形图样式
-     * @param chart
-     */
-    private void setPieChart(PieChart chart) {
-        // apply styling
-        chart.setDescription("这是对饼图的描述");
-        chart.setHoleRadius(52f);//孔的半径
-        chart.setTransparentCircleRadius(57f);//透明圆环的半径
-        chart.setCenterText("MPChart\nAndroid");
 
-//        chart.setCenterTextTypeface(mTf);
-        chart.setCenterTextSize(18f);
-        chart.setUsePercentValues(true);
-
-        //中心文字颜色
-        chart.setCenterTextColor(Color.GREEN);
-    }
-
-    private void loadPieChartData(PieChart chart) {
-        ArrayList<Entry> entries = new ArrayList<Entry>();
-        for (int i = 0; i < 5; i++) {
-            entries.add(new Entry((int) (Math.random() * 70) + 30, i));
-        }
-        PieDataSet mPieDataSet = new PieDataSet(entries, "");
-
-        // space between slices
-        mPieDataSet.setSliceSpace(2f);
-        mPieDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
-
-        PieData mPieChartData = new PieData(getQuarters(),mPieDataSet);
-
-        // set data
-        chart.setData( mPieChartData);
-
-        //设置动画
-        chart.animateXY(900, 900);
-
-        Legend l = chart.getLegend();
-        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
-
-        mPieChartData.setValueFormatter(new PercentFormatter());//设置显示成百分比
-//        mChartData.setValueTypeface(mTf);
-        mPieChartData.setValueTextSize(11f);//设置文字大小
-        mPieChartData.setValueTextColor(Color.WHITE);
-
-        //设置中心数据
-        chart.setCenterText("各种去向");
-    }
-    /**
-     * 饼形图的划分
-     * @return
-     */
-    private ArrayList<String> getQuarters() {
-        ArrayList<String> q = new ArrayList<String>();
-        q.add("1st Quarter");
-        q.add("2nd Quarter");
-        q.add("3rd Quarter");
-        q.add("4th Quarter");
-        q.add("5th xzy");
-        return q;
-    }
 }

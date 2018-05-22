@@ -75,4 +75,6 @@ dependencies {
     //题目进度
     compile 'com.yanzhikaijky:PictureProgressbar:1.2.0'
     implementation files('libs/alipaySdk-20170922.jar')
+    //五星控件
+    compile 'com.hedgehog.ratingbar:app:1.0.4'
 }

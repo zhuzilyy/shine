@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +17,19 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.gson.Gson;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.career_planning.entity.SuitableForMeEntity;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.EstablishAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
 import com.qianyi.shine.ui.gaokao_news.view.XTitleView;
 import com.qianyi.shine.ui.home.bean.SchoolInfo;
+import com.qianyi.shine.utils.Utils;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -64,12 +69,16 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     public List<SchoolInfo> list_temp;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
+    private String major_id ;
 
 
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
         tv_title.setText("专业优先");
+
+
+        major_id=getIntent().getStringExtra("major_id");
 
         //省份
         final View areaView = getLayoutInflater().inflate(R.layout.custom_layout, null);
@@ -122,6 +131,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         View contentView= LayoutInflater.from(PriorityProfessionalDetailsActivity.this).inflate(R.layout.layout_refresh,null);
         swipeRefreshLayout=contentView.findViewById(R.id.swipeLayout);
         recyclerView= contentView.findViewById(R.id.rv_list);
+
         initContentView();
 
 
@@ -204,15 +214,31 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     }
     //刷新
     private void refresh() {
+
+        LoginBean.LoginData.LoginInfo user =Utils.readUser(PriorityProfessionalDetailsActivity.this);
+        if(user==null){
+            return;
+        }
+        if(TextUtils.isEmpty(major_id)){
+            return;
+        }
+
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh("http://www.baidu.com", mNextRequestPage,"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.majorPriorMajor(apiConstant.PRIOR_MAJOR, user.getId(),major_id, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, String s) {
                 Log.i("ppp","131"+s);
                 PriorityProfessionalDetailsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
+                        Gson gson =new Gson();
+                     //   gson.fromJson(s.)
+
+
+
+
                         setData(true,list_temp);
                         mAdapter.setEnableLoadMore(true);
                         swipeRefreshLayout.setRefreshing(false);

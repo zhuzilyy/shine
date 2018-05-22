@@ -88,6 +88,24 @@ public class MeasurementFragment extends BaseFragment {
         rv_measurement.setAdapter(measurementAdapter);
 
 
+        rv_measurement.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
+                List<MeasurementBean.MeasurementData.MeasurementInfo.CollectionJobList> infoList= measurementAdapter.getData();
+                if("1".equals(infoList.get(position).getType())){
+                    //霍兰德须兴趣测评
+                    Intent intent =new Intent(getActivity(), InterestResultActivity.class);
+                    intent.putExtra("InterestResult",infoList.get(position).getKeystring());
+                    startActivity(intent);
+
+                }else if("0".equals(infoList.get(position).getType())){
+                    //性格
+                    Intent intent =new Intent(getActivity(), CharacterResultActivity.class);
+                    intent.putExtra("CharatorResult",infoList.get(position).getKeystring());
+                    startActivity(intent);
+                }
+            }
+        });
 
 
 
@@ -119,23 +137,7 @@ public class MeasurementFragment extends BaseFragment {
                                     setData(true,  measurementInfo.getCollectionJobList());
                                     measurementAdapter.setEnableLoadMore(true);
                                     mSwipeRefreshLayout.setRefreshing(false);
-                                    rv_measurement.addOnItemTouchListener(new OnItemClickListener() {
-                                        @Override
-                                        public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
-                                         if("1".equals(measurementInfo.getCollectionJobList().get(position).getType())){
-                                             //霍兰德须兴趣测评
-                                             Intent intent =new Intent(getActivity(), InterestResultActivity.class);
-                                             intent.putExtra("InterestResult",measurementInfo.getCollectionJobList().get(position).getKeystring());
-                                             startActivity(intent);
 
-                                         }else if("0".equals(measurementInfo.getCollectionJobList().get(position).getType())){
-                                             //性格
-                                             Intent intent =new Intent(getActivity(), CharacterResultActivity.class);
-                                             intent.putExtra("CharatorResult",measurementInfo.getCollectionJobList().get(position).getKeystring());
-                                             startActivity(intent);
-                                         }
-                                        }
-                                    });
                                 }
                             }
                         }
@@ -177,11 +179,12 @@ public class MeasurementFragment extends BaseFragment {
                         if(measurementBean!=null){
                             MeasurementBean.MeasurementData measurementData= measurementBean.getData();
                             if(measurementData!=null){
-                                MeasurementBean.MeasurementData.MeasurementInfo measurementInfo =measurementData.getInfo();
+                                final MeasurementBean.MeasurementData.MeasurementInfo measurementInfo =measurementData.getInfo();
                                 if(measurementInfo!=null){
                                     setData(false,  measurementInfo.getCollectionJobList());
                                     measurementAdapter.setEnableLoadMore(true);
                                     mSwipeRefreshLayout.setRefreshing(false);
+
 
                                 }
 

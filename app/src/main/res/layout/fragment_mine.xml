@@ -89,6 +89,7 @@
         />
     <!--点亮-->
     <TextView
+        android:visibility="gone"
         android:gravity="center"
         android:textColor="@color/main_blue"
         android:text="点亮VIP图标"

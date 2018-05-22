@@ -9,6 +9,7 @@
         android:layout_marginLeft="@dimen/dp_1"
         android:layout_marginRight="@dimen/dp_1"
         android:layout_marginTop="@dimen/dp_2"
+        android:scaleType="centerCrop"
         android:layout_height="100dp"
         android:src="@color/taohong"
         />

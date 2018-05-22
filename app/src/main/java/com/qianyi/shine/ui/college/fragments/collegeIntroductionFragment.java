@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.hedgehog.ratingbar.RatingBar;
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.fragment.adapter.GridAdapter;
@@ -25,6 +26,7 @@ import com.qianyi.shine.ui.college.activity.BigImgActivity;
 import com.qianyi.shine.ui.college.activity.CollegePicBean;
 import com.qianyi.shine.ui.college.adapter.PicCollegeAdapter;
 import com.qianyi.shine.ui.college.view.MyScrollview;
+import com.qianyi.shine.ui.college.view.Star;
 import com.qianyi.shine.ui.home.bean.CollegeDetailsBean;
 import com.qianyi.shine.utils.Utils;
 
@@ -78,6 +80,8 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
     @BindView(R.id.reload)
     TextView reload;
     private MyReceiver myReceiver;
+    @BindView(R.id.star) public Star star;
+
 
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
@@ -101,6 +105,10 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
         IntentFilter intentFilter=new IntentFilter();
         intentFilter.addAction("com.action.introduce.success");
         getActivity().registerReceiver(myReceiver,intentFilter);
+
+
+
+
     }
 
     @Override
@@ -121,17 +129,27 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.Accommodation_re:
+                //住宿条件
                 Intent intent_Accommodation = new Intent(getActivity(), WebviewActivity.class);
                 intent_Accommodation.putExtra("title","住宿条件");
                 intent_Accommodation.putExtra("url","http://www.baidu.com");
                 getActivity().startActivity(intent_Accommodation);
                 break;
             case R.id.Scholarship_re:
+                //奖学金设置
                 Intent intent_Scholarship = new Intent(getActivity(), WebviewActivity.class);
                 intent_Scholarship.putExtra("title","奖学金设置");
                 intent_Scholarship.putExtra("url","http://www.baidu.com");
                 getActivity().startActivity(intent_Scholarship);
                 break;
+            case R.id.acamy_re:
+                //院系设置
+                Intent intent_Acamy= new Intent(getActivity(), WebviewActivity.class);
+                intent_Acamy.putExtra("title","院系设置");
+                intent_Acamy.putExtra("url","http://www.baidu.com");
+                getActivity().startActivity(intent_Acamy);
+                break;
+
             default:
                 break;
         }
@@ -160,7 +178,8 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
         tv_collegeType.setText(info.getType());
         //批次
         tv_collegePici.setText(info.getLevel());
-        //
+        //推荐指数
+        star.setMark(Float.parseFloat(info.getUniversity_satisfaction()));
         //学校名称
         tv_collegeName.setText(info.getName());
         //学校简介

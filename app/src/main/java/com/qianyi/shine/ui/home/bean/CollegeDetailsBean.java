@@ -264,6 +264,15 @@ public class CollegeDetailsBean {
             private List<SchoolScenery> school_scenery;
             private List<Major> major ;
             private UniversityResearch university_research;
+
+            public String getUniversity_satisfaction() {
+                return university_satisfaction;
+            }
+
+            public void setUniversity_satisfaction(String university_satisfaction) {
+                this.university_satisfaction = university_satisfaction;
+            }
+
             private String university_satisfaction;
             private MajorRecommend major_recommend;
 
