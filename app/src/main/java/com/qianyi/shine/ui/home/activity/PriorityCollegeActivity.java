@@ -70,7 +70,7 @@ public class PriorityCollegeActivity extends BaseActivity {
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private View view_header;
-    private String member_id,order="rank",area="",school_type="",rate_type="";
+    private String member_id,order="rate",area="",school_type="",rate_type="";
     private TextView reload;
     private RelativeLayout no_internet_rl,no_data_rl;
     private CustomLoadingDialog customLoadingDialog;

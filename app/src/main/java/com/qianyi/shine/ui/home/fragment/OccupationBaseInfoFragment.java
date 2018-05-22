@@ -58,7 +58,7 @@ public class OccupationBaseInfoFragment extends BaseFragment {
     TextView reload;
     private OccupationRightProfessionAdapter adapter;
     private Intent intent;
-    private String occupationName;
+    private String occupationName,occupationParentName;
     private CustomLoadingDialog customLoadingDialog;
 
     @Override
@@ -71,6 +71,7 @@ public class OccupationBaseInfoFragment extends BaseFragment {
         intent=getActivity().getIntent();
         if (intent!=null){
             occupationName=intent.getStringExtra("occupationName");
+            occupationParentName=intent.getStringExtra("occupationParentName");
         }
     }
     @Override
@@ -96,7 +97,7 @@ public class OccupationBaseInfoFragment extends BaseFragment {
     }
     private void getData() {
         Log.i("tag","occupationName"+occupationName);
-        apiHome.occupationDetail(apiConstant.OCCUPATION_DETAIL, occupationName, new RequestCallBack<String>() {
+        apiHome.occupationDetail(apiConstant.OCCUPATION_DETAIL, occupationName,occupationParentName,new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 customLoadingDialog.dismiss();

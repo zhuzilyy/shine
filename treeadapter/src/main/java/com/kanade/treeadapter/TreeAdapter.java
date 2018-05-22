@@ -175,8 +175,6 @@ public class TreeAdapter<T extends RvTree> extends RecyclerView.Adapter<TreeAdap
                 lp.setMargins(20, 0, 0, 0);
                 icon.setLayoutParams(lp);
             }
-
-
             int rotateDegree = node.isExpand() ? 90 : 0;
             icon.setRotation(0);
             icon.setRotation(rotateDegree);

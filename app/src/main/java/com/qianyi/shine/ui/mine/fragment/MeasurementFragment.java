@@ -95,12 +95,10 @@ public class MeasurementFragment extends BaseFragment {
     }
     //刷新
     private void refresh() {
-
         LoginBean.LoginData.LoginInfo user = Utils.readUser(getActivity());
         if(user== null){
             return;
         }
-
         mNextRequestPage = 1;
         measurementAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
         apiMine.measurementReport(apiConstant.Evaluationeport,user.getId(), mNextRequestPage+"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {
@@ -121,7 +119,6 @@ public class MeasurementFragment extends BaseFragment {
                                     setData(true,  measurementInfo.getCollectionJobList());
                                     measurementAdapter.setEnableLoadMore(true);
                                     mSwipeRefreshLayout.setRefreshing(false);
-
                                     rv_measurement.addOnItemTouchListener(new OnItemClickListener() {
                                         @Override
                                         public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
@@ -137,19 +134,11 @@ public class MeasurementFragment extends BaseFragment {
                                              intent.putExtra("CharatorResult",measurementInfo.getCollectionJobList().get(position).getKeystring());
                                              startActivity(intent);
                                          }
-
-
-
                                         }
                                     });
-
                                 }
-
                             }
                         }
-
-
-
                     }
                 });
             }

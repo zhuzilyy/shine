@@ -12,20 +12,30 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.gson.Gson;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
-import com.qianyi.shine.ui.career_planning.entity.SuitableForMeEntity;
+import com.qianyi.shine.callbcak.RequestCallBack;
+import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.EstablishAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
+import com.qianyi.shine.ui.college.entivity.ProfessionBean;
+import com.qianyi.shine.ui.home.bean.MajorSchoolInfo;
 import com.qianyi.shine.ui.home.bean.SchoolInfo;
+import com.qianyi.shine.ui.home.bean.SchoolMajorBean;
+import com.qianyi.shine.ui.mine.bean.CollegeBean;
+import com.qianyi.shine.ui.mine.bean.UniversityInfo;
+import com.qianyi.shine.utils.Utils;
 import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
@@ -41,18 +51,18 @@ import okhttp3.Response;
  */
 
 public class Profession_EstablishmentFragment extends BaseFragment {
-    private String headers[] = {"排序", "省份", "类型"};
+    private String headers[] = {"省份", "类型"};
     private List<View> popupViews = new ArrayList<>();
 
 
     private GirdDropDownAdapter orderAdapter;
     private GirdDropDownAdapter typeAdapter;
     private AreaAdapter areaAdapter;
-
-    private String citys[] = {"不限", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
-    private String orderDatas[] = {"概率", "分数线", "排名"};
-    private String typeDatas[] = {"提前批", "一本", "二本"};
-
+   // private String orderDatas[] = {"概率", "分数线", "排名"};
+   private String[] types={"默认","985","211"};
+    private String[] citys = {"全国","北京","天津","上海","重庆","河北","山西","辽宁","吉林","黑龙江",
+            "江苏","浙江","安徽","福建","江西","山东","河南","湖北","湖南","广东","海南","四川","贵州",
+            "云南","陕西","甘肃","青海","内蒙古","广西","宁夏","新疆"};
     private int constellationPosition = 0;
     @BindView(R.id.dropDownMenu)
     public DropDownMenu mDropDownMenu;
@@ -64,15 +74,31 @@ public class Profession_EstablishmentFragment extends BaseFragment {
     public List<SchoolInfo> list_temp;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
-
+    private ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo majorInfo;
+    private String  major_name;
+    private RelativeLayout no_internet_rl,no_data_rl;
+    private TextView reload;
+    private CustomLoadingDialog customLoadingDialog;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_profession_establish,null);
     }
+    public ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo getMajorInfo() {
+        return majorInfo;
+    }
+
+    public void setMajorInfo(ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo majorInfo) {
+        this.majorInfo = majorInfo;
+        initMdata(majorInfo);
+    }
+
+    private void initMdata(ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo majorInfo) {
+        major_name= majorInfo.getMajor_name();
+    }
 
     @Override
     protected void initViews() {
-
+        customLoadingDialog=new CustomLoadingDialog(getActivity());
         //省份
         final View areaView = getLayoutInflater().inflate(R.layout.custom_layout, null);
         GridView constellation = areaView.findViewById(R.id.constellation);
@@ -89,29 +115,25 @@ public class Profession_EstablishmentFragment extends BaseFragment {
         });
 
         //排序
-        final ListView orderView = new ListView(getActivity());
+       /* final ListView orderView = new ListView(getActivity());
         orderAdapter = new GirdDropDownAdapter(getActivity(), Arrays.asList(orderDatas));
         orderView.setDividerHeight(0);
-        orderView.setAdapter(orderAdapter);
+        orderView.setAdapter(orderAdapter);*/
 
         //类型
         final ListView typeView = new ListView(getActivity());
         typeView.setDividerHeight(0);
-        typeAdapter = new GirdDropDownAdapter(getActivity(), Arrays.asList(typeDatas));
-        typeView.setAdapter(orderAdapter);
-
-
-
-
+        typeAdapter = new GirdDropDownAdapter(getActivity(), Arrays.asList(types));
+        typeView.setAdapter(typeAdapter);
 
         //init popupViews{添加的顺序决定展示的条目类型}
-        popupViews.add(orderView);
+       // popupViews.add(orderView);
         popupViews.add(areaView);
         popupViews.add(typeView);
 
 
         //add item click event
-        orderView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* orderView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 orderAdapter.setCheckItem(position);
@@ -120,12 +142,12 @@ public class Profession_EstablishmentFragment extends BaseFragment {
                 Toast.makeText(mActivity, "排序条目", Toast.LENGTH_SHORT).show();
             }
         });
-
+*/
         typeView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 typeAdapter.setCheckItem(position);
-                mDropDownMenu.setTabText(position == 0 ? headers[2] : typeDatas[position]);
+                mDropDownMenu.setTabText(position == 0 ? headers[2] : types[position]);
                 mDropDownMenu.closeMenu();
                 Toast.makeText(mActivity, "类型条目", Toast.LENGTH_SHORT).show();
 
@@ -143,9 +165,10 @@ public class Profession_EstablishmentFragment extends BaseFragment {
         View contentView= LayoutInflater.from(getActivity()).inflate(R.layout.layout_refresh,null);
         swipeRefreshLayout=contentView.findViewById(R.id.swipeLayout);
         recyclerView= contentView.findViewById(R.id.rv_list);
+        no_data_rl=contentView.findViewById(R.id.no_data_rl);
+        no_internet_rl=contentView.findViewById(R.id.no_internet_rl);
+        reload=contentView.findViewById(R.id.reload);
         initContentView();
-
-
         //init dropdownview
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
         //清空popupviews,否则报tab的数量和popupviews的数量不相等的错
@@ -167,13 +190,28 @@ public class Profession_EstablishmentFragment extends BaseFragment {
         //下拉刷新
         initRefreshLayout();
         swipeRefreshLayout.setRefreshing(true);
-        refresh();
+        //refresh();
 
     }
 
     @Override
     protected void initData() {
-
+        //网络错误时候的界面
+        if (!Utils.hasInternet()){
+            swipeRefreshLayout.setVisibility(View.GONE);
+            no_internet_rl.setVisibility(View.VISIBLE);
+            no_data_rl.setVisibility(View.GONE);
+        }else{
+            customLoadingDialog.show();
+            refresh();
+        }
+        //点击重新加载数据
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refresh();
+            }
+        });
 
     }
 
@@ -217,35 +255,51 @@ public class Profession_EstablishmentFragment extends BaseFragment {
     private void refresh() {
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.refresh("http://www.baidu.com", mNextRequestPage,"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.majorSchoolList(apiConstant.MAJOR_SCHOOL_LIST, major_name, new RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
-                Log.i("ppp","131"+s);
+            public void onSuccess(Call call, Response response, final String s) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true,list_temp);
+                        customLoadingDialog.dismiss();
+                        Log.i("tag",s);
+                        Gson gson=new Gson();
+                        SchoolMajorBean schoolMajorBean = gson.fromJson(s, SchoolMajorBean.class);
+                        List<MajorSchoolInfo> universityList = schoolMajorBean.getData().getMajorSchoolList();
+                      /*  if (universityList.size()==0){
+                            swipeRefreshLayout.setVisibility(View.GONE);
+                            no_internet_rl.setVisibility(View.GONE);
+                            no_data_rl.setVisibility(View.VISIBLE);
+                        }*/
+                        //数据不为空
+                        if (universityList!=null && universityList.size()>0){
+                            setData(true,universityList);
+                            swipeRefreshLayout.setVisibility(View.VISIBLE);
+                            no_internet_rl.setVisibility(View.GONE);
+                            no_data_rl.setVisibility(View.GONE);
+                        }else{
+                            swipeRefreshLayout.setVisibility(View.GONE);
+                            no_internet_rl.setVisibility(View.GONE);
+                            no_data_rl.setVisibility(View.VISIBLE);
+                        }
                         mAdapter.setEnableLoadMore(true);
                         swipeRefreshLayout.setRefreshing(false);
-
-
                     }
                 });
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
-                Log.i("ppp","132"+e);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true,list_temp);
+                        customLoadingDialog.dismiss();
+                        swipeRefreshLayout.setVisibility(View.GONE);
+                        no_internet_rl.setVisibility(View.VISIBLE);
+                        no_data_rl.setVisibility(View.GONE);
                         mAdapter.setEnableLoadMore(true);
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });
-
-
             }
         });
 

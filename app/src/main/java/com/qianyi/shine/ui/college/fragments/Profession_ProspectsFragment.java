@@ -133,7 +133,7 @@ public class Profession_ProspectsFragment extends BaseFragment {
         chart.animateXY(900, 900);
 
         Legend l = chart.getLegend();
-        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
+        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART_INSIDE);
 
         mPieChartData.setValueFormatter(new PercentFormatter());//设置显示成百分比
 //        mChartData.setValueTypeface(mTf);
@@ -177,13 +177,12 @@ public class Profession_ProspectsFragment extends BaseFragment {
         chart.animateXY(900, 900);
 
         Legend l = chart.getLegend();
-        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
+        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART_INSIDE);
 
         mPieChartData.setValueFormatter(new PercentFormatter());//设置显示成百分比
 //        mChartData.setValueTypeface(mTf);
         mPieChartData.setValueTextSize(11f);//设置文字大小
         mPieChartData.setValueTextColor(Color.BLACK);
-
         //设置中心数据
         chart.setCenterText("职能方向");
     }
@@ -196,10 +195,6 @@ public class Profession_ProspectsFragment extends BaseFragment {
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_profession_prospects,null);
     }
-
-
-
-
     @Override
     protected void initViews() {
 
@@ -239,18 +234,15 @@ public class Profession_ProspectsFragment extends BaseFragment {
         chart.animateXY(900, 900);
 
         Legend l = chart.getLegend();
-        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
+        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART_INSIDE);
 
         mPieChartData.setValueFormatter(new PercentFormatter());//设置显示成百分比
 //        mChartData.setValueTypeface(mTf);
         mPieChartData.setValueTextSize(11f);//设置文字大小
         mPieChartData.setValueTextColor(Color.BLACK);
-
         //设置中心数据
         chart.setCenterText("行业去向");
     }
-
-
     /***
      * 职能饼图
      * @param chart
@@ -411,7 +403,7 @@ public class Profession_ProspectsFragment extends BaseFragment {
         chart.animateXY(900, 900);
 
         Legend l = chart.getLegend();
-        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
 
         mPieChartData.setValueFormatter(new PercentFormatter());//设置显示成百分比
 //        mChartData.setValueTypeface(mTf);
@@ -464,8 +456,6 @@ public class Profession_ProspectsFragment extends BaseFragment {
      * @return
      */
     private ArrayList<String> getAreaQuarters() {
-
-
 
         ArrayList<String> q = new ArrayList<String>();
 

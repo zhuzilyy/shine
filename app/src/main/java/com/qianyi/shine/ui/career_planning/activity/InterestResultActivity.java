@@ -107,7 +107,6 @@ public class InterestResultActivity extends BaseActivity implements View.OnClick
                                 InterestResultBean.InterestResultData.InterestResultInfo resultInfo = resultData.getInfo();
                                 if(resultInfo !=null){
                                     InitDataFromWeb(resultInfo);
-
                                 }
                             }
                         }
@@ -134,12 +133,12 @@ public class InterestResultActivity extends BaseActivity implements View.OnClick
         }
 
         tv_type.setText(info.getType());
-        tv_majorInterest.setText("主导兴趣为： "+info.getDecription());
+        tv_majorInterest.setText("主导兴趣为： "+info.getDescription());
         tv_color.setText(info.getColor().getName()+" : "+info.getColor().getValue());
         tv_type2.setText(info.getType());
-        tv_type3.setText(info.getDecription());
+        tv_type3.setText(info.getDescription());
         tv_color2.setText(info.getColor().getName()+" : "+info.getColor().getValue());
-        tv_type4.setText(info.getDecription());
+        tv_type4.setText(info.getDescription());
 
             tv_title01.setText(info.getInteresting().getName());
 

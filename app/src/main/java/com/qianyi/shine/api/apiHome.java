@@ -129,9 +129,10 @@ public class apiHome {
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
     //就业前景
-    public static void occupationDetail(String url,String name,RequestCallBack<String> callback){
+    public static void occupationDetail(String url,String name,String cate_two_name,RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
         params.put("name",name);
+        params.put("cate_two_name",cate_two_name);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
     //关注大学
@@ -219,6 +220,12 @@ public class apiHome {
         params.put("major_id",major_id);
         params.put("major_name",major_name);
         OkHttpManager.getInstance().postRequest(urlString,params,callback);
+    }
+    //专业详情开设院校
+    public static void majorSchoolList(String url,String major_name, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("major_name",major_name);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
     }
 
 

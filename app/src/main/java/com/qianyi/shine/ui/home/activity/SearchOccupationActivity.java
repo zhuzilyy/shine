@@ -87,9 +87,11 @@ public class SearchOccupationActivity extends BaseActivity {
                             JobBean jobBean = gson.fromJson(s, JobBean.class);
                             List<FirstJob> firstJobList = jobBean.getData().getInfo().getJobList();
                             if (firstJobList.size()>0){
-                                recyclerView.setVisibility(View.VISIBLE);
-                                no_internet_rl.setVisibility(View.GONE);
-                                no_data_rl.setVisibility(View.GONE);
+                                if (recyclerView!=null){
+                                    recyclerView.setVisibility(View.VISIBLE);
+                                    no_internet_rl.setVisibility(View.GONE);
+                                    no_data_rl.setVisibility(View.GONE);
+                                }
                                 //第一层数据
                                 for (int i = 0; i < firstJobList.size(); i++) {
                                     FirstJob firstJob = firstJobList.get(i);
@@ -148,7 +150,6 @@ public class SearchOccupationActivity extends BaseActivity {
             no_data_rl.setVisibility(View.GONE);
         }
     }
-
     //加载适配器
     private void setAdapter(List<Major> majorList) {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -172,6 +173,13 @@ public class SearchOccupationActivity extends BaseActivity {
                         }else if (tag.equals("searchOccupation")){
                             Intent intent=new Intent(SearchOccupationActivity.this,OccupationDetailActivity.class);
                             intent.putExtra("occupationName",node.getName());
+                            int level=node.getParent().getLevel();
+                            //列表只有二级
+                            if (node.getParent().getLevel()==1){
+                                intent.putExtra("occupationParentName",node.getParent().getName());
+                            }else if(node.getParent().getLevel()==0){
+                                intent.putExtra("occupationParentName",node.getName());
+                            }
                             startActivity(intent);
                         }
                     }
@@ -193,7 +201,8 @@ public class SearchOccupationActivity extends BaseActivity {
                 String keyWord=et_searchOccupation.getText().toString().trim();
                 if (!TextUtils.isEmpty(keyWord)){
                     Intent intent=new Intent(SearchOccupationActivity.this,OccupationDetailActivity.class);
-                    intent.putExtra("occupationName",keyWord);
+                    intent.putExtra("occupationName",et_searchOccupation.getText().toString().trim());
+                    intent.putExtra("occupationParentName",et_searchOccupation.getText().toString().trim());
                     startActivity(intent);
                 }
                 return false;

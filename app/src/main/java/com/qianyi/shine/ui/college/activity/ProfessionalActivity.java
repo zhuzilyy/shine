@@ -194,6 +194,8 @@ public class ProfessionalActivity extends BaseActivity implements View.OnClickLi
                                   try {
                                       JSONObject jsonObject = new JSONObject(s);
                                       String code= jsonObject.getString("code");
+                                      String info= jsonObject.getString("info");
+                                      Toast.makeText(ProfessionalActivity.this, info, Toast.LENGTH_SHORT).show();
                                       if("0".equals(code)){
                                           Toast.makeText(ProfessionalActivity.this, jsonObject.getString("info"), Toast.LENGTH_SHORT).show();
                                       }
@@ -220,7 +222,6 @@ public class ProfessionalActivity extends BaseActivity implements View.OnClickLi
             }
         });
     }
-
     @Override
     protected void setStatusBarColor() {
 

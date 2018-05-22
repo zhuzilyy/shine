@@ -345,31 +345,33 @@
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
-        android:gravity="center_vertical"
         android:paddingLeft="@dimen/dp_20"
         android:paddingRight="@dimen/dp_20">
         <!--重新测评-->
         <LinearLayout
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
             android:id="@+id/TestAgain_ll"
-            android:layout_width="40dp"
+            android:layout_width="300dp"
             android:layout_height="40dp"
-            android:background="@drawable/shape_stroke_circle"
+            android:background="@drawable/shape_corner_stroke_blue"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="重新"
+                android:text="重新测评"
                 android:textColor="@color/main_blue"
-                android:textSize="10sp" />
+                android:textSize="16sp" />
 
             <TextView
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="测评"
@@ -379,6 +381,7 @@
         </LinearLayout>
         <!--取消关注-->
         <Button
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="@dimen/dp_20"
@@ -387,6 +390,6 @@
             android:textColor="@color/main_blue" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -502,22 +502,18 @@ public class CollegeDetailsBean {
                 private String labs_count;
                 private String advantage_majors_count;
                 private String faculty;
-
             }
             //大学满意度
             public class UniversitySatisfaction{
                 public String getId() {
                     return id;
                 }
-
                 public void setId(String id) {
                     this.id = id;
                 }
-
                 public String getName() {
                     return name;
                 }
-
                 public void setName(String name) {
                     this.name = name;
                 }

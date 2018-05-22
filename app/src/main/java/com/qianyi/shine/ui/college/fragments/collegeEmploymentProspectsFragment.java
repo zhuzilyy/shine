@@ -39,6 +39,9 @@ import com.qianyi.shine.ui.home.bean.SalaryMajorInfo;
 import com.qianyi.shine.utils.SPUtils;
 import com.qianyi.shine.utils.Utils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,39 +143,46 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
                         myScrollview.setVisibility(View.VISIBLE);
                         no_internet_rl.setVisibility(View.GONE);
                         no_data_rl.setVisibility(View.GONE);
-                        Gson gson=new Gson();
-                        ProspectBean prospectBean = gson.fromJson(s, ProspectBean.class);
-                        String code = prospectBean.getCode();
-                        Log.i("tag",code+"======code========");
-                        if (code.equals("0")){
-                            Prospect prospect = prospectBean.getData().getInfo().getProspect();
-                            String salary_factor_rank_index = prospect.getSalary_factor_rank_index();
-                            String salary_factor = prospect.getSalary_factor();
-                            String most_industry = prospect.getMost_industry();
-                            String most_city = prospect.getMost_city();
-                            String most_major = prospect.getMost_major();
-                            tv_rank.setText(salary_factor_rank_index);
-                            tv_salary.setText(salary_factor);
-                            tv_industry.setText(most_industry);
-                            tv_city.setText(most_city);
-                            tv_major.setText(most_major);
-                            //高薪专业
-                            List<SalaryMajorInfo> salary_major_list = prospect.getSalary_major_list();
-                            if (salary_major_list!=null && salary_major_list.size()>0){
-                                list.addAll(salary_major_list);
-                                moneyAdapter.notifyDataSetChanged();
+                        try {
+                            JSONObject jsonObject=new JSONObject(s);
+                            String code = jsonObject.getString("code");
+                            if (code.equals("0")){
+                                Gson gson=new Gson();
+                                ProspectBean prospectBean = gson.fromJson(s, ProspectBean.class);
+                                Log.i("tag",code+"======code========");
+                                if (code.equals("0")){
+                                    Prospect prospect = prospectBean.getData().getInfo().getProspect();
+                                    String salary_factor_rank_index = prospect.getSalary_factor_rank_index();
+                                    String salary_factor = prospect.getSalary_factor();
+                                    String most_industry = prospect.getMost_industry();
+                                    String most_city = prospect.getMost_city();
+                                    String most_major = prospect.getMost_major();
+                                    tv_rank.setText(salary_factor_rank_index);
+                                    tv_salary.setText(salary_factor);
+                                    tv_industry.setText(most_industry);
+                                    tv_city.setText(most_city);
+                                    tv_major.setText(most_major);
+                                    //高薪专业
+                                    List<SalaryMajorInfo> salary_major_list = prospect.getSalary_major_list();
+                                    if (salary_major_list!=null && salary_major_list.size()>0){
+                                        list.addAll(salary_major_list);
+                                        moneyAdapter.notifyDataSetChanged();
+                                    }
+                                    //就业报告
+                                    List<MajorListInfo> majorList = prospect.getMajor_list();
+                                    if (majorList!=null && majorList.size()>0){
+                                        rv_allreport.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                        allreportAdapter=new Prospect_allreportAdapter(getActivity(),majorList);
+                                        rv_allreport.setAdapter(allreportAdapter);
+                                    }
+                                }
+                            }  else if(code.equals("-100")){
+                                myScrollview.setVisibility(View.GONE);
+                                no_internet_rl.setVisibility(View.GONE);
+                                no_data_rl.setVisibility(View.VISIBLE);
                             }
-                            //就业报告
-                            List<MajorListInfo> majorList = prospect.getMajor_list();
-                            if (majorList!=null && majorList.size()>0){
-                                rv_allreport.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                allreportAdapter=new Prospect_allreportAdapter(getActivity(),majorList);
-                                rv_allreport.setAdapter(allreportAdapter);
-                            }
-                        }else {
-                            myScrollview.setVisibility(View.GONE);
-                            no_internet_rl.setVisibility(View.GONE);
-                            no_data_rl.setVisibility(View.VISIBLE);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
                 });

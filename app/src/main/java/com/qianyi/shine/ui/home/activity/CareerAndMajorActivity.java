@@ -145,22 +145,18 @@ public class CareerAndMajorActivity extends BaseActivity {
             @Override
             public void OnClick(Node node) {
                 if (node.isLeaf()){
-                    jumpActivity(CareerAndMajorActivity.this,OccupationDetailActivity.class);
-                }
-               /* if (level==2){
-                    if (tag.equals("willingSetting")){
-                        Intent intent=new Intent();
-                        intent.putExtra("cccupationName",node.getName());
-                        setResult(3,intent);
-                        finish();
+                    Intent intent=new Intent(CareerAndMajorActivity.this,OccupationDetailActivity.class);
+                    intent.putExtra("occupationName",node.getName());
+                    if (node.getParent().getLevel()==1){
+                        intent.putExtra("occupationParentName",node.getParent().getName());
+                    }else if(node.getParent().getLevel()==0){
+                        intent.putExtra("occupationParentName",node.getName());
                     }
-                }*/
+                    startActivity(intent);
+                }
             }
         });
     }
-
-
-
     @Override
     protected void getResLayout() {
         setContentView(R.layout.activity_career_major);
@@ -170,7 +166,13 @@ public class CareerAndMajorActivity extends BaseActivity {
         et_searchOccupation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                jumpActivity(CareerAndMajorActivity.this,OccupationDetailActivity.class);
+                String keyWord=et_searchOccupation.getText().toString().trim();
+                if (!TextUtils.isEmpty(keyWord)){
+                    Intent intent=new Intent(CareerAndMajorActivity.this,OccupationDetailActivity.class);
+                    intent.putExtra("occupationName",keyWord);
+                    intent.putExtra("occupationParentName",keyWord);
+                    startActivity(intent);
+                }
                 return false;
             }
         });

@@ -146,7 +146,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 refresh();
             }
         });

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.career_planning.activity.SuitableForMyProfessionActivity;
@@ -81,22 +82,18 @@ public class CareerFragment extends BaseFragment implements View.OnClickListener
                 //本科毕业生从事的10个高薪工作
                 Intent intent = new Intent(getActivity(), WebviewActivity.class);
                 intent.putExtra("title", "本科毕业生从事的10个高薪工作");
-                intent.putExtra("url", "http://www.baidu.com");
+                intent.putExtra("url", apiConstant.BENKETOP);
                 startActivity(intent);
                 break;
             case R.id.re_zhuanke_10:
                 //专科科毕业生从事的10个高薪工作
                 Intent intent_02 = new Intent(getActivity(), WebviewActivity.class);
-                intent_02.putExtra("title", "专科科毕业生从事的10个高薪工作");
-                intent_02.putExtra("url", "http://www.baidu.com");
+                intent_02.putExtra("title", "专科毕业生从事的10个高薪工作");
+                intent_02.putExtra("url", apiConstant.ZHUNANETOP);
                 startActivity(intent_02);
                 break;
-
             default:
                 break;
-
-
         }
-
     }
 }

@@ -113,7 +113,6 @@ public class JoinUsActivity extends BaseActivity {
                     }
                 });
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 customLoadingDialog.dismiss();

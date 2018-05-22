@@ -55,12 +55,12 @@ public class InterestResultBean {
                 this.type = type;
             }
 
-            public String getDecription() {
-                return decription;
+            public String getDescription() {
+                return description;
             }
 
-            public void setDecription(String decription) {
-                this.decription = decription;
+            public void setDescription(String decription) {
+                this.description = decription;
             }
 
             public mColor getColor() {
@@ -90,7 +90,7 @@ public class InterestResultBean {
             }
 
             private String type;
-            private String decription;
+            private String description;
             private mColor color;
 
             public Intereting getInteresting() {

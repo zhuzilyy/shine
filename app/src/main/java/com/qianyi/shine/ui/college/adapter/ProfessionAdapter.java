@@ -24,7 +24,16 @@ public class ProfessionAdapter extends BaseQuickAdapter<UniversityMajorInfo, Bas
     @Override
     protected void convert(BaseViewHolder helper, UniversityMajorInfo item) {
         helper.setText(R.id.tv_majorName,item.getMajor_name());
-        helper.setText(R.id.tv_salary,"毕业5年后的月薪￥:"+item.getSalary5());
-        helper.setText(R.id.tv_zhineng,"职业方向介绍："+item.getZhineng());
+        if (item.getSalary5().contains("信息统计中")){
+            helper.setText(R.id.tv_salary,"毕业5年后的月薪￥:---");
+        }else{
+            helper.setText(R.id.tv_salary,"毕业5年后的月薪￥:"+item.getSalary5());
+        }
+        if (item.getZhineng().contains("信息统计中")){
+            helper.setText(R.id.tv_zhineng,"职业方向介绍:---");
+        }else{
+            helper.setText(R.id.tv_zhineng,"职业方向介绍:"+item.getZhineng());
+        }
+
     }
 }
