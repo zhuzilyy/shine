@@ -222,7 +222,7 @@ public class Profession_EstablishmentFragment extends BaseFragment {
                 loadMore();
             }
         });
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
 //        mAdapter.setPreLoadNumber(3);
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnItemTouchListener(new OnItemClickListener() {

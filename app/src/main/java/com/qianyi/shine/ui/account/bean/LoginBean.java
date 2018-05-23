@@ -249,22 +249,14 @@ public class LoginBean {
                 public String getLevel() {
                     return level;
                 }
-
                 public void setLevel(String level) {
                     this.level = level;
                 }
-
                 public String level;
                 public String intention_major;
                 public String intention_job;
                 public String intention_area;
                 public String limit;
-
-
-
-
-
-
                 public String getIntention_major() {
                     return intention_major;
                 }

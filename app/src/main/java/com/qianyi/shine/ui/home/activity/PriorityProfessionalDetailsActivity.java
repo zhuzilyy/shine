@@ -26,8 +26,10 @@ import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.career_planning.entity.SuitableForMeEntity;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.EstablishAdapter;
+import com.qianyi.shine.ui.college.adapter.EstablishProiAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
 import com.qianyi.shine.ui.gaokao_news.view.XTitleView;
+import com.qianyi.shine.ui.home.bean.ProfessionPriorBean;
 import com.qianyi.shine.ui.home.bean.SchoolInfo;
 import com.qianyi.shine.utils.Utils;
 import com.yyydjk.library.DropDownMenu;
@@ -65,8 +67,8 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     //**************
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private EstablishAdapter mAdapter;
-    public List<SchoolInfo> list_temp;
+    private EstablishProiAdapter mAdapter;
+
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private String major_id ;
@@ -182,14 +184,14 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     }
 
     private void initAdapter() {
-        mAdapter = new EstablishAdapter(R.layout.priority_profession_item,list_temp);
+        mAdapter = new EstablishProiAdapter(PriorityProfessionalDetailsActivity.this);
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 loadMore();
             }
         });
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
 //      mAdapter.setPreLoadNumber(3);
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnItemTouchListener(new OnItemClickListener() {
@@ -227,21 +229,39 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
         apiHome.majorPriorMajor(apiConstant.PRIOR_MAJOR, user.getId(),major_id, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
+            public void onSuccess(Call call, Response response, final String s) {
                 Log.i("ppp","131"+s);
                 PriorityProfessionalDetailsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 
                         Gson gson =new Gson();
-                     //   gson.fromJson(s.)
+                        ProfessionPriorBean priorBean = gson.fromJson(s, ProfessionPriorBean.class);
+                        if(priorBean!=null){
+                            String code =priorBean.getCode();
+                            if("0".equals(code)){
+                                ProfessionPriorBean.ProfessionPriorData priorData= priorBean.getData();
+                                if(priorData!=null){
+                                    ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo priorInfo= priorData.getInfo();
+                                    if(priorInfo!=null){
+                                       List<ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo.ProfessionInfoList> infoLists= priorInfo.getInfoList();
+                                        if(infoLists.size()>0){
+                                            setData(true,infoLists);
+//                                            mAdapter.setEnableLoadMore(true);
+//                                            swipeRefreshLayout.setRefreshing(false);
+                                        }
+
+                                    }
+
+
+                                }
+                            }
+                        }
 
 
 
 
-                        setData(true,list_temp);
-                        mAdapter.setEnableLoadMore(true);
-                        swipeRefreshLayout.setRefreshing(false);
+
                     }
                 });
             }
@@ -251,7 +271,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
                 PriorityProfessionalDetailsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(true,list_temp);
+                       // setData(true,list_temp);
                         mAdapter.setEnableLoadMore(true);
                         swipeRefreshLayout.setRefreshing(false);
                     }
@@ -267,7 +287,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
                 PriorityProfessionalDetailsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setData(false, list_temp);
+                       // setData(false, list_temp);
                     }
                 });
 
@@ -288,7 +308,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     }
 
     private void setData(boolean isRefresh, List data) {
-        mNextRequestPage++;
+       // mNextRequestPage++;
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {
             Log.i("uio","isisisojfsojf===()()()()()");
@@ -301,7 +321,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
             mAdapter.loadMoreEnd(isRefresh);
-            Toast.makeText(PriorityProfessionalDetailsActivity.this, "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(PriorityProfessionalDetailsActivity.this, "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             mAdapter.loadMoreComplete();
         }

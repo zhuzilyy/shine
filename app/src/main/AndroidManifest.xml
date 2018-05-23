@@ -68,6 +68,10 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.account.activity.GuessScoreActivity"/>
+        <!--查专业详情界面-->
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.home.activity.SearchMajorDetailsActivity"/>
         <!--大学主页-->
         <activity android:name=".ui.college.activity.CollegeActivity"
             android:screenOrientation="portrait"

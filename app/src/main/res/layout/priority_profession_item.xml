@@ -20,6 +20,7 @@
             android:orientation="vertical"
             >
             <TextView
+                android:id="@+id/tvv_collegeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="北京大学"
@@ -28,6 +29,7 @@
 
                 />
             <TextView
+                android:id="@+id/tv_score"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,6 +48,7 @@
             android:layout_centerVertical="true"
             >
             <TextView
+                android:id="@+id/tv_luqu"
                 android:layout_toLeftOf="@+id/rightback_"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_width="wrap_content"
@@ -243,6 +246,7 @@
             >
 
             <TextView
+                android:id="@+id/tv_zhanshengjianzhang"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:textSize="12sp"
@@ -250,7 +254,7 @@
                 android:padding="@dimen/dp_10"
                 android:maxLines="3"
                 android:ellipsize="end"
-                android:text="佛佛山积分覅发我就佛为飞机王洪服务和服务评分我就佛为假发票违法批文非叫我"
+                android:text=""
                 />
         </LinearLayout>
         <View
@@ -264,10 +268,11 @@
             android:layout_weight="1"
             >
             <TextView
+                android:id="@+id/tv_2017plan"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="2"
+                android:text="*"
                 android:textSize="12sp"
                 />
         </LinearLayout>
@@ -297,65 +302,25 @@
                     android:gravity="center"
                     />
                 <TextView
+                    android:id="@+id/tv_2015renshu"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="2"
+                    android:text="*"
                     android:textSize="12sp"
                     android:gravity="center"
                     />
                 <TextView
+                    android:id="@+id/tv_2016renshu"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="1"
+                    android:text="*"
                     android:textSize="12sp"
                     android:gravity="center"
                     />
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="--"
-                    android:textSize="12sp"
-                    android:gravity="center"
-                    />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/light_gray"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                >
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="最低位"
-                    android:textSize="12sp"
-                    android:gravity="center"
-                    />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="592"
-                    android:textSize="12sp"
-                    android:gravity="center"
-                    />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="593"
-                    android:textSize="12sp"
-                    android:gravity="center"
-                    />
-                <TextView
+                    android:id="@+id/tv_2017renshu"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -383,22 +348,71 @@
                     android:gravity="center"
                     />
                 <TextView
+                    android:id="@+id/tv_2015zuidi"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="592"
+                    android:text="*"
                     android:textSize="12sp"
                     android:gravity="center"
                     />
                 <TextView
+                    android:id="@+id/tv_2016zuidi"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="592"
+                    android:text="*"
                     android:textSize="12sp"
                     android:gravity="center"
                     />
                 <TextView
+                    android:id="@+id/tv_2017zuidi"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="--"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/light_gray"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="最低位"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/tv_2015zuigao"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="*"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/tv_2016zuigao"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="*"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/tv_2017zuigao"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
