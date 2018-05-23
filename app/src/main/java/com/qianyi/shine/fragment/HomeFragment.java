@@ -403,7 +403,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
     //获取各个层次的数据
     private void getLevelData() {
-        Log.i("tag",memberId+"=======memberId========");
         apiHome.getScoreLevel(apiConstant.SCORE_LEVEL, memberId, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response,final String s) {
