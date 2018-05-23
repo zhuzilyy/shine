@@ -48,7 +48,7 @@ public class EstablishProiAdapter extends BaseQuickAdapter<ProfessionPriorBean.P
         //赋值
         textView.setText(item.getName());
         tv_score.setText(item.getLevel());
-        tv_luqu.setText(item.getRank());
+        tv_luqu.setText(item.getRecruit_students().getRecord_2017().getRate());
         tv_zhanshengjianzhang.setText(item.getRecruit_students().getMajor_name());
         tv_2017plan.setText(item.getRecruit_students().getRecord_2017().getRenshu());
 
