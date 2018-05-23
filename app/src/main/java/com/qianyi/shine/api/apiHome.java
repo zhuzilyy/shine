@@ -255,10 +255,13 @@ public class apiHome {
     }
 
     //专业优先填报P
-    public static void majorPriorMajor(String url,String memberId,String majorId, RequestCallBack<String> callback){
+    public static void majorPriorMajor(String url,String memberId,String majorId,String order,String area, RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
         params.put("member_id",memberId);
         params.put("major_id",majorId);
+        params.put("order",order);
+        params.put("area",area);
+
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
 

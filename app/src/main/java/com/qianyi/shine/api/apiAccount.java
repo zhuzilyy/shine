@@ -81,4 +81,78 @@ public class apiAccount {
         Map<String,String> params=new HashMap<>();
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /***
+     * 微信登录
+     */
+    public static void weixin_login(String url,String openid,String unionid,String sex,String headimgurl,String nickname, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("openid",openid);
+        params.put("unionid",unionid);
+        params.put("sex",sex);
+        params.put("headimgurl",headimgurl);
+        params.put("nickname",nickname);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+
+
+
+
+
+
+
 }

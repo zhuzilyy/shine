@@ -209,6 +209,8 @@ public class apiConstant {
     public static String PRIOR_MAJOR= BASE_URL+"prior_major";
     //大学详情里的分数线
     public static String COLLEGE_SCORE= BASE_URL+"university_scoreline";
+    //微信登录
+    public static String WEIXIN_LOGIN= BASE_URL+"weixin_login";
 
 
 

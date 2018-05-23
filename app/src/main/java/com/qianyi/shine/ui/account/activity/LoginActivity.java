@@ -49,6 +49,8 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+
+
     @Override
     protected void getResLayout() {
         setContentView(R.layout.activity_login);

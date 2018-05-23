@@ -55,9 +55,11 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     private GirdDropDownAdapter orderAdapter;
     private AreaAdapter areaAdapter;
 
-    private String citys[] = {"不限", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
-    private String orderDatas[] = {"概率", "分数线", "排名"};
-  
+    private String citys[] = {"全国", "北京", "天津", "上海", "重庆", "河北", "山西", "辽宁", "吉林", "黑龙江",
+            "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东", "海南", "四川", "贵州",
+            "云南", "陕西", "甘肃", "青海", "内蒙古", "广西", "宁夏", "新疆"};
+    private String orderDatas[] = {"录取率", "分数线", "排名"};
+
 
     private int constellationPosition = 0;
     @BindView(R.id.dropDownMenu)
@@ -71,7 +73,9 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
 
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
-    private String major_id ;
+    private String major_id = "";
+    private String mCity = "";
+    private String mOrder = "";
 
 
     @Override
@@ -79,8 +83,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         BaseActivity.addActivity(this);
         tv_title.setText("专业优先");
 
-
-        major_id=getIntent().getStringExtra("major_id");
+        major_id = getIntent().getStringExtra("major_id");
 
         //省份
         final View areaView = getLayoutInflater().inflate(R.layout.custom_layout, null);
@@ -93,7 +96,10 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
             public void onClick(View v) {
                 mDropDownMenu.setTabText(constellationPosition == 0 ? headers[1] : citys[constellationPosition]);
                 mDropDownMenu.closeMenu();
-                Toast.makeText(PriorityProfessionalDetailsActivity.this, "ok", Toast.LENGTH_SHORT).show();
+
+                mCity = citys[constellationPosition];
+                refresh();
+
             }
         });
 
@@ -103,11 +109,10 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         orderView.setDividerHeight(0);
         orderView.setAdapter(orderAdapter);
 
-
         //init popupViews{添加的顺序决定展示的条目类型}
         popupViews.add(orderView);
         popupViews.add(areaView);
-      
+
 
         //add item click event
         orderView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -116,7 +121,16 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
                 orderAdapter.setCheckItem(position);
                 mDropDownMenu.setTabText(position == 0 ? headers[0] : orderDatas[position]);
                 mDropDownMenu.closeMenu();
-                Toast.makeText(PriorityProfessionalDetailsActivity.this, "排序条目", Toast.LENGTH_SHORT).show();
+
+                if ("录取率".equals(orderDatas[position])) {
+                    mOrder = "rate";
+                } else if ("分数线".equals(orderDatas[position])) {
+                    mOrder = "difen";
+                } else if ("排名".equals(orderDatas[position])) {
+                    mOrder = "rank";
+                }
+                refresh();
+
             }
         });
 
@@ -125,14 +139,16 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 areaAdapter.setCheckItem(position);
                 constellationPosition = position;
-                Toast.makeText(PriorityProfessionalDetailsActivity.this, "星座条目", Toast.LENGTH_SHORT).show();
+
+
+                //Toast.makeText(PriorityProfessionalDetailsActivity.this, "星座条目", Toast.LENGTH_SHORT).show();
             }
         });
 
         //填充布局
-        View contentView= LayoutInflater.from(PriorityProfessionalDetailsActivity.this).inflate(R.layout.layout_refresh,null);
-        swipeRefreshLayout=contentView.findViewById(R.id.swipeLayout);
-        recyclerView= contentView.findViewById(R.id.rv_list);
+        View contentView = LayoutInflater.from(PriorityProfessionalDetailsActivity.this).inflate(R.layout.layout_refresh, null);
+        swipeRefreshLayout = contentView.findViewById(R.id.swipeLayout);
+        recyclerView = contentView.findViewById(R.id.rv_list);
 
         initContentView();
 
@@ -141,21 +157,22 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
         //清空popupviews,否则报tab的数量和popupviews的数量不相等的错
         popupViews.clear();
-        
+
 
     }
 
-  
+
     @Override
     protected void getResLayout() {
         setContentView(R.layout.activity_priority_details_profession);
     }
 
-  
+
     @Override
     protected void setStatusBarColor() {
 
     }
+
     /***
      * 处理加载的布局
      *
@@ -198,7 +215,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
 
-                Intent intent=new Intent(PriorityProfessionalDetailsActivity.this,PriorityCollegeDetailsActivity.class);
+                Intent intent = new Intent(PriorityProfessionalDetailsActivity.this, PriorityCollegeDetailsActivity.class);
                 PriorityProfessionalDetailsActivity.this.startActivity(intent);
             }
         });
@@ -214,57 +231,61 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
             }
         });
     }
+
     //刷新
     private void refresh() {
-        LoginBean.LoginData.LoginInfo user =Utils.readUser(PriorityProfessionalDetailsActivity.this);
-        if(user==null){
+        LoginBean.LoginData.LoginInfo user = Utils.readUser(PriorityProfessionalDetailsActivity.this);
+        if (user == null) {
             return;
         }
-        if(TextUtils.isEmpty(major_id)){
+        if (TextUtils.isEmpty(major_id)) {
             return;
         }
+
+       // Toast.makeText(this, "mcity==" + mCity + "      morder==" + mOrder, Toast.LENGTH_SHORT).show();
 
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.majorPriorMajor(apiConstant.PRIOR_MAJOR, user.getId(),major_id, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.majorPriorMajor(apiConstant.PRIOR_MAJOR, user.getId(), major_id, mOrder, "全国".endsWith(mCity)?"":mCity, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
-                Log.i("ppp","131"+s);
+                Log.i("ppp", "131" + s);
                 PriorityProfessionalDetailsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Gson gson =new Gson();
+                        Gson gson = new Gson();
                         ProfessionPriorBean priorBean = gson.fromJson(s, ProfessionPriorBean.class);
-                        if(priorBean!=null){
-                            String code =priorBean.getCode();
-                            if("0".equals(code)){
-                                ProfessionPriorBean.ProfessionPriorData priorData= priorBean.getData();
-                                if(priorData!=null){
-                                    ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo priorInfo= priorData.getInfo();
-                                    if(priorInfo!=null){
-                                       List<ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo.ProfessionInfoList> infoLists= priorInfo.getInfoList();
-                                        if(infoLists.size()>0){
-                                            setData(true,infoLists);
-                                            mAdapter.setEnableLoadMore(true);
-                                            swipeRefreshLayout.setRefreshing(false);
-                                        }
+                        if (priorBean != null) {
+                            String code = priorBean.getCode();
 
-                                    }
+                            ProfessionPriorBean.ProfessionPriorData priorData = priorBean.getData();
+                            if (priorData != null) {
+                                ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo priorInfo = priorData.getInfo();
+                                if (priorInfo != null) {
+                                    List<ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo.ProfessionInfoList> infoLists = priorInfo.getInfoList();
+
+                                    setData(true, infoLists);
+                                    mAdapter.setEnableLoadMore(true);
+                                    swipeRefreshLayout.setRefreshing(false);
+
 
                                 }
+
+
                             }
                         }
 
                     }
                 });
             }
+
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
-                Log.i("ppp","132"+e);
+                Log.i("ppp", "132" + e);
                 PriorityProfessionalDetailsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                       // setData(true,list_temp);
+                        // setData(true,list_temp);
                         mAdapter.setEnableLoadMore(true);
                         swipeRefreshLayout.setRefreshing(false);
                     }
@@ -272,6 +293,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
             }
         });
     }
+
     //加载
     private void loadMore() {
         apiHome.loadMore("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
@@ -280,7 +302,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
                 PriorityProfessionalDetailsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                       // setData(false, list_temp);
+                        // setData(false, list_temp);
                     }
                 });
 
@@ -301,10 +323,10 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     }
 
     private void setData(boolean isRefresh, List data) {
-       // mNextRequestPage++;
+        // mNextRequestPage++;
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {
-            Log.i("uio","isisisojfsojf===()()()()()");
+            Log.i("uio", "isisisojfsojf===()()()()()");
             mAdapter.setNewData(data);
         } else {
             if (size > 0) {
@@ -314,14 +336,15 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         if (size < PAGE_SIZE) {
             //第一页如果不够一页就不显示没有更多数据布局
             mAdapter.loadMoreEnd(isRefresh);
-          //  Toast.makeText(PriorityProfessionalDetailsActivity.this, "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
+            //  Toast.makeText(PriorityProfessionalDetailsActivity.this, "第一页如果不够一页就不显示没有更多数据布局", Toast.LENGTH_SHORT).show();
         } else {
             mAdapter.loadMoreComplete();
         }
     }
+
     @OnClick({R.id.iv_back})
-    public void click(View view){
-        switch (view.getId()){
+    public void click(View view) {
+        switch (view.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
