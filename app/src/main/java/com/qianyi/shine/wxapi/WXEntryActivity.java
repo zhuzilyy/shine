@@ -179,10 +179,14 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
                     String nickname=jsonObject.getString("nickname");
                     int sex=jsonObject.getInt("sex");
                     String headimgurl=jsonObject.getString("headimgurl");
-
-
-
-
+                    Intent intent=new Intent();
+                    intent.putExtra("openid",openid);
+                    intent.putExtra("unionid",unionid);
+                    intent.putExtra("nickname",nickname);
+                    intent.putExtra("sex",sex);
+                    intent.putExtra("headimgurl",headimgurl);
+                    intent.setAction("com.action.wechat");
+                    sendBroadcast(intent);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

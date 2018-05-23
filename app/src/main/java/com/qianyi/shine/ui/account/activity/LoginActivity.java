@@ -1,6 +1,9 @@
 package com.qianyi.shine.ui.account.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -37,11 +40,19 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.et_pwd)
     ClearEditText et_pwd;
     CustomLoadingDialog customLoadingDialog;
+    private MyReceiver myReceiver;
+    private String openid,unionid,nickname,headimgurl;
+    private int sex;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
         customLoadingDialog=new CustomLoadingDialog(this);
         //customLoadingDialog.show();
+
+        myReceiver=new MyReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.wechat");
+        registerReceiver(myReceiver,intentFilter);
     }
 
     @Override
@@ -160,6 +171,69 @@ public class LoginActivity extends BaseActivity {
         req.scope = "snsapi_userinfo";
         req.state = "diandi_wx_login";
         mWxApi.sendReq(req);
+    }
+    class MyReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("com.action.wechat")){
+                openid=intent.getStringExtra("openid");
+                unionid=intent.getStringExtra("unionid");
+                nickname=intent.getStringExtra("nickname");
+                headimgurl=intent.getStringExtra("headimgurl");
+                sex=intent.getIntExtra("sex",0);
+                wechatLogin();
+            }
+        }
+    }
 
+    private void wechatLogin() {
+        customLoadingDialog.show();
+        apiAccount.wechatLogin(apiConstant.WECHAT_LOGIN, openid, unionid, sex, headimgurl, nickname, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(Call call, Response response, final String s) {
+                Log.i("tag",s);
+                customLoadingDialog.dismiss();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Gson gson = new Gson();
+                        LoginBean loginBean=gson.fromJson(s, LoginBean.class);
+                        if(loginBean != null){
+                            String code = loginBean.getCode();
+                            if("0" .equals(code)){
+                                LoginBean.LoginData.LoginInfo user = loginBean.getData().getInfo();
+                                try {
+                                    //存储当前用户
+                                    Utils.saveUser(user,LoginActivity.this);
+                                    Intent intent=new Intent(LoginActivity.this, GuessScoreActivity.class);
+                                    intent.putExtra("tag","setScore");
+                                    startActivity(intent);
+                                    finish();
+                                    /*if (loginBean.getData().getInfo().getMember_scoreinfo()==null){
+                                        Intent intent=new Intent(LoginActivity.this, GuessScoreActivity.class);
+                                        intent.putExtra("tag","setScore");
+                                        startActivity(intent);
+                                        finish();
+                                    }else{
+                                        Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }*/
+                                }catch (Exception e){
+                                    Log.i("excaption_shine",e.getMessage());
+                                }
+                            }else {
+                                Toast.makeText(LoginActivity.this, ""+loginBean.getInfo(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+            }
+            @Override
+            public void onEror(Call call, int statusCode, Exception e) {
+                customLoadingDialog.dismiss();
+            }
+        });
     }
 }

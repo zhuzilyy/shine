@@ -117,12 +117,19 @@ public class GuessScoreActivity extends BaseActivity {
                     Toast.makeText(this, "请输入分数", Toast.LENGTH_SHORT).show();
                     return;
                 }
+/*
                 LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
-                String limit = loginInfo.getMember_scoreinfo().getLimit();
-                if (limit.equals("0")){
-                    Toast.makeText(this, "只能填写3次高考信息", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                LoginBean.LoginData.LoginInfo.MemberScoreInfo member_scoreinfo = loginInfo.getMember_scoreinfo();
+                if (member_scoreinfo==null){
+                    Toast.makeText(this, "1111", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(this, "2222222222", Toast.LENGTH_SHORT).show();
+                    String limit = loginInfo.getMember_scoreinfo().getLimit();
+                    if (limit.equals("0")){
+                        Toast.makeText(this, "只能填写3次高考信息", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }*/
                 String id = Utils.readUser(GuessScoreActivity.this).getId();
                 goToMain(id,type,prov,myScore,myRank);
                 break;
