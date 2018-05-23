@@ -93,6 +93,7 @@
                         android:textColor="@color/cicle_red"
                         android:textSize="10sp"
                         android:layout_centerInParent="true"
+
                         />
                     <View
                         android:layout_width="0dp"
