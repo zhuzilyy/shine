@@ -51,6 +51,7 @@ import com.qianyi.shine.ui.home.activity.FindMajorActivity;
 import com.qianyi.shine.ui.home.activity.HomeSearchActivity;
 import com.qianyi.shine.ui.home.activity.IntelligentFillCollegeActivity;
 import com.qianyi.shine.ui.home.activity.PriorityCollegeActivity;
+import com.qianyi.shine.ui.home.activity.SearchActivity;
 import com.qianyi.shine.ui.home.activity.SearchOccupationActivity;
 import com.qianyi.shine.ui.home.bean.HomeBean;
 import com.qianyi.shine.ui.mine.activity.PersonalInfoActivity;
@@ -503,7 +504,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.homeSearch_ll:
-                startActivity(new Intent(getActivity(), HomeSearchActivity.class));
+                //startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
             //测试录取率
             case R.id.ll_acceptanceRate:

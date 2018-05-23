@@ -47,6 +47,8 @@
             </LinearLayout>
             <!--搜索-->
             <LinearLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:id="@+id/homeSearch_ll"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -65,8 +67,9 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:src="@mipmap/fdj" />
-
                 <TextView
+                    android:layout_gravity="center_vertical"
+                    android:background="@null"
                     android:id="@+id/main_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -77,7 +80,6 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/gray"
                     android:textSize="14sp" />
-
             </LinearLayout>
 
         </LinearLayout>

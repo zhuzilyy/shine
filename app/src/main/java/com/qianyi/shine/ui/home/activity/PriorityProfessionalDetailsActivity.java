@@ -216,7 +216,6 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     }
     //刷新
     private void refresh() {
-
         LoginBean.LoginData.LoginInfo user =Utils.readUser(PriorityProfessionalDetailsActivity.this);
         if(user==null){
             return;
@@ -234,7 +233,6 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
                 PriorityProfessionalDetailsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
                         Gson gson =new Gson();
                         ProfessionPriorBean priorBean = gson.fromJson(s, ProfessionPriorBean.class);
                         if(priorBean!=null){
@@ -253,14 +251,9 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
 
                                     }
 
-
                                 }
                             }
                         }
-
-
-
-
 
                     }
                 });

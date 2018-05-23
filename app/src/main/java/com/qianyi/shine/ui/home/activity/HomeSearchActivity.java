@@ -70,8 +70,6 @@ public class HomeSearchActivity extends BaseActivity implements View.OnClickList
                         SPUtils.put(HomeSearchActivity.this,"keyWord",keyWord);
                         tab.setVisibility(View.VISIBLE);
                         viewPager.setVisibility(View.VISIBLE);
-                       /* SearchHomeCollegeFragment searchHomeCollegeFragment=new SearchHomeCollegeFragment();
-                        searchHomeCollegeFragment.setKeyWord(keyWord);*/
                         //查询数据，显示内容
 
                     }
