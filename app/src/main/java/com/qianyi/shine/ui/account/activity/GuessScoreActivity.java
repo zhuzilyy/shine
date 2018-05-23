@@ -67,7 +67,6 @@ public class GuessScoreActivity extends BaseActivity {
         }else{
             ll_wraning.setVisibility(View.GONE);
         }
-
         intent=getIntent();
         if (intent!=null){
             tag=intent.getStringExtra("tag");

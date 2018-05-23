@@ -196,6 +196,14 @@ public class apiHome {
         params.put("page",page+"");
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+    //测录取率
+    public static void acceptanceRate(String url,String keyword,String member_id,int page,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("keyword",keyword);
+        params.put("member_id",member_id);
+        params.put("page",page+"");
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 
 
 

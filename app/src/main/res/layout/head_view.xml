@@ -448,7 +448,6 @@
         android:layout_below="@+id/main_sectionTwo"
         android:layout_marginLeft="@dimen/dp_5"
         android:layout_marginRight="@dimen/dp_5"
-        android:layout_marginTop="@dimen/dp_15"
         android:orientation="horizontal"
         android:visibility="visible">
         <!--找大学-->
@@ -575,11 +574,9 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_below="@+id/main_sectionThree"
-        android:layout_marginTop="@dimen/dp_10"
         android:paddingLeft="@dimen/dp_15"
         android:paddingRight="@dimen/dp_10"
         android:visibility="visible">
-
         <ImageView
             android:id="@+id/flag"
             android:layout_width="3dp"
@@ -640,7 +637,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_below="@+id/main_headRv_LL"
-        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_15"
         android:paddingRight="@dimen/dp_10">
 

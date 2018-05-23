@@ -64,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
+            android:id="@+id/tv_score"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
@@ -74,14 +75,17 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
     </LinearLayout>
-    <ListView
-        android:background="@color/white"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
-        android:dividerHeight="0.5dp"
-        android:divider="@color/common_line"
-        android:id="@+id/lv_college"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_college"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <include layout="@layout/common_wrong_intert" />
+    <include layout="@layout/common_no_data" />
 
 </LinearLayout>

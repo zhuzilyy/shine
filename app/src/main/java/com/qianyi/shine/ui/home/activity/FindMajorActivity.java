@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseActivity;
+import com.qianyi.shine.ui.college.activity.ProfessionalActivity;
 import com.qianyi.shine.ui.home.fragment.BenkeFragment;
 import com.qianyi.shine.ui.home.fragment.MajorBenkeFragment;
 import com.qianyi.shine.ui.home.fragment.MajorZhuanKeFragment;
@@ -81,7 +82,10 @@ public class FindMajorActivity extends BaseActivity {
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 String keyWord=et_search.getText().toString().trim();
                 if (!TextUtils.isEmpty(keyWord)){
-                    jumpActivity(FindMajorActivity.this,PriorityProfessionalDetailsActivity.class);
+                    Intent intent=new Intent(FindMajorActivity.this,ProfessionalActivity.class);
+                    intent.putExtra("id","");
+                    intent.putExtra("name",keyWord);
+                    startActivity(intent);
                 }
                 return false;
             }
