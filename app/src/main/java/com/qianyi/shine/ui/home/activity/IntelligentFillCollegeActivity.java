@@ -121,7 +121,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
                 loadMore();
             }
         });
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
         rv_college.setAdapter(mAdapter);
         //添加headerView
         view_header=getLayoutInflater().inflate(R.layout.header_intelligence_fill,null);
@@ -234,6 +234,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Toast.makeText(IntelligentFillCollegeActivity.this, "22222222222", Toast.LENGTH_SHORT).show();
                         customLoadingDialog.dismiss();
                         swipeRefreshLayout.setVisibility(View.GONE);
                         no_internet_rl.setVisibility(View.VISIBLE);
