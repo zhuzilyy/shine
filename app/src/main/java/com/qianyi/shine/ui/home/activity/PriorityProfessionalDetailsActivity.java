@@ -247,8 +247,8 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
                                        List<ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo.ProfessionInfoList> infoLists= priorInfo.getInfoList();
                                         if(infoLists.size()>0){
                                             setData(true,infoLists);
-//                                            mAdapter.setEnableLoadMore(true);
-//                                            swipeRefreshLayout.setRefreshing(false);
+                                            mAdapter.setEnableLoadMore(true);
+                                            swipeRefreshLayout.setRefreshing(false);
                                         }
 
                                     }
