@@ -121,9 +121,6 @@ public class collegeScoreFragment extends BaseFragment {
                                 //折线图(毕业生平均月薪)
                                 setLineChart(mLineChart,allRecord);
                                 loadLineChartData(mLineChart,allRecord);
-
-
-
                             }
                         }
                     }
