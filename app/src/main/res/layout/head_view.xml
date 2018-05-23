@@ -635,12 +635,11 @@
     <RelativeLayout
         android:id="@+id/main_gaokao_title"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/main_headRv_LL"
         android:layout_marginTop="@dimen/dp_5"
         android:paddingLeft="@dimen/dp_15"
         android:paddingRight="@dimen/dp_10">
-
         <ImageView
             android:id="@+id/flag3"
             android:layout_width="3dp"
