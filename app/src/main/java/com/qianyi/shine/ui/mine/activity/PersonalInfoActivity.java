@@ -50,6 +50,7 @@ import com.qianyi.shine.ui.mine.view.CircleImageView;
 import com.qianyi.shine.utils.BitmapToBase64;
 import com.qianyi.shine.utils.ListActivity;
 import com.qianyi.shine.utils.SDPathUtils;
+import com.qianyi.shine.utils.SPUtils;
 import com.qianyi.shine.utils.Utils;
 
 import java.io.File;
@@ -297,9 +298,6 @@ public class PersonalInfoActivity extends BaseActivity implements LoginDialogFra
       province=address[0];
       selectCity=address[1];
       selectCounty=address[2];
-      Log.i("tag",province+"=====province=======");
-      Log.i("tag",selectCity+"=====selectCity=======");
-      Log.i("tag",selectCounty+"=====selectCounty=======");
     }
     //跳转到拍照
     private void takePhoto() {
@@ -414,6 +412,9 @@ public class PersonalInfoActivity extends BaseActivity implements LoginDialogFra
         quitDialog.setYesOnclickListener("确定", new SelfDialog.onYesOnclickListener() {
             @Override
             public void onYesClick() {
+                SPUtils.put(PersonalInfoActivity.this,"chongCi","");
+                SPUtils.put(PersonalInfoActivity.this,"baoShou","");
+                SPUtils.put(PersonalInfoActivity.this,"wenTuo","");
                Utils.clearSharedUser(PersonalInfoActivity.this);
                quitDialog.dismiss();
                 ListActivity.close();

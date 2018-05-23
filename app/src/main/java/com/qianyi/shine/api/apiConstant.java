@@ -85,6 +85,8 @@ public class apiConstant {
     public static final String SEARCH_MAJOR=BASE_URL+"search_major";
     //获取开放的省份
     public static final String OPEN_AREA=BASE_URL+"open_area";
+    //测试录取率
+    public static final String ACCEPTANCE_RATE=BASE_URL+"prior_noopsyche";
     //微信参数
     public static  String APP_ID="wxf51a00546d18489f";
     public static  String APP_SECRET="ed6e15ab8d28ca6dd3b024f1ffedbec9";

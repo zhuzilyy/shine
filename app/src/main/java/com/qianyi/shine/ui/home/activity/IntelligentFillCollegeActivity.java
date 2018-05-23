@@ -78,6 +78,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     LinearLayout ll_nodataCollegeData;
     private boolean isHasHeader;
     private CustomLoadingDialog customLoadingDialog;
+    private String intention_area,intention_job,intention_major;
     @Override
     protected void initViews() {
         customLoadingDialog=new CustomLoadingDialog(this);
@@ -137,7 +138,10 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
         rv_college.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(IntelligentFillCollegeActivity.this, com.qianyi.shine.ui.college.activity.CollegeActivity.class);
+                List<SchoolInfo> data = mAdapter.getData();
+                Intent intent=new Intent(IntelligentFillCollegeActivity.this, CollegeActivity.class);
+                intent.putExtra("id",data.get(position).getId());
+                intent.putExtra("name",data.get(position).getName());
                 startActivity(intent);
             }
         });
@@ -163,9 +167,9 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
         String score = (String) SPUtils.get(IntelligentFillCollegeActivity.this, "score", "");
         tv_collegeData.setText(area+"/"+type+"/"+score);
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
-        String intention_area = loginInfo.getMember_scoreinfo().getIntention_area();
-        String intention_job = loginInfo.getMember_scoreinfo().getIntention_job();
-        String intention_major = loginInfo.getMember_scoreinfo().getIntention_major();
+        intention_area = loginInfo.getMember_scoreinfo().getIntention_area();
+        intention_job = loginInfo.getMember_scoreinfo().getIntention_job();
+        intention_major = loginInfo.getMember_scoreinfo().getIntention_major();
         int count=0;
         if (!TextUtils.isEmpty(intention_area)){
             count++;
@@ -234,7 +238,6 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(IntelligentFillCollegeActivity.this, "22222222222", Toast.LENGTH_SHORT).show();
                         customLoadingDialog.dismiss();
                         swipeRefreshLayout.setVisibility(View.GONE);
                         no_internet_rl.setVisibility(View.VISIBLE);
@@ -310,18 +313,19 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_willings:
-                Toast.makeText(this, "22222222222222", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_comfirm_:
-
-                if(!TextUtils.isEmpty(area)){
+                if(!TextUtils.isEmpty(intention_area) && TextUtils.isEmpty(intention_job) && TextUtils.isEmpty(intention_major)){
                         //只设置了地区
                         Intent intent = new Intent(IntelligentFillCollegeActivity.this, PriorityCollegeActivity.class);
                         startActivity(intent);
-                }else if(!TextUtils.isEmpty(majorName) || !TextUtils.isEmpty(occupationName)){
+                }else if(!TextUtils.isEmpty(intention_job) || !TextUtils.isEmpty(intention_major)){
                     //设置了专业或职业
                     Intent intent = new Intent(IntelligentFillCollegeActivity.this, PriorityProfessionalDetailsActivity.class);
                     startActivity(intent);
+                }else if(TextUtils.isEmpty(intention_area) && TextUtils.isEmpty(intention_job) && TextUtils.isEmpty(intention_major)){
+                    Toast.makeText(this, "请先设置意愿", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 break;
 

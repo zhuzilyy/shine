@@ -159,8 +159,8 @@ public class MajorBenkeFragment extends BaseFragment {
         adapter.setListener(new TreeItemClickListener() {
             @Override
             public void OnClick(Node node) {
-                int level = node.getLevel();
-                if (level==2){
+                boolean isLeaf = node.isLeaf();
+                if (isLeaf){
                     //startActivity(new Intent(getActivity(), ProfessionalActivity.class));
                     //意愿设置里面的专业设置
                     if (!TextUtils.isEmpty(tag)){

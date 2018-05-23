@@ -160,8 +160,8 @@ public class MajorZhuanKeFragment extends BaseFragment {
         adapter.setListener(new TreeItemClickListener() {
             @Override
             public void OnClick(Node node) {
-                int level = node.getLevel();
-                if (level==2){
+                boolean isLeaf = node.isLeaf();
+                if (isLeaf){
                     //startActivity(new Intent(getActivity(), ProfessionalActivity.class));
                     //意愿设置里面的专业设置
                     if (!TextUtils.isEmpty(tag)){
@@ -178,6 +178,10 @@ public class MajorZhuanKeFragment extends BaseFragment {
                         }else if(tag.equals("searchMajor")){
                             //查专业跳转过来的界面
                             intent=new Intent(getActivity(), ProfessionalActivity.class);
+                            String major_id=node.getId()+"";
+                            intent.putExtra("id",major_id);
+                            intent.putExtra("name",node.getName());
+                            Toast.makeText(getActivity(), major_id+"==="+node.getName(), Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                         }
                     }
