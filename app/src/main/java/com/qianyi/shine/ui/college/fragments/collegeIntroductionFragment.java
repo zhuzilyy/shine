@@ -132,7 +132,7 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
                 //住宿条件
                 Intent intent_Accommodation = new Intent(getActivity(), WebviewActivity.class);
                 intent_Accommodation.putExtra("title","住宿条件");
-                intent_Accommodation.putExtra("url","http://www.baidu.com");
+                intent_Accommodation.putExtra("url",collegeDetailsInfo.getShisu_weburl());
                 getActivity().startActivity(intent_Accommodation);
                 break;
             case R.id.Scholarship_re:

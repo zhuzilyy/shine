@@ -276,6 +276,16 @@ public class CollegeDetailsBean {
             private String university_satisfaction;
             private MajorRecommend major_recommend;
 
+            public String getShisu_weburl() {
+                return shisu_weburl;
+            }
+
+            public void setShisu_weburl(String shisu_weburl) {
+                this.shisu_weburl = shisu_weburl;
+            }
+
+            private String shisu_weburl;
+
 
 
 
