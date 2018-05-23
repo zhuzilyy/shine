@@ -121,7 +121,7 @@ public class GuessScoreActivity extends BaseActivity {
                 LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
                 String limit = loginInfo.getMember_scoreinfo().getLimit();
                 if (limit.equals("0")){
-                    Toast.makeText(this, "非vip只能填写2次高考信息", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "只能填写3次高考信息", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String id = Utils.readUser(GuessScoreActivity.this).getId();

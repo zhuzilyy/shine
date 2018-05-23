@@ -223,11 +223,12 @@ public class apiHome {
         OkHttpManager.getInstance().postRequest(urlString,params,callback);
     }
     //专业详情开设院校
-    public static void majorSchoolList(String url,String major_name,String area,String is_type, RequestCallBack<String> callback){
+    public static void majorSchoolList(String url,int page,String major_name,String area,String is_type, RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
         params.put("major_name",major_name);
         params.put("area",area);
         params.put("is_type",is_type);
+        params.put("page",page+"");
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
     //首页搜索大学

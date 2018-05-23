@@ -74,4 +74,11 @@ public class apiAccount {
         params.put("member_id",memberId);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+    /***
+     * 获取开放的地区
+     */
+    public static void getOpenArea(String url,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 }
