@@ -189,6 +189,13 @@ public class apiHome {
         params.put("intro",intro);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+    //加入我们
+    public static void searchMajor(String url,String keyword,int page,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("keyword",keyword);
+        params.put("page",page+"");
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 
 
 

@@ -70,7 +70,7 @@ public class CollegeListActivity extends BaseActivity {
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private Intent intent;
-    private String order,area,level,is_type,school_type,keyword;
+    private String order="rank",area,level,is_type,school_type,keyword;
     private TextView reload;
     private RelativeLayout no_internet_rl,no_data_rl;
     private CustomLoadingDialog customLoadingDialog;
@@ -177,7 +177,7 @@ public class CollegeListActivity extends BaseActivity {
         popupViews.clear();
         intent=getIntent();
         if (intent!=null){
-            order=intent.getStringExtra("order");
+            //order=intent.getStringExtra("order");
             area=intent.getStringExtra("area");
             level=intent.getStringExtra("level");
             is_type=intent.getStringExtra("is_type");

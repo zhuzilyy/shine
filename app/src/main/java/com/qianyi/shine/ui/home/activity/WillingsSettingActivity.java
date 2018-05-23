@@ -122,7 +122,7 @@ public class WillingsSettingActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_collegeArea:
-                startActivityForResult(new Intent(WillingsSettingActivity.this,SelectCollegeAreaActivity.class),1);
+                startActivityForResult(new Intent(WillingsSettingActivity.this,WillingSelectCollegeAreaActivity.class),1);
                 break;
             case R.id.rl_major:
                 intent=new Intent(WillingsSettingActivity.this,FindMajorActivity.class);

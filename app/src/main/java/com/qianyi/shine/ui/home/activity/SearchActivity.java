@@ -1,5 +1,6 @@
 package com.qianyi.shine.ui.home.activity;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -27,9 +28,10 @@ public class SearchActivity extends BaseActivity{
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(!TextUtils.isEmpty(v.getText())){
-                    boolean isFirst=false;
                     String keyWord=v.getText().toString().trim();
-
+                    Intent intent=new Intent(SearchActivity.this,HomeSearchActivity.class);
+                    intent.putExtra("keyWord",keyWord);
+                    startActivity(intent);
                     //查询数据，显示内容
 
                 }
@@ -56,7 +58,7 @@ public class SearchActivity extends BaseActivity{
     protected void setStatusBarColor() {
 
     }
-    @OnClick(R.id.iv_back)
+    @OnClick(R.id.back)
     public void click(View view){
         switch (view.getId()){
             case R.id.back:
