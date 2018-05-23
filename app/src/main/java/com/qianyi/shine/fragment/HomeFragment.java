@@ -33,12 +33,10 @@ import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
-import com.qianyi.shine.dialog.SelfDialog;
 import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.adapter.PullToRefreshAdapter;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.ui.account.activity.GuessScoreActivity;
-import com.qianyi.shine.ui.account.activity.LoginActivity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.activity.CollegeActivity;
@@ -48,14 +46,11 @@ import com.qianyi.shine.ui.home.activity.AcceptanceRateActivity;
 import com.qianyi.shine.ui.home.activity.EmploymentActivity;
 import com.qianyi.shine.ui.home.activity.FindCollegeActivity;
 import com.qianyi.shine.ui.home.activity.FindMajorActivity;
-import com.qianyi.shine.ui.home.activity.HomeSearchActivity;
 import com.qianyi.shine.ui.home.activity.IntelligentFillCollegeActivity;
 import com.qianyi.shine.ui.home.activity.PriorityCollegeActivity;
 import com.qianyi.shine.ui.home.activity.SearchActivity;
 import com.qianyi.shine.ui.home.activity.SearchOccupationActivity;
 import com.qianyi.shine.ui.home.bean.HomeBean;
-import com.qianyi.shine.ui.mine.activity.PersonalInfoActivity;
-import com.qianyi.shine.utils.ListActivity;
 import com.qianyi.shine.utils.SPUtils;
 import com.qianyi.shine.utils.Utils;
 
@@ -504,7 +499,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.homeSearch_ll:
-                //startActivity(new Intent(getActivity(), SearchActivity.class));
+                startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
             //测试录取率
             case R.id.ll_acceptanceRate:

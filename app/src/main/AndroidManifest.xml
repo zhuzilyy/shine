@@ -241,6 +241,9 @@
         <!--搜索-->
         <activity android:name=".ui.home.activity.SearchActivity"
             android:screenOrientation="portrait"/>
+        <!--搜索-->
+        <activity android:name=".ui.home.activity.WillingSelectCollegeAreaActivity"
+            android:screenOrientation="portrait"/>
         <!--大学详情大图展示-->
         <activity android:name=".ui.college.activity.BigImgActivity"
             android:screenOrientation="portrait"/>

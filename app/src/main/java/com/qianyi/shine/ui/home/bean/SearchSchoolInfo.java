@@ -7,13 +7,12 @@ import java.util.List;
  */
 
 public class SearchSchoolInfo {
-    private List<SearchSchoolListInfo> RecommendUniversityList;
-
-    public List<SearchSchoolListInfo> getRecommendUniversityList() {
-        return RecommendUniversityList;
+    private List<SearchSchoolListInfo> ResultList;
+    public List<SearchSchoolListInfo> getResultList() {
+        return ResultList;
     }
 
-    public void setRecommendUniversityList(List<SearchSchoolListInfo> recommendUniversityList) {
-        RecommendUniversityList = recommendUniversityList;
+    public void setResultList(List<SearchSchoolListInfo> resultList) {
+        ResultList = resultList;
     }
 }

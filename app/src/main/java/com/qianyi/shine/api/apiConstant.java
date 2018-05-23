@@ -81,6 +81,8 @@ public class apiConstant {
     public static final String MAJOR_SCHOOL_LIST=BASE_URL+"major_school_list";
     //首页搜索大学
     public static final String SEARCH_COLLEGE=BASE_URL+"search_school";
+    //首页搜索专业
+    public static final String SEARCH_MAJOR=BASE_URL+"search_major";
     //获取开放的省份
     public static final String OPEN_AREA=BASE_URL+"open_area";
     //微信参数
