@@ -17,6 +17,7 @@
             android:layout_centerVertical="true"
             />
         <TextView
+            android:id="@+id/tv_name"
             android:layout_toRightOf="@+id/college_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

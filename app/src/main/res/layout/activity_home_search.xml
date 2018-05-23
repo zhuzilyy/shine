@@ -8,6 +8,7 @@
     >
     <!--搜索框-->
     <LinearLayout
+        android:visibility="visible"
         android:background="@color/main_blue"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -44,13 +45,11 @@
                 />
 
         </RelativeLayout>
-
-
     </LinearLayout>
     <!---->
     <android.support.design.widget.TabLayout
         android:id="@+id/tablayout"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

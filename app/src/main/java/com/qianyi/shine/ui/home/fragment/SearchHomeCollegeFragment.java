@@ -55,9 +55,18 @@ public class SearchHomeCollegeFragment extends BaseFragment {
     private CustomLoadingDialog customLoadingDialog;
     private List<SearchSchoolListInfo> infoList;
     private MyReceiver myReceiver;
-    public void setKeyWord(String keyWord) {
+    public static boolean isFirst;
+   /* public void setKeyWord(String keyWord) {
         this.keyWord = keyWord;
-    }
+        Log.i("tag",isFirst+"=============");
+        if (isFirst){
+            Intent intent=new Intent();
+            intent.setAction("com.action.search");
+            intent.putExtra("keyWord",keyWord);
+            getActivity().sendBroadcast(intent);
+        }
+       *//* *//*
+    }*/
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_search_homecollege,null);
@@ -70,8 +79,9 @@ public class SearchHomeCollegeFragment extends BaseFragment {
         customLoadingDialog=new CustomLoadingDialog(getContext());
 
         myReceiver=new MyReceiver();
-        String keyWord = myReceiver.getKeyWord();
-        Toast.makeText(getActivity(), keyWord, Toast.LENGTH_SHORT).show();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.search");
+        getActivity().registerReceiver(myReceiver,intentFilter);
     }
     @Override
     protected void initData() {
@@ -81,13 +91,13 @@ public class SearchHomeCollegeFragment extends BaseFragment {
             no_data_rl.setVisibility(View.GONE);
         }else{
             customLoadingDialog.show();
-            getData(keyWord);
+            getData();
         }
         //点击重新加载数据
         reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getData(keyWord);
+                getData();
             }
         });
 
@@ -100,7 +110,6 @@ public class SearchHomeCollegeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         keyWord= (String) SPUtils.get(getActivity(),"keyWord","");
-        getData(keyWord);
     }
 
     @Override
@@ -108,8 +117,10 @@ public class SearchHomeCollegeFragment extends BaseFragment {
         super.onDestroy();
     }
     //获取数据
-    private void getData(String keyWord) {
-        Toast.makeText(getActivity(), "1111111111111", Toast.LENGTH_SHORT).show();
+    private void getData() {
+        isFirst=true;
+        Toast.makeText(getActivity(), "000000000000000", Toast.LENGTH_SHORT).show();
+        String keyWord= (String) SPUtils.get(getActivity(),"keyWord","");
         apiHome.searchCollege(apiConstant.SEARCH_COLLEGE, keyWord, 1, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
@@ -144,5 +155,16 @@ public class SearchHomeCollegeFragment extends BaseFragment {
 
             }
         });
+    }
+    class MyReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Toast.makeText(getActivity(), "11111111111111", Toast.LENGTH_SHORT).show();
+            String action = intent.getAction();
+            if (action.equals("com.action.search")){
+                keyWord=intent.getStringExtra("keyWord");
+                Toast.makeText(getActivity(), keyWord, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

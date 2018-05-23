@@ -29,6 +29,7 @@ import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.EstablishAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
+import com.qianyi.shine.ui.college.adapter.SchoolMajorAdapter;
 import com.qianyi.shine.ui.college.entivity.ProfessionBean;
 import com.qianyi.shine.ui.home.activity.CollegeListActivity;
 import com.qianyi.shine.ui.home.bean.MajorSchoolInfo;
@@ -71,8 +72,7 @@ public class Profession_EstablishmentFragment extends BaseFragment {
     //**************
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private EstablishAdapter mAdapter;
-    public List<SchoolInfo> list_temp;
+    private SchoolMajorAdapter mAdapter;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo majorInfo;
@@ -215,28 +215,27 @@ public class Profession_EstablishmentFragment extends BaseFragment {
     }
 
     private void initAdapter() {
-        mAdapter = new EstablishAdapter(R.layout.establish_item,list_temp);
+        mAdapter = new SchoolMajorAdapter(R.layout.establish_item);
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 loadMore();
             }
         });
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
 //        mAdapter.setPreLoadNumber(3);
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(mActivity, "专业设置", Toast.LENGTH_SHORT).show();
+                List<MajorSchoolInfo> data = mAdapter.getData();
                 Intent intent=new Intent(getActivity(),CollegeActivity.class);
+                intent.putExtra("id",data.get(position).getId());
+                intent.putExtra("name",data.get(position).getName());
                 getActivity().startActivity(intent);
             }
         });
-
-
     }
-
     private void initRefreshLayout() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -249,22 +248,16 @@ public class Profession_EstablishmentFragment extends BaseFragment {
     private void refresh() {
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.majorSchoolList(apiConstant.MAJOR_SCHOOL_LIST, major_name,area,is_type, new RequestCallBack<String>() {
+        apiHome.majorSchoolList(apiConstant.MAJOR_SCHOOL_LIST,mNextRequestPage, major_name,area,is_type, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         customLoadingDialog.dismiss();
-                        Log.i("tag",s);
                         Gson gson=new Gson();
                         SchoolMajorBean schoolMajorBean = gson.fromJson(s, SchoolMajorBean.class);
-                        List<MajorSchoolInfo> universityList = schoolMajorBean.getData().getMajorSchoolList();
-                      /*  if (universityList.size()==0){
-                            swipeRefreshLayout.setVisibility(View.GONE);
-                            no_internet_rl.setVisibility(View.GONE);
-                            no_data_rl.setVisibility(View.VISIBLE);
-                        }*/
+                        List<MajorSchoolInfo> universityList = schoolMajorBean.getData().getInfo().getMajorSchoolList();
                         //数据不为空
                         if (universityList!=null && universityList.size()>0){
                             setData(true,universityList);
@@ -301,7 +294,7 @@ public class Profession_EstablishmentFragment extends BaseFragment {
     //加载
     private void loadMore() {
         mNextRequestPage++;
-        apiHome.majorSchoolList(apiConstant.MAJOR_SCHOOL_LIST, major_name,area,is_type, new RequestCallBack<String>() {
+        apiHome.majorSchoolList(apiConstant.MAJOR_SCHOOL_LIST,mNextRequestPage, major_name,area,is_type, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 getActivity().runOnUiThread(new Runnable() {
@@ -309,7 +302,7 @@ public class Profession_EstablishmentFragment extends BaseFragment {
                     public void run() {
                         Gson gson=new Gson();
                         SchoolMajorBean schoolMajorBean = gson.fromJson(s, SchoolMajorBean.class);
-                        List<MajorSchoolInfo> universityList = schoolMajorBean.getData().getMajorSchoolList();
+                        List<MajorSchoolInfo> universityList = schoolMajorBean.getData().getInfo().getMajorSchoolList();
                         //数据不为空
                         setData(false,universityList);
                         mAdapter.setEnableLoadMore(true);

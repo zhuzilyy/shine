@@ -65,17 +65,15 @@ public class HomeSearchActivity extends BaseActivity implements View.OnClickList
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     if(!TextUtils.isEmpty(v.getText())){
+                        boolean isFirst=false;
                         String keyWord=v.getText().toString().trim();
                         SPUtils.put(HomeSearchActivity.this,"keyWord",keyWord);
                         tab.setVisibility(View.VISIBLE);
                         viewPager.setVisibility(View.VISIBLE);
-                        SearchHomeCollegeFragment searchHomeCollegeFragment=new SearchHomeCollegeFragment();
-                        searchHomeCollegeFragment.setKeyWord(keyWord);
+                       /* SearchHomeCollegeFragment searchHomeCollegeFragment=new SearchHomeCollegeFragment();
+                        searchHomeCollegeFragment.setKeyWord(keyWord);*/
                         //查询数据，显示内容
-                        Intent intent=new Intent();
-                        sendBroadcast(intent);
-                        intent.putExtra("keyWord",v.getText().toString().trim());
-                        intent.setAction("com.action.search");
+
                     }
                 return false;
             }
