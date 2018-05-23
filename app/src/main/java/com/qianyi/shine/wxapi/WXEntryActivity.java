@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.qianyi.shine.api.apiConstant;
+import com.qianyi.shine.ui.account.activity.LoginActivity;
 import com.qianyi.shine.ui.account.bean.WXAccessTokenInfo;
 import com.qianyi.shine.ui.account.bean.WXErrorInfo;
 import com.qianyi.shine.utils.Utils;
@@ -178,6 +179,16 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
                     String nickname=jsonObject.getString("nickname");
                     int sex=jsonObject.getInt("sex");
                     String headimgurl=jsonObject.getString("headimgurl");
+
+                    Intent intent =new Intent(WXEntryActivity.this, LoginActivity.class);
+                    intent.putExtra("openid",openid);
+                    intent.putExtra("unionid",unionid);
+                    intent.putExtra("nickname",nickname);
+                    intent.putExtra("sex",sex);
+                    intent.putExtra("headimgurl",headimgurl);
+
+                    startActivity(intent);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -50,6 +50,59 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+       Intent intent= getIntent();
+       if(intent!=null){
+          String openid= intent.getStringExtra("openid");
+           String unionid= intent.getStringExtra("unionid");
+           String nickname= intent.getStringExtra("nickname");
+           String sex= intent.getStringExtra("sex");
+           String headimgurl= intent.getStringExtra("headimgurl");
+           if(TextUtils.isEmpty(openid)){
+               return;
+           }
+           if(TextUtils.isEmpty(unionid)){
+               return;
+           }
+           if(TextUtils.isEmpty(nickname)){
+               return;
+           }
+           if(TextUtils.isEmpty(sex)){
+               return;
+           }
+           if(TextUtils.isEmpty(headimgurl)){
+               return;
+           }
+
+            final CustomLoadingDialog loadingDialog =new CustomLoadingDialog(LoginActivity.this);
+           loadingDialog.show();
+
+            apiAccount.weixin_login(apiConstant.WEIXIN_LOGIN, openid, unionid, sex, headimgurl, nickname, new RequestCallBack<String>() {
+                @Override
+                public void onSuccess(Call call, Response response, String s) {
+                    loadingDialog.dismiss();
+                    Log.i("ddd",s);
+                }
+
+                @Override
+                public void onEror(Call call, int statusCode, Exception e) {
+                    loadingDialog.dismiss();
+                    Log.i("ddd",e.getMessage());
+                }
+            });
+
+
+
+
+       }
+
+
+
+    }
+
+    @Override
     protected void getResLayout() {
         setContentView(R.layout.activity_login);
     }
