@@ -85,7 +85,7 @@ public class Profession_ProspectsFragment extends BaseFragment {
 
         //折线图(毕业生平均月薪)
         setLineChart(mLineChart);
-        loadLineChartData(mLineChart);
+        loadLineChartData(mLineChart,majorInfo);
         //饼图--就业方向
         setPieChart(chat01,"就业方向");
         loadPieIndChartData(chat01);
@@ -271,7 +271,7 @@ public class Profession_ProspectsFragment extends BaseFragment {
      */
     private void setLineChart(LineChart chart) {
 
-        chart.setDescription("Glan");
+        chart.setDescription("");
         chart.setDrawGridBackground(false);//设置网格背景
         chart.setScaleEnabled(false);//设置缩放
         chart.setDoubleTapToZoomEnabled(false);//设置双击不进行缩放
@@ -282,6 +282,8 @@ public class Profession_ProspectsFragment extends BaseFragment {
 //      xAxis.setTypeface(mTf);//设置字体
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(true);
+        //x轴不要间隔显示
+        xAxis.setAdjustXLabels(false);
 
         //获得左侧侧坐标轴
         YAxis leftAxis = chart.getAxisLeft();
@@ -301,61 +303,58 @@ public class Profession_ProspectsFragment extends BaseFragment {
     /**
      * 为折线图设置数据
      * @param chart
+     * @param majorInfo
      */
-    private void loadLineChartData(LineChart chart){
+    private void loadLineChartData(LineChart chart, ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo majorInfo){
         //所有线的List
         ArrayList<LineDataSet> allLinesList = new ArrayList<LineDataSet>();
 
         ArrayList<Entry> entryList1 = new ArrayList<Entry>();
         ArrayList<Entry> entryList2 = new ArrayList<Entry>();
-        for(int i=0;i<12;i++){
+        for(int i=0;i<majorInfo.getMajor_salary_year_list().size();i++){
             //Entry(yValue,xIndex);一个Entry表示一个点，第一个参数为y值，第二个为X轴List的角标
-            entryList1.add(new Entry((int)(Math.random()*65)+40,i));
+            entryList1.add(new Entry((int)(Float.parseFloat(majorInfo.getMajor_salary_year_list().get(i).getSalary())),i));
         }
-        for(int i=0;i<12;i++){
+        for(int i=0;i<majorInfo.getMajor_salary_year_list().size();i++){
             //Entry(yValue,xIndex);一个Entry表示一个点，第一个参数为y值，第二个为X轴List的角标
-            entryList2.add(new Entry((int)(Math.random()*3)+10,i));
+            entryList2.add(new Entry((int)(Float.parseFloat(majorInfo.getGeneral_salary_year_list().get(i).getSalary())),i));
         }
 
 
         //LineDataSet可以看做是一条线
-        LineDataSet dataSet1 = new LineDataSet(entryList1,"dataLine1");
+        LineDataSet dataSet1 = new LineDataSet(entryList1,"本专业月薪线");
         dataSet1.setLineWidth(2.5f);
         dataSet1.setCircleSize(4.5f);
-        dataSet1.setHighLightColor(Color.RED);//设置点击某个点时，横竖两条线的颜色
-        dataSet1.setDrawValues(false);//是否在点上绘制Value
 
-        LineDataSet dataSet2 = new LineDataSet(entryList2,"dataLine2");
+        dataSet1.setHighLightColor(Color.BLACK);//设置点击某个点时，横竖两条线的颜色
+        dataSet1.setColor(R.color.red);
+        dataSet1.setCircleColor(R.color.red);
+        dataSet1.setDrawValues(true);//是否在点上绘制Value
+
+        LineDataSet dataSet2 = new LineDataSet(entryList2,"全部专业月薪线");
         dataSet1.setLineWidth(2.5f);
         dataSet1.setCircleSize(4.5f);
         dataSet1.setHighLightColor(Color.GREEN);//设置点击某个点时，横竖两条线的颜色
-        dataSet1.setDrawValues(false);//是否在点上绘制Value
+        dataSet1.setDrawValues(true);//是否在点上绘制Value
 
         allLinesList.add(dataSet1);
         allLinesList.add(dataSet2);
 
         //LineData表示一个LineChart的所有数据(即一个LineChart中所有折线的数据)
-        LineData mChartData = new LineData(getXAxisShowLable(),allLinesList);
+        LineData mChartData = new LineData(getXAxisShowLable(majorInfo),allLinesList);
 
         // set data
         chart.setData((LineData) mChartData);
         chart.animateX(1500);//设置动画
     }
     //提供x轴数据
-    private ArrayList<String> getXAxisShowLable() {
+    private ArrayList<String> getXAxisShowLable(ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo majorInfo) {
         ArrayList<String> m = new ArrayList<String>();
-        m.add("Jan");
-        m.add("Feb");
-        m.add("Mar");
-        m.add("Apr");
-        m.add("May");
-        m.add("Jun");
-        m.add("Jul");
-        m.add("Aug");
-        m.add("Sep");
-        m.add("Okt");
-        m.add("Nov");
-        m.add("Dec");
+        for (int i = 0; i < majorInfo.getMajor_salary_year_list().size(); i++) {
+            m.add(i+"年");
+
+        }
+
         return m;
     }
 //**************折线统计图结束*******************************************
