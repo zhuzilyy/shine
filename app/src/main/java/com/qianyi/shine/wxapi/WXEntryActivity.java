@@ -180,14 +180,7 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
                     int sex=jsonObject.getInt("sex");
                     String headimgurl=jsonObject.getString("headimgurl");
 
-                    Intent intent =new Intent(WXEntryActivity.this, LoginActivity.class);
-                    intent.putExtra("openid",openid);
-                    intent.putExtra("unionid",unionid);
-                    intent.putExtra("nickname",nickname);
-                    intent.putExtra("sex",sex);
-                    intent.putExtra("headimgurl",headimgurl);
 
-                    startActivity(intent);
 
 
                 } catch (JSONException e) {
