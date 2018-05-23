@@ -5,20 +5,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qianyi.shine.R;
-import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.ui.college.entivity.CollegeScoreBean;
-
-import java.util.List;
 
 /**
  * Created by Administrator on 2018/4/4.
  */
 
-public class ScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
+public class ScoreAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     private Context mContext;
     private CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.AllRecord allRecord;//数据
 
@@ -29,14 +25,14 @@ public class ScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     }
 
-    private ScoreAdapter.OnRecyclerViewItemClickListener mOnItemClickListener = null;
+    private ScoreAdapter2.OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public void setOnItemClickListener(ScoreAdapter.OnRecyclerViewItemClickListener listener) {
+    public void setOnItemClickListener(ScoreAdapter2.OnRecyclerViewItemClickListener listener) {
         mOnItemClickListener = listener;
     }
 
     //适配器初始化
-    public ScoreAdapter(Context context,CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.AllRecord allRecord) {
+    public ScoreAdapter2(Context context, CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.AllRecord allRecord) {
         mContext = context;
         this.allRecord = allRecord;
     }
@@ -58,7 +54,7 @@ public class ScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             View view = LayoutInflater.from(mContext
             ).inflate(R.layout.lay_score_item, parent,
                     false);//这个布局就是一个imageview用来显示图片
-            ScoreAdapter.MyViewHolder holder = new ScoreAdapter.MyViewHolder(view);
+            ScoreAdapter2.MyViewHolder holder = new ScoreAdapter2.MyViewHolder(view);
 
 
 
@@ -70,7 +66,7 @@ public class ScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //将数据与item视图进行绑定，如果是MyViewHolder就加载网络图片，如果是MyViewHolder2就显示页数
-        if (holder instanceof ScoreAdapter.MyViewHolder) {
+        if (holder instanceof ScoreAdapter2.MyViewHolder) {
 
             if(0==position){
                 //2017

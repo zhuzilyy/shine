@@ -87,13 +87,13 @@ public class PriorityCollegeDetailsActivity extends BaseActivity implements View
 
         //招生分数线列表
         rv_list.setLayoutManager(new LinearLayoutManager(PriorityCollegeDetailsActivity.this));
-        moneyAdapter=new ScoreAdapter(PriorityCollegeDetailsActivity.this,list);
-        rv_list.setAdapter(moneyAdapter);
+//        moneyAdapter=new ScoreAdapter(PriorityCollegeDetailsActivity.this,list);
+//        rv_list.setAdapter(moneyAdapter);
 
         //专业招生计划及历年数据列表
         rv_plan.setLayoutManager(new LinearLayoutManager(PriorityCollegeDetailsActivity.this));
-        planAndDataAdapter=new PlanAndDataAdapter(PriorityCollegeDetailsActivity.this,list);
-        rv_plan.setAdapter(planAndDataAdapter);
+//        planAndDataAdapter=new PlanAndDataAdapter(PriorityCollegeDetailsActivity.this,list);
+//        rv_plan.setAdapter(planAndDataAdapter);
     }
 
     @Override

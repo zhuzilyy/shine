@@ -256,4 +256,70 @@ public class apiHome {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //大学详情里分数线
+    public static void collegeScroe(String url,String memberId,String id, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",memberId);
+        params.put("id",id);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

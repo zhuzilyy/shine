@@ -235,8 +235,10 @@ public class MoreCollegeActivity extends BaseActivity {
         recyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                List<SchoolInfo> universityList = mAdapter.getData();
                 Toast.makeText(MoreCollegeActivity.this, "专业设置", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(MoreCollegeActivity.this,CollegeActivity.class);
+                intent.putExtra("id",universityList.get(position).getId());
                 MoreCollegeActivity.this.startActivity(intent);
             }
         });
@@ -281,6 +283,10 @@ public class MoreCollegeActivity extends BaseActivity {
                         }
                         mAdapter.setEnableLoadMore(true);
                         swipeRefreshLayout.setRefreshing(false);
+
+
+
+
                     }
                 });
             }

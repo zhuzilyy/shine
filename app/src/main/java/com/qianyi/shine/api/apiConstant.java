@@ -203,6 +203,8 @@ public class apiConstant {
     //********************************
     //专业优先填报
     public static String PRIOR_MAJOR= BASE_URL+"prior_major";
+    //大学详情里的分数线
+    public static String COLLEGE_SCORE= BASE_URL+"university_scoreline";
 
 
 

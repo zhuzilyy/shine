@@ -82,7 +82,8 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
     public TextView tv_tag;
     @BindView(R.id.back)
     public ImageView back;
-    private String collegeId,universityName,memberId;
+    private String universityName,memberId;
+    public static String  collegeId;
     //==================================================
     @BindView(R.id.college_logo) public RoundedImageView college_logo;
     @BindView(R.id.collegeName) public TextView collegeName;
@@ -137,6 +138,7 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
                                     CollegeDetailsBean.CollegeDetailsData.CollegeDetailsInfo detailsInfo = detailsData.getInfo();
                                     if(detailsInfo!=null){
                                         //赋值界面数据
+
                                         String wmzyId=detailsInfo.getWmzy_school_id();
                                         String is_211 = detailsInfo.getIs_211();
                                         String is_985 = detailsInfo.getIs_985();
@@ -159,6 +161,7 @@ public class CollegeActivity extends BaseActivity implements View.OnClickListene
                                         Intent intent=new Intent();
                                         intent.setAction("com.action.introduce.success");
                                         sendBroadcast(intent);
+
                                     }
                                 }
                             }

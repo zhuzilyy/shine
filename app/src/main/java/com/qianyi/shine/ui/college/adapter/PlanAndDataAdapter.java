@@ -6,9 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.chad.library.adapter.base.util.TouchEventUtil;
 import com.qianyi.shine.R;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
+import com.qianyi.shine.ui.college.entivity.CollegeScoreBean;
 
 import java.util.List;
 
@@ -18,7 +21,7 @@ import java.util.List;
 
 public class PlanAndDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     private Context mContext;
-    private List<CollegeEntity> datas;//数据
+    private List<CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.MajorRecord> datas;//数据
 
     //自定义监听事件
     public static interface OnRecyclerViewItemClickListener {
@@ -34,7 +37,7 @@ public class PlanAndDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     //适配器初始化
-    public PlanAndDataAdapter(Context context, List<CollegeEntity> datas) {
+    public PlanAndDataAdapter(Context context, List<CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.MajorRecord> datas) {
         mContext = context;
         this.datas = datas;
     }
@@ -70,15 +73,36 @@ public class PlanAndDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         //将数据与item视图进行绑定，如果是MyViewHolder就加载网络图片，如果是MyViewHolder2就显示页数
         if (holder instanceof PlanAndDataAdapter.MyViewHolder) {
 
+            CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.MajorRecord record=datas.get(position);
+            ((MyViewHolder) holder).tv_title.setText(record.getMajor_name());
+            ((MyViewHolder) holder).tv_renshu.setText(record.getRecord_2017().getReshu());
+            //2015
+            ((MyViewHolder) holder).tv_2015score.setText(record.getRecord_2015().getReshu());
+            ((MyViewHolder) holder).tv_2015di.setText(record.getRecord_2015().getDifen());
+            ((MyViewHolder) holder).tv_2015gao.setText(record.getRecord_2015().getGaofen());
+
+            //2016
+            ((MyViewHolder) holder).tv_2016score.setText(record.getRecord_2016().getReshu());
+            ((MyViewHolder) holder).tv_2016di.setText(record.getRecord_2016().getDifen());
+            ((MyViewHolder) holder).tv_2016gao.setText(record.getRecord_2016().getGaofen());
+
+            //2017
+            ((MyViewHolder) holder).tv_2017score.setText(record.getRecord_2017().getReshu());
+            ((MyViewHolder) holder).tv_2017di.setText(record.getRecord_2017().getDifen());
+            ((MyViewHolder) holder).tv_2017gao.setText(record.getRecord_2017().getGaofen());
+
+
+
+
             // Picasso.with(mContext).load(datas.get(position).getUrl()).into(((MyViewHolder) holder).iv);//加载网络图片
             if(mOnItemClickListener!=null){
-                ((PlanAndDataAdapter.MyViewHolder) holder).pic_item.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //把条目的位置回调回去
-                        mOnItemClickListener.onItemClick(position);
-                    }
-                });
+//                ((PlanAndDataAdapter.MyViewHolder) holder).pic_item.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        //把条目的位置回调回去
+//                        mOnItemClickListener.onItemClick(position);
+//                    }
+//                });
             }
 
         }
@@ -96,13 +120,40 @@ public class PlanAndDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     //自定义ViewHolder，用于加载图片
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private ImageView pic_item;
+        private TextView tv_title;
+        private TextView tv_renshu;
+
+        private TextView tv_2015score;
+        private TextView tv_2015di;
+        private TextView tv_2015gao;
+
+        private TextView tv_2016score;
+        private TextView tv_2016di;
+        private TextView tv_2016gao;
+
+        private TextView tv_2017score;
+        private TextView tv_2017di;
+        private TextView tv_2017gao;
+
 
 
 
         public MyViewHolder(View view) {
             super(view);
-            pic_item = view.findViewById(R.id.pic_item);
+            tv_title = view.findViewById(R.id.tv_title);
+            tv_renshu = view.findViewById(R.id.tv_renshu);
+
+            tv_2015score=view.findViewById(R.id.tv_2015score);
+            tv_2015di=view.findViewById(R.id.tv_2015di);
+            tv_2015gao=view.findViewById(R.id.tv_2015gao);
+
+            tv_2016score=view.findViewById(R.id.tv_2016score);
+            tv_2016di=view.findViewById(R.id.tv_2016di);
+            tv_2016gao=view.findViewById(R.id.tv_2016gao);
+
+            tv_2017score=view.findViewById(R.id.tv_2017score);
+            tv_2017di=view.findViewById(R.id.tv_2017di);
+            tv_2017gao=view.findViewById(R.id.tv_2017gao);
 
         }
     }

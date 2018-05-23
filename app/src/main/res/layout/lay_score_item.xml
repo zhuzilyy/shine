@@ -15,6 +15,7 @@
             android:background="@color/light_gray"
             />
         <TextView
+            android:id="@+id/tv_nian"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -29,6 +30,7 @@
             android:background="@color/light_gray"
             />
         <TextView
+            android:id="@+id/tv_rennshu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.8"
@@ -43,6 +45,7 @@
             android:background="@color/light_gray"
             />
         <TextView
+            android:id="@+id/tv_gao"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -57,6 +60,7 @@
             android:background="@color/light_gray"
             />
         <TextView
+            android:id="@+id/tv_di"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -71,6 +75,7 @@
             android:background="@color/light_gray"
             />
         <TextView
+            android:id="@+id/tv_xiancha"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.8"
@@ -85,6 +90,7 @@
             android:background="@color/light_gray"
             />
         <TextView
+            android:id="@+id/tv_zuidiweici"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
