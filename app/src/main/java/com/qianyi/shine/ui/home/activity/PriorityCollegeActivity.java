@@ -239,7 +239,11 @@ public class PriorityCollegeActivity extends BaseActivity {
         recyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                List<SchoolInfo> priorSchoolList  =mAdapter.getData();
                 Intent intent=new Intent(PriorityCollegeActivity.this,PriorityCollegeDetailsActivity.class);
+                intent.putExtra("collegeName",priorSchoolList.get(position).getName());
+                intent.putExtra("luqulv",priorSchoolList.get(position).getRate());
+                intent.putExtra("collegeid",priorSchoolList.get(position).getId());
                 startActivity(intent);
             }
         });

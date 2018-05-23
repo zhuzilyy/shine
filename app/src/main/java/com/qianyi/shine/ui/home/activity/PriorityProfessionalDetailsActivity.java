@@ -214,8 +214,11 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         recyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                List<ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo.ProfessionInfoList> infoLists=mAdapter.getData();
                 Intent intent = new Intent(PriorityProfessionalDetailsActivity.this, PriorityCollegeDetailsActivity.class);
+                intent.putExtra("collegeName",infoLists.get(position).getName());
+                intent.putExtra("luqulv",infoLists.get(position).getRecruit_students().getRecord_2017().getRate());
+                intent.putExtra("collegeid",infoLists.get(position).getId());
                 PriorityProfessionalDetailsActivity.this.startActivity(intent);
             }
         });

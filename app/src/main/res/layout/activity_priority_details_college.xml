@@ -52,7 +52,7 @@
                             android:id="@+id/tv_RiskRate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="23"
+                            android:text="*"
                             android:textSize="45sp"
                             android:textColor="@color/cicle_red"
                             />
@@ -86,7 +86,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="风险极大"
+                        android:text="****"
                         android:gravity="center"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_marginRight="@dimen/dp_10"
@@ -108,7 +108,7 @@
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="风险极大，建议填报冷门专业"
+                    android:text="报考志愿需谨慎"
                     android:textSize="12sp"
                     android:textColor="@color/white"
                     android:background="@drawable/shape_corner_red"
@@ -120,12 +120,13 @@
                     />
                 <!--2017年招生计划：33-->
                 <TextView
+                    android:id="@+id/tv_2017renshuplan"
                     android:layout_marginTop="@dimen/dp_10"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2017年招生计划：33"
+                    android:text="2017年招生计划：*"
                     />
 
             </LinearLayout>
@@ -188,12 +189,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="位次波动图"
+                    android:visibility="gone"
                     android:layout_marginBottom="@dimen/dp_10"
 
                     />
                 <!--折线图-->
                 <com.github.mikephil.charting.charts.LineChart
                     android:layout_marginLeft="@dimen/dp_10"
+                    android:visibility="gone"
                     android:layout_marginRight="@dimen/dp_10"
                     android:id="@+id/line_chart02"
                     android:layout_width="match_parent"
@@ -506,6 +509,7 @@
         android:orientation="horizontal"
         >
         <TextView
+            android:visibility="gone"
             android:id="@+id/addAtention_tv"
             android:layout_width="0dp"
             android:layout_height="40dp"
