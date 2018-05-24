@@ -36,10 +36,11 @@ public class ColorTemplate {
             Color.rgb(106, 150, 31), Color.rgb(179, 100, 53)
     };
     public static final int[] VORDIPLOM_COLORS = {
-            Color.rgb(192, 255, 140), Color.rgb(255, 247, 140), Color.rgb(255, 208, 140),
-            Color.rgb(140, 234, 255), Color.rgb(255, 140, 157),Color.rgb(146, 23, 209),
-            Color.rgb(23, 209, 89), Color.rgb(239, 84, 0),
-            Color.rgb(105, 176, 140), Color.rgb(251, 30, 207)
+            Color.rgb(227, 0, 12), Color.rgb(242, 142, 0), Color.rgb(255, 239, 0),
+            Color.rgb(134, 189, 24), Color.rgb(0, 144, 58),Color.rgb(0, 149, 140),
+            Color.rgb(0, 151, 230), Color.rgb(0, 93, 175),
+            Color.rgb(21, 24, 128), Color.rgb(130, 4, 121),
+            Color.rgb(225, 0, 115),Color.rgb(225, 0, 68)
     };
 
     // public static final int[] FRESH_COLORS = {
