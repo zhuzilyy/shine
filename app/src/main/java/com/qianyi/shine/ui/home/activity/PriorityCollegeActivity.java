@@ -80,6 +80,7 @@ public class PriorityCollegeActivity extends BaseActivity {
         Intent intent=getIntent();
         if (intent!=null){
             rate_type=intent.getStringExtra("risk");
+            area=intent.getStringExtra("area");
         }
         BaseActivity.addActivity(this);
         view_header=getLayoutInflater().inflate(R.layout.header_priority_college,null);
