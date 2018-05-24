@@ -1,7 +1,9 @@
 package com.qianyi.shine.fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -103,7 +105,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private TextView cityname,tv_chongCi,tv_baoShou,tv_wenTuo,tv_totalCount,tv_subjectType,tv_score,tv_level;
     private String province,memberId;
     private LinearLayout ll_chongci,ll_wentuo,ll_baoshou,ll_scoreInfo;
-    private CustomLoadingDialog customLoadingDialog;
+    private String headerScore,headerType,headerProvince;
+    private MyReceiver myReceiver;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_home = inflater.inflate(R.layout.fragment_home, null);
@@ -112,8 +115,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void initViews() {
+        setValue();
         Log.i("loc", sHA1(getActivity()));
-        customLoadingDialog=new CustomLoadingDialog(getActivity());
+        //customLoadingDialog=new CustomLoadingDialog(getActivity());
         //获取定位
         getCityName();
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
@@ -125,9 +129,21 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         //下拉刷新
         initRefreshLayout();
         mSwipeRefreshLayout.setRefreshing(true);
+
+        myReceiver=new MyReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.changeScore");
+        getActivity().registerReceiver(myReceiver,intentFilter);
+
+    }
+    private void setValue() {
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
         memberId= loginInfo.getId();
+        headerScore=loginInfo.getMember_scoreinfo().getScore();
+        headerProvince=loginInfo.getMember_scoreinfo().getProv();
+        headerType=loginInfo.getMember_scoreinfo().getType();
     }
+
     @Override
     protected void initData() {
         //获取保守稳妥冲刺的数据
@@ -197,12 +213,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         tv_subjectType = headView.findViewById(R.id.tv_subjectType);
         tv_score = headView.findViewById(R.id.tv_score);
         tv_level = headView.findViewById(R.id.tv_level);
-        String score= (String) SPUtils.get(getActivity(),"score","");
-        String type= (String) SPUtils.get(getActivity(),"type","");
-        String level= (String) SPUtils.get(getActivity(),"level","");
-        tv_subjectType.setText(score);
-        tv_score.setText(type);
-        tv_level.setText(level);
+        tv_subjectType.setText(headerType);
+        tv_score.setText(headerScore);
+        tv_level.setText(headerProvince);
 
 
         LinearLayout ll_findCollege = headView.findViewById(R.id.ll_findCollege);
@@ -595,6 +608,18 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             e.printStackTrace();
         }
         return null;
+    }
+    class MyReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("com.action.changeScore")){
+                setValue();
+                tv_subjectType.setText(headerType);
+                tv_score.setText(headerScore);
+                tv_level.setText(headerProvince);
+            }
+        }
     }
 }
 
