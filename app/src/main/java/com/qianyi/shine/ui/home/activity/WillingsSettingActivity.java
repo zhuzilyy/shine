@@ -99,7 +99,8 @@ public class WillingsSettingActivity extends BaseActivity {
     protected void setStatusBarColor() {
 
     }
-    @OnClick({R.id.iv_back,R.id.rl_collegeArea,R.id.rl_major,R.id.rl_occupation,R.id.btn_confirm})
+    @OnClick({R.id.iv_back,R.id.rl_collegeArea,R.id.rl_major,R.id.rl_occupation,R.id.btn_confirm,R.id.iv_areaDelete,
+    R.id.iv_majorDelete,R.id.iv_occupationDelete})
     public void click(View view){
         Intent intent=null;
         switch (view.getId()){
@@ -136,12 +137,25 @@ public class WillingsSettingActivity extends BaseActivity {
                 intent.putExtra("tag","willingSetting");
                 startActivityForResult(intent,3);
                 break;
+            case R.id.iv_areaDelete:
+                intention_area="";
+                tv_area.setText("点击选择");
+                break;
+            case R.id.iv_majorDelete:
+                intention_major="";
+                majorId="";
+                tv_majorName.setText("点击选择");
+                break;
+            case R.id.iv_occupationDelete:
+                intention_job="";
+                tv_occupationName.setText("点击选择");
+                break;
         }
     }
     //意愿设置
     private void setWillings(final int count) {
         customLoadingDialog.show();
-        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        final LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
         String memberId= loginInfo.getId();
         apiHome.willingSet(apiConstant.WILLING_SETTING, memberId, occupationParentName,majorId,intention_area, intention_major, intention_job, new RequestCallBack<String>() {
             @Override
