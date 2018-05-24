@@ -22,6 +22,7 @@ import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.fragment.adapter.GridAdapter;
 import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
+import com.qianyi.shine.ui.career_planning.activity.CollegeDetailsTextActivity;
 import com.qianyi.shine.ui.college.activity.BigImgActivity;
 import com.qianyi.shine.ui.college.activity.CollegePicBean;
 import com.qianyi.shine.ui.college.adapter.PicCollegeAdapter;
@@ -81,6 +82,9 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
     TextView reload;
     private MyReceiver myReceiver;
     @BindView(R.id.star) public Star star;
+    @BindView(R.id.tv_college_more) public TextView tv_college_more;
+    private String CollegeStr="";
+    private String CollegeNameStr="";
 
 
     @Override
@@ -124,7 +128,7 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
     protected void initListener() {
 
     }
-    @OnClick({R.id.Accommodation_re,R.id.Scholarship_re})
+    @OnClick({R.id.Accommodation_re,R.id.Scholarship_re,R.id.tv_college_more})
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -148,6 +152,13 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
                 intent_Acamy.putExtra("title","院系设置");
                 intent_Acamy.putExtra("url","http://www.baidu.com");
                 getActivity().startActivity(intent_Acamy);
+                break;
+            case R.id.tv_college_more:
+                Intent intent_collegeText= new Intent(getActivity(), CollegeDetailsTextActivity.class);
+                intent_collegeText.putExtra("title",CollegeNameStr);
+                intent_collegeText.putExtra("college_content",CollegeStr);
+
+                getActivity().startActivity(intent_collegeText);
                 break;
 
             default:
@@ -182,8 +193,10 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
         star.setMark(Float.parseFloat(info.getUniversity_satisfaction()));
         //学校名称
         tv_collegeName.setText(info.getName());
+        CollegeNameStr=info.getName();
         //学校简介
         tv_introduce.setText(info.getIntroduction());
+        CollegeStr=info.getIntroduction();
         //学校图片
         listCollege= getSchoolPic(info.getSchool_scenery());
         adapter=new PicCollegeAdapter(getActivity(),listCollege);
