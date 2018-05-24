@@ -67,7 +67,15 @@ public class LoginBean {
              public String weiboid;
              public String is_vip;
              public String vip_endtime;
+             public String member_scoreinfo_status;
              public MemberScoreInfo member_scoreinfo;
+            public String getMember_scoreinfo_status() {
+                return member_scoreinfo_status;
+            }
+
+            public void setMember_scoreinfo_status(String member_scoreinfo_status) {
+                this.member_scoreinfo_status = member_scoreinfo_status;
+            }
 
             public MemberScoreInfo getMember_scoreinfo() {
                 return member_scoreinfo;
@@ -245,6 +253,23 @@ public class LoginBean {
                 public String score;
                 public String rank;
                 public String create_time;
+                public String cate_two_name;
+                public String major_id;
+                public String getCate_two_name() {
+                    return cate_two_name;
+                }
+
+                public void setCate_two_name(String cate_two_name) {
+                    this.cate_two_name = cate_two_name;
+                }
+
+                public String getMajor_id() {
+                    return major_id;
+                }
+
+                public void setMajor_id(String major_id) {
+                    this.major_id = major_id;
+                }
 
                 public String getLevel() {
                     return level;

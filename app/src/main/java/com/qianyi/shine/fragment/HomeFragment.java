@@ -472,6 +472,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.rl_priorityCollege:
                 intent=new Intent(getActivity(), PriorityCollegeActivity.class);
                 intent.putExtra("risk","");
+                intent.putExtra("area","");
                 startActivity(intent);
                 break;
             //智能填报
@@ -490,11 +491,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.goto_college01:
                 intent = new Intent(getActivity(), PriorityCollegeActivity.class);
                 intent.putExtra("risk","2");
+                intent.putExtra("area","");
                 startActivity(intent);
                 break;
             case R.id.goto_college02:
                 intent = new Intent(getActivity(), PriorityCollegeActivity.class);
                 intent.putExtra("risk","");
+                intent.putExtra("area","");
                 startActivity(intent);
                 break;
             case R.id.homeSearch_ll:
@@ -507,16 +510,19 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.ll_chongci:
                 intent=new Intent(getActivity(),PriorityCollegeActivity.class);
                 intent.putExtra("risk","1");
+                intent.putExtra("area","");
                 startActivity(intent);
                 break;
             case R.id.ll_baoshou:
                 intent=new Intent(getActivity(),PriorityCollegeActivity.class);
                 intent.putExtra("risk","2");
+                intent.putExtra("area","");
                 startActivity(intent);
                 break;
             case R.id.ll_wentuo:
                 intent=new Intent(getActivity(),PriorityCollegeActivity.class);
                 intent.putExtra("risk","3");
+                intent.putExtra("area","");
                 startActivity(intent);
                 break;
             case R.id.ll_scoreInfo:

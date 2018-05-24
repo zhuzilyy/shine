@@ -88,9 +88,8 @@ public class MineFragment extends BaseFragment {
     private void setValues() {
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
         String avatar = loginInfo.getAvatar();
-        Log.i("ava","========我的头像"+avatar);
+        Log.i("tag",avatar);
         Glide.with(getActivity()).load(avatar).into(mine_head);
-
     }
     @Override
     protected void initData() {

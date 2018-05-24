@@ -26,6 +26,7 @@ import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.activity.GuessScoreActivity;
 import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.activity.CollegeActivity;
+import com.qianyi.shine.ui.college.activity.ProfessionalActivity;
 import com.qianyi.shine.ui.home.adapter.IntellgenceFillAdapter;
 import com.qianyi.shine.ui.home.bean.IntellgenceFillBean;
 import com.qianyi.shine.ui.home.bean.SchoolInfo;
@@ -65,9 +66,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     //=========意愿设置========================
-    private  String area;
-    private  String majorName;
-    private  String occupationName,memberId;
+    private  String cccupationName,memberId,occupationParentName;
     private TextView tv_collegeData,tv_willings;
     private View view_header;
     @BindView(R.id.tv_collegeData)
@@ -78,7 +77,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     LinearLayout ll_nodataCollegeData;
     private boolean isHasHeader;
     private CustomLoadingDialog customLoadingDialog;
-    private String intention_area,intention_job,intention_major;
+    private String intention_area,intention_job,intention_major,majorId;
     @Override
     protected void initViews() {
         customLoadingDialog=new CustomLoadingDialog(this);
@@ -170,6 +169,8 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
         intention_area = loginInfo.getMember_scoreinfo().getIntention_area();
         intention_job = loginInfo.getMember_scoreinfo().getIntention_job();
         intention_major = loginInfo.getMember_scoreinfo().getIntention_major();
+        majorId = loginInfo.getMember_scoreinfo().getMajor_id();
+        occupationParentName = loginInfo.getMember_scoreinfo().getCate_two_name();
         int count=0;
         if (!TextUtils.isEmpty(intention_area)){
             count++;
@@ -318,14 +319,25 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
                 if(!TextUtils.isEmpty(intention_area) && TextUtils.isEmpty(intention_job) && TextUtils.isEmpty(intention_major)){
                         //只设置了地区
                         Intent intent = new Intent(IntelligentFillCollegeActivity.this, PriorityCollegeActivity.class);
+                        intent.putExtra("risk","");
+                        intent.putExtra("area",intention_area);
                         startActivity(intent);
-                }else if(!TextUtils.isEmpty(intention_job) || !TextUtils.isEmpty(intention_major)){
-                    //设置了专业或职业
+                }else if(!TextUtils.isEmpty(intention_major) && TextUtils.isEmpty(intention_job) && TextUtils.isEmpty(intention_area)){
+                    //设置了专业
                     Intent intent = new Intent(IntelligentFillCollegeActivity.this, PriorityProfessionalDetailsActivity.class);
+                    intent.putExtra("major_id",majorId);
                     startActivity(intent);
-                }else if(TextUtils.isEmpty(intention_area) && TextUtils.isEmpty(intention_job) && TextUtils.isEmpty(intention_major)){
+                }else if(!TextUtils.isEmpty(intention_job) && TextUtils.isEmpty(intention_area) && TextUtils.isEmpty(intention_major)){
+                    Intent intent = new Intent(IntelligentFillCollegeActivity.this, OccupationDetailActivity.class);
+                    intent.putExtra("occupationName",intention_job);
+                    intent.putExtra("occupationParentName",occupationParentName);
+                    startActivity(intent);
+                }else if (!TextUtils.isEmpty(intention_job) || !TextUtils.isEmpty(intention_major)){
+                    Intent intent = new Intent(IntelligentFillCollegeActivity.this, PriorityProfessionalDetailsActivity.class);
+                    intent.putExtra("major_id",majorId);
+                    startActivity(intent);
+                }else{
                     Toast.makeText(this, "请先设置意愿", Toast.LENGTH_SHORT).show();
-                    return;
                 }
                 break;
 
@@ -336,10 +348,25 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data!=null){
-           int willingCount=data.getIntExtra("willing",0);
-           area=data.getStringExtra("area");
-           majorName=data.getStringExtra("majorName");
-           occupationName=data.getStringExtra("occupationName");
+            LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+            intention_area = loginInfo.getMember_scoreinfo().getIntention_area();
+            intention_job = loginInfo.getMember_scoreinfo().getIntention_job();
+            intention_major = loginInfo.getMember_scoreinfo().getIntention_major();
+            majorId = loginInfo.getMember_scoreinfo().getMajor_id();
+            occupationParentName = loginInfo.getMember_scoreinfo().getCate_two_name();
+        /*    majorId=data.getStringExtra("majorId");
+            cccupationName=data.getStringExtra("cccupationName");
+            occupationParentName=data.getStringExtra("occupationParentName");*/
+            int willingCount=0;
+            if (!TextUtils.isEmpty(intention_area)){
+                willingCount++;
+            }
+            if (!TextUtils.isEmpty(intention_job)){
+                willingCount++;
+            }
+            if (!TextUtils.isEmpty(intention_major)){
+                willingCount++;
+            }
             tv_willings.setText("已选"+willingCount+"项意愿");
         }
     }

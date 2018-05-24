@@ -166,7 +166,14 @@ public class SearchOccupationActivity extends BaseActivity {
                         //意愿设置里面的查专业
                         if (tag.equals("willingSetting")){
                             Intent intent=new Intent();
-                            intent.putExtra("cccupationName",node.getName());
+                            int level = node.getParent().getLevel();
+                            if (level==0){
+                                intent.putExtra("cccupationName",node.getName());
+                                intent.putExtra("occupationParentName",node.getName());
+                            }else if(level==1){
+                                intent.putExtra("cccupationName",node.getName());
+                                intent.putExtra("occupationParentName",node.getParent().getName());
+                            }
                             setResult(3,intent);
                             finish();
                             //搜职业
