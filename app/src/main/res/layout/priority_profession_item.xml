@@ -297,7 +297,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="录取数"
+                    android:text="招生数"
                     android:textSize="12sp"
                     android:gravity="center"
                     />
@@ -343,7 +343,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="最低位"
+                    android:text="最低分"
                     android:textSize="12sp"
                     android:gravity="center"
                     />
@@ -389,7 +389,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="最高位"
+                    android:text="最高分"
                     android:textSize="12sp"
                     android:gravity="center"
                     />
