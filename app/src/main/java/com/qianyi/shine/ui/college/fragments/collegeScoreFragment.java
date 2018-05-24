@@ -219,28 +219,60 @@ public class collegeScoreFragment extends BaseFragment {
 //            //Entry(yValue,xIndex);一个Entry表示一个点，第一个参数为y值，第二个为X轴List的角标
 //            entryList2.add(new Entry((int)(Math.random()*3)+10,i));
 //        }
+
+
+        String m2015H=allRecord.getRecord_2015().getGaofen();
+        String m2016H=allRecord.getRecord_2016().getGaofen();
+        String m2017H=allRecord.getRecord_2017().getGaofen();
+        if("--".equals(m2015H)){
+            m2015H="0";
+        }
+        if("--".equals(m2016H)){
+            m2016H="0";
+        }
+        if("--".equals(m2017H)){
+            m2017H="0";
+        }
+
+
+        String m2015L=allRecord.getRecord_2015().getDifen();
+        String m2016L=allRecord.getRecord_2016().getDifen();
+        String m2017L=allRecord.getRecord_2017().getDifen();
+        if("--".equals(m2015L)){
+            m2015L="0";
+        }
+        if("--".equals(m2016L)){
+            m2016L="0";
+        }
+        if("--".equals(m2017L)){
+            m2017L="0";
+        }
+
+
         //高分线
-        entryList1.add(new Entry((int)(Integer.parseInt(allRecord.getRecord_2015().getGaofen())),0));
-        entryList1.add(new Entry((int)(Integer.parseInt(allRecord.getRecord_2016().getGaofen())),1));
-        entryList1.add(new Entry((int)(Integer.parseInt(allRecord.getRecord_2017().getGaofen())),2));
+        entryList1.add(new Entry((Integer.parseInt(m2015H)),0));
+        entryList1.add(new Entry((Integer.parseInt(m2016H)),1));
+        entryList1.add(new Entry((Integer.parseInt(m2017H)),2));
         //低分线
-        entryList2.add(new Entry((int)(Integer.parseInt(allRecord.getRecord_2015().getDifen())),0));
-        entryList2.add(new Entry((int)(Integer.parseInt(allRecord.getRecord_2016().getDifen())),1));
-        entryList2.add(new Entry((int)(Integer.parseInt(allRecord.getRecord_2017().getDifen())),2));
+        entryList2.add(new Entry((Integer.parseInt(m2015L)),0));
+        entryList2.add(new Entry((Integer.parseInt(m2016L)),1));
+        entryList2.add(new Entry((Integer.parseInt(m2017L)),2));
 
 
         //LineDataSet可以看做是一条线
         LineDataSet dataSet1 = new LineDataSet(entryList1,"最高分");
         dataSet1.setLineWidth(2.5f);
         dataSet1.setCircleSize(4.5f);
+        dataSet1.setCircleColor(R.color.yellow);
+        dataSet1.setColor(R.color.yellow);
         dataSet1.setHighLightColor(Color.RED);//设置点击某个点时，横竖两条线的颜色
         dataSet1.setDrawValues(true);//是否在点上绘制Value
 
         LineDataSet dataSet2 = new LineDataSet(entryList2,"最低分");
-        dataSet1.setLineWidth(2.5f);
-        dataSet1.setCircleSize(4.5f);
-        dataSet1.setHighLightColor(Color.GREEN);//设置点击某个点时，横竖两条线的颜色
-        dataSet1.setDrawValues(true);//是否在点上绘制Value
+        dataSet2.setLineWidth(2.5f);
+        dataSet2.setCircleSize(4.5f);
+        dataSet2.setHighLightColor(Color.GREEN);//设置点击某个点时，横竖两条线的颜色
+        dataSet2.setDrawValues(true);//是否在点上绘制Value
 
         allLinesList.add(dataSet1);
         allLinesList.add(dataSet2);

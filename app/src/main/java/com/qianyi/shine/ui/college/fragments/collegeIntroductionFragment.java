@@ -190,7 +190,8 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
         //批次
         tv_collegePici.setText(info.getLevel());
         //推荐指数
-        star.setMark(Float.parseFloat(info.getUniversity_satisfaction()));
+        String ss =info.getUniversity_satisfaction();
+        star.setMark(Float.parseFloat("--".equals(ss)?"0":ss));
         //学校名称
         tv_collegeName.setText(info.getName());
         CollegeNameStr=info.getName();
@@ -264,4 +265,12 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if(myReceiver!=null){
+            getActivity().unregisterReceiver(myReceiver);
+        }
+    }
 }
