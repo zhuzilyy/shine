@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,7 +88,9 @@ public class MineFragment extends BaseFragment {
     private void setValues() {
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
         String avatar = loginInfo.getAvatar();
+        Log.i("ava","========我的头像"+avatar);
         Glide.with(getActivity()).load(avatar).into(mine_head);
+
     }
     @Override
     protected void initData() {
