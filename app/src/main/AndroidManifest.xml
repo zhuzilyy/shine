@@ -181,6 +181,7 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.home.activity.OccupationDetailActivity"/>
+
         <!--院校优先填报-->
         <activity
             android:screenOrientation="portrait"
@@ -249,6 +250,13 @@
         <!--大学详情大图展示-->
         <activity android:name=".ui.college.activity.BigImgActivity"
             android:screenOrientation="portrait"/>
+
+        <!--显示大学更多-->
+        <activity android:name=".ui.career_planning.activity.CollegeDetailsTextActivity"
+            android:screenOrientation="portrait"
+            />
+
+
         <receiver android:name=".receiver.MyReceiver">
             <intent-filter>
                 <action android:name="com.action.search"/>

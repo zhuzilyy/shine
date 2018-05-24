@@ -170,6 +170,7 @@ public class MajorZhuanKeFragment extends BaseFragment {
                             intent=new Intent();
                             intent.setAction("com.action.setwilling");
                             intent.putExtra("majorName",node.getName());
+                            intent.putExtra("majorId",node.getId()+"");
                             getActivity().sendBroadcast(intent);
                             //专业优先跳转的界面  或是
                         }else if(tag.equals("majorPriority") ){

@@ -100,12 +100,15 @@ public class apiHome {
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
     //意愿设置
-    public static void willingSet(String url,String member_id,String intention_area,String intention_major,String intention_job,RequestCallBack<String> callback){
+
+    public static void willingSet(String url,String member_id,String cate_two_name,String major_id,String intention_area,String intention_major,String intention_job,RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
         params.put("member_id",member_id);
         params.put("intention_area",intention_area);
         params.put("intention_major",intention_major);
         params.put("intention_job",intention_job);
+        params.put("cate_two_name",cate_two_name);
+        params.put("major_id",major_id);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
     //智能填报

@@ -22,6 +22,7 @@ public class WebviewUtil {
 					String url) {
 				//view.loadUrl(url);
 				return false;
+
 			}
 	       });
 	        webView.setOnKeyListener(new OnKeyListener() {

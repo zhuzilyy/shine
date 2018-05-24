@@ -41,7 +41,7 @@ public class WillingsSettingActivity extends BaseActivity {
     @BindView(R.id.tv_occupationName)
     TextView tv_occupationName;
     private MyReceiver myReceiver;
-    private String majorName="",area="",occupationName="";
+    private String intention_area="",intention_job="",intention_major="",majorId="",occupationParentName="";
     CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
@@ -56,9 +56,11 @@ public class WillingsSettingActivity extends BaseActivity {
         //读取已经设置的意愿
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
         LoginBean.LoginData.LoginInfo.MemberScoreInfo member_scoreinfo = loginInfo.getMember_scoreinfo();
-        String intention_area = member_scoreinfo.getIntention_area();
-        String intention_job = member_scoreinfo.getIntention_job();
-        String intention_major = member_scoreinfo.getIntention_major();
+        intention_area = member_scoreinfo.getIntention_area();
+        intention_job = member_scoreinfo.getIntention_job();
+        intention_major = member_scoreinfo.getIntention_major();
+        majorId = member_scoreinfo.getMajor_id();
+        occupationParentName = member_scoreinfo.getCate_two_name();
         if (TextUtils.isEmpty(intention_area)){
             tv_area.setText("点击选择");
         }else{
@@ -97,19 +99,20 @@ public class WillingsSettingActivity extends BaseActivity {
     protected void setStatusBarColor() {
 
     }
-    @OnClick({R.id.iv_back,R.id.rl_collegeArea,R.id.rl_major,R.id.rl_occupation,R.id.btn_confirm})
+    @OnClick({R.id.iv_back,R.id.rl_collegeArea,R.id.rl_major,R.id.rl_occupation,R.id.btn_confirm,R.id.iv_areaDelete,
+    R.id.iv_majorDelete,R.id.iv_occupationDelete})
     public void click(View view){
         Intent intent=null;
         switch (view.getId()){
             case R.id.btn_confirm:
                 int count=0;
-                if (!TextUtils.isEmpty(area)){
+                if (!TextUtils.isEmpty(intention_area)){
                     count++;
                 }
-                if (!TextUtils.isEmpty(majorName)){
+                if (!TextUtils.isEmpty(intention_job)){
                     count++;
                 }
-                if (!TextUtils.isEmpty(occupationName)){
+                if (!TextUtils.isEmpty(intention_major)){
                     count++;
                 }
                 if (count==0){
@@ -134,14 +137,27 @@ public class WillingsSettingActivity extends BaseActivity {
                 intent.putExtra("tag","willingSetting");
                 startActivityForResult(intent,3);
                 break;
+            case R.id.iv_areaDelete:
+                intention_area="";
+                tv_area.setText("点击选择");
+                break;
+            case R.id.iv_majorDelete:
+                intention_major="";
+                majorId="";
+                tv_majorName.setText("点击选择");
+                break;
+            case R.id.iv_occupationDelete:
+                intention_job="";
+                tv_occupationName.setText("点击选择");
+                break;
         }
     }
     //意愿设置
     private void setWillings(final int count) {
         customLoadingDialog.show();
-        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        final LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
         String memberId= loginInfo.getId();
-        apiHome.willingSet(apiConstant.WILLING_SETTING, memberId, area, majorName, occupationName, new RequestCallBack<String>() {
+        apiHome.willingSet(apiConstant.WILLING_SETTING, memberId, occupationParentName,majorId,intention_area, intention_major, intention_job, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 customLoadingDialog.dismiss();
@@ -159,9 +175,10 @@ public class WillingsSettingActivity extends BaseActivity {
                                     Utils.saveUser(user,WillingsSettingActivity.this);
                                     Intent intent=new Intent();
                                     intent.putExtra("willing",count);
-                                    intent.putExtra("area",area);
-                                    intent.putExtra("majorName",majorName);
-                                    intent.putExtra("occupationName",occupationName);
+                                    intent.putExtra("area",intention_area);
+                                    intent.putExtra("majorName",intention_major);
+                                    intent.putExtra("occupationName",intention_job);
+                                    intent.putExtra("majorId",majorId);
                                     setResult(1,intent);
                                     finish();
                                 }catch (Exception e){
@@ -187,12 +204,13 @@ public class WillingsSettingActivity extends BaseActivity {
         if (data!=null){
             switch (requestCode){
                 case 1:
-                    area=data.getStringExtra("area");
-                    tv_area.setText(area);
+                    intention_area=data.getStringExtra("area");
+                    tv_area.setText(intention_area);
                     break;
                 case 3:
-                    occupationName=data.getStringExtra("cccupationName");
-                    tv_occupationName.setText(occupationName);
+                    intention_job=data.getStringExtra("cccupationName");
+                    occupationParentName=data.getStringExtra("occupationParentName");
+                    tv_occupationName.setText(intention_job);
                     break;
             }
         }
@@ -202,8 +220,9 @@ public class WillingsSettingActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals("com.action.setwilling")){
-                majorName=intent.getStringExtra("majorName");
-                tv_majorName.setText(majorName);
+                intention_major=intent.getStringExtra("majorName");
+                majorId=intent.getStringExtra("majorId");
+                tv_majorName.setText(intention_major);
             }
         }
     }

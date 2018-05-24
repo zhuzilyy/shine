@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center"
-                android:text="点击进入保守界面"
+                android:text="适合你的大学"
                 android:textColor="@color/white" />
             <TextView
                 android:id="@+id/suitCount"
