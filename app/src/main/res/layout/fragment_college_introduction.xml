@@ -191,18 +191,38 @@
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_introduce"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_marginBottom="@dimen/dp_10"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:text="分离式结构付款完工文件金佛老司机佛飞机哦搜集佛金佛寺金佛废旧塑料金佛飞机哦搜集佛斐林试剂大佛金佛寺金佛 飞机哦我【牌就佛教否欧文IE富哦我我飞机哦我奇偶发我就偶尔菲姐金佛危机而非金佛我就"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp" />
+                    >
+                    <TextView
+                        android:id="@+id/tv_introduce"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:paddingLeft="@dimen/dp_10"
+                        android:maxLines="5"
+                        android:ellipsize="end"
+                        android:text="分离式结构付款完工文件金佛老司机佛飞机哦搜集佛金佛寺金佛废旧塑料金佛飞机哦搜集佛斐林试剂大佛金佛寺金佛 飞机哦我【牌就佛教否欧文IE富哦我我飞机哦我奇偶发我就偶尔菲姐金佛危机而非金佛我就"
+                        android:textColor="@color/gray"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tv_college_more"
+                        android:background="@drawable/shape_corner_stroke_blue"
+                        android:layout_width="150dp"
+                        android:gravity="center"
+                        android:layout_height="40dp"
+                        android:text="查看更多"
+                        />
+
+
+                </LinearLayout>
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"
