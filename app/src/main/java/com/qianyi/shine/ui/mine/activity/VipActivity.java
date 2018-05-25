@@ -205,8 +205,8 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
                     if(vipCongData!=null){
                         VipCongBean.VipCongData.VipCongInfo vipCongInfo = vipCongData.getInfo();
                         if(vipCongInfo!=null){
-                            vipMoney = vipCongInfo.getLimit();
-                            vipLimit = vipCongInfo.getMoney();
+                            vipMoney = vipCongInfo.getMoney();
+                            vipLimit = vipCongInfo.getLimit();
                             if(!TextUtils.isEmpty(vipMoney)){
                                 showPopWindow(vipMoney);
                             }
