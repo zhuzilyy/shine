@@ -161,6 +161,7 @@ public class GuessScoreActivity extends BaseActivity {
         apiAccount.Launch(apiConstant.LAUNCH,id, type, prov, myScore, myRank, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, String s) {
+                Log.i("tag",s);
                 loadingDialog.dismiss();
                 Gson gson = new Gson();
                 LoginBean loginBean = gson.fromJson(s, LoginBean.class);

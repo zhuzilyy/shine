@@ -61,7 +61,7 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
     private String vipLimit;
     private TextView tv_vipMoney;
     private TextView tv_totalMoney;
-
+    private TextView tv_timeLimit;
 
     @Override
     protected void initViews() {
@@ -76,6 +76,7 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
 
         tv_vipMoney = view_buyVip.findViewById(R.id.tv_vipMoney);
         tv_totalMoney=view_buyVip.findViewById(R.id.tv_totalMoney);
+        tv_timeLimit=view_buyVip.findViewById(R.id.tv_timeLimit);
         tv_gotoPay=view_payMethod.findViewById(R.id.tv_gotoPay);
         tv_gotoPay.setOnClickListener(this);
         //选择方式
@@ -232,6 +233,7 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
         pw_buyVip.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
         tv_vipMoney.setText("￥"+vipMoney);
         tv_totalMoney.setText("￥"+vipMoney);
+        tv_timeLimit.setText(vipLimit);
         pw_buyVip.setTouchable(true);
         pw_buyVip.setFocusable(true);
         pw_buyVip.setBackgroundDrawable(new BitmapDrawable());

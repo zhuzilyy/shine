@@ -60,6 +60,7 @@
             android:textCursorDrawable="@null"
             />
         <Button
+            android:id="@+id/btn_getConfirmCode"
             android:textSize="15sp"
             android:textColor="@color/white"
             android:background="@drawable/bg_login"

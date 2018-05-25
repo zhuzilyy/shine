@@ -170,14 +170,11 @@ public class FindPwdActiviy extends BaseActivity {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 loadingDialog.dismiss();
             }
         });
-
-
 
     }
 }
