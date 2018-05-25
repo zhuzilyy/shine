@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -26,6 +27,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -43,7 +45,7 @@ public class GaoKaoNewsActivity extends BaseActivity {
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     @BindView(R.id.title)
-    public XTitleView titleView;
+    TextView titleView;
 
     @Override
     protected void initViews() {
@@ -56,6 +58,7 @@ public class GaoKaoNewsActivity extends BaseActivity {
         initRefreshLayout();
         mSwipeRefreshLayout.setRefreshing(true);
         refresh();
+        titleView.setText("高考头条");
     }
 
     @Override
@@ -71,12 +74,6 @@ public class GaoKaoNewsActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-        titleView.setBackListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(final BaseQuickAdapter adapter, final View view, final int position) {
@@ -227,6 +224,14 @@ public class GaoKaoNewsActivity extends BaseActivity {
             mAdapter.loadMoreEnd(isRefresh);
         } else {
             mAdapter.loadMoreComplete();
+        }
+    }
+    @OnClick(R.id.iv_back)
+    public void click(View view){
+        switch (view.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
         }
     }
 }

@@ -68,11 +68,11 @@ public class MitBean {
 
             public class MitList {
                 public String getQuetion() {
-                    return quetion;
+                    return question;
                 }
 
                 public void setQuetion(String quetion) {
-                    this.quetion = quetion;
+                    this.question = quetion;
                 }
 
                 public Keys getKey() {
@@ -83,7 +83,7 @@ public class MitBean {
                     this.key = key;
                 }
 
-                private String quetion;
+                private String question;
                 private Keys key;
 
                 public String getOrder() {
