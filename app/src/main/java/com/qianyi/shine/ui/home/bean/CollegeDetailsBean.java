@@ -261,6 +261,16 @@ public class CollegeDetailsBean {
             private String wmzy_school_id;
             private String yzy_school_id;
 
+            public String getJiangxuejin_weburl() {
+                return jiangxuejin_weburl;
+            }
+
+            public void setJiangxuejin_weburl(String jiangxuejin_weburl) {
+                this.jiangxuejin_weburl = jiangxuejin_weburl;
+            }
+
+            private String jiangxuejin_weburl;
+
             private List<SchoolScenery> school_scenery;
             private List<Major> major ;
             private UniversityResearch university_research;

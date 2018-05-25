@@ -143,7 +143,7 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
                 //奖学金设置
                 Intent intent_Scholarship = new Intent(getActivity(), WebviewActivity.class);
                 intent_Scholarship.putExtra("title","奖学金设置");
-                intent_Scholarship.putExtra("url","http://www.baidu.com");
+                intent_Scholarship.putExtra("url",collegeDetailsInfo.getJiangxuejin_weburl());
                 getActivity().startActivity(intent_Scholarship);
                 break;
             case R.id.acamy_re:
