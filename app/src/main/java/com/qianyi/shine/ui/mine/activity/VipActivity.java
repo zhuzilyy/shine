@@ -233,7 +233,7 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
         pw_buyVip.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
         tv_vipMoney.setText("￥"+vipMoney);
         tv_totalMoney.setText("￥"+vipMoney);
-        tv_timeLimit.setText(vipLimit);
+        tv_timeLimit.setText("有效期为"+vipLimit+"年");
         pw_buyVip.setTouchable(true);
         pw_buyVip.setFocusable(true);
         pw_buyVip.setBackgroundDrawable(new BitmapDrawable());
