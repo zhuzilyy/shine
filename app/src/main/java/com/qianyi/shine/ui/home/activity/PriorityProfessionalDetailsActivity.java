@@ -244,9 +244,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         if (TextUtils.isEmpty(major_id)) {
             return;
         }
-
        // Toast.makeText(this, "mcity==" + mCity + "      morder==" + mOrder, Toast.LENGTH_SHORT).show();
-
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
         apiHome.majorPriorMajor(apiConstant.PRIOR_MAJOR, user.getId(), major_id, mOrder, "全国".endsWith(mCity)?"":mCity, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
