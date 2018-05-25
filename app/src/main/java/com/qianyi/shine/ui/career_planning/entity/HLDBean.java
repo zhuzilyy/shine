@@ -75,15 +75,15 @@ public class HLDBean {
                 }
 
                 public String getQuestion() {
-                    return quetion;
+                    return question;
                 }
 
                 public void setQuestion(String question) {
-                    this.quetion = question;
+                    this.question = question;
                 }
 
                 private String order;
-                private String quetion;
+                private String question;
             }
         }
 

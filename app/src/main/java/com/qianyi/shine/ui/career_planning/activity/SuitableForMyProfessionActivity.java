@@ -53,8 +53,6 @@ public class SuitableForMyProfessionActivity extends BaseActivity implements Vie
                 finish();
             }
         });
-
-
     }
 
 
