@@ -43,6 +43,7 @@
 
 
     <TextView
+        android:id="@+id/tv_timeLimit"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:text="有效期30天"

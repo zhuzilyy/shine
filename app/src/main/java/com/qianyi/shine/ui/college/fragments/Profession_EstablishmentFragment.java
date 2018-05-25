@@ -198,7 +198,7 @@ public class Profession_EstablishmentFragment extends BaseFragment {
 
         //下拉刷新
         initRefreshLayout();
-        swipeRefreshLayout.setRefreshing(true);
+        //swipeRefreshLayout.setRefreshing(true);
         //refresh();
 
     }
@@ -343,8 +343,4 @@ public class Profession_EstablishmentFragment extends BaseFragment {
             mAdapter.loadMoreComplete();
         }
     }
-
-
-
-
 }

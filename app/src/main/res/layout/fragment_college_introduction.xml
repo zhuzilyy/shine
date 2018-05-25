@@ -239,12 +239,13 @@
             </LinearLayout>
             <!--003院系设置-->
             <LinearLayout
+
                 android:id="@+id/acamy_re"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
                 <!--title-->
                 <RelativeLayout
                     android:layout_width="match_parent"

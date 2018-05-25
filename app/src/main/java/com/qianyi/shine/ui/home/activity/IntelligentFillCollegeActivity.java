@@ -93,7 +93,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
         swipeRefreshLayout.setRefreshing(true);
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
         memberId= loginInfo.getId();
-        refresh();
+       // refresh();
     }
     @Override
     protected void initData() {
@@ -150,6 +150,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
         tv_collegeData=view_header.findViewById(R.id.tv_collegeData);
         RelativeLayout rl_setScore=view_header.findViewById(R.id.rl_setScore);
         setWillingData(tv_collegeData,tv_willings);
+        setWillingData(tv_noDataCollegeData,tv_noDataWillings);
         rl_setScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -223,7 +224,6 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
                         }else{
                             //在这里显示一下逻辑
                             ll_nodataCollegeData.setVisibility(View.VISIBLE);
-                            setWillingData(tv_noDataCollegeData,tv_noDataCollegeData);
                             swipeRefreshLayout.setVisibility(View.GONE);
                             btn_comfirm_.setVisibility(View.GONE);
                             no_internet_rl.setVisibility(View.GONE);
@@ -301,11 +301,20 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
             mAdapter.loadMoreComplete();
         }
     }
-    @OnClick({R.id.iv_back})
+    @OnClick({R.id.iv_back,R.id.rl_setScore,R.id.rl_willing})
     public void click(View view){
+        Intent intent=null;
         switch (view.getId()){
             case R.id.iv_back:
                 finish();
+                break;
+            case R.id.rl_setScore:
+                intent=new Intent(IntelligentFillCollegeActivity.this,GuessScoreActivity.class);
+                intent.putExtra("tag","intelligentFill");
+                startActivity(intent);
+                break;
+            case R.id.rl_willing:
+                startActivityForResult(new Intent(IntelligentFillCollegeActivity.this,WillingsSettingActivity.class),1);
                 break;
         }
     }
@@ -367,7 +376,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
             if (!TextUtils.isEmpty(intention_major)){
                 willingCount++;
             }
-            tv_willings.setText("已选"+willingCount+"项意愿");
+            tv_noDataWillings.setText("已选"+willingCount+"项意愿");
         }
     }
 }

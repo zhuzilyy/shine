@@ -67,7 +67,7 @@ public class OccupationDetailActivity extends BaseActivity {
 
         ArrayList<String> titles = new ArrayList<String>();
         titles.add("职业信息");
-        titles.add("基本信息");
+        titles.add("行业信息");
         myPageAdapter.setTitles(titles);
 
         viewPager.setAdapter(myPageAdapter);

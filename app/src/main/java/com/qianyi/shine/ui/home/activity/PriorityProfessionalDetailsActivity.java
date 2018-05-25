@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +69,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     TextView tv_title;
     //**************
     private SwipeRefreshLayout swipeRefreshLayout;
+    private RelativeLayout no_data_rl;
     private RecyclerView recyclerView;
     private EstablishProiAdapter mAdapter;
 
@@ -148,6 +150,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         //填充布局
         View contentView = LayoutInflater.from(PriorityProfessionalDetailsActivity.this).inflate(R.layout.layout_refresh, null);
         swipeRefreshLayout = contentView.findViewById(R.id.swipeLayout);
+        no_data_rl = contentView.findViewById(R.id.no_data_rl);
         recyclerView = contentView.findViewById(R.id.rv_list);
 
         initContentView();
@@ -264,10 +267,16 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
                                 ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo priorInfo = priorData.getInfo();
                                 if (priorInfo != null) {
                                     List<ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo.ProfessionInfoList> infoLists = priorInfo.getInfoList();
-
-                                    setData(true, infoLists);
-                                    mAdapter.setEnableLoadMore(true);
-                                    swipeRefreshLayout.setRefreshing(false);
+                                    if (infoLists!=null && infoLists.size()>0){
+                                        setData(true, infoLists);
+                                        mAdapter.setEnableLoadMore(true);
+                                        swipeRefreshLayout.setRefreshing(false);
+                                        swipeRefreshLayout.setVisibility(View.VISIBLE);
+                                        no_data_rl.setVisibility(View.GONE);
+                                    }else{
+                                        swipeRefreshLayout.setVisibility(View.GONE);
+                                        no_data_rl.setVisibility(View.VISIBLE);
+                                    }
 
 
                                 }

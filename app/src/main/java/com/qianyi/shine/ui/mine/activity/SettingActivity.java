@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
 
@@ -57,7 +58,7 @@ public class SettingActivity extends BaseActivity{
             case R.id.rl_userAgreement:
                 intent=new Intent(SettingActivity.this,WebviewActivity.class);
                 intent.putExtra("title","用户协议");
-                intent.putExtra("url","https://home.firefoxchina.cn/");
+                intent.putExtra("url", apiConstant.AGREEMENT);
                 startActivity(intent);
                 break;
         }

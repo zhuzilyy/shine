@@ -77,6 +77,8 @@ public class apiConstant {
     public static final String BENKETOP=BASE_URL+"diploma_job_view/3";
     //专科10个高薪行业
     public static final String ZHUNANETOP=BASE_URL+"diploma_job_view/4";
+    //用户协议
+    public static final String AGREEMENT=BASE_URL+"article_info/5";
     //专业详情开设院校
     public static final String MAJOR_SCHOOL_LIST=BASE_URL+"major_school_list";
     //首页搜索大学
@@ -87,8 +89,10 @@ public class apiConstant {
     public static final String OPEN_AREA=BASE_URL+"open_area";
     //测试录取率
     public static final String ACCEPTANCE_RATE=BASE_URL+"prior_noopsyche";
-    //测试录取率
+    //微信登录
     public static final String WECHAT_LOGIN=BASE_URL+"weixin_login";
+    //发送验证码
+    public static final String GET_COFIRM_CODE=BASE_URL+"sendsmscode";
     //微信参数
     public static  String APP_ID="wxf51a00546d18489f";
     public static  String APP_SECRET="ed6e15ab8d28ca6dd3b024f1ffedbec9";

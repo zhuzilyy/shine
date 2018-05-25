@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -15,8 +16,11 @@ import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.bean.RegisterBean;
 import com.qianyi.shine.ui.account.view.ClearEditText;
+import com.qianyi.shine.ui.account.view.MyCountDownTimer;
 import com.qianyi.shine.utils.ToastUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
@@ -36,9 +40,12 @@ public class RegisterActivity extends BaseActivity {
     ClearEditText et_confirmCode;
     @BindView(R.id.et_pwd)
     ClearEditText et_pwd;
+    private MyCountDownTimer timer;
+    private CustomLoadingDialog customLoadingDialog;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
+        customLoadingDialog=new CustomLoadingDialog(this);
     }
 
     @Override
@@ -60,7 +67,7 @@ public class RegisterActivity extends BaseActivity {
     protected void setStatusBarColor() {
 
     }
-    @OnClick({R.id.tv_login,R.id.iv_login_wechat,R.id.iv_login_weibo,R.id.iv_login_qq,R.id.btn_register})
+    @OnClick({R.id.tv_login,R.id.iv_login_wechat,R.id.iv_login_weibo,R.id.iv_login_qq,R.id.btn_register,R.id.btn_getConfirmCode})
     public void click(View view){
         switch (view.getId()){
             case R.id.tv_login:
@@ -95,7 +102,44 @@ public class RegisterActivity extends BaseActivity {
                 }
                 register(phoneNum,confrimCode,pwd);
                 break;
+            case R.id.btn_getConfirmCode:
+                String phoneNumber = et_phoneNum.getText().toString();
+                if (!TextUtils.isEmpty(phoneNumber)) {
+                    if (phoneNumber.matches("^[1][3469758][0-9]{9}$")) {
+                        timer = new MyCountDownTimer(60000, 1000, (Button) view);
+                        timer.start();
+                        // 向服务器请求验证码
+                        getConfirmCode(phoneNumber);
+                    } else {
+                        Toast.makeText(this, "手机号码格式不正确", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "手机号码不能为空", Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
+    }
+    //获取短信验证码
+    private void getConfirmCode(String phoneNumber) {
+        customLoadingDialog.show();
+        apiAccount.getConfirmCode(apiConstant.GET_COFIRM_CODE, phoneNumber, "1", new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(Call call, Response response, final String s) {
+                customLoadingDialog.dismiss();
+                try {
+                    JSONObject jsonObject=new JSONObject(s);
+                    String info = jsonObject.getString("info");
+                    Toast.makeText(RegisterActivity.this, info, Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onEror(Call call, int statusCode, Exception e) {
+                customLoadingDialog.dismiss();
+                Toast.makeText(RegisterActivity.this, "网络错误发送失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     //注册的方法
     private void register(String phoneNum, String confrimCode, String pwd) {

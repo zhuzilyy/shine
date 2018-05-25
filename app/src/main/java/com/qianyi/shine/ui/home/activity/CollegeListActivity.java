@@ -117,7 +117,7 @@ public class CollegeListActivity extends BaseActivity {
                 typeAdapter.setCheckItem(position);
                 mDropDownMenu.setTabText(types[position]);
                 mDropDownMenu.closeMenu();
-                level=batch[position];
+                level=types[position];
                 refresh();
             }
         });

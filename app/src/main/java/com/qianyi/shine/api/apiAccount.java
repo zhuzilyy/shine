@@ -93,6 +93,15 @@ public class apiAccount {
         params.put("nickname",nickname);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+    /***
+     * 发送验证码
+     */
+    public static void getConfirmCode(String url,String mobile,String type,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("mobile",mobile);
+        params.put("type",type);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 
 
 

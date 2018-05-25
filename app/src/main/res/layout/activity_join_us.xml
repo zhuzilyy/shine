@@ -24,8 +24,7 @@
         android:maxLines="6"
         android:textSize="14sp"
         android:layout_marginTop="10dp"
-        android:text="教育部高校招生阳光工程指定信息发布平台、自主招生报名平台。发布高校招生章程,提供学生名单公示、院校信息、分数线、填报志愿、选专业、高考咨询等服务。
-教育部高校招生阳光工程指定信息发布平台、自主招生报名平台。发布高校招生章程,提供学生名单公示、院校信息、分数线、填报志愿、选专业、高考咨询等服务。"
+        android:text="教育蓝海等你加入高考和志愿填报是每个学生人生的转折点，每年有900多万的高考考生需要得到更专业的志愿填报指导和服务。随着互联网教育的时代的到来，AI人工智能+大数据将是最好的解决志愿问题的方法，也被越来越多的家长和考生认可。让我们共同开拓这个亿级的刚需市场。"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:id="@+id/tv_content"

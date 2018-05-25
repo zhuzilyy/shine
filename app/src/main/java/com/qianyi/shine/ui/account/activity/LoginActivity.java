@@ -120,15 +120,16 @@ public class LoginActivity extends BaseActivity {
                            String code = loginBean.getCode();
                            if("0" .equals(code)){
                               LoginBean.LoginData.LoginInfo user = loginBean.getData().getInfo();
-                              try {
+                               String member_scoreinfo_status = loginBean.getData().getInfo().getMember_scoreinfo_status();
+                               try {
                                   //存储当前用户
                                   Utils.saveUser(user,LoginActivity.this);
-                                  if (loginBean.getData().getInfo().getMember_scoreinfo()==null){
+                                  if (member_scoreinfo_status.equals("0")){
                                       Intent intent=new Intent(LoginActivity.this, GuessScoreActivity.class);
                                       intent.putExtra("tag","setScore");
                                       startActivity(intent);
                                       finish();
-                                  }else{
+                                  }else if (member_scoreinfo_status.equals("1")){
                                       Intent intent=new Intent(LoginActivity.this, MainActivity.class);
                                       startActivity(intent);
                                       finish();

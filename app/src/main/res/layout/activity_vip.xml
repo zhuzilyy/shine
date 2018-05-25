@@ -80,7 +80,7 @@
                          android:textColor="@color/white"
                          android:gravity="center"
                          android:layout_gravity="center_horizontal"
-                         android:text="有效期1个月"
+                         android:text="有效期1个年"
                          android:layout_width="100dp"
                          android:layout_height="40dp" />
                  </LinearLayout>

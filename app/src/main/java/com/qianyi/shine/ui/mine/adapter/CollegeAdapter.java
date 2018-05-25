@@ -43,8 +43,8 @@ public class CollegeAdapter extends BaseQuickAdapter<UniversityInfo, BaseViewHol
         }
         helper.setText(R.id.tv_level,is_211+"/"+is_985);
         //综合排名
-        if (item.getRank().equals("0")){
-            helper.setText(R.id.tv_rank,"排名:暂无数据");
+        if (item.getRank().equals("9999")){
+            helper.setText(R.id.tv_rank,"排名:——");
         }else{
             helper.setText(R.id.tv_rank,"排名:"+item.getRank());
         }
