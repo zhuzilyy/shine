@@ -271,6 +271,16 @@ public class CollegeDetailsBean {
 
             private String jiangxuejin_weburl;
 
+            public String getIntroduction_weburl() {
+                return introduction_weburl;
+            }
+
+            public void setIntroduction_weburl(String introduction_weburl) {
+                this.introduction_weburl = introduction_weburl;
+            }
+
+            private String introduction_weburl;
+
             private List<SchoolScenery> school_scenery;
             private List<Major> major ;
             private UniversityResearch university_research;

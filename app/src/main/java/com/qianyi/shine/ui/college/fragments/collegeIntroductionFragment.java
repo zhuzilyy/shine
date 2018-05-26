@@ -154,11 +154,18 @@ public class collegeIntroductionFragment extends BaseFragment implements View.On
                 getActivity().startActivity(intent_Acamy);
                 break;
             case R.id.tv_college_more:
-                Intent intent_collegeText= new Intent(getActivity(), CollegeDetailsTextActivity.class);
-                intent_collegeText.putExtra("title",CollegeNameStr);
-                intent_collegeText.putExtra("college_content",CollegeStr);
 
-                getActivity().startActivity(intent_collegeText);
+                Intent intent_more= new Intent(getActivity(), WebviewActivity.class);
+                intent_more.putExtra("title",CollegeNameStr);
+                intent_more.putExtra("url",collegeDetailsInfo.getIntroduction_weburl());
+                getActivity().startActivity(intent_more);
+
+
+//                Intent intent_collegeText= new Intent(getActivity(), CollegeDetailsTextActivity.class);
+//                intent_collegeText.putExtra("title",CollegeNameStr);
+//                intent_collegeText.putExtra("college_content",CollegeStr);
+//
+//                getActivity().startActivity(intent_collegeText);
                 break;
 
             default:
