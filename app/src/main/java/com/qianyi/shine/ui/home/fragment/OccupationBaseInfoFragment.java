@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +61,7 @@ public class OccupationBaseInfoFragment extends BaseFragment {
     private Intent intent;
     private String occupationName,occupationParentName;
     private CustomLoadingDialog customLoadingDialog;
+    @BindView(R.id.id_progress) ProgressBar id_progress;
 
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
@@ -115,6 +117,11 @@ public class OccupationBaseInfoFragment extends BaseFragment {
                             tv_workingContent.setText(job_info.getContent());
                             tv_female.setText(job_info.getFemalte_ratio());
                             tv_male.setText(job_info.getMale_ratio());
+                           String number= job_info.getMale_ratio();
+                           if(number!=null&&number.endsWith("%")){
+                              number= number.replace("%","");
+                           }
+                            id_progress.setProgress(Integer.parseInt(number));
                             String weburl = job_info.getWeburl();
                             //发送广播
                             String name = job_info.getName();
