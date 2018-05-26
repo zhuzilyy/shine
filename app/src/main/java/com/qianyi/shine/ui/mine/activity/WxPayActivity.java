@@ -187,7 +187,7 @@ public class WxPayActivity {
 		return MD5.getMessageDigest(String.valueOf(random.nextInt(10000)).getBytes());
 	}
 	private String genProductArgs() {
-		String body="VO";
+		String body="阳光志愿";
 		StringBuffer xml = new StringBuffer();
 		try {
 			String nonceStr = genNonceStr();

@@ -283,7 +283,7 @@
             <TextView
                 android:textSize="14sp"
                 android:layout_marginTop="10dp"
-                android:text="本一批"
+                android:text="本科批"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -294,6 +294,7 @@
             android:layout_height="match_parent"/>
         <!--二本-->
         <LinearLayout
+            android:visibility="gone"
             android:gravity="center"
             android:orientation="vertical"
             android:id="@+id/ll_erBen"
@@ -313,11 +314,13 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <View
+            android:visibility="gone"
             android:background="@color/common_line"
             android:layout_width="0.5dp"
             android:layout_height="match_parent"/>
         <!--三本-->
         <LinearLayout
+            android:visibility="gone"
             android:gravity="center"
             android:orientation="vertical"
             android:id="@+id/ll_sanBen"
@@ -338,6 +341,7 @@
 
         </LinearLayout>
         <View
+            android:visibility="gone"
             android:background="@color/common_line"
             android:layout_width="0.5dp"
             android:layout_height="match_parent"/>
@@ -360,46 +364,11 @@
                 android:text="专科批"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
         </LinearLayout>
-    </LinearLayout>
-
-    <!--按层次选学校-->
-    <LinearLayout
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <View
-            android:layout_gravity="center_vertical"
-            android:background="@color/main_blue"
-            android:layout_width="50dp"
-            android:layout_height="0.5dp"/>
-        <TextView
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/main_blue"
-            android:layout_gravity="center_vertical"
-            android:textSize="14sp"
-            android:text="按层次选学校"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <View
-            android:layout_gravity="center_vertical"
-            android:background="@color/main_blue"
-            android:layout_width="50dp"
-            android:layout_height="0.5dp"/>
-    </LinearLayout>
-    <!--按照层次-->
-    <LinearLayout
-        android:background="@drawable/bg_college_area"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="100dp">
+            android:background="@color/common_line"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"/>
         <!--985-->
         <LinearLayout
             android:id="@+id/ll_985"
@@ -449,6 +418,48 @@
             android:background="@color/common_line"
             android:layout_width="0.5dp"
             android:layout_height="match_parent"/>
+
+
+    </LinearLayout>
+
+    <!--按层次选学校-->
+    <LinearLayout
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_gravity="center_vertical"
+            android:background="@color/main_blue"
+            android:layout_width="50dp"
+            android:layout_height="0.5dp"/>
+        <TextView
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/main_blue"
+            android:layout_gravity="center_vertical"
+            android:textSize="14sp"
+            android:text="按层次选学校"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_gravity="center_vertical"
+            android:background="@color/main_blue"
+            android:layout_width="50dp"
+            android:layout_height="0.5dp"/>
+    </LinearLayout>
+    <!--按照层次-->
+    <LinearLayout
+        android:visibility="gone"
+        android:background="@drawable/bg_college_area"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
         <!--卓越-->
         <LinearLayout
             android:gravity="center"

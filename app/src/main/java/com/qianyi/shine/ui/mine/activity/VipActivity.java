@@ -162,10 +162,6 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
             }
         });
 
-
-
-
-
     }
     @Override
     protected void setStatusBarColor() {
@@ -301,6 +297,7 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
                 apiPay.alipay(apiConstant.ALIPAY, user.getId(), new RequestCallBack<String>() {
                     @Override
                     public void onSuccess(Call call, Response response, String s) {
+                        Log.i("tag",s);
                         loadingDialog.dismiss();
                         Gson gson = new Gson();
                         AliBean aliBean = gson.fromJson(s, AliBean.class);
@@ -325,11 +322,6 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
                 });
             }
         }
-
-
-
-
-
 
     }
 

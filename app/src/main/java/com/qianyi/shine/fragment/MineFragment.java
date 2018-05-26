@@ -120,10 +120,10 @@ public class MineFragment extends BaseFragment {
 
     private void shareFriendCircle() {
         WXWebpageObject webpage = new WXWebpageObject();
-        webpage.webpageUrl = "http://www.baidu.com";
+        webpage.webpageUrl = "http://www.gaokaoygzy.cn/download";
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title ="阳光志愿";
-        msg.description ="测试" ;
+        msg.description ="阳光志愿" ;
         Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.mipmap.logo);
         Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, 100, 100, true);
         msg.setThumbImage(thumbBmp);
@@ -152,10 +152,10 @@ public class MineFragment extends BaseFragment {
     //分享到微信
     private void shareFriends() {
         WXWebpageObject webpage = new WXWebpageObject();
-        webpage.webpageUrl = "http://www.baidu.com";
+        webpage.webpageUrl = "http://www.gaokaoygzy.cn/download";
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title ="阳光志愿";
-        msg.description ="测试" ;
+        msg.description ="阳光志愿" ;
         Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.mipmap.logo);
         Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, 100, 100, true);
         msg.setThumbImage(thumbBmp);
