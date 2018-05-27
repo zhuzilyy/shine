@@ -29,12 +29,14 @@ import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.entivity.ProfessionBean;
 import com.qianyi.shine.ui.college.view.MyScrollview;
 import com.qianyi.shine.ui.home.activity.PriorityProfessionalDetailsActivity;
+import com.qianyi.shine.ui.mine.activity.VipActivity;
 import com.qianyi.shine.utils.Utils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2018/4/3.
@@ -487,7 +489,15 @@ public class Profession_ProspectsFragment extends BaseFragment {
 
         return q;
     }
-
+    @OnClick({R.id.btn_openVip})
+    public void click(View view){
+        switch (view.getId()){
+            case R.id.btn_openVip:
+                Intent intent=new Intent(getActivity(), VipActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -501,7 +511,7 @@ public class Profession_ProspectsFragment extends BaseFragment {
             String action = intent.getAction();
             if (action.equals("com.action.open.vip")){
                 ll_openVip.setVisibility(View.GONE);
-               myScrollview.setVisibility(View.VISIBLE);
+                myScrollview.setVisibility(View.VISIBLE);
             }
         }
     }

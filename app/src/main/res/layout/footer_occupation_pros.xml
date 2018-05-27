@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--职业前景-->
+    <RelativeLayout
+        android:id="@+id/rl_allOccupationPros"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10">
+        <View
+            android:id="@+id/indecator4"
+            android:layout_width="5dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:background="@color/main_blue" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_toRightOf="@+id/indecator4"
+            android:text="全部方向薪资涨幅"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </RelativeLayout>
+    <LinearLayout
+        android:background="#ececec"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:text="毕业年限"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/tv_year"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:text="薪资水平"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/tv_salary"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <com.qianyi.shine.ui.home.view.MyListView
+        android:listSelector="@android:color/transparent"
+        android:id="@+id/lv_occupation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

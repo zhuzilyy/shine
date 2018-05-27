@@ -259,6 +259,10 @@
         <activity android:name=".ui.account.activity.OccupationWebviewActivity"
             android:screenOrientation="portrait"
             />
+        <!--就业前景-->
+        <activity android:name=".ui.home.activity.OccupationProsActivity"
+            android:screenOrientation="portrait"
+            />
         <receiver android:name=".receiver.MyReceiver">
             <intent-filter>
                 <action android:name="com.action.search"/>

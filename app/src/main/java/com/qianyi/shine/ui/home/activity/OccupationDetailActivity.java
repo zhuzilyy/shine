@@ -24,6 +24,7 @@ import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.college.adapter.MyPageAdapter;
 import com.qianyi.shine.ui.home.fragment.OccupationBaseInfoFragment;
 import com.qianyi.shine.ui.home.fragment.OccupationDetailsFragment;
+import com.qianyi.shine.ui.home.fragment.OccupationProsFragment;
 import com.qianyi.shine.utils.Utils;
 
 import org.json.JSONException;
@@ -63,11 +64,13 @@ public class OccupationDetailActivity extends BaseActivity {
         ArrayList<Fragment> datas = new ArrayList<Fragment>();
         datas.add(new OccupationDetailsFragment());
         datas.add(new OccupationBaseInfoFragment());
+       // datas.add(new OccupationProsFragment());
         myPageAdapter.setData(datas);
 
         ArrayList<String> titles = new ArrayList<String>();
         titles.add("职业信息");
         titles.add("行业信息");
+        //titles.add("职业前景");
         myPageAdapter.setTitles(titles);
 
         viewPager.setAdapter(myPageAdapter);

@@ -246,7 +246,6 @@ public class OccupationDetailsFragment extends BaseFragment {
             mAdapter.loadMoreComplete();
         }
     }
-
     class MyReceiver extends BroadcastReceiver{
         @Override
         public void onReceive(Context context, Intent intent) {
