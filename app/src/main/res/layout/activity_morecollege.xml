@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <include layout="@layout/layout_title"/>
     <View
         android:layout_width="match_parent"
@@ -12,7 +15,6 @@
         android:background="@color/gray"
         />
     <com.yyydjk.library.DropDownMenu
-
         android:id="@+id/dropDownMenu"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,6 +31,19 @@
         app:ddmenuBackgroundColor="@color/white"
         app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
         />
+    </LinearLayout>
+    <Button
+        android:visibility="gone"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btn_openVip"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:background="@drawable/bg_login"
+        android:layout_marginTop="70dp"
+        android:text="开通Vip查看所有院校"
+        android:layout_width="300dp"
+        android:layout_height="45dp" />
 
-
-</LinearLayout>
+</RelativeLayout>

@@ -130,11 +130,11 @@ public class GaoKaoNewsActivity extends BaseActivity {
                                 ArticleBean.AriticleData ariticleData = articleBean.getData();
                                 if (ariticleData != null) {
                                     ArticleBean.AriticleData.AriticleInfo ariticleInfo = ariticleData.getInfo();
-                                    if(ariticleInfo != null){
+                                  //  if(ariticleInfo != null){
                                         setData(true, ariticleInfo.getArticleList());
                                         mAdapter.setEnableLoadMore(true);
                                         mSwipeRefreshLayout.setRefreshing(false);
-                                    }
+                                 //   }
                                 }
                             } else {
                                 Toast.makeText(GaoKaoNewsActivity.this, "" + articleBean.getInfo(), Toast.LENGTH_SHORT).show();
@@ -169,20 +169,20 @@ public class GaoKaoNewsActivity extends BaseActivity {
                         ArticleBean articleBean = gson.fromJson(s, ArticleBean.class);
                         if (articleBean != null) {
                             String code = articleBean.getCode();
-                            if ("0".equals(code)) {
+                          //  if ("0".equals(code)) {
                                 ArticleBean.AriticleData ariticleData = articleBean.getData();
                                 if (ariticleData != null) {
                                     ArticleBean.AriticleData.AriticleInfo ariticleInfo = ariticleData.getInfo();
-                                    if(ariticleInfo != null){
+                                //    if(ariticleInfo != null){
                                         setData(false, ariticleInfo.getArticleList());
                                         mAdapter.setEnableLoadMore(true);
                                         mSwipeRefreshLayout.setRefreshing(false);
-                                    }
+                                 //   }
                                 }
                             } else {
                                 Toast.makeText(GaoKaoNewsActivity.this, "" + articleBean.getInfo(), Toast.LENGTH_SHORT).show();
                             }
-                        }
+                     //   }
                     }
                 });
             }
