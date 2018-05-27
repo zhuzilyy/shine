@@ -6,10 +6,9 @@
     android:layout_height="match_parent"
     >
    <include layout="@layout/layout_title"/>
-
+    <include layout="@layout/layout_not_vip"/>
     <com.yyydjk.library.DropDownMenu
         android:id="@+id/dropDownMenu"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:ddmenuTextSize="13sp"

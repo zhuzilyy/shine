@@ -1,6 +1,9 @@
 package com.qianyi.shine.ui.home.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +13,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,11 +27,13 @@ import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
+import com.qianyi.shine.ui.account.activity.OccupationWebviewActivity;
 import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.activity.CollegeActivity;
 import com.qianyi.shine.ui.home.adapter.IntellgenceFillAdapter;
 import com.qianyi.shine.ui.home.bean.SchoolInfo;
 import com.qianyi.shine.ui.home.bean.UniversityBean;
+import com.qianyi.shine.ui.mine.activity.VipActivity;
 import com.qianyi.shine.utils.SPUtils;
 import com.qianyi.shine.utils.Utils;
 
@@ -57,19 +63,21 @@ public class AcceptanceRateActivity extends BaseActivity {
     TextView tv_score;
     @BindView(R.id.et_search)
     EditText et_search;
+    @BindView(R.id.ll_openVip)
+    LinearLayout ll_openVip;
     private IntellgenceFillAdapter mAdapter;
     public List<SchoolInfo> infoList;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private CustomLoadingDialog customLoadingDialog;
-    private String keyWord,memberId;
+    private String keyWord,memberId,isVip;
+    private MyReceiver myReceiver;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
         memberId= loginInfo.getId();
-
-
+        isVip=loginInfo.getIs_vip();
         customLoadingDialog=new CustomLoadingDialog(this);
         swipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
         rv_college.setLayoutManager(new LinearLayoutManager(AcceptanceRateActivity.this));
@@ -78,18 +86,23 @@ public class AcceptanceRateActivity extends BaseActivity {
         //下拉刷新
         initRefreshLayout();
         swipeRefreshLayout.setRefreshing(false);
-
         setScoreData();
+
+        //注册广播
+        myReceiver= new MyReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.open.vip");
+        registerReceiver(myReceiver,intentFilter);
     }
 
     private void setScoreData() {
-        String area = (String) SPUtils.get(AcceptanceRateActivity.this, "area", "");
-        String type = (String) SPUtils.get(AcceptanceRateActivity.this, "type", "");
-        String score = (String) SPUtils.get(AcceptanceRateActivity.this, "score", "");
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        String score=loginInfo.getMember_scoreinfo().getScore();
+        String area=loginInfo.getMember_scoreinfo().getProv();
+        String type=loginInfo.getMember_scoreinfo().getType();
+
         tv_score.setText(area+"/"+type+"/"+score);
-
     }
-
     private void initRefreshLayout() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -136,9 +149,17 @@ public class AcceptanceRateActivity extends BaseActivity {
                         //数据不为空
                         if (universityList!=null && universityList.size()>0){
                             setData(true,universityList);
-                            swipeRefreshLayout.setVisibility(View.VISIBLE);
-                            no_internet_rl.setVisibility(View.GONE);
-                            no_data_rl.setVisibility(View.GONE);
+                            if (isVip.equals("0")){
+                                swipeRefreshLayout.setVisibility(View.GONE);
+                                no_internet_rl.setVisibility(View.GONE);
+                                no_data_rl.setVisibility(View.GONE);
+                                ll_openVip.setVisibility(View.VISIBLE);
+                            }else if(isVip.equals("1")){
+                                swipeRefreshLayout.setVisibility(View.VISIBLE);
+                                no_internet_rl.setVisibility(View.GONE);
+                                no_data_rl.setVisibility(View.GONE);
+                                ll_openVip.setVisibility(View.GONE);
+                            }
                         }else{
                             //在这里显示一下逻辑
                             swipeRefreshLayout.setVisibility(View.GONE);
@@ -261,12 +282,32 @@ public class AcceptanceRateActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.iv_back})
+    @OnClick({R.id.iv_back,R.id.btn_openVip})
     public void click(View view){
         switch (view.getId()){
             case R.id.iv_back:
                 finish();
                 break;
+            case R.id.btn_openVip:
+                jumpActivity(AcceptanceRateActivity.this, VipActivity.class);
+                break;
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myReceiver);
+    }
+
+    //接收支付成功的广播
+    class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("com.action.open.vip")){
+                ll_openVip.setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

@@ -7,9 +7,10 @@
     android:layout_height="match_parent"
 
     >
-
     <include layout="@layout/layout_title"/>
     <ScrollView
+        android:visibility="gone"
+        android:id="@+id/myScrollview"
         android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -202,7 +203,7 @@
 
         </LinearLayout>
     </ScrollView>
-
+<include layout="@layout/layout_not_vip"/>
 
 
 

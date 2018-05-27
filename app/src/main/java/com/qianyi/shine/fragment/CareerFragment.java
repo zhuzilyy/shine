@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.base.BaseFragment;
+import com.qianyi.shine.ui.account.activity.OccupationWebviewActivity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.career_planning.activity.SuitableForMyProfessionActivity;
 import com.qianyi.shine.ui.home.activity.CareerAndMajorActivity;
@@ -80,14 +81,14 @@ public class CareerFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.re_benke10:
                 //本科毕业生从事的10个高薪工作
-                Intent intent = new Intent(getActivity(), WebviewActivity.class);
+                Intent intent = new Intent(getActivity(), OccupationWebviewActivity.class);
                 intent.putExtra("title", "本科毕业生从事的10个高薪工作");
                 intent.putExtra("url", apiConstant.BENKETOP);
                 startActivity(intent);
                 break;
             case R.id.re_zhuanke_10:
                 //专科科毕业生从事的10个高薪工作
-                Intent intent_02 = new Intent(getActivity(), WebviewActivity.class);
+                Intent intent_02 = new Intent(getActivity(), OccupationWebviewActivity.class);
                 intent_02.putExtra("title", "专科毕业生从事的10个高薪工作");
                 intent_02.putExtra("url", apiConstant.ZHUNANETOP);
                 startActivity(intent_02);

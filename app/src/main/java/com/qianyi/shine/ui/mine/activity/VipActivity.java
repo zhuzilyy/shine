@@ -13,10 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.google.gson.Gson;
 import com.qianyi.shine.R;
+import com.qianyi.shine.api.apiAccount;
 import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.api.apiPay;
 import com.qianyi.shine.base.BaseActivity;
@@ -27,6 +29,7 @@ import com.qianyi.shine.ui.mine.bean.AliBean;
 import com.qianyi.shine.ui.mine.bean.VipCongBean;
 import com.qianyi.shine.ui.mine.bean.WXPayBean;
 import com.qianyi.shine.utils.Utils;
+import com.qianyi.shine.wxapi.WXPayEntryActivity;
 import com.tencent.mm.sdk.modelpay.PayReq;
 
 import org.json.JSONException;
@@ -344,8 +347,7 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
                                         JSONObject jsonObject1=jsonObject.getJSONObject("alipay_trade_app_pay_response");
                                         String code_= jsonObject1.getString("code");
                                         if("10000".equals(code_)){
-                                            //支付成功
-                                           Log.i("kkk","支付成功");
+                                          paySucces();
                                         }else {
                                             //支付失败
                                             Log.i("kkk","支付失败");
@@ -363,6 +365,50 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
         // 必须异步调用
         Thread payThread = new Thread(payRunnable);
         payThread.start();
+    }
+
+    private void paySucces() {
+        //֧支付成功
+        LoginBean.LoginData.LoginInfo user = Utils.readUser(VipActivity.this);
+        if(user!=null){
+            apiAccount.updateUserInfo(apiConstant.GETMEMBERINFO, user.getId(), new RequestCallBack<String>() {
+                @Override
+                public void onSuccess(Call call, Response response, final String s) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Gson gson = new Gson();
+                            LoginBean loginBean=gson.fromJson(s, LoginBean.class);
+                            if(loginBean != null){
+                                String code = loginBean.getCode();
+                                if("0" .equals(code)){
+                                    LoginBean.LoginData.LoginInfo user = loginBean.getData().getInfo();
+                                    try {
+                                        //清除当前用户信息
+                                        Utils.clearSharedUser(VipActivity.this);
+                                        //存储当前用户
+                                        Utils.saveUser(user,VipActivity.this);
+                                        Intent intent=new Intent();
+                                        intent.setAction("com.action.open.vip");
+                                        sendBroadcast(intent);
+                                        finish();
+                                    }catch (Exception e){
+                                        Log.i("excaption_shine",e.getMessage());
+                                    }
+                                }else {
+                                    Toast.makeText(VipActivity.this, ""+loginBean.getInfo(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    });
+                }
+                @Override
+                public void onEror(Call call, int statusCode, Exception e) {
+                    Log.i("","123"+e.getMessage());
+                }
+            });
+        }
+
     }
 
     /***

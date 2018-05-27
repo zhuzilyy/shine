@@ -7,9 +7,9 @@
     android:orientation="vertical"
     >
     <com.qianyi.shine.ui.college.view.MyScrollview
+        android:id="@+id/myScrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -318,5 +318,6 @@
             </LinearLayout>
         </LinearLayout>
     </com.qianyi.shine.ui.college.view.MyScrollview>
+    <include layout="@layout/layout_not_vip"/>
 
 </LinearLayout>

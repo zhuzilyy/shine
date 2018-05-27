@@ -255,8 +255,10 @@
         <activity android:name=".ui.career_planning.activity.CollegeDetailsTextActivity"
             android:screenOrientation="portrait"
             />
-
-
+        <!--看就业详情-->
+        <activity android:name=".ui.account.activity.OccupationWebviewActivity"
+            android:screenOrientation="portrait"
+            />
         <receiver android:name=".receiver.MyReceiver">
             <intent-filter>
                 <action android:name="com.action.search"/>

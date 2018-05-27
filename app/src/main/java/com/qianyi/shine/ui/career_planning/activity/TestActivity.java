@@ -1,13 +1,18 @@
 package com.qianyi.shine.ui.career_planning.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -17,8 +22,11 @@ import com.qianyi.shine.api.apiTest;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
+import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.career_planning.entity.HLDBean;
 import com.qianyi.shine.ui.career_planning.entity.MitBean;
+import com.qianyi.shine.ui.mine.activity.VipActivity;
+import com.qianyi.shine.utils.Utils;
 import com.yanzhikai.pictureprogressbar.PictureProgressBar;
 
 import java.util.List;
@@ -59,6 +67,10 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
     public int currentNum = 0;
     @BindView(R.id.pre_question)
     public TextView pre_question;
+    @BindView(R.id.ll_openVip)
+    public LinearLayout ll_openVip;
+    @BindView(R.id.myScrollview)
+    public ScrollView myScrollview;
     //用于记录性格测试答案的Stringbuilder
     public StringBuilder CharachorStringBuilder = new StringBuilder();
     //用于记录兴趣测试答案的Stringbuilder
@@ -68,6 +80,8 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
     //用于记录当前兴趣测试答案
     public String currentInterestAnswer;
     private List<HLDBean.HLDData.HLDInfo.HLDQuestionLIST> hldQuestion; ;
+    private MyReceiver myReceiver;
+    private String isVip;
 
     @Override
     protected void initViews() {
@@ -83,6 +97,15 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         title.setText("测试");
         pb.setDrawableIds(new int[]{R.drawable.i00, R.drawable.i01, R.drawable.i02, R.drawable.i03, R.drawable.i04, R.drawable.i05, R.drawable.i06});
         pb.setProgress(0);
+
+        //注册广播
+        myReceiver= new MyReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.open.vip");
+        registerReceiver(myReceiver,intentFilter);
+
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        isVip=loginInfo.getIs_vip();
     }
 
     @Override
@@ -118,6 +141,13 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         apiTest.getHLD_TestData(apiConstant.GETHLDINTERESTDDATA, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, String s) {
+                if (isVip.equals("0")){
+                    myScrollview.setVisibility(View.GONE);
+                    ll_openVip.setVisibility(View.VISIBLE);
+                }else if(isVip.equals("1")){
+                    myScrollview.setVisibility(View.VISIBLE);
+                    ll_openVip.setVisibility(View.GONE);
+                }
                 loadingDialog.dismiss();
                 Gson gson =new Gson();
                 HLDBean hldBean = gson.fromJson(s, HLDBean.class);
@@ -167,6 +197,13 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         apiTest.getMIT_TestData(apiConstant.GETMBTDATA, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, String s) {
+                if (isVip.equals("0")){
+                    myScrollview.setVisibility(View.GONE);
+                    ll_openVip.setVisibility(View.VISIBLE);
+                }else if(isVip.equals("1")){
+                    myScrollview.setVisibility(View.VISIBLE);
+                    ll_openVip.setVisibility(View.GONE);
+                }
                 loadingDialog.dismiss();
                 Gson gson = new Gson();
                 MitBean mitBean = gson.fromJson(s, MitBean.class);
@@ -262,7 +299,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
-    @OnClick({R.id.next_question_btn, R.id.pre_question})
+    @OnClick({R.id.next_question_btn, R.id.pre_question,R.id.btn_openVip})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -271,7 +308,6 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
                     doCharactor();
                 } else if ("1".equals(testType)) {
                     doInterest();
-
                 }
                 break;
             case R.id.pre_question:
@@ -296,16 +332,13 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
                     }
 
                 }
-
-
                 break;
-
-            default:
+            case R.id.btn_openVip:
+                jumpActivity(TestActivity.this, VipActivity.class);
                 break;
         }
 
     }
-
     /***
      * 处理兴趣测试结果
      */
@@ -346,6 +379,24 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
             intent.putExtra("CharatorResult",CharachorStringBuilder.toString());
             startActivity(intent);
             finish();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myReceiver);
+    }
+
+    //接收支付成功的广播
+    class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("com.action.open.vip")){
+                ll_openVip.setVisibility(View.GONE);
+                myScrollview.setVisibility(View.VISIBLE);
+            }
         }
     }
 

@@ -1,6 +1,9 @@
 package com.qianyi.shine.ui.home.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -30,6 +34,7 @@ import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
 import com.qianyi.shine.ui.home.adapter.PriorityCollegeAdapter;
 import com.qianyi.shine.ui.home.bean.SchoolInfo;
 import com.qianyi.shine.ui.home.bean.UniversityBean;
+import com.qianyi.shine.ui.mine.activity.VipActivity;
 import com.qianyi.shine.utils.Utils;
 import com.yyydjk.library.DropDownMenu;
 
@@ -62,6 +67,8 @@ public class PriorityCollegeActivity extends BaseActivity {
     public DropDownMenu mDropDownMenu;
     @BindView(R.id.tv_title)
     public TextView tv_title;
+    @BindView(R.id.btn_openVip)
+    public Button btn_openVip;
     //**************
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
@@ -70,12 +77,17 @@ public class PriorityCollegeActivity extends BaseActivity {
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private View view_header;
-    private String member_id,order="rate",area="",school_type="",rate_type="";
+    private String member_id,order="rate",area="",school_type="",rate_type="",isVip;
     private TextView reload;
     private RelativeLayout no_internet_rl,no_data_rl;
     private CustomLoadingDialog customLoadingDialog;
+    private MyReceiver myReceiver;
+    private  LoginBean.LoginData.LoginInfo loginInfo;
     @Override
     protected void initViews() {
+        loginInfo= Utils.readUser(this);
+        member_id=loginInfo.getId();
+        isVip=loginInfo.getIs_vip();
         customLoadingDialog=new CustomLoadingDialog(this);
         Intent intent=getIntent();
         if (intent!=null){
@@ -185,6 +197,13 @@ public class PriorityCollegeActivity extends BaseActivity {
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
         //清空popupviews,否则报tab的数量和popupviews的数量不相等的错
         popupViews.clear();
+
+        //注册广播
+        myReceiver=new MyReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.open.vip");
+        registerReceiver(myReceiver,intentFilter);
+
     }
     @Override
     protected void initData() {
@@ -259,8 +278,6 @@ public class PriorityCollegeActivity extends BaseActivity {
     }
     //刷新
     private void refresh() {
-        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
-        member_id=loginInfo.getId();
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
        apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, order,area ,school_type,rate_type, new RequestCallBack<String>() {
@@ -276,6 +293,12 @@ public class PriorityCollegeActivity extends BaseActivity {
                        List<SchoolInfo> priorSchoolList =universityBean.getData().getInfo().getPriorSchoolList();
                        if (priorSchoolList!=null && priorSchoolList.size()>0){
                            setData(true,priorSchoolList);
+                           isVip=loginInfo.getIs_vip();
+                           if (isVip.equals("0")){
+                               btn_openVip.setVisibility(View.VISIBLE);
+                           }else if (isVip.equals("1")){
+                               btn_openVip.setVisibility(View.GONE);
+                           }
                            swipeRefreshLayout.setVisibility(View.VISIBLE);
                            no_internet_rl.setVisibility(View.GONE);
                            no_data_rl.setVisibility(View.GONE);
@@ -343,7 +366,6 @@ public class PriorityCollegeActivity extends BaseActivity {
         mNextRequestPage++;
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {
-            Log.i("uio","isisisojfsojf===()()()()()");
             mAdapter.setNewData(data);
         } else {
             if (size > 0) {
@@ -358,12 +380,32 @@ public class PriorityCollegeActivity extends BaseActivity {
             mAdapter.loadMoreComplete();
         }
     }
-    @OnClick({R.id.iv_back})
+    @OnClick({R.id.iv_back,R.id.btn_openVip})
     public void click(View view){
         switch (view.getId()){
             case R.id.iv_back:
                 finish();
                 break;
+            case R.id.btn_openVip:
+                jumpActivity(PriorityCollegeActivity.this, VipActivity.class);
+                break;
         }
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myReceiver);
+    }
+    //接收支付成功的广播
+    class MyReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("com.action.open.vip")){
+                btn_openVip.setVisibility(View.GONE);
+                refresh();
+            }
+        }
+    }
+
 }

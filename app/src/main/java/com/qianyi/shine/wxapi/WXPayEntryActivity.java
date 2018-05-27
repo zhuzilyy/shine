@@ -54,7 +54,6 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 	public void onResp(BaseResp resp) {
 		if (resp.errCode == BaseResp.ErrCode.ERR_OK) {
 			//֧支付成功
-			Toast.makeText(this, "xxx,chengggong百元", Toast.LENGTH_SHORT).show();
 			LoginBean.LoginData.LoginInfo user = Utils.readUser(WXPayEntryActivity.this);
 			if(user!=null){
 				apiAccount.updateUserInfo(apiConstant.GETMEMBERINFO, user.getId(), new RequestCallBack<String>() {
@@ -74,6 +73,9 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 											Utils.clearSharedUser(WXPayEntryActivity.this);
 											//存储当前用户
 											Utils.saveUser(user,WXPayEntryActivity.this);
+											Intent intent=new Intent();
+											intent.setAction("com.action.open.vip");
+											sendBroadcast(intent);
 											finish();
 										}catch (Exception e){
 											Log.i("excaption_shine",e.getMessage());

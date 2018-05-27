@@ -162,11 +162,11 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
     }
     //设置意愿的数据
     private void setWillingData(TextView tv_collegeData,TextView tv_willings) {
-        String area = (String) SPUtils.get(IntelligentFillCollegeActivity.this, "area", "");
-        String type = (String) SPUtils.get(IntelligentFillCollegeActivity.this, "type", "");
-        String score = (String) SPUtils.get(IntelligentFillCollegeActivity.this, "score", "");
-        tv_collegeData.setText(area+"/"+type+"/"+score);
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        String score=loginInfo.getMember_scoreinfo().getScore();
+        String area=loginInfo.getMember_scoreinfo().getProv();
+        String type=loginInfo.getMember_scoreinfo().getType();
+        tv_collegeData.setText(area+"/"+type+"/"+score);
         intention_area = loginInfo.getMember_scoreinfo().getIntention_area();
         intention_job = loginInfo.getMember_scoreinfo().getIntention_job();
         intention_major = loginInfo.getMember_scoreinfo().getIntention_major();

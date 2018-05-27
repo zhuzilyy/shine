@@ -15,6 +15,7 @@ import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
+import com.qianyi.shine.ui.account.activity.OccupationWebviewActivity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
 import com.qianyi.shine.ui.home.adapter.EmploymentAdapter;
 import com.qianyi.shine.ui.home.bean.ArticleInfo;
@@ -109,7 +110,7 @@ public class ZhuankeFragment extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent=new Intent(getActivity(), WebviewActivity.class);
+                Intent intent=new Intent(getActivity(), OccupationWebviewActivity.class);
                 intent.putExtra("title","详情");
                 intent.putExtra("url",articleList.get(i).getWeburl());
                 startActivity(intent);

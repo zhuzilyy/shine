@@ -1,9 +1,14 @@
 package com.qianyi.shine.ui.college.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -20,7 +25,11 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseFragment;
+import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.entivity.ProfessionBean;
+import com.qianyi.shine.ui.college.view.MyScrollview;
+import com.qianyi.shine.ui.home.activity.PriorityProfessionalDetailsActivity;
+import com.qianyi.shine.utils.Utils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -45,8 +54,13 @@ public class Profession_ProspectsFragment extends BaseFragment {
     @BindView(R.id.tv_moreCity) public TextView tv_moreCity;
     @BindView(R.id.tv_fiveyearMoney) public TextView tv_fiveyearMoney;
     @BindView(R.id.tv_moreIndutory) public TextView tv_moreIndutory;
-    @BindView(R.id.tv_moneyOrder) public TextView tv_moneyOrder;
-
+    @BindView(R.id.tv_moneyOrder)
+    public TextView tv_moneyOrder;
+    @BindView(R.id.ll_openVip)
+    public LinearLayout ll_openVip;
+    @BindView(R.id.myScrollview)
+    public MyScrollview myScrollview;
+    private MyReceiver myReceiver;
     public ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo getMajorInfo() {
         return majorInfo;
     }
@@ -56,12 +70,20 @@ public class Profession_ProspectsFragment extends BaseFragment {
         initMdata(majorInfo);
 
     }
-
     /***
      * 赋值数据
      * @param majorInfo
      */
     private void initMdata(ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo majorInfo) {
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
+        String isVip=loginInfo.getIs_vip();
+        if (isVip.equals("0")){
+            ll_openVip.setVisibility(View.VISIBLE);
+            myScrollview.setVisibility(View.GONE);
+        }else if (isVip.equals("1")){
+            ll_openVip.setVisibility(View.GONE);
+            myScrollview.setVisibility(View.VISIBLE);
+        }
         if(getMajorInfo() == null){
             return;
         }
@@ -96,10 +118,11 @@ public class Profession_ProspectsFragment extends BaseFragment {
         setPieChart(chat03, "地区方向");
         loadPieCityChartData(chat03);
 
-
-
-
-
+        //注册广播
+        myReceiver=new MyReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.open.vip");
+        getActivity().registerReceiver(myReceiver,intentFilter);
 
     }
 
@@ -465,8 +488,21 @@ public class Profession_ProspectsFragment extends BaseFragment {
         return q;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(myReceiver);
+    }
 
-
-//**************饼图结束***************************************
-
+    //接收支付成功的广播
+    class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("com.action.open.vip")){
+                ll_openVip.setVisibility(View.GONE);
+               myScrollview.setVisibility(View.VISIBLE);
+            }
+        }
+    }
 }

@@ -1,6 +1,9 @@
 package com.qianyi.shine.ui.home.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,6 +29,7 @@ import com.qianyi.shine.api.apiHome;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.career_planning.entity.SuitableForMeEntity;
+import com.qianyi.shine.ui.college.activity.ProfessionalActivity;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.EstablishAdapter;
 import com.qianyi.shine.ui.college.adapter.EstablishProiAdapter;
@@ -32,6 +37,7 @@ import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
 import com.qianyi.shine.ui.gaokao_news.view.XTitleView;
 import com.qianyi.shine.ui.home.bean.ProfessionPriorBean;
 import com.qianyi.shine.ui.home.bean.SchoolInfo;
+import com.qianyi.shine.ui.mine.activity.VipActivity;
 import com.qianyi.shine.utils.Utils;
 import com.yyydjk.library.DropDownMenu;
 
@@ -67,6 +73,8 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     public DropDownMenu mDropDownMenu;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.ll_openVip)
+    LinearLayout ll_openVip;
     //**************
     private SwipeRefreshLayout swipeRefreshLayout;
     private RelativeLayout no_data_rl;
@@ -78,10 +86,17 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     private String major_id = "";
     private String mCity = "";
     private String mOrder = "";
-
-
+    private String isVip;
+    private MyReceiver myReceiver;
     @Override
     protected void initViews() {
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        isVip=loginInfo.getIs_vip();
+        if (isVip.equals("0")){
+            ll_openVip.setVisibility(View.VISIBLE);
+        }else if (isVip.equals("1")){
+            ll_openVip.setVisibility(View.GONE);
+        }
         BaseActivity.addActivity(this);
         tv_title.setText("专业优先");
 
@@ -162,6 +177,12 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         popupViews.clear();
 
 
+        //注册广播
+        myReceiver=new MyReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.open.vip");
+        registerReceiver(myReceiver,intentFilter);
+
     }
 
 
@@ -202,7 +223,6 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     protected void initListener() {
 
     }
-
     private void initAdapter() {
         mAdapter = new EstablishProiAdapter(PriorityProfessionalDetailsActivity.this);
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
@@ -225,10 +245,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
                 PriorityProfessionalDetailsActivity.this.startActivity(intent);
             }
         });
-
-
     }
-
     private void initRefreshLayout() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -237,7 +254,6 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
             }
         });
     }
-
     //刷新
     private void refresh() {
         LoginBean.LoginData.LoginInfo user = Utils.readUser(PriorityProfessionalDetailsActivity.this);
@@ -261,7 +277,6 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
                         ProfessionPriorBean priorBean = gson.fromJson(s, ProfessionPriorBean.class);
                         if (priorBean != null) {
                             String code = priorBean.getCode();
-
                             ProfessionPriorBean.ProfessionPriorData priorData = priorBean.getData();
                             if (priorData != null) {
                                 ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo priorInfo = priorData.getInfo();
@@ -277,14 +292,9 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
                                         swipeRefreshLayout.setVisibility(View.GONE);
                                         no_data_rl.setVisibility(View.VISIBLE);
                                     }
-
-
                                 }
-
-
                             }
                         }
-
                     }
                 });
             }
@@ -352,13 +362,30 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.iv_back})
+    @OnClick({R.id.iv_back,R.id.btn_openVip})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
+            case R.id.btn_openVip:
+                jumpActivity(PriorityProfessionalDetailsActivity.this, VipActivity.class);
+                break;
         }
     }
-
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myReceiver);
+    }
+    //接收支付成功的广播
+    class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("com.action.open.vip")){
+                ll_openVip.setVisibility(View.GONE);
+                refresh();
+            }
+        }
+    }
 }

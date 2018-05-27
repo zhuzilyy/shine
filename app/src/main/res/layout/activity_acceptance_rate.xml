@@ -88,5 +88,5 @@
     </android.support.v4.widget.SwipeRefreshLayout>
     <include layout="@layout/common_wrong_intert" />
     <include layout="@layout/common_no_data" />
-
+    <include layout="@layout/layout_not_vip"/>
 </LinearLayout>
