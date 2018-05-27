@@ -420,8 +420,6 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
         if(user==null){
             return;
         }
-
-
         final CustomLoadingDialog loadingDialog = new CustomLoadingDialog(VipActivity.this);
         loadingDialog.show();
         apiPay.wxpay(apiConstant.WXPAY, user.getId(), new RequestCallBack<String>() {
@@ -462,7 +460,6 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
      * @param payInfo
      */
     private void startWXPayPage(final WXPayBean.WXPayData.WXPayInfo payInfo) {
-
         apiConstant.APP_ID=payInfo.getAppid();
         apiConstant.MCH_ID=payInfo.getMch_id();
         apiConstant.NOTIFY_URL=payInfo.getNotify_url();

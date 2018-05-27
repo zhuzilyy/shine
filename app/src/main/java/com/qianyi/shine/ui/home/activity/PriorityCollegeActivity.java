@@ -35,6 +35,7 @@ import com.qianyi.shine.ui.home.adapter.PriorityCollegeAdapter;
 import com.qianyi.shine.ui.home.bean.SchoolInfo;
 import com.qianyi.shine.ui.home.bean.UniversityBean;
 import com.qianyi.shine.ui.mine.activity.VipActivity;
+import com.qianyi.shine.utils.ToastUtils;
 import com.qianyi.shine.utils.Utils;
 import com.yyydjk.library.DropDownMenu;
 
@@ -292,13 +293,14 @@ public class PriorityCollegeActivity extends BaseActivity {
                        UniversityBean universityBean = gson.fromJson(s, UniversityBean.class);
                        List<SchoolInfo> priorSchoolList =universityBean.getData().getInfo().getPriorSchoolList();
                        if (priorSchoolList!=null && priorSchoolList.size()>0){
-                           setData(true,priorSchoolList);
-                           isVip=loginInfo.getIs_vip();
+                           LoginBean.LoginData.LoginInfo useInfo = Utils.readUser(PriorityCollegeActivity.this);
+                           isVip= useInfo.getIs_vip();
                            if (isVip.equals("0")){
                                btn_openVip.setVisibility(View.VISIBLE);
                            }else if (isVip.equals("1")){
                                btn_openVip.setVisibility(View.GONE);
                            }
+                           setData(true,priorSchoolList);
                            swipeRefreshLayout.setVisibility(View.VISIBLE);
                            no_internet_rl.setVisibility(View.GONE);
                            no_data_rl.setVisibility(View.GONE);
