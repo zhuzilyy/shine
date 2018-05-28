@@ -49,6 +49,7 @@ import com.qianyi.shine.ui.mine.addressUtils.LoginDialogFragment;
 import com.qianyi.shine.ui.mine.view.CircleImageView;
 import com.qianyi.shine.utils.BitmapToBase64;
 import com.qianyi.shine.utils.ListActivity;
+import com.qianyi.shine.utils.PhotoUtils;
 import com.qianyi.shine.utils.SDPathUtils;
 import com.qianyi.shine.utils.SPUtils;
 import com.qianyi.shine.utils.Utils;
@@ -92,6 +93,15 @@ public class PersonalInfoActivity extends BaseActivity implements LoginDialogFra
     private ImageView iv_female,iv_male;
     private String province,selectCity,selectCounty,sexType="1";
     private CustomLoadingDialog dialog;
+
+    private static final int CODE_GALLERY_REQUEST = 0xa0;
+    private static final int CODE_CAMERA_REQUEST = 0xa1;
+    private static final int CODE_RESULT_REQUEST = 0xa2;
+    private File fileUri = new File(Environment.getExternalStorageDirectory().getPath() + "/photo.jpg");
+    private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() + "/crop_photo.jpg");
+    private Uri imageUri;
+    private Uri cropImageUri;
+
     @Override
     protected void initViews() {
         tv_title.setText("我的资料");
@@ -301,68 +311,82 @@ public class PersonalInfoActivity extends BaseActivity implements LoginDialogFra
     }
     //跳转到拍照
     private void takePhoto() {
-        if (ContextCompat.checkSelfPermission(PersonalInfoActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(PersonalInfoActivity.this, new String[]{Manifest.permission.CAMERA}, 222);
-            return;
-        } else if (ContextCompat.checkSelfPermission(PersonalInfoActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(PersonalInfoActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 222);
-            return;
-        } else if (ContextCompat.checkSelfPermission(PersonalInfoActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(PersonalInfoActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 222);
-            return;
-        } else {
-            Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(SDPathUtils.getCachePath(), "temp.jpg")));
-                startActivityForResult(openCameraIntent, 2);
-            } else {
-                //获取系統版本
-                int currentapiVersion = Build.VERSION.SDK_INT;
-                // 激活相机
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                // 判断存储卡是否可以用，可用进行存储
-                    SimpleDateFormat timeStampFormat = new SimpleDateFormat(
-                            "yyyy_MM_dd_HH_mm_ss");
-                    String filename = timeStampFormat.format(new Date());
-                    File outputImagepath = new File(Environment.getExternalStorageDirectory(),
-                            filename + ".jpg");
-                    if (currentapiVersion < 24) {
-                        // 从文件中创建uri
-                        Uri uri = Uri.fromFile(outputImagepath);
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                    } else {
-                        //兼容android7.0 使用共享文件的形式
-                        ContentValues contentValues = new ContentValues(1);
-                        contentValues.put(MediaStore.Images.Media.DATA, outputImagepath.getAbsolutePath());
-                        Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                    }
-                // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_CAREMA
-                startActivityForResult(intent, 2);
+        requestPermissions(PersonalInfoActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, new RequestPermissionCallBack() {
+            @Override
+            public void granted() {
+                if (hasSdcard()) {
+                    imageUri = Uri.fromFile(fileUri);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                        //通过FileProvider创建一个content类型的Uri
+                        imageUri = FileProvider.getUriForFile(PersonalInfoActivity.this, "com.zl.shine_.fileprovider", fileUri);
+                    PhotoUtils.takePicture(PersonalInfoActivity.this, imageUri, CODE_CAMERA_REQUEST);
+                } else {
+                    Toast.makeText(PersonalInfoActivity.this, "设备没有SD卡！", Toast.LENGTH_SHORT).show();
+                    Log.e("asd", "设备没有SD卡");
+                }
             }
-        }
+
+            @Override
+            public void denied() {
+                Toast.makeText(PersonalInfoActivity.this, "部分权限获取失败，正常功能受到影响", Toast.LENGTH_LONG).show();
+            }
+        });
+
 
     }
     //读取相册
     private void readPhotoAlbum() {
-        Intent intent = new Intent(Intent.ACTION_PICK, null);
-        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        startActivityForResult(intent, 1);
+        requestPermissions(PersonalInfoActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, new RequestPermissionCallBack() {
+            @Override
+            public void granted() {
+                PhotoUtils.openPic(PersonalInfoActivity.this, CODE_GALLERY_REQUEST);
+            }
+
+            @Override
+            public void denied() {
+                Toast.makeText(PersonalInfoActivity.this, "部分权限获取失败，正常功能受到影响", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && data != null) {
-            startPhotoZoom(data.getData());
-        } else if (requestCode == 2) {
-            File temp = new File(SDPathUtils.getCachePath(), "temp.jpg");
-            startPhotoZoom(Uri.fromFile(temp));
-        } else if (requestCode == 3) {
-            if (data != null) {
-                setPicToView(data);
+        int output_X = 480, output_Y = 480;
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case CODE_CAMERA_REQUEST://拍照完成回调
+                    cropImageUri = Uri.fromFile(fileCropUri);
+                    PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 0, 0, output_X, output_Y, CODE_RESULT_REQUEST);
+                    break;
+                case CODE_GALLERY_REQUEST://访问相册完成回调
+                    if (hasSdcard()) {
+                        cropImageUri = Uri.fromFile(fileCropUri);
+                        Uri newUri = Uri.parse(PhotoUtils.getPath(this, data.getData()));
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                            newUri = FileProvider.getUriForFile(this, "com.zl.shine_.fileprovider", new File(newUri.getPath()));
+                        PhotoUtils.cropImageUri(this, newUri, cropImageUri, 0, 0, output_X, output_Y, CODE_RESULT_REQUEST);
+                    } else {
+                        Toast.makeText(PersonalInfoActivity.this, "设备没有SD卡!", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case CODE_RESULT_REQUEST:
+                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
+                    if (bitmap != null) {
+                        showImages(bitmap);
+
+                    }
+                    break;
             }
         }
     }
+
+    private void showImages(Bitmap bitmap) {
+        iv_mine.setImageBitmap(bitmap);
+        strBase64= BitmapToBase64.Bitmap2StrByBase64(bitmap);
+    }
+
     /**
      * 裁剪图片方法实现
      *
@@ -429,4 +453,13 @@ public class PersonalInfoActivity extends BaseActivity implements LoginDialogFra
         });
         quitDialog.show();
     }
+
+    /**
+     * 检查设备是否存在SDCard的工具方法
+     */
+    public static boolean hasSdcard() {
+        String state = Environment.getExternalStorageState();
+        return state.equals(Environment.MEDIA_MOUNTED);
+    }
+
 }
