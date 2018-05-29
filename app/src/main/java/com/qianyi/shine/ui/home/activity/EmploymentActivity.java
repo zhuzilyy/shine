@@ -71,7 +71,6 @@ public class EmploymentActivity extends BaseActivity {
         }
         currentFragment = fragment;
     }
-
     @Override
     protected void initData() {
 

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.qianyi.shine.R;
@@ -60,6 +61,7 @@ public class OccupationProsFragment extends BaseFragment {
     private CustomLoadingDialog customLoadingDialog;
     @BindView(R.id.id_progress) ProgressBar id_progress;
     private List<SalaryMarginInfo> salaryMarginAllInfoList,salaryMarginInfoList;
+    private String weburl;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_occupation_baseinfo,null);
@@ -121,7 +123,8 @@ public class OccupationProsFragment extends BaseFragment {
                               number= number.replace("%","");
                            }
                             id_progress.setProgress(Integer.parseInt(number));
-                            String weburl = job_info.getWeburl();
+                            weburl=jobInfoBean.getData().getInfo().getWeburl();
+                            Toast.makeText(getActivity(), weburl+"=======111111111=====", Toast.LENGTH_SHORT).show();
                             //发送广播
                             String name = job_info.getName();
                             String category = job_info.getCategory();
@@ -145,7 +148,7 @@ public class OccupationProsFragment extends BaseFragment {
                             intent.putExtra("name",occupationName);
                             intent.putExtra("category","暂无数据");
                             intent.putExtra("occupationId","");
-                            intent.putExtra("weburl","");
+                            intent.putExtra("weburl",weburl);
                             intent.setAction("com.action.occupation");
                             getActivity().sendBroadcast(intent);
                             myScrollview.setVisibility(View.GONE);

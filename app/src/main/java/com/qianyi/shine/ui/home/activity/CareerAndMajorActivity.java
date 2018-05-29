@@ -74,9 +74,11 @@ public class CareerAndMajorActivity extends BaseActivity {
                             JobBean jobBean = gson.fromJson(s, JobBean.class);
                             List<FirstJob> firstJobList = jobBean.getData().getInfo().getJobList();
                             if (firstJobList.size()>0){
-                                recyclerView.setVisibility(View.VISIBLE);
-                                no_internet_rl.setVisibility(View.GONE);
-                                no_data_rl.setVisibility(View.GONE);
+                                if (recyclerView!=null){
+                                    recyclerView.setVisibility(View.VISIBLE);
+                                    no_internet_rl.setVisibility(View.GONE);
+                                    no_data_rl.setVisibility(View.GONE);
+                                }
                                 //第一层数据
                                 for (int i = 0; i < firstJobList.size(); i++) {
                                     FirstJob firstJob = firstJobList.get(i);

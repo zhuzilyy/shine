@@ -69,6 +69,7 @@ public class OccupationBaseInfoFragment extends BaseFragment {
     private CustomLoadingDialog customLoadingDialog;
     @BindView(R.id.id_progress) ProgressBar id_progress;
     private List<SalaryMarginInfo> salaryMarginAllInfoList,salaryMarginInfoList;
+    private String weburl;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_occupation_baseinfo,null);
@@ -111,7 +112,6 @@ public class OccupationBaseInfoFragment extends BaseFragment {
         apiHome.occupationDetail(apiConstant.OCCUPATION_DETAIL, occupationName,occupationParentName,new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
-
                 customLoadingDialog.dismiss();
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
@@ -119,6 +119,7 @@ public class OccupationBaseInfoFragment extends BaseFragment {
                         Gson gson=new Gson();
                         JobInfoBean jobInfoBean = gson.fromJson(s, JobInfoBean.class);
                         String code = jobInfoBean.getCode();
+                        weburl=jobInfoBean.getData().getInfo().getWeburl();
                         if (code.equals("0")){
                             myScrollview.setVisibility(View.VISIBLE);
                             no_internet_rl.setVisibility(View.GONE);
@@ -134,7 +135,7 @@ public class OccupationBaseInfoFragment extends BaseFragment {
                               number= number.replace("%","");
                            }
                             id_progress.setProgress(Integer.parseInt(number));
-                            String weburl = job_info.getWeburl();
+                            weburl= jobInfoBean.getData().getInfo().getWeburl();
                             //发送广播
                             String name = job_info.getName();
                             String category = job_info.getCategory();
@@ -158,7 +159,7 @@ public class OccupationBaseInfoFragment extends BaseFragment {
                             intent.putExtra("name",occupationName);
                             intent.putExtra("category","暂无数据");
                             intent.putExtra("occupationId","");
-                            intent.putExtra("weburl","");
+                            intent.putExtra("weburl",weburl);
                             intent.setAction("com.action.occupation");
                             getActivity().sendBroadcast(intent);
                             myScrollview.setVisibility(View.GONE);

@@ -7,6 +7,7 @@ import java.util.List;
  */
 
 public class OccupationInfo {
+    private String weburl;
     private OccupationInnerInfo job_info;
     public OccupationInnerInfo getJob_info() {
         return job_info;
@@ -15,4 +16,12 @@ public class OccupationInfo {
     public void setJob_info(OccupationInnerInfo job_info) {
         this.job_info = job_info;
     }
+    public String getWeburl() {
+        return weburl;
+    }
+
+    public void setWeburl(String weburl) {
+        this.weburl = weburl;
+    }
+
 }
