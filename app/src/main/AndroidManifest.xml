@@ -253,6 +253,10 @@
         <activity android:name=".ui.home.activity.OccupationProsActivity"
             android:screenOrientation="portrait"
             />
+        <!--职业和专业-->
+        <activity android:name=".ui.home.activity.MajorAndJobDetailsActivity"
+            android:screenOrientation="portrait"
+            />
         <receiver android:name=".receiver.MyReceiver">
             <intent-filter>
                 <action android:name="com.action.search"/>

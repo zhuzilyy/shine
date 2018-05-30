@@ -343,14 +343,13 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
                     intent.putExtra("occupationParentName",occupationParentName);
                     startActivity(intent);
                 }else if (!TextUtils.isEmpty(intention_job) || !TextUtils.isEmpty(intention_major)){
-                    Intent intent = new Intent(IntelligentFillCollegeActivity.this, PriorityProfessionalDetailsActivity.class);
+                    Intent intent = new Intent(IntelligentFillCollegeActivity.this, MajorAndJobDetailsActivity.class);
                     intent.putExtra("major_id",majorId);
                     startActivity(intent);
                 }else{
                     Toast.makeText(this, "请先设置意愿", Toast.LENGTH_SHORT).show();
                 }
                 break;
-
         }
     }
 
