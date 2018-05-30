@@ -31,17 +31,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo"
         android:theme="@style/AppTheme">
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="applicationId.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true"
-            >
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"
-                />
-        </provider>
+
         <!--微信支付开始-->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
@@ -259,10 +249,44 @@
         <activity android:name=".ui.account.activity.OccupationWebviewActivity"
             android:screenOrientation="portrait"
             />
+        <!--就业前景-->
+        <activity android:name=".ui.home.activity.OccupationProsActivity"
+            android:screenOrientation="portrait"
+            />
         <receiver android:name=".receiver.MyReceiver">
             <intent-filter>
                 <action android:name="com.action.search"/>
             </intent-filter>
         </receiver>
+
+        //********************************************************************
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.zl.shine_.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!--QQ登录-->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent101475945" />
+              <!--  例如 ：  <data android:scheme="tencent123123123" />-->
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
     </application>
 </manifest>

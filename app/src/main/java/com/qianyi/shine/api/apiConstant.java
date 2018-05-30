@@ -4,6 +4,7 @@ package com.qianyi.shine.api;
  * Created by Administrator on 2018/4/10.
  */
 public class apiConstant {
+   // public static final String BASE_URL="http://39.104.109.53/api/";
     public static final String BASE_URL="http://39.104.109.53:8080/api/";
     //注册
     public static final String REGISTER=BASE_URL+"register";
@@ -53,6 +54,8 @@ public class apiConstant {
     public static final String WILLING_SETTING=BASE_URL+"insert_intentioninfo";
     //智能填报
     public static final String INTELLGENT_FILL=BASE_URL+"prior_noopsyche";
+    //测录取率
+    public static final String ACCEPT_RATE=BASE_URL+"prior_school";
     //专业设置
     public static final String MAJOR_SETTING=BASE_URL+"university_majorinfo";
     //就业前景

@@ -142,14 +142,17 @@ public class TreeAdapter<T extends RvTree> extends RecyclerView.Adapter<TreeAdap
 
     class TreeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView icon;
+        private ImageView icon1;
+        private ImageView icon2;
         private TextView title;
         private ImageView detail;
         private LinearLayout ll_item;
 
         private TreeViewHolder(View itemView) {
             super(itemView);
-
             icon = (ImageView) itemView.findViewById(R.id.rv_item_tree_icon);
+            icon1 = (ImageView) itemView.findViewById(R.id.rv_item_tree_icon1);
+            icon2 = (ImageView) itemView.findViewById(R.id.rv_item_tree_icon2);
             title = (TextView) itemView.findViewById(R.id.rv_item_tree_title);
             detail = (ImageView) itemView.findViewById(R.id.tv_item_tree_detail);
             ll_item = (LinearLayout) itemView.findViewById(R.id.item);
@@ -163,7 +166,7 @@ public class TreeAdapter<T extends RvTree> extends RecyclerView.Adapter<TreeAdap
 
         private void setControl(Node node) {
             title.setText(node.getName());
-            title.setPadding(node.getLevel() * PADDING, 3, 3, 3);
+            //title.setPadding(node.getLevel() * PADDING, 3, 3, 3);
             detail.setImageResource(node.getResId());
             if (node.isLeaf()) {
                 icon.setImageResource(0);
@@ -171,10 +174,14 @@ public class TreeAdapter<T extends RvTree> extends RecyclerView.Adapter<TreeAdap
             }
             //判断第二层数据向里面偏移
             if (node.getLevel()==1){
-                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(icon.getLayoutParams());
+             /*   LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(icon.getLayoutParams());
+                //lp = new LinearLayout.LayoutParams();
                 lp.setMargins(20, 0, 0, 0);
-                icon.setLayoutParams(lp);
+                icon.setLayoutParams(lp);*/
             }
+            //LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(ll_item.getLayoutParams());
+            //ll_item.setPadding(node.getLevel()*20,0,0,0);
+
             int rotateDegree = node.isExpand() ? 90 : 0;
             icon.setRotation(0);
             icon.setRotation(rotateDegree);

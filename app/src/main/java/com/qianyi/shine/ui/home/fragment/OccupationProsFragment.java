@@ -20,24 +20,16 @@ import com.qianyi.shine.base.BaseFragment;
 import com.qianyi.shine.callbcak.RequestCallBack;
 import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.college.adapter.OccupationRightProfessionAdapter;
-import com.qianyi.shine.ui.college.adapter.RightProfessionAdapter;
 import com.qianyi.shine.ui.college.view.MyScrollview;
-import com.qianyi.shine.ui.home.activity.OccupationProsActivity;
 import com.qianyi.shine.ui.home.bean.JobInfoBean;
 import com.qianyi.shine.ui.home.bean.JobMajor;
 import com.qianyi.shine.ui.home.bean.OccupationInnerInfo;
-import com.qianyi.shine.ui.home.bean.SalaryMajorInfo;
 import com.qianyi.shine.ui.home.bean.SalaryMarginInfo;
-import com.qianyi.shine.ui.mine.activity.VipActivity;
-import com.qianyi.shine.utils.SPUtils;
 import com.qianyi.shine.utils.Utils;
 
-import java.security.acl.LastOwnerException;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -45,7 +37,7 @@ import okhttp3.Response;
  * Created by Administrator on 2018/4/7.
  */
 
-public class OccupationBaseInfoFragment extends BaseFragment {
+public class OccupationProsFragment extends BaseFragment {
     //对口职业
     @BindView(R.id.rightprofession_rv)
     public RecyclerView rightprofession_rv;
@@ -82,8 +74,6 @@ public class OccupationBaseInfoFragment extends BaseFragment {
             occupationName=intent.getStringExtra("occupationName");
             occupationParentName=intent.getStringExtra("occupationParentName");
         }
-        salaryMarginAllInfoList=new ArrayList<>();
-        salaryMarginInfoList=new ArrayList<>();
     }
     @Override
     protected void initData() {
@@ -108,7 +98,6 @@ public class OccupationBaseInfoFragment extends BaseFragment {
     }
     private void getData() {
         Log.i("tag","occupationName"+occupationName);
-        Log.i("tag","occupationParentName"+occupationParentName);
         apiHome.occupationDetail(apiConstant.OCCUPATION_DETAIL, occupationName,occupationParentName,new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
@@ -119,14 +108,13 @@ public class OccupationBaseInfoFragment extends BaseFragment {
                         Gson gson=new Gson();
                         JobInfoBean jobInfoBean = gson.fromJson(s, JobInfoBean.class);
                         String code = jobInfoBean.getCode();
-                        weburl=jobInfoBean.getData().getInfo().getWeburl();
                         if (code.equals("0")){
                             myScrollview.setVisibility(View.VISIBLE);
                             no_internet_rl.setVisibility(View.GONE);
                             no_data_rl.setVisibility(View.GONE);
                             OccupationInnerInfo job_info = jobInfoBean.getData().getInfo().getJob_info();
-                            salaryMarginInfoList=jobInfoBean.getData().getInfo().getJob_info().getSalary_margin();
-                            salaryMarginAllInfoList=jobInfoBean.getData().getInfo().getJob_info().getSalary_margin_all();
+                          /*  salaryMarginInfoList=jobInfoBean.getData().getInfo().getSalary_margin();
+                            salaryMarginAllInfoList=jobInfoBean.getData().getInfo().getSalary_margin_all();*/
                             tv_workingContent.setText(job_info.getContent());
                             tv_female.setText(job_info.getFemalte_ratio());
                             tv_male.setText(job_info.getMale_ratio());
@@ -135,7 +123,8 @@ public class OccupationBaseInfoFragment extends BaseFragment {
                               number= number.replace("%","");
                            }
                             id_progress.setProgress(Integer.parseInt(number));
-                            weburl= jobInfoBean.getData().getInfo().getWeburl();
+                            weburl=jobInfoBean.getData().getInfo().getWeburl();
+                            Toast.makeText(getActivity(), weburl+"=======111111111=====", Toast.LENGTH_SHORT).show();
                             //发送广播
                             String name = job_info.getName();
                             String category = job_info.getCategory();
@@ -177,31 +166,5 @@ public class OccupationBaseInfoFragment extends BaseFragment {
                 no_data_rl.setVisibility(View.GONE);
             }
         });
-    }
-    @OnClick({R.id.rl_occupationPros})
-    public void click(View view){
-        switch (view.getId()){
-            case R.id.rl_occupationPros:
-                ArrayList<String> marginListYear,marginListSalary,marginAllListYear,marginAllListSalary;
-                marginListYear=new ArrayList<>();
-                marginListSalary=new ArrayList<>();
-                marginAllListYear=new ArrayList<>();
-                marginAllListSalary=new ArrayList<>();
-                for (int i = 0; i <salaryMarginInfoList.size() ; i++) {
-                    marginListYear.add(salaryMarginInfoList.get(i).getYears());
-                    marginListSalary.add(salaryMarginInfoList.get(i).getSalary());
-                }
-                for (int i = 0; i <salaryMarginAllInfoList.size() ; i++) {
-                    marginAllListYear.add(salaryMarginAllInfoList.get(i).getYears());
-                    marginAllListSalary.add(salaryMarginAllInfoList.get(i).getSalary());
-                }
-                Intent intent=new Intent(getActivity(), OccupationProsActivity.class);
-                intent.putStringArrayListExtra("marginListYear",marginListYear);
-                intent.putStringArrayListExtra("marginListSalary",marginListSalary);
-                intent.putStringArrayListExtra("marginAllListYear",marginAllListYear);
-                intent.putStringArrayListExtra("marginAllListSalary",marginAllListSalary);
-                startActivity(intent);
-            break;
-        }
     }
 }

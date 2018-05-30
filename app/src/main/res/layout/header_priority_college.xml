@@ -20,8 +20,8 @@
             android:layout_height="match_parent"/>
         <TextView
             android:gravity="center"
-            android:text="综合排名"
-            android:layout_weight="1.5"
+            android:text="排名"
+            android:layout_weight="1.2"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
         <View
@@ -72,7 +72,12 @@
             android:background="@color/gray"
             android:layout_width="0.5dp"
             android:layout_height="match_parent"/>
-
+        <TextView
+            android:gravity="center"
+            android:text="批次"
+            android:layout_weight="1.2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
     </LinearLayout>
     <View
         android:background="@color/gray"

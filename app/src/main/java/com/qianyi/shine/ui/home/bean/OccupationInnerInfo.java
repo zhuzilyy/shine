@@ -13,16 +13,23 @@ public class OccupationInnerInfo {
     private String content;
     private String femalte_ratio;
     private String male_ratio;
-    private String weburl;
     private List<JobMajor> job_major;
-    public String getWeburl() {
-        return weburl;
+    private List<SalaryMarginInfo> salary_margin_all;
+    private List<SalaryMarginInfo> salary_margin;
+    public List<SalaryMarginInfo> getSalary_margin_all() {
+        return salary_margin_all;
+    }
+    public void setSalary_margin_all(List<SalaryMarginInfo> salary_margin_all) {
+        this.salary_margin_all = salary_margin_all;
     }
 
-    public void setWeburl(String weburl) {
-        this.weburl = weburl;
+    public List<SalaryMarginInfo> getSalary_margin() {
+        return salary_margin;
     }
 
+    public void setSalary_margin(List<SalaryMarginInfo> salary_margin) {
+        this.salary_margin = salary_margin;
+    }
     public String getZhineng_id() {
         return zhineng_id;
     }

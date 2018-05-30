@@ -103,8 +103,6 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
     }
     @Override
     protected void initViews() {
-        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
-        isVip =loginInfo.getIs_vip();
         customLoadingDialog=new CustomLoadingDialog(getActivity());
         intent = getActivity().getIntent();
         if (intent!=null){
@@ -308,6 +306,8 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
+                        isVip =loginInfo.getIs_vip();
                         if (isVip.equals("0")){
                             myScrollview.setVisibility(View.GONE);
                             no_internet_rl.setVisibility(View.GONE);

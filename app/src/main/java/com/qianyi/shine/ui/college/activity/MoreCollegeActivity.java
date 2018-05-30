@@ -1,6 +1,9 @@
 package com.qianyi.shine.ui.college.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -28,8 +32,10 @@ import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.EstablishAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
+import com.qianyi.shine.ui.home.activity.PriorityCollegeActivity;
 import com.qianyi.shine.ui.home.bean.SchoolInfo;
 import com.qianyi.shine.ui.home.bean.UniversityBean;
+import com.qianyi.shine.ui.mine.activity.VipActivity;
 import com.qianyi.shine.utils.Utils;
 import com.yyydjk.library.DropDownMenu;
 
@@ -58,6 +64,8 @@ public class MoreCollegeActivity extends BaseActivity {
     private String[] types={"综合","理工","财经","农林","医药","师范","体育","政法","艺术","民族","军事","语言"};
     @BindView(R.id.dropDownMenu)
     public DropDownMenu mDropDownMenu;
+    @BindView(R.id.btn_openVip)
+    public Button btn_openVip;
 
     //**************
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -74,6 +82,7 @@ public class MoreCollegeActivity extends BaseActivity {
     private int constellationPosition = 0;
     private int typeConstellationPosition = 0;
     private CustomLoadingDialog customLoadingDialog;
+    private MyReceiver myReceiver;
     @Override
     protected void initViews() {
         tv_title.setText("大学列表");
@@ -178,6 +187,12 @@ public class MoreCollegeActivity extends BaseActivity {
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
         //清空popupviews,否则报tab的数量和popupviews的数量不相等的错
         popupViews.clear();
+
+        //注册广播
+        myReceiver=new MyReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.action.open.vip");
+        registerReceiver(myReceiver,intentFilter);
     }
     @Override
     protected void getResLayout() {
@@ -271,6 +286,13 @@ public class MoreCollegeActivity extends BaseActivity {
                         UniversityBean universityBean = gson.fromJson(s, UniversityBean.class);
                         List<SchoolInfo> recommendUniversityList = universityBean.getData().getInfo().getPriorSchoolList();
                         if (recommendUniversityList!=null && recommendUniversityList.size()>0){
+                            LoginBean.LoginData.LoginInfo useInfo = Utils.readUser(MoreCollegeActivity.this);
+                            String isVip= useInfo.getIs_vip();
+                            if (isVip.equals("0")){
+                                btn_openVip.setVisibility(View.VISIBLE);
+                            }else if (isVip.equals("1")){
+                                btn_openVip.setVisibility(View.GONE);
+                            }
                             setData(true,recommendUniversityList);
                             swipeRefreshLayout.setVisibility(View.VISIBLE);
                             no_internet_rl.setVisibility(View.GONE);
@@ -357,12 +379,31 @@ public class MoreCollegeActivity extends BaseActivity {
             mAdapter.loadMoreComplete();
         }
     }
-    @OnClick({R.id.iv_back})
+    @OnClick({R.id.iv_back,R.id.btn_openVip})
     public void click(View view){
         switch (view.getId()){
             case R.id.iv_back:
                 finish();
                 break;
+            case R.id.btn_openVip:
+                jumpActivity(MoreCollegeActivity.this, VipActivity.class);
+                break;
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myReceiver);
+    }
+    //接收支付成功的广播
+    class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("com.action.open.vip")){
+                btn_openVip.setVisibility(View.GONE);
+                refresh();
+            }
         }
     }
 }

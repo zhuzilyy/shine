@@ -136,7 +136,7 @@ public class AcceptanceRateActivity extends BaseActivity {
     private void refresh() {
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.acceptanceRate(apiConstant.INTELLGENT_FILL, keyWord,memberId,mNextRequestPage,new RequestCallBack<String>() {
+        apiHome.acceptanceRate(apiConstant.ACCEPT_RATE, keyWord,memberId,mNextRequestPage,new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 runOnUiThread(new Runnable() {

@@ -44,8 +44,8 @@ public class GaoKaoNewsActivity extends BaseActivity {
     List<TestEntity> testEntities;
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
-    @BindView(R.id.title)
-    TextView titleView;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
 
     @Override
     protected void initViews() {
@@ -58,7 +58,7 @@ public class GaoKaoNewsActivity extends BaseActivity {
         initRefreshLayout();
         mSwipeRefreshLayout.setRefreshing(true);
         refresh();
-        titleView.setText("高考头条");
+        tv_title.setText("高考头条");
     }
 
     @Override
@@ -104,7 +104,7 @@ public class GaoKaoNewsActivity extends BaseActivity {
                 loadMore();
             }
         });
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
 //        mAdapter.setPreLoadNumber(3);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -130,13 +130,11 @@ public class GaoKaoNewsActivity extends BaseActivity {
                                 ArticleBean.AriticleData ariticleData = articleBean.getData();
                                 if (ariticleData != null) {
                                     ArticleBean.AriticleData.AriticleInfo ariticleInfo = ariticleData.getInfo();
-                                    if(ariticleInfo != null){
+                                  //  if(ariticleInfo != null){
                                         setData(true, ariticleInfo.getArticleList());
                                         mAdapter.setEnableLoadMore(true);
                                         mSwipeRefreshLayout.setRefreshing(false);
-                                    }
-
-
+                                 //   }
                                 }
                             } else {
                                 Toast.makeText(GaoKaoNewsActivity.this, "" + articleBean.getInfo(), Toast.LENGTH_SHORT).show();
@@ -158,7 +156,6 @@ public class GaoKaoNewsActivity extends BaseActivity {
 
     //加载
     private void loadMore() {
-
         mNextRequestPage++;
      //   mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
         apiHome.refresh(apiConstant.ARTICLEMORE, mNextRequestPage,"", new com.qianyi.shine.callbcak.RequestCallBack<String>() {
@@ -172,29 +169,26 @@ public class GaoKaoNewsActivity extends BaseActivity {
                         ArticleBean articleBean = gson.fromJson(s, ArticleBean.class);
                         if (articleBean != null) {
                             String code = articleBean.getCode();
-                            if ("0".equals(code)) {
+                          //  if ("0".equals(code)) {
                                 ArticleBean.AriticleData ariticleData = articleBean.getData();
                                 if (ariticleData != null) {
                                     ArticleBean.AriticleData.AriticleInfo ariticleInfo = ariticleData.getInfo();
-                                    if(ariticleInfo != null){
+                                //    if(ariticleInfo != null){
                                         setData(false, ariticleInfo.getArticleList());
                                         mAdapter.setEnableLoadMore(true);
                                         mSwipeRefreshLayout.setRefreshing(false);
-                                    }
+                                 //   }
                                 }
                             } else {
                                 Toast.makeText(GaoKaoNewsActivity.this, "" + articleBean.getInfo(), Toast.LENGTH_SHORT).show();
                             }
-                        }
+                     //   }
                     }
                 });
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 Log.i("ppp", "132" + e);
-
-
             }
         });
 
@@ -209,7 +203,6 @@ public class GaoKaoNewsActivity extends BaseActivity {
             }
         });
     }
-
     private void setData(boolean isRefresh, List data) {
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {

@@ -36,8 +36,8 @@
         <TextView
             android:id="@+id/tv_rank"
             android:gravity="center"
-            android:text="1"
-            android:layout_weight="1.5"
+            android:text="1.2"
+            android:layout_weight="1.2"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
         <View
@@ -92,6 +92,13 @@
             android:background="@color/common_line"
             android:layout_width="0.5dp"
             android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/tv_pici"
+            android:gravity="center"
+            android:text="8本"
+            android:layout_weight="1.2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
     <View

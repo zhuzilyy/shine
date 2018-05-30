@@ -45,6 +45,8 @@ public class BenkeFragment extends BaseFragment {
     private EmploymentAdapter employmentAdapter;
     private CustomLoadingDialog customLoadingDialog;
     private  List<ArticleInfo> articleList;
+    private Intent intent;
+    private String tag,type;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_benKe=inflater.inflate(R.layout.fragment_benke,null);
@@ -54,6 +56,15 @@ public class BenkeFragment extends BaseFragment {
     @Override
     protected void initViews() {
         customLoadingDialog=new CustomLoadingDialog(getActivity());
+        intent=getActivity().getIntent();
+        if (intent!=null){
+            tag=intent.getStringExtra("tag");
+        }
+        if (tag.equals("homePage")){
+            type="2";
+        }else if (tag.equals("career")){
+            type="6";
+        }
     }
     @Override
     protected void initData() {
@@ -63,7 +74,7 @@ public class BenkeFragment extends BaseFragment {
     private void getData() {
         if (Utils.hasInternet()){
             customLoadingDialog.show();
-            apiHome.getEmployerList(apiConstant.EMPLOYER_BENKE_LIST, "2", new RequestCallBack<String>() {
+            apiHome.getEmployerList(apiConstant.EMPLOYER_BENKE_LIST, type, new RequestCallBack<String>() {
                 @Override
                 public void onSuccess(Call call, Response response, final String s) {
                     getActivity().runOnUiThread(new Runnable() {

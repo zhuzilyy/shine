@@ -1,6 +1,7 @@
 package com.qianyi.shine.fragment;
 
 import android.content.Intent;
+import android.support.v4.app.INotificationSideChannel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class CareerFragment extends BaseFragment implements View.OnClickListener
     @OnClick({R.id.goText_tv,R.id.re_Professionalselection,R.id.re_professional_employment,R.id.re_benke10,R.id.re_zhuanke_10})
     @Override
     public void onClick(View v) {
+        Intent intent=null;
         switch (v.getId()) {
             case R.id.goText_tv:
                 //去测试
@@ -77,11 +79,14 @@ public class CareerFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.re_professional_employment:
                 //看职业就业
-                getActivity().startActivity(new Intent(getActivity(), EmploymentActivity.class));
+                intent=new Intent(getActivity(), EmploymentActivity.class);
+                intent.putExtra("tag","career");
+                startActivity(intent);
+                //getActivity().startActivity(new Intent(getActivity(), EmploymentActivity.class));
                 break;
             case R.id.re_benke10:
                 //本科毕业生从事的10个高薪工作
-                Intent intent = new Intent(getActivity(), OccupationWebviewActivity.class);
+                intent = new Intent(getActivity(), OccupationWebviewActivity.class);
                 intent.putExtra("title", "本科毕业生从事的10个高薪工作");
                 intent.putExtra("url", apiConstant.BENKETOP);
                 startActivity(intent);

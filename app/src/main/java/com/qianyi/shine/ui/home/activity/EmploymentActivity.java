@@ -1,6 +1,7 @@
 package com.qianyi.shine.ui.home.activity;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -39,7 +40,6 @@ public class EmploymentActivity extends BaseActivity {
         //初始化碎片
         initFragment();
     }
-
     private void initFragment() {
         if (benkeFragment == null) {
             benkeFragment = new BenkeFragment();
@@ -71,7 +71,6 @@ public class EmploymentActivity extends BaseActivity {
         }
         currentFragment = fragment;
     }
-
     @Override
     protected void initData() {
 
