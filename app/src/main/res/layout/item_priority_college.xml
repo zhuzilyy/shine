@@ -21,6 +21,7 @@
                 android:layout_width="10dp"
                 android:layout_height="10dp"/>
             <TextView
+                android:textSize="12sp"
                 android:id="@+id/tv_collegeName"
                 android:gravity="center"
                 android:text="北京大学"
@@ -34,6 +35,7 @@
             android:layout_height="match_parent"/>
 
         <TextView
+            android:textSize="12sp"
             android:id="@+id/tv_rank"
             android:gravity="center"
             android:text="1.2"
@@ -46,6 +48,7 @@
             android:layout_height="match_parent"/>
 
         <TextView
+            android:textSize="12sp"
             android:id="@+id/tv_type"
             android:gravity="center"
             android:text="医疗"
@@ -58,6 +61,7 @@
             android:layout_height="match_parent"/>
 
         <TextView
+            android:textSize="12sp"
             android:id="@+id/tv_area"
             android:gravity="center"
             android:text="北京"
@@ -70,6 +74,7 @@
             android:layout_height="match_parent"/>
 
         <TextView
+            android:textSize="12sp"
             android:id="@+id/tv_rate"
             android:gravity="center"
             android:text="21%"
@@ -82,6 +87,7 @@
             android:layout_height="match_parent"/>
 
         <TextView
+            android:textSize="12sp"
             android:id="@+id/tv_risk"
             android:gravity="center"
             android:text="极大"
@@ -93,6 +99,7 @@
             android:layout_width="0.5dp"
             android:layout_height="match_parent"/>
         <TextView
+            android:textSize="12sp"
             android:id="@+id/tv_pici"
             android:gravity="center"
             android:text="8本"
