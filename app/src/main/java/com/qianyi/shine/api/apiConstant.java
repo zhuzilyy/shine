@@ -222,6 +222,9 @@ public class apiConstant {
     public static String COLLEGE_SCORE= BASE_URL+"university_scoreline";
     //微信登录
     public static String WEIXIN_LOGIN= BASE_URL+"weixin_login";
+   //微信登录
+   public static String MAJOR_JOB_PROI= BASE_URL+"prior_noopsyche";
+
 
 
 
