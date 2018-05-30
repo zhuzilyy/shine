@@ -43,6 +43,8 @@ public class ZhuankeFragment extends BaseFragment {
     private EmploymentAdapter employmentAdapter;
     private CustomLoadingDialog customLoadingDialog;
     private List<ArticleInfo> articleList;
+    private Intent intent;
+    private String tag,type;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_zhuanKe=inflater.inflate(R.layout.fragment_zhuanke,null);
@@ -52,6 +54,15 @@ public class ZhuankeFragment extends BaseFragment {
     @Override
     protected void initViews() {
         customLoadingDialog=new CustomLoadingDialog(getActivity());
+        intent=getActivity().getIntent();
+        if (intent!=null){
+            tag=intent.getStringExtra("tag");
+        }
+        if (tag.equals("homePage")){
+            type="3";
+        }else if (tag.equals("career")){
+            type="7";
+        }
     }
 
     @Override
@@ -61,7 +72,7 @@ public class ZhuankeFragment extends BaseFragment {
     private void getData() {
         if (Utils.hasInternet()){
             customLoadingDialog.show();
-            apiHome.getEmployerList(apiConstant.EMPLOYER_BENKE_LIST, "3", new RequestCallBack<String>() {
+            apiHome.getEmployerList(apiConstant.EMPLOYER_BENKE_LIST, type, new RequestCallBack<String>() {
                 @Override
                 public void onSuccess(Call call, Response response, final String s) {
                     getActivity().runOnUiThread(new Runnable() {

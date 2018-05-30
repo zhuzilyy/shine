@@ -466,7 +466,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 break;
             //看就业
             case R.id.ll_employment:
-                startActivity(new Intent(getActivity(), EmploymentActivity.class));
+                intent=new Intent(getActivity(), EmploymentActivity.class);
+                intent.putExtra("tag","homePage");
+                startActivity(intent);
                 break;
             //查专业
             case R.id.ll_findMajor:

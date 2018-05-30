@@ -19,6 +19,15 @@ public class SchoolInfo {
     private String difen;
     private String rate;
     private String risk;
+    private String pici;
+    public String getPici() {
+        return pici;
+    }
+
+    public void setPici(String pici) {
+        this.pici = pici;
+    }
+
     public String getId() {
         return id;
     }

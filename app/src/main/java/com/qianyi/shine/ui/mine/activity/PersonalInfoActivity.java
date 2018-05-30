@@ -226,6 +226,7 @@ public class PersonalInfoActivity extends BaseActivity implements LoginDialogFra
         apiMine.UpdateInfo(apiConstant.UPDATE_INFO, id, strBase64, sexType, nikeName, province, selectCity, selectCounty, school, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
+                Log.i("tag",s);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

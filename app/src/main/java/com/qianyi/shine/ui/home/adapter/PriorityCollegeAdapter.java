@@ -28,6 +28,7 @@ public class PriorityCollegeAdapter extends BaseQuickAdapter<SchoolInfo, BaseVie
         helper.setText(R.id.tv_area, item.getArea());
         helper.setText(R.id.tv_rate, item.getRate());
         helper.setText(R.id.tv_risk, item.getRisk());
+        helper.setText(R.id.tv_pici, item.getPici());
         String risk=item.getRisk();
         if (risk.equals("冲刺")){
             helper.setBackgroundRes(R.id.view_risk,R.drawable.circle_red);

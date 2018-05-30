@@ -30,7 +30,7 @@ android:layout_height="match_parent">
         android:textColor="#fff"
         android:background="@drawable/bg_login"
         android:layout_marginTop="70dp"
-        android:text="开通Vip查看所有院校"
+        android:text="开通vip查看全部推荐院校"
         android:layout_width="300dp"
         android:layout_height="45dp" />
 </RelativeLayout>

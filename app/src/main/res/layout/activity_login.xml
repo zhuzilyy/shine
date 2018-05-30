@@ -128,7 +128,9 @@
     </RelativeLayout>
 
     <!--三方登录的logo-->
-    <RelativeLayout
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
         android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -150,8 +152,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageView
-
-            android:layout_marginLeft="80dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/iv_login_qq"
             android:id="@+id/iv_login_wechat"
@@ -160,7 +160,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 
