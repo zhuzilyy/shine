@@ -173,6 +173,36 @@ public class ProfessionPriorBean {
                     private String cost;
                     private String plannum;
                     private String learnyear;
+
+                    public String getRate() {
+                        return rate;
+                    }
+
+                    public void setRate(String rate) {
+                        this.rate = rate;
+                    }
+
+                    public String getDifen() {
+                        return difen;
+                    }
+
+                    public void setDifen(String difen) {
+                        this.difen = difen;
+                    }
+
+                    public String getPici() {
+                        return pici;
+                    }
+
+                    public void setPici(String pici) {
+                        this.pici = pici;
+                    }
+
+                    private String rate;
+                    private String difen;
+                    private String pici;
+
+
                     private Record2017 record_2017;
                     private Record2016 record_2016;
                     private Record2015 record_2015;

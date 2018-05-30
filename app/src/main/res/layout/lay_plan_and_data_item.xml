@@ -19,18 +19,35 @@
            android:layout_width="0dp"
            android:layout_height="match_parent"
            android:layout_weight="2"
+           android:orientation="vertical"
+           android:gravity="center"
            >
 
            <TextView
                android:id="@+id/tv_title"
                android:gravity="center"
                android:layout_width="match_parent"
-               android:textSize="12sp"
-               android:layout_height="match_parent"
+               android:textSize="14sp"
+               android:layout_height="wrap_content"
                android:padding="@dimen/dp_10"
                android:maxLines="3"
+               android:textColor="@color/black"
+
                android:ellipsize="end"
-               android:text="佛佛山积分覅发我就佛为飞机王洪服务和服务评分我就佛为假发票违法批文非叫我"
+               android:text="dddddd"
+               />
+           <TextView
+               android:id="@+id/tv_pici"
+               android:gravity="center"
+               android:layout_width="match_parent"
+               android:textSize="12sp"
+               android:layout_height="wrap_content"
+               android:padding="@dimen/dp_10"
+               android:maxLines="3"
+               android:textColor="@color/black"
+
+               android:ellipsize="end"
+               android:text="dsvsgs"
                />
        </LinearLayout>
         <View

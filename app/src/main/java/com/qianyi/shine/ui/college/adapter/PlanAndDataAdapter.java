@@ -5,13 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.util.TouchEventUtil;
 import com.qianyi.shine.R;
-import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.ui.college.entivity.CollegeScoreBean;
+import com.qianyi.shine.ui.home.bean.PrefessionBean;
 
 import java.util.List;
 
@@ -21,7 +19,7 @@ import java.util.List;
 
 public class PlanAndDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     private Context mContext;
-    private List<CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.MajorRecord> datas;//数据
+    private List<PrefessionBean.PrefessionData.PrefessionInfo.EnrollArr> datas;//数据
 
     //自定义监听事件
     public static interface OnRecyclerViewItemClickListener {
@@ -37,7 +35,7 @@ public class PlanAndDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     //适配器初始化
-    public PlanAndDataAdapter(Context context, List<CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.MajorRecord> datas) {
+    public PlanAndDataAdapter(Context context, List<PrefessionBean.PrefessionData.PrefessionInfo.EnrollArr> datas) {
         mContext = context;
         this.datas = datas;
     }
@@ -73,21 +71,22 @@ public class PlanAndDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         //将数据与item视图进行绑定，如果是MyViewHolder就加载网络图片，如果是MyViewHolder2就显示页数
         if (holder instanceof PlanAndDataAdapter.MyViewHolder) {
 
-            CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.MajorRecord record=datas.get(position);
-            ((MyViewHolder) holder).tv_title.setText(record.getMajor_name());
-            ((MyViewHolder) holder).tv_renshu.setText(record.getRecord_2017().getReshu());
+            PrefessionBean.PrefessionData.PrefessionInfo.EnrollArr record =datas.get(position);
+            ((MyViewHolder) holder).tv_title.setText(record.getZhuanye());
+            ((MyViewHolder) holder).tv_renshu.setText(record.getRecord_2017().getRenshu());
+            ((MyViewHolder) holder).tv_pici.setText("[ "+record.getRecord_2017().getPici()+" ]");
             //2015
-            ((MyViewHolder) holder).tv_2015score.setText(record.getRecord_2015().getReshu());
+            ((MyViewHolder) holder).tv_2015score.setText(record.getRecord_2015().getRenshu());
             ((MyViewHolder) holder).tv_2015di.setText(record.getRecord_2015().getDifen());
             ((MyViewHolder) holder).tv_2015gao.setText(record.getRecord_2015().getGaofen());
 
             //2016
-            ((MyViewHolder) holder).tv_2016score.setText(record.getRecord_2016().getReshu());
+            ((MyViewHolder) holder).tv_2016score.setText(record.getRecord_2016().getRenshu());
             ((MyViewHolder) holder).tv_2016di.setText(record.getRecord_2016().getDifen());
             ((MyViewHolder) holder).tv_2016gao.setText(record.getRecord_2016().getGaofen());
 
             //2017
-            ((MyViewHolder) holder).tv_2017score.setText(record.getRecord_2017().getReshu());
+            ((MyViewHolder) holder).tv_2017score.setText(record.getRecord_2017().getRenshu());
             ((MyViewHolder) holder).tv_2017di.setText(record.getRecord_2017().getDifen());
             ((MyViewHolder) holder).tv_2017gao.setText(record.getRecord_2017().getGaofen());
 
@@ -122,6 +121,7 @@ public class PlanAndDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_title;
         private TextView tv_renshu;
+        private TextView tv_pici;
 
         private TextView tv_2015score;
         private TextView tv_2015di;
@@ -142,6 +142,7 @@ public class PlanAndDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             super(view);
             tv_title = view.findViewById(R.id.tv_title);
             tv_renshu = view.findViewById(R.id.tv_renshu);
+            tv_pici = view.findViewById(R.id.tv_pici);
 
             tv_2015score=view.findViewById(R.id.tv_2015score);
             tv_2015di=view.findViewById(R.id.tv_2015di);

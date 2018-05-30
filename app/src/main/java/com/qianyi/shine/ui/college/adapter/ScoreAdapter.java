@@ -5,14 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qianyi.shine.R;
-import com.qianyi.shine.fragment.entity.CollegeEntity;
 import com.qianyi.shine.ui.college.entivity.CollegeScoreBean;
-
-import java.util.List;
+import com.qianyi.shine.ui.home.bean.PrefessionBean;
 
 /**
  * Created by Administrator on 2018/4/4.
@@ -20,7 +17,7 @@ import java.util.List;
 
 public class ScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     private Context mContext;
-    private CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.AllRecord allRecord;//数据
+    private PrefessionBean.PrefessionData.PrefessionInfo allRecord;//数据
 
     //自定义监听事件
     public static interface OnRecyclerViewItemClickListener {
@@ -36,7 +33,7 @@ public class ScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     //适配器初始化
-    public ScoreAdapter(Context context,CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.AllRecord allRecord) {
+    public ScoreAdapter(Context context, PrefessionBean.PrefessionData.PrefessionInfo allRecord) {
         mContext = context;
         this.allRecord = allRecord;
     }
@@ -75,29 +72,29 @@ public class ScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             if(0==position){
                 //2017
                 ((MyViewHolder) holder).tv_nian.setText("2017");
-                ((MyViewHolder) holder).tv_renshu.setText(allRecord.getRecord_2017().getRenshu());
-                ((MyViewHolder) holder).tv_gao.setText(allRecord.getRecord_2017().getGaofen());
-                ((MyViewHolder) holder).tv_di.setText(allRecord.getRecord_2017().getDifen());
-                ((MyViewHolder) holder).tv_xiancha.setText(allRecord.getRecord_2017().getH());
-                ((MyViewHolder) holder).tv_zuidiweici.setText(allRecord.getRecord_2017().getWeci());
+                ((MyViewHolder) holder).tv_renshu.setText(allRecord.getScoreinfo().getRecord_2017().getRenshu());
+                ((MyViewHolder) holder).tv_gao.setText(allRecord.getScoreinfo().getRecord_2017().getGaofen());
+                ((MyViewHolder) holder).tv_di.setText(allRecord.getScoreinfo().getRecord_2017().getDifen());
+                ((MyViewHolder) holder).tv_xiancha.setText(allRecord.getScoreinfo().getRecord_2017().getH());
+                ((MyViewHolder) holder).tv_zuidiweici.setText(allRecord.getScoreinfo().getRecord_2017().getWeici());
 
             }else if(1==position){
                 //2016
                 ((MyViewHolder) holder).tv_nian.setText("2016");
-                ((MyViewHolder) holder).tv_renshu.setText(allRecord.getRecord_2016().getRenshu());
-                ((MyViewHolder) holder).tv_gao.setText(allRecord.getRecord_2016().getGaofen());
-                ((MyViewHolder) holder).tv_di.setText(allRecord.getRecord_2016().getDifen());
-                ((MyViewHolder) holder).tv_xiancha.setText(allRecord.getRecord_2016().getH());
-                ((MyViewHolder) holder).tv_zuidiweici.setText(allRecord.getRecord_2016().getWeci());
+                ((MyViewHolder) holder).tv_renshu.setText(allRecord.getScoreinfo().getRecord_2016().getRenshu());
+                ((MyViewHolder) holder).tv_gao.setText(allRecord.getScoreinfo().getRecord_2016().getGaofen());
+                ((MyViewHolder) holder).tv_di.setText(allRecord.getScoreinfo().getRecord_2016().getDifen());
+                ((MyViewHolder) holder).tv_xiancha.setText(allRecord.getScoreinfo().getRecord_2016().getH());
+                ((MyViewHolder) holder).tv_zuidiweici.setText(allRecord.getScoreinfo().getRecord_2016().getWeici());
 
             }else if(2==position){
                 //2015
                 ((MyViewHolder) holder).tv_nian.setText("2015");
-                ((MyViewHolder) holder).tv_renshu.setText(allRecord.getRecord_2015().getRenshu());
-                ((MyViewHolder) holder).tv_gao.setText(allRecord.getRecord_2015().getGaofen());
-                ((MyViewHolder) holder).tv_di.setText(allRecord.getRecord_2015().getDifen());
-                ((MyViewHolder) holder).tv_xiancha.setText(allRecord.getRecord_2015().getH());
-                ((MyViewHolder) holder).tv_zuidiweici.setText(allRecord.getRecord_2015().getWeci());
+                ((MyViewHolder) holder).tv_renshu.setText(allRecord.getScoreinfo().getRecord_2015().getRenshu());
+                ((MyViewHolder) holder).tv_gao.setText(allRecord.getScoreinfo().getRecord_2015().getGaofen());
+                ((MyViewHolder) holder).tv_di.setText(allRecord.getScoreinfo().getRecord_2015().getDifen());
+                ((MyViewHolder) holder).tv_xiancha.setText(allRecord.getScoreinfo().getRecord_2015().getH());
+                ((MyViewHolder) holder).tv_zuidiweici.setText(allRecord.getScoreinfo().getRecord_2015().getWeici());
 
             }
 

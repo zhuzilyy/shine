@@ -31,6 +31,8 @@ import com.qianyi.shine.ui.college.adapter.PlanAndDataAdapter;
 import com.qianyi.shine.ui.college.adapter.Prospect_MoneyAdapter;
 import com.qianyi.shine.ui.college.adapter.ScoreAdapter;
 import com.qianyi.shine.ui.college.entivity.CollegeScoreBean;
+import com.qianyi.shine.ui.home.activity.PriorityCollegeDetailsActivity;
+import com.qianyi.shine.ui.home.bean.PrefessionBean;
 import com.qianyi.shine.utils.Utils;
 
 import java.util.ArrayList;
@@ -104,26 +106,22 @@ public class collegeScoreFragment extends BaseFragment {
             public void onSuccess(Call call, Response response, String s) {
                 Log.i("wwww",s);
                 Gson gson = new Gson();
-                CollegeScoreBean collegeScoreBean =gson.fromJson(s,CollegeScoreBean.class);
-                if(collegeScoreBean!=null){
-                    String code = collegeScoreBean.getCode();
-                    if("0".equals(code)){
-                        CollegeScoreBean.CollegeScoreData collegeScoreData=collegeScoreBean.getData();
-                        if(collegeScoreData!=null){
-                            CollegeScoreBean.CollegeScoreData.CollegeScoreInfo collegeScoreInfo=collegeScoreData.getInfo();
-                            if(collegeScoreInfo!=null){
-                                CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.AllRecord allRecord=   collegeScoreInfo.getAll_record();
-                                List<CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.MajorRecord> majorRecords=collegeScoreInfo.getMajor_record();
-                                //赋值分数线
-                                setDataScore(allRecord);
-                                //赋值招生计划
-                                setDataPlan(majorRecords);
-                                //折线图(毕业生平均月薪)
-                                setLineChart(mLineChart,allRecord);
-                                loadLineChartData(mLineChart,allRecord);
-                            }
+                PrefessionBean prefessionBean= gson.fromJson(s,PrefessionBean.class);
+                if(prefessionBean!=null){
+                    PrefessionBean.PrefessionData prefessionData=prefessionBean.getData();
+                    if(prefessionData!=null){
+                        PrefessionBean.PrefessionData.PrefessionInfo prefessionInfo= prefessionData.getInfo();
+                        if(prefessionInfo!=null){
+                            //折线图(录取分数线波动图)
+                            setLineChart(mLineChart,prefessionInfo);
+                            loadLineChartData(mLineChart,prefessionInfo);
+                            //赋值分数线
+                            setDataScore(prefessionInfo);
+                            //赋值招生计划
+                            setDataPlan(prefessionInfo);
                         }
                     }
+
                 }
 
             }
@@ -135,8 +133,10 @@ public class collegeScoreFragment extends BaseFragment {
         });
     }
 
-    private void setDataPlan(List<CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.MajorRecord> majorRecords) {
-        planAndDataAdapter=new PlanAndDataAdapter(getActivity(),majorRecords);
+    private void setDataPlan(PrefessionBean.PrefessionData.PrefessionInfo majorRecords) {
+
+        planAndDataAdapter=new PlanAndDataAdapter(getActivity(),majorRecords.getEnroll_arr());
+        rv_plan.setAdapter(planAndDataAdapter);
         rv_plan.setAdapter(planAndDataAdapter);
     }
 
@@ -144,7 +144,7 @@ public class collegeScoreFragment extends BaseFragment {
      * 赋值分数线
      * @param allRecord
      */
-    private void setDataScore(CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.AllRecord allRecord) {
+    private void setDataScore(PrefessionBean.PrefessionData.PrefessionInfo allRecord) {
 
         moneyAdapter=new ScoreAdapter(getActivity(),allRecord);
         rv_list.setAdapter(moneyAdapter);
@@ -163,7 +163,7 @@ public class collegeScoreFragment extends BaseFragment {
      * @param chart
      * @param allRecord
      */
-    private void setLineChart(LineChart chart, CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.AllRecord allRecord) {
+    private void setLineChart(LineChart chart, PrefessionBean.PrefessionData.PrefessionInfo allRecord) {
 
         chart.setDescription("");
         chart.setDrawGridBackground(false);//设置网格背景
@@ -204,7 +204,7 @@ public class collegeScoreFragment extends BaseFragment {
      * @param chart
      * @param allRecord
      */
-    private void loadLineChartData(LineChart chart, CollegeScoreBean.CollegeScoreData.CollegeScoreInfo.AllRecord allRecord){
+    private void loadLineChartData(LineChart chart, PrefessionBean.PrefessionData.PrefessionInfo allRecord){
         //所有线的List
         ArrayList<LineDataSet> allLinesList = new ArrayList<LineDataSet>();
 
@@ -221,9 +221,9 @@ public class collegeScoreFragment extends BaseFragment {
 //        }
 
 
-        String m2015H=allRecord.getRecord_2015().getGaofen();
-        String m2016H=allRecord.getRecord_2016().getGaofen();
-        String m2017H=allRecord.getRecord_2017().getGaofen();
+        String m2015H=allRecord.getScoreinfo().getRecord_2015().getGaofen();
+        String m2016H=allRecord.getScoreinfo().getRecord_2016().getGaofen();
+        String m2017H=allRecord.getScoreinfo().getRecord_2017().getGaofen();
         if("--".equals(m2015H)){
             m2015H="0";
         }
@@ -235,9 +235,9 @@ public class collegeScoreFragment extends BaseFragment {
         }
 
 
-        String m2015L=allRecord.getRecord_2015().getDifen();
-        String m2016L=allRecord.getRecord_2016().getDifen();
-        String m2017L=allRecord.getRecord_2017().getDifen();
+        String m2015L=allRecord.getScoreinfo().getRecord_2015().getDifen();
+        String m2016L=allRecord.getScoreinfo().getRecord_2016().getDifen();
+        String m2017L=allRecord.getScoreinfo().getRecord_2017().getDifen();
         if("--".equals(m2015L)){
             m2015L="0";
         }

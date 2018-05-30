@@ -32,6 +32,7 @@ public class EstablishProiAdapter extends BaseQuickAdapter<ProfessionPriorBean.P
         TextView tv_luqu = helper.getView(R.id.tv_luqu);
         TextView tv_zhanshengjianzhang = helper.getView(R.id.tv_zhanshengjianzhang);
         TextView tv_2017plan = helper.getView(R.id.tv_2017plan);
+        TextView tv_pici=helper.getView(R.id.tv_pici);
 
         TextView tv_2015renshu = helper.getView(R.id.tv_2015renshu);
         TextView tv_2015zuidi = helper.getView(R.id.tv_2015zuidi);
@@ -48,9 +49,11 @@ public class EstablishProiAdapter extends BaseQuickAdapter<ProfessionPriorBean.P
         //赋值
         textView.setText(item.getName());
         tv_score.setText(item.getLevel());
-        tv_luqu.setText(item.getRecruit_students().getRecord_2017().getRate());
+        tv_luqu.setText(item.getRecruit_students().getRate());
         tv_zhanshengjianzhang.setText(item.getRecruit_students().getMajor_name());
         tv_2017plan.setText(item.getRecruit_students().getRecord_2017().getRenshu());
+        tv_pici.setText("["+item.getRecruit_students().getPici()+"]");
+
 
         tv_2015renshu.setText(item.getRecruit_students().getRecord_2015().getRenshu());
         tv_2015zuidi.setText(item.getRecruit_students().getRecord_2015().getDifen());

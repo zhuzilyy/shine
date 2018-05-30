@@ -240,8 +240,9 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
                 List<ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo.ProfessionInfoList> infoLists=mAdapter.getData();
                 Intent intent = new Intent(PriorityProfessionalDetailsActivity.this, PriorityCollegeDetailsActivity.class);
                 intent.putExtra("collegeName",infoLists.get(position).getName());
-                intent.putExtra("luqulv",infoLists.get(position).getRecruit_students().getRecord_2017().getRate());
+                intent.putExtra("luqulv",infoLists.get(position).getRecruit_students().getRate());
                 intent.putExtra("collegeid",infoLists.get(position).getId());
+
                 PriorityProfessionalDetailsActivity.this.startActivity(intent);
             }
         });
@@ -316,28 +317,60 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
 
     //加载
     private void loadMore() {
-        apiHome.loadMore("http://www.baidu.com", mNextRequestPage, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        LoginBean.LoginData.LoginInfo user = Utils.readUser(PriorityProfessionalDetailsActivity.this);
+        if (user == null) {
+            return;
+        }
+        if (TextUtils.isEmpty(major_id)) {
+            return;
+        }
+        // Toast.makeText(this, "mcity==" + mCity + "      morder==" + mOrder, Toast.LENGTH_SHORT).show();
+        mNextRequestPage++;
+
+        apiHome.majorPriorMajor(apiConstant.PRIOR_MAJOR, user.getId(), major_id, mOrder, "全国".endsWith(mCity)?"":mCity, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
-            public void onSuccess(Call call, Response response, String s) {
+            public void onSuccess(Call call, Response response, final String s) {
+                Log.i("ppp", "131" + s);
                 PriorityProfessionalDetailsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        // setData(false, list_temp);
+                        Gson gson = new Gson();
+                        ProfessionPriorBean priorBean = gson.fromJson(s, ProfessionPriorBean.class);
+                        if (priorBean != null) {
+                            String code = priorBean.getCode();
+                            ProfessionPriorBean.ProfessionPriorData priorData = priorBean.getData();
+                            if (priorData != null) {
+                                ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo priorInfo = priorData.getInfo();
+                                if (priorInfo != null) {
+                                    List<ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo.ProfessionInfoList> infoLists = priorInfo.getInfoList();
+                                    if (infoLists!=null && infoLists.size()>0){
+                                        setData(false, infoLists);
+                                        mAdapter.setEnableLoadMore(true);
+                                        swipeRefreshLayout.setRefreshing(false);
+                                        swipeRefreshLayout.setVisibility(View.VISIBLE);
+                                        no_data_rl.setVisibility(View.GONE);
+                                    }else{
+                                        swipeRefreshLayout.setVisibility(View.GONE);
+                                        no_data_rl.setVisibility(View.VISIBLE);
+                                    }
+                                }
+                            }
+                        }
                     }
                 });
-
             }
 
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
+                Log.i("ppp", "132" + e);
                 PriorityProfessionalDetailsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mAdapter.loadMoreFail();
-                        Toast.makeText(PriorityProfessionalDetailsActivity.this, "网络错误", Toast.LENGTH_LONG).show();
+                        // setData(true,list_temp);
+                        mAdapter.setEnableLoadMore(true);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
-
             }
         });
     }
