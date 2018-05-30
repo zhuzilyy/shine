@@ -4,11 +4,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.qianyi.shine.MainActivity;
 import com.qianyi.shine.R;
@@ -21,6 +24,8 @@ import com.qianyi.shine.dialog.CustomLoadingDialog;
 import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.account.view.ClearEditText;
 import com.qianyi.shine.utils.Utils;
+import com.tencent.connect.UserInfo;
+import com.tencent.connect.auth.QQToken;
 import com.tencent.mm.sdk.modelmsg.SendAuth;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
@@ -50,7 +55,7 @@ public class LoginActivity extends BaseActivity {
     private String openid, unionid, nickname, headimgurl;
     private int sex;
     private Tencent mTencent;
-
+    private UserInfo mInfo;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
@@ -127,22 +132,10 @@ public class LoginActivity extends BaseActivity {
     private class BaseUiListener implements IUiListener {
         @Override
         public void onComplete(Object response) {
-            Toast.makeText(LoginActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
-            try {
-                //获得的数据是JSON格式的，获得你想获得的内容
-                //如果你不知道你能获得什么，看一下下面的LOG
-                Log.v("----TAG--", "-------------"+response.toString());
-                String openidString = ((JSONObject) response).getString("openid");
-                mTencent.setOpenId(openidString);
-                //saveUser("44","text","text",1);
-                mTencent.setAccessToken(((JSONObject) response).getString("access_token"),((JSONObject) response).getString("expires_in"));
-                Log.v("TAG", "-------------"+openidString);
-                //access_token= ((JSONObject) response).getString("access_token");
-                //expires_in = ((JSONObject) response).getString("expires_in");
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            //获取openid和token
+            initOpenIdAndToken(response);
+            //获取用户信息
+            getUserInfo();
         }
         @Override
         public void onError(UiError uiError) {
@@ -154,6 +147,51 @@ public class LoginActivity extends BaseActivity {
 
         }
     }
+    private void initOpenIdAndToken(Object object) {
+        JSONObject jb = (JSONObject) object;
+        try {
+            String openID = jb.getString("openid");  //openid用户唯一标识
+            String access_token = jb.getString("access_token");
+            String expires = jb.getString("expires_in");
+            mTencent.setOpenId(openID);
+            mTencent.setAccessToken(access_token, expires);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getUserInfo() {
+        QQToken token = mTencent.getQQToken();
+        mInfo = new UserInfo(LoginActivity.this, token);
+        mInfo.getUserInfo(new IUiListener() {
+            @Override
+            public void onComplete(Object object) {
+                JSONObject jb = (JSONObject) object;
+                String s = jb.toString();
+                Log.i("tag",s);
+                try {
+                    String name = jb.getString("nickname");
+                    String namefigureurl = jb.getString("figureurl_qq_2");  //头像图片的url
+                   // Glide.with(LoginActivity.this).load(namefigureurl).into(iv_login_qq);
+                    /*Log.i("imgUrl",figureurl.toString()+"");*/
+                   /* nickName.setText(name);
+                    *//*Glide.with(MainActivity.this).load(figureurl).into(figure);*//*
+                    Uri parse = Uri.parse(figureurl);
+                    figure.setImageURI(parse);*/
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(UiError uiError) {
+            }
+
+            @Override
+            public void onCancel() {
+            }
+        });
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -161,8 +199,6 @@ public class LoginActivity extends BaseActivity {
         Tencent.onActivityResultData(requestCode, resultCode, data, new BaseUiListener());
         Tencent.handleResultData(data, new BaseUiListener());
     }
-
-
     //登录的方法
 
         private void login(String userName, String pwd) {
