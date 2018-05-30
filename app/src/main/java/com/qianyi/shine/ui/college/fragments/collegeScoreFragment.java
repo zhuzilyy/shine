@@ -100,6 +100,7 @@ public class collegeScoreFragment extends BaseFragment {
         LoginBean.LoginData.LoginInfo user = Utils.readUser(getActivity());
         if(user==null){
             return;
+
         }
         apiHome.collegeScroe(apiConstant.COLLEGE_SCORE, user.getId(), CollegeActivity.collegeId, new RequestCallBack<String>() {
             @Override
