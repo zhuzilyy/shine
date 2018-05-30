@@ -57,7 +57,7 @@ public class PriorityCollegeActivity extends BaseActivity {
     private List<View> popupViews = new ArrayList<>();
     private GirdDropDownAdapter orderAdapter;
     private AreaAdapter areaAdapter,typeAdapter;
-    private String[] orderDatas = {"排名","录取率","分数线"};
+    private String[] orderDatas;
     private String[] citys =  {"全国","北京","天津","上海","重庆","河北","山西","辽宁","吉林","黑龙江",
             "江苏","浙江","安徽","福建","江西","山东","河南","湖北","湖南","广东","海南","四川","贵州",
             "云南","陕西","甘肃","青海","内蒙古","广西","宁夏","新疆"};
@@ -78,7 +78,7 @@ public class PriorityCollegeActivity extends BaseActivity {
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private View view_header;
-    private String member_id,order="rate",area="",school_type="",rate_type="",isVip;
+    private String member_id,order="rate",area="",school_type="",rate_type="",isVip,tag;
     private TextView reload;
     private RelativeLayout no_internet_rl,no_data_rl;
     private CustomLoadingDialog customLoadingDialog;
@@ -94,6 +94,12 @@ public class PriorityCollegeActivity extends BaseActivity {
         if (intent!=null){
             rate_type=intent.getStringExtra("risk");
             area=intent.getStringExtra("area");
+            tag=intent.getStringExtra("tag");
+            if (tag.equals("intellgnetFill")){
+                orderDatas = new String[]{"排名"};
+            }else if(tag.equals("home")){
+                orderDatas = new String[]{"排名", "录取率", "分数线"};
+            }
         }
         BaseActivity.addActivity(this);
         view_header=getLayoutInflater().inflate(R.layout.header_priority_college,null);

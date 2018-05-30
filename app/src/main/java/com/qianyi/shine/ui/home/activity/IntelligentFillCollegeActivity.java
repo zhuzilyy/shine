@@ -330,6 +330,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
                         Intent intent = new Intent(IntelligentFillCollegeActivity.this, PriorityCollegeActivity.class);
                         intent.putExtra("risk","");
                         intent.putExtra("area",intention_area);
+                        intent.putExtra("tag","intellgnetFill");
                         startActivity(intent);
                 }else if(!TextUtils.isEmpty(intention_major) && TextUtils.isEmpty(intention_job) && TextUtils.isEmpty(intention_area)){
                     //设置了专业

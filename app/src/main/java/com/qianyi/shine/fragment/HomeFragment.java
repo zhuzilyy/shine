@@ -488,6 +488,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 intent=new Intent(getActivity(), PriorityCollegeActivity.class);
                 intent.putExtra("risk","");
                 intent.putExtra("area","");
+                intent.putExtra("tag","home");
                 startActivity(intent);
                 break;
             //智能填报
@@ -507,12 +508,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 intent = new Intent(getActivity(), PriorityCollegeActivity.class);
                 intent.putExtra("risk","2");
                 intent.putExtra("area","");
+                intent.putExtra("tag","home");
                 startActivity(intent);
                 break;
             case R.id.goto_college02:
                 intent = new Intent(getActivity(), PriorityCollegeActivity.class);
                 intent.putExtra("risk","");
                 intent.putExtra("area","");
+                intent.putExtra("tag","home");
                 startActivity(intent);
                 break;
             case R.id.homeSearch_ll:
@@ -526,23 +529,27 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 intent=new Intent(getActivity(),PriorityCollegeActivity.class);
                 intent.putExtra("risk","1");
                 intent.putExtra("area","");
+                intent.putExtra("tag","home");
                 startActivity(intent);
                 break;
             case R.id.ll_baoshou:
                 intent=new Intent(getActivity(),PriorityCollegeActivity.class);
                 intent.putExtra("risk","2");
                 intent.putExtra("area","");
+                intent.putExtra("tag","home");
                 startActivity(intent);
                 break;
             case R.id.ll_wentuo:
                 intent=new Intent(getActivity(),PriorityCollegeActivity.class);
                 intent.putExtra("risk","3");
                 intent.putExtra("area","");
+                intent.putExtra("tag","home");
                 startActivity(intent);
                 break;
             case R.id.ll_scoreInfo:
                 intent=new Intent(getActivity(),GuessScoreActivity.class);
                 intent.putExtra("tag","homePage");
+                intent.putExtra("tag","home");
                 startActivity(intent);
                 break;
         }
