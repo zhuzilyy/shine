@@ -120,6 +120,8 @@ public class apiConstant {
     public static String ATTENTIONMAJOR=  BASE_URL+"insert_collection_major";
     //我的关注测评报告
     public static String Evaluationeport= BASE_URL+"get_test_record";
+    //qq登录
+    public static String QQ_LOGIN= BASE_URL+"qq_login";
 
 
 

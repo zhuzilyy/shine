@@ -56,6 +56,7 @@ public class LoginActivity extends BaseActivity {
     private int sex;
     private Tencent mTencent;
     private UserInfo mInfo;
+    private String qqOpenId,qqNickname,qqHeadimgurl,qqSex;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
@@ -150,10 +151,10 @@ public class LoginActivity extends BaseActivity {
     private void initOpenIdAndToken(Object object) {
         JSONObject jb = (JSONObject) object;
         try {
-            String openID = jb.getString("openid");  //openid用户唯一标识
+            qqOpenId = jb.getString("openid");  //openid用户唯一标识
             String access_token = jb.getString("access_token");
             String expires = jb.getString("expires_in");
-            mTencent.setOpenId(openID);
+            mTencent.setOpenId(qqOpenId);
             mTencent.setAccessToken(access_token, expires);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -168,21 +169,8 @@ public class LoginActivity extends BaseActivity {
             public void onComplete(Object object) {
                 JSONObject jb = (JSONObject) object;
                 String s = jb.toString();
-                Log.i("tag",s);
-                try {
-                    String name = jb.getString("nickname");
-                    String namefigureurl = jb.getString("figureurl_qq_2");  //头像图片的url
-                   // Glide.with(LoginActivity.this).load(namefigureurl).into(iv_login_qq);
-                    /*Log.i("imgUrl",figureurl.toString()+"");*/
-                   /* nickName.setText(name);
-                    *//*Glide.with(MainActivity.this).load(figureurl).into(figure);*//*
-                    Uri parse = Uri.parse(figureurl);
-                    figure.setImageURI(parse);*/
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                qqLogin(object);
             }
-
             @Override
             public void onError(UiError uiError) {
             }
@@ -191,6 +179,73 @@ public class LoginActivity extends BaseActivity {
             public void onCancel() {
             }
         });
+    }
+
+    private void qqLogin(Object object) {
+        JSONObject jb = (JSONObject) object;
+        String s = jb.toString();
+        Log.i("tag",s);
+        try {
+            qqNickname = jb.getString("nickname");
+            qqHeadimgurl= jb.getString("figureurl_qq_2");  //头像图片的url
+            qqSex= jb.getString("gender");  //头像图片的url
+            Log.i("tag",qqOpenId);
+            if (qqSex.equals("男")){
+                qqSex="1";
+            }else{
+                qqSex="0";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        customLoadingDialog.show();
+        apiAccount.qqLogin(apiConstant.QQ_LOGIN, qqOpenId, "", qqSex, qqHeadimgurl, qqNickname, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(Call call, Response response, final String s) {
+                Log.i("tag", s);
+                customLoadingDialog.dismiss();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Gson gson = new Gson();
+                        LoginBean loginBean = gson.fromJson(s, LoginBean.class);
+                        if (loginBean != null) {
+                            String code = loginBean.getCode();
+                            if ("0".equals(code)) {
+                                LoginBean.LoginData.LoginInfo user = loginBean.getData().getInfo();
+                                String member_scoreinfo_status = loginBean.getData().getInfo().getMember_scoreinfo_status();
+                                try {
+                                    //存储当前用户
+                                    Utils.saveUser(user, LoginActivity.this);
+                                    if (member_scoreinfo_status.equals("0")) {
+                                        Intent intent = new Intent(LoginActivity.this, GuessScoreActivity.class);
+                                        intent.putExtra("tag", "setScore");
+                                        startActivity(intent);
+                                        finish();
+                                    } else if (member_scoreinfo_status.equals("1")) {
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                } catch (Exception e) {
+                                    Log.i("excaption_shine", e.getMessage());
+                                }
+                            } else {
+                                Toast.makeText(LoginActivity.this, "" + loginBean.getInfo(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onEror(Call call, int statusCode, Exception e) {
+                Log.i("tag",e.getMessage());
+                customLoadingDialog.dismiss();
+            }
+        });
+
+
     }
 
     @Override

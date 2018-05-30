@@ -102,6 +102,18 @@ public class apiAccount {
         params.put("type",type);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+    /***
+     * qq登录
+     */
+    public static void qqLogin(String url,String openid,String unionid,String sex,String headimgurl,String nickname,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("openid",openid);
+        params.put("unionid",unionid);
+        params.put("sex",sex);
+        params.put("headimgurl",headimgurl);
+        params.put("nickname",nickname);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 
 
 
