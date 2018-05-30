@@ -27,7 +27,7 @@
                android:id="@+id/tv_title"
                android:gravity="center"
                android:layout_width="match_parent"
-               android:textSize="14sp"
+               android:textSize="12sp"
                android:layout_height="wrap_content"
                android:padding="@dimen/dp_10"
                android:maxLines="3"
