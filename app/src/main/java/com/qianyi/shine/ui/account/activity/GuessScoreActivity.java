@@ -170,14 +170,6 @@ public class GuessScoreActivity extends BaseActivity {
                     if("0".equals(code)){
                        LoginBean.LoginData loginData =  loginBean.getData();
                        LoginBean.LoginData.LoginInfo loginInfo = loginData.getInfo();
-                        String score = loginInfo.getMember_scoreinfo().getScore();
-                        String type = loginInfo.getMember_scoreinfo().getType();
-                        String level = loginInfo.getMember_scoreinfo().getLevel();
-                        String area = loginInfo.getMember_scoreinfo().getProv();
-                        SPUtils.put(GuessScoreActivity.this,"score",score);
-                        SPUtils.put(GuessScoreActivity.this,"type",type);
-                        SPUtils.put(GuessScoreActivity.this,"level",level);
-                        SPUtils.put(GuessScoreActivity.this,"area",area);
                         if(loginInfo != null){
                            try{
                                Utils.clearSharedUser(GuessScoreActivity.this);
@@ -204,6 +196,7 @@ public class GuessScoreActivity extends BaseActivity {
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 loadingDialog.dismiss();
+                Log.i("tag",e.getMessage());
 
             }
         });
@@ -219,6 +212,9 @@ public class GuessScoreActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (data==null){
+            return;
+        }
         switch (requestCode) {
             case 101:
                 arer = data.getStringExtra("area");
