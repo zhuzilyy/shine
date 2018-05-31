@@ -62,14 +62,16 @@ public class OccupationDetailActivity extends BaseActivity {
         tv_title.setText("职业介绍");
         myPageAdapter = new MyPageAdapter(getSupportFragmentManager());
         ArrayList<Fragment> datas = new ArrayList<Fragment>();
-        datas.add(new OccupationDetailsFragment());
+
         datas.add(new OccupationBaseInfoFragment());
+        datas.add(new OccupationDetailsFragment());
        // datas.add(new OccupationProsFragment());
         myPageAdapter.setData(datas);
 
         ArrayList<String> titles = new ArrayList<String>();
-        titles.add("职业信息");
+
         titles.add("行业信息");
+        titles.add("职业信息");
         //titles.add("职业前景");
         myPageAdapter.setTitles(titles);
 

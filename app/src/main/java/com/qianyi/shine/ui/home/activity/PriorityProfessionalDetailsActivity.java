@@ -65,7 +65,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     private String citys[] = {"全国", "北京", "天津", "上海", "重庆", "河北", "山西", "辽宁", "吉林", "黑龙江",
             "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东", "海南", "四川", "贵州",
             "云南", "陕西", "甘肃", "青海", "内蒙古", "广西", "宁夏", "新疆"};
-    private String orderDatas[] = {"录取率", "分数线", "排名"};
+    private String orderDatas[] = {"录取率", "分数线"};
 
 
     private int constellationPosition = 0;
@@ -267,7 +267,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
        // Toast.makeText(this, "mcity==" + mCity + "      morder==" + mOrder, Toast.LENGTH_SHORT).show();
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.majorPriorMajor(apiConstant.PRIOR_MAJOR, user.getId(), major_id, mOrder, "全国".endsWith(mCity)?"":mCity, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.majorPriorMajor(apiConstant.PRIOR_MAJOR,mNextRequestPage,user.getId(), major_id, mOrder, "全国".endsWith(mCity)?"":mCity, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 Log.i("ppp", "131" + s);
@@ -326,7 +326,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         }
         // Toast.makeText(this, "mcity==" + mCity + "      morder==" + mOrder, Toast.LENGTH_SHORT).show();
         mNextRequestPage++;
-        apiHome.majorPriorMajor(apiConstant.PRIOR_MAJOR, user.getId(), major_id, mOrder, "全国".endsWith(mCity)?"":mCity, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.majorPriorMajor(apiConstant.PRIOR_MAJOR, mNextRequestPage, user.getId(), major_id, mOrder, "全国".endsWith(mCity)?"":mCity, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 Log.i("ppp", "131" + s);
