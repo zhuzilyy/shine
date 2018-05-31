@@ -501,7 +501,10 @@ public class Profession_ProspectsFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().unregisterReceiver(myReceiver);
+        if (myReceiver!=null){
+            getActivity().unregisterReceiver(myReceiver);
+        }
+
     }
 
     //接收支付成功的广播
