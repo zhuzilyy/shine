@@ -8,12 +8,14 @@
     android:id="@+id/no_data_rl"
     android:visibility="gone">
     <ImageView
+        android:scaleType="fitXY"
         android:id="@+id/common_no__data_iv"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:src="@mipmap/common_no_data"
         android:layout_centerHorizontal="true"/>
     <TextView
+        android:visibility="gone"
         android:id="@+id/common_no__data_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

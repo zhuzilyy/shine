@@ -554,7 +554,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 break;
         }
     }
-
     private void getCityName() {
         //初始化定位
         mLocationClient = new AMapLocationClient(getActivity());

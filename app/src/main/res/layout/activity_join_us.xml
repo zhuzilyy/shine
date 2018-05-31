@@ -16,7 +16,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:text="阳光志愿"
+        android:text="教育蓝海等你加入"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
@@ -24,7 +24,7 @@
         android:maxLines="6"
         android:textSize="14sp"
         android:layout_marginTop="10dp"
-        android:text="教育蓝海等你加入高考和志愿填报是每个学生人生的转折点，每年有900多万的高考考生需要得到更专业的志愿填报指导和服务。随着互联网教育的时代的到来，AI人工智能+大数据将是最好的解决志愿问题的方法，也被越来越多的家长和考生认可。让我们共同开拓这个亿级的刚需市场。"
+        android:text="高考和志愿填报是每个学生人生的转折点，每年有900多万的高考考生需要得到更专业的志愿填报指导和服务。随着互联网教育的时代的到来，AI人工智能+大数据将是最好的解决志愿问题的方法，也被越来越多的家长和考生认可。让我们共同开拓这个亿级的刚需市场。"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:id="@+id/tv_content"

@@ -22,7 +22,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_toRightOf="@+id/indecator4"
-            android:text="该方向薪资涨幅"
+            android:text="全部方向薪资涨幅"
             android:textColor="@color/black"
             android:textSize="16sp" />
     </RelativeLayout>

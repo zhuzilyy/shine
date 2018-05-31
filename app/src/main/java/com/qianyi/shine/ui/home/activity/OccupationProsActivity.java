@@ -72,12 +72,12 @@ public class OccupationProsActivity extends BaseActivity {
     }
     @Override
     protected void initData() {
-        occupationProsAdapter=new OccupationProsAdapter(marginListYear,marginListSalary,this);
+        occupationProsAdapter=new OccupationProsAdapter(marginAllListYear,marginListSalary,this);
         lv_occupation.setAdapter(occupationProsAdapter);
 
         allOccupationProsAdapter=new OccupationProsAdapter(marginAllListYear,marginAllListSalary,this);
         lv_allOccupationPros.setAdapter(allOccupationProsAdapter);
-        lv_occupation.addFooterView(view_footer);
+        //lv_occupation.addFooterView(view_footer);
         lv_occupation.addHeaderView(view_header);
 
     }
