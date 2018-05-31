@@ -342,6 +342,7 @@ public class PriorityCollegeActivity extends BaseActivity {
         apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, order,area , school_type, rate_type,new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -371,7 +372,7 @@ public class PriorityCollegeActivity extends BaseActivity {
     }
 
     private void setData(boolean isRefresh, List data) {
-        mNextRequestPage++;
+
         final int size = data == null ? 0 : data.size();
         if (isRefresh) {
             mAdapter.setNewData(data);

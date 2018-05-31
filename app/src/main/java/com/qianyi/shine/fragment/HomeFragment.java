@@ -624,8 +624,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             String action = intent.getAction();
             if (action.equals("com.action.changeScore")){
                 setValue();
+                getLevelData();
                 tv_subjectType.setText(headerType);
                 tv_score.setText(headerScore);
+
                 tv_level.setText(headerProvince);
             }
         }
