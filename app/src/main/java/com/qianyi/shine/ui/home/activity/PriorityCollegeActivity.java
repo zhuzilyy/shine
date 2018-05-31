@@ -342,6 +342,7 @@ public class PriorityCollegeActivity extends BaseActivity {
         apiHome.schoolPrior(apiConstant.SCHOOL_PRiOR, member_id, mNextRequestPage, order,area , school_type, rate_type,new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
+                Log.i("tag",s);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

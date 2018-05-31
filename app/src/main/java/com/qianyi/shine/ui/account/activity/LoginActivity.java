@@ -198,12 +198,13 @@ public class LoginActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        customLoadingDialog.show();
+        final CustomLoadingDialog loadingDialog = new CustomLoadingDialog(LoginActivity.this);
+        loadingDialog.show();
         apiAccount.qqLogin(apiConstant.QQ_LOGIN, qqOpenId, "", qqSex, qqHeadimgurl, qqNickname, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 Log.i("tag", s);
-                customLoadingDialog.dismiss();
+                loadingDialog.dismiss();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -237,11 +238,10 @@ public class LoginActivity extends BaseActivity {
                     }
                 });
             }
-
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 Log.i("tag",e.getMessage());
-                customLoadingDialog.dismiss();
+                loadingDialog.dismiss();
             }
         });
 

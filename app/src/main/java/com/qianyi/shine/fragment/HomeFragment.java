@@ -549,7 +549,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.ll_scoreInfo:
                 intent=new Intent(getActivity(),GuessScoreActivity.class);
                 intent.putExtra("tag","homePage");
-                intent.putExtra("tag","home");
+                //intent.putExtra("tag","home");
                 startActivity(intent);
                 break;
         }
