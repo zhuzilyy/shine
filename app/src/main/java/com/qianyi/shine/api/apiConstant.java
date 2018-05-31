@@ -5,7 +5,7 @@ package com.qianyi.shine.api;
  */
 public class apiConstant {
    // public static final String BASE_URL="http://39.104.109.53/api/";
-    public static final String BASE_URL="http://39.104.109.53:8080/api/";
+    public static final String BASE_URL="http://39.104.109.53/api/";
     //注册
     public static final String REGISTER=BASE_URL+"register";
     //登录
@@ -222,6 +222,9 @@ public class apiConstant {
     public static String COLLEGE_SCORE= BASE_URL+"university_scoreline";
     //微信登录
     public static String WEIXIN_LOGIN= BASE_URL+"weixin_login";
+   //微信登录
+   public static String MAJOR_JOB_PROI= BASE_URL+"prior_noopsyche";
+
 
 
 

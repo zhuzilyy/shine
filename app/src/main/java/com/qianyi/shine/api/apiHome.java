@@ -307,6 +307,16 @@ public class apiHome {
         params.put("id",id);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+    //只能填报选择专业和职业
+    public static void majorAndJobPriorMajor(String url,String memberId,String page,String order,String area, RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",memberId);
+        params.put("page",page);
+        params.put("order",order);
+        params.put("area",area);
+
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 
 
 

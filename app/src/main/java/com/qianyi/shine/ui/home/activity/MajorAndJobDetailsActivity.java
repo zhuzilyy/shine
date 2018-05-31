@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -30,6 +31,8 @@ import com.qianyi.shine.ui.account.bean.LoginBean;
 import com.qianyi.shine.ui.college.adapter.AreaAdapter;
 import com.qianyi.shine.ui.college.adapter.EstablishProiAdapter;
 import com.qianyi.shine.ui.college.adapter.GirdDropDownAdapter;
+import com.qianyi.shine.ui.college.adapter.MajorAndJobEstablishProiAdapter;
+import com.qianyi.shine.ui.home.bean.ProfessionMajorJobPriorBean;
 import com.qianyi.shine.ui.home.bean.ProfessionPriorBean;
 import com.qianyi.shine.ui.mine.activity.VipActivity;
 import com.qianyi.shine.utils.Utils;
@@ -73,7 +76,7 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RelativeLayout no_data_rl;
     private RecyclerView recyclerView;
-    private EstablishProiAdapter mAdapter;
+    private MajorAndJobEstablishProiAdapter mAdapter;
 
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
@@ -84,6 +87,7 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
     private MyReceiver myReceiver;
     @Override
     protected void initViews() {
+
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
         isVip=loginInfo.getIs_vip();
         if (isVip.equals("0")){
@@ -218,7 +222,7 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
 
     }
     private void initAdapter() {
-        mAdapter = new EstablishProiAdapter(MajorAndJobDetailsActivity.this);
+        mAdapter = new MajorAndJobEstablishProiAdapter(MajorAndJobDetailsActivity.this);
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
@@ -228,18 +232,18 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
         mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
 //      mAdapter.setPreLoadNumber(3);
         recyclerView.setAdapter(mAdapter);
-        recyclerView.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                List<ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo.ProfessionInfoList> infoLists=mAdapter.getData();
-                Intent intent = new Intent(MajorAndJobDetailsActivity.this, PriorityCollegeDetailsActivity.class);
-                intent.putExtra("collegeName",infoLists.get(position).getName());
-                intent.putExtra("luqulv",infoLists.get(position).getRecruit_students().getRate());
-                intent.putExtra("collegeid",infoLists.get(position).getId());
-
-                MajorAndJobDetailsActivity.this.startActivity(intent);
-            }
-        });
+//        recyclerView.addOnItemTouchListener(new OnItemClickListener() {
+//            @Override
+//            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                List<ProfessionMajorJobPriorBean.ProfessionMajorJobPriorData.ProfessionMajorJobPriorInfo.ProfessionMajorJobPriorList> infoLists=mAdapter.getData();
+//                Intent intent = new Intent(MajorAndJobDetailsActivity.this, PriorityCollegeDetailsActivity.class);
+//                intent.putExtra("collegeName",infoLists.get(position).getName());
+//                intent.putExtra("luqulv",infoLists.get(position)..getRate());
+//                intent.putExtra("collegeid",infoLists.get(position).getId());
+//
+//                MajorAndJobDetailsActivity.this.startActivity(intent);
+//            }
+//        });
     }
     private void initRefreshLayout() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -261,7 +265,7 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
        // Toast.makeText(this, "mcity==" + mCity + "      morder==" + mOrder, Toast.LENGTH_SHORT).show();
         mNextRequestPage = 1;
         mAdapter.setEnableLoadMore(false);//这里的作用是防止下拉刷新的时候还可以上拉加载
-        apiHome.majorPriorMajor(apiConstant.PRIOR_MAJOR, user.getId(), major_id, mOrder, "全国".endsWith(mCity)?"":mCity, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.majorAndJobPriorMajor(apiConstant.MAJOR_JOB_PROI, user.getId(), mNextRequestPage+"", mOrder, "全国".endsWith(mCity)?"":mCity, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 Log.i("ppp", "131" + s);
@@ -269,14 +273,14 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
                     @Override
                     public void run() {
                         Gson gson = new Gson();
-                        ProfessionPriorBean priorBean = gson.fromJson(s, ProfessionPriorBean.class);
-                        if (priorBean != null) {
-                            String code = priorBean.getCode();
-                            ProfessionPriorBean.ProfessionPriorData priorData = priorBean.getData();
+                        ProfessionMajorJobPriorBean majorJobPriorBean = gson.fromJson(s, ProfessionMajorJobPriorBean.class);
+                        if (majorJobPriorBean != null) {
+                            String code = majorJobPriorBean.getCode();
+                            ProfessionMajorJobPriorBean.ProfessionMajorJobPriorData priorData = majorJobPriorBean.getData();
                             if (priorData != null) {
-                                ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo priorInfo = priorData.getInfo();
+                                ProfessionMajorJobPriorBean.ProfessionMajorJobPriorData.ProfessionMajorJobPriorInfo priorInfo = priorData.getInfo();
                                 if (priorInfo != null) {
-                                    List<ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo.ProfessionInfoList> infoLists = priorInfo.getInfoList();
+                                    List<ProfessionMajorJobPriorBean.ProfessionMajorJobPriorData.ProfessionMajorJobPriorInfo.ProfessionMajorJobPriorList> infoLists = priorInfo.getPriorSchoolList();
                                     if (infoLists!=null && infoLists.size()>0){
                                         setData(true, infoLists);
                                         mAdapter.setEnableLoadMore(true);
@@ -321,7 +325,7 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
         // Toast.makeText(this, "mcity==" + mCity + "      morder==" + mOrder, Toast.LENGTH_SHORT).show();
         mNextRequestPage++;
 
-        apiHome.majorPriorMajor(apiConstant.PRIOR_MAJOR, user.getId(), major_id, mOrder, "全国".endsWith(mCity)?"":mCity, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
+        apiHome.majorAndJobPriorMajor(apiConstant.MAJOR_JOB_PROI, user.getId(), mNextRequestPage+"", mOrder, "全国".endsWith(mCity)?"":mCity, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 Log.i("ppp", "131" + s);
@@ -329,15 +333,15 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
                     @Override
                     public void run() {
                         Gson gson = new Gson();
-                        ProfessionPriorBean priorBean = gson.fromJson(s, ProfessionPriorBean.class);
-                        if (priorBean != null) {
-                            String code = priorBean.getCode();
-                            ProfessionPriorBean.ProfessionPriorData priorData = priorBean.getData();
+                        ProfessionMajorJobPriorBean majorJobPriorBean = gson.fromJson(s, ProfessionMajorJobPriorBean.class);
+                        if (majorJobPriorBean != null) {
+                            String code = majorJobPriorBean.getCode();
+                            ProfessionMajorJobPriorBean.ProfessionMajorJobPriorData priorData = majorJobPriorBean.getData();
                             if (priorData != null) {
-                                ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo priorInfo = priorData.getInfo();
+                                ProfessionMajorJobPriorBean.ProfessionMajorJobPriorData.ProfessionMajorJobPriorInfo priorInfo = priorData.getInfo();
                                 if (priorInfo != null) {
-                                    List<ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo.ProfessionInfoList> infoLists = priorInfo.getInfoList();
-                                    if (infoLists!=null && infoLists.size()>0){
+                                    List<ProfessionMajorJobPriorBean.ProfessionMajorJobPriorData.ProfessionMajorJobPriorInfo.ProfessionMajorJobPriorList> infoLists = priorInfo.getPriorSchoolList();
+                                    if (infoLists!=null){
                                         setData(false, infoLists);
                                         mAdapter.setEnableLoadMore(true);
                                         swipeRefreshLayout.setRefreshing(false);

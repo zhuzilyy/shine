@@ -59,8 +59,6 @@ public class PlanAndDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     false);//这个布局就是一个imageview用来显示图片
             PlanAndDataAdapter.MyViewHolder holder = new PlanAndDataAdapter.MyViewHolder(view);
 
-
-
             return holder;
         }
         return null;
@@ -74,7 +72,7 @@ public class PlanAndDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             PrefessionBean.PrefessionData.PrefessionInfo.EnrollArr record =datas.get(position);
             ((MyViewHolder) holder).tv_title.setText(record.getZhuanye());
             ((MyViewHolder) holder).tv_renshu.setText(record.getRecord_2017().getRenshu());
-            ((MyViewHolder) holder).tv_pici.setText("[ "+record.getRecord_2017().getPici()+" ]");
+            ((MyViewHolder) holder).tv_pici.setText("[ "+record.getPici()+" ]");
             //2015
             ((MyViewHolder) holder).tv_2015score.setText(record.getRecord_2015().getRenshu());
             ((MyViewHolder) holder).tv_2015di.setText(record.getRecord_2015().getDifen());
