@@ -326,7 +326,6 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         }
         // Toast.makeText(this, "mcity==" + mCity + "      morder==" + mOrder, Toast.LENGTH_SHORT).show();
         mNextRequestPage++;
-
         apiHome.majorPriorMajor(apiConstant.PRIOR_MAJOR, user.getId(), major_id, mOrder, "全国".endsWith(mCity)?"":mCity, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
