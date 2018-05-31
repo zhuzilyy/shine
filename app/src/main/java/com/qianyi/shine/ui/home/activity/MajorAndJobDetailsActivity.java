@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -86,6 +87,7 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
     private MyReceiver myReceiver;
     @Override
     protected void initViews() {
+
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
         isVip=loginInfo.getIs_vip();
         if (isVip.equals("0")){
@@ -339,8 +341,8 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
                                 ProfessionMajorJobPriorBean.ProfessionMajorJobPriorData.ProfessionMajorJobPriorInfo priorInfo = priorData.getInfo();
                                 if (priorInfo != null) {
                                     List<ProfessionMajorJobPriorBean.ProfessionMajorJobPriorData.ProfessionMajorJobPriorInfo.ProfessionMajorJobPriorList> infoLists = priorInfo.getPriorSchoolList();
-                                    if (infoLists!=null && infoLists.size()>0){
-                                        setData(true, infoLists);
+                                    if (infoLists!=null){
+                                        setData(false, infoLists);
                                         mAdapter.setEnableLoadMore(true);
                                         swipeRefreshLayout.setRefreshing(false);
                                         swipeRefreshLayout.setVisibility(View.VISIBLE);

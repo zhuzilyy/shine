@@ -5,7 +5,7 @@ package com.qianyi.shine.api;
  */
 public class apiConstant {
    // public static final String BASE_URL="http://39.104.109.53/api/";
-    public static final String BASE_URL="http://39.104.109.53:8080/api/";
+    public static final String BASE_URL="http://39.104.109.53/api/";
     //注册
     public static final String REGISTER=BASE_URL+"register";
     //登录
