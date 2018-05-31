@@ -42,7 +42,7 @@
                         android:id="@+id/tv_over"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(毕业薪酬超过87%的专业)"
+                        android:text="**"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:textColor="@color/gray"
                         android:textSize="14sp"
@@ -76,7 +76,7 @@
                             android:id="@+id/tv_moneyOrder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="33"
+                            android:text="**"
                             android:textSize="16sp"
                             android:textColor="@color/orange"
                             />
@@ -103,7 +103,7 @@
                             android:id="@+id/tv_fiveyearMoney"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="￥15000~8000"
+                            android:text="**"
                             android:textSize="16sp"
                             android:textColor="@color/orange"
                             />
@@ -129,7 +129,7 @@
                             android:id="@+id/tv_moreIndutory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="互联网"
+                            android:text="**"
                             android:textSize="16sp"
                             android:textColor="@color/orange"
                             />
@@ -155,7 +155,7 @@
                             android:id="@+id/tv_moreCity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="北京"
+                            android:text="**"
                             android:textSize="16sp"
                             android:textColor="@color/orange"
                             />

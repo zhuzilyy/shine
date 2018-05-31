@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
-<include layout="@layout/layout_title"/>
-<com.yyydjk.library.DropDownMenu
-    android:id="@+id/dropDownMenu"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:ddmenuTextSize="13sp"
-    app:ddtextUnselectedColor="@color/drop_down_unselected"
-    app:ddtextSelectedColor="@color/drop_down_selected"
-    app:dddividerColor="@color/gray"
-    app:ddunderlineColor="@color/gray"
-    app:ddmenuMenuHeightPercent="0.5"
-    app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
-    app:ddmaskColor="@color/mask_color"
-    app:ddmenuBackgroundColor="@color/white"
-    app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
-    />
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_title" />
+
+        <com.yyydjk.library.DropDownMenu xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/dropDownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:dddividerColor="@color/gray"
+            app:ddmaskColor="@color/mask_color"
+            app:ddmenuBackgroundColor="@color/white"
+            app:ddmenuMenuHeightPercent="0.5"
+            app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
+            app:ddmenuTextSize="13sp"
+            app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
+            app:ddtextSelectedColor="@color/drop_down_selected"
+            app:ddtextUnselectedColor="@color/drop_down_unselected"
+            app:ddunderlineColor="@color/gray" />
+    </LinearLayout>
+
     <Button
-        android:visibility="gone"
-        android:layout_marginBottom="50dp"
+        android:id="@+id/btn_openVip"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/btn_openVip"
-        android:textSize="16sp"
-        android:textColor="#fff"
-        android:background="@drawable/bg_login"
+        android:layout_marginBottom="50dp"
         android:layout_marginTop="70dp"
+        android:background="@drawable/bg_login"
         android:text="开通vip查看全部推荐院校"
-        android:layout_width="300dp"
-        android:layout_height="45dp" />
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:visibility="gone" />
 </RelativeLayout>
