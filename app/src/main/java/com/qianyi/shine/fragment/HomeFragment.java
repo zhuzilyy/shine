@@ -620,6 +620,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
     class MyReceiver extends BroadcastReceiver{
         @Override
+
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals("com.action.changeScore")){
