@@ -57,14 +57,14 @@ public class EstablishProiAdapter extends BaseQuickAdapter<ProfessionPriorBean.P
 
         tv_2015renshu.setText(item.getRecruit_students().getRecord_2015().getRenshu());
         tv_2015zuidi.setText(item.getRecruit_students().getRecord_2015().getDifen());
-        tv_2015zuigao.setText(item.getRecruit_students().getRecord_2015().getGaofen());
+        tv_2015zuigao.setText(item.getRecruit_students().getRecord_2015().getWeici());
 
         tv_2016renshu.setText(item.getRecruit_students().getRecord_2016().getRenshu());
         tv_2016zuidi.setText(item.getRecruit_students().getRecord_2016().getDifen());
-        tv_2016zuigao.setText(item.getRecruit_students().getRecord_2016().getGaofen());
+        tv_2016zuigao.setText(item.getRecruit_students().getRecord_2016().getWeici());
 
         tv_2017renshu.setText(item.getRecruit_students().getRecord_2017().getRenshu());
         tv_2017zuidi.setText(item.getRecruit_students().getRecord_2017().getDifen());
-        tv_2017zuigao.setText(item.getRecruit_students().getRecord_2017().getGaofen());
+        tv_2017zuigao.setText(item.getRecruit_students().getRecord_2017().getWeici());
     }
 }

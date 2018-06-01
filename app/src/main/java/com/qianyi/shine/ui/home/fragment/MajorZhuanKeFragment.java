@@ -175,6 +175,8 @@ public class MajorZhuanKeFragment extends BaseFragment {
                             //专业优先跳转的界面  或是
                         }else if(tag.equals("majorPriority") ){
                             intent=new Intent(getActivity(), PriorityProfessionalDetailsActivity.class);
+                            String major_id=node.getId()+"";
+                            intent.putExtra("major_id",major_id);
                             startActivity(intent);
                         }else if(tag.equals("searchMajor")){
                             //查专业跳转过来的界面
@@ -182,7 +184,6 @@ public class MajorZhuanKeFragment extends BaseFragment {
                             String major_id=node.getId()+"";
                             intent.putExtra("id",major_id);
                             intent.putExtra("name",node.getName());
-                            Toast.makeText(getActivity(), major_id+"==="+node.getName(), Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                         }
                     }

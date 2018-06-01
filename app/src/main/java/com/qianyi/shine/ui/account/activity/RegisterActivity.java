@@ -125,6 +125,7 @@ public class RegisterActivity extends BaseActivity {
         apiAccount.getConfirmCode(apiConstant.GET_COFIRM_CODE, phoneNumber, "1", new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
+                Log.i("kk",s);
                 customLoadingDialog.dismiss();
                 try {
                     JSONObject jsonObject=new JSONObject(s);
@@ -137,7 +138,14 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 customLoadingDialog.dismiss();
-                Toast.makeText(RegisterActivity.this, "网络错误发送失败", Toast.LENGTH_SHORT).show();
+                Log.i("tt",e.getMessage());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(RegisterActivity.this, "网络错误发送失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
     }
@@ -148,6 +156,7 @@ public class RegisterActivity extends BaseActivity {
        apiAccount.Register(apiConstant.REGISTER, phoneNum, pwd, confrimCode, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
+                Log.i("ss",s);
                 loadingDialog.dismiss();
                 runOnUiThread(new Runnable() {
                     @Override
@@ -169,6 +178,7 @@ public class RegisterActivity extends BaseActivity {
             }
             @Override
             public void onEror(Call call, int statusCode, final Exception e) {
+                Log.i("ss",e.getMessage());
                 loadingDialog.dismiss();
                 runOnUiThread(new Runnable() {
                     @Override

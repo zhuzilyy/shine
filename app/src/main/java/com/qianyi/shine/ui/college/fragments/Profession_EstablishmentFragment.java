@@ -76,7 +76,7 @@ public class Profession_EstablishmentFragment extends BaseFragment {
     private int mNextRequestPage = 1;
     private static final int PAGE_SIZE = 6;
     private ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo majorInfo;
-    private String  major_name;
+    private String  major_name="";
     private RelativeLayout no_internet_rl,no_data_rl;
     private TextView reload;
     private CustomLoadingDialog customLoadingDialog;

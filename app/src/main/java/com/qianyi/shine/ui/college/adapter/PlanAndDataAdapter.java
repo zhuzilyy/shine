@@ -76,17 +76,17 @@ public class PlanAndDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             //2015
             ((MyViewHolder) holder).tv_2015score.setText(record.getRecord_2015().getRenshu());
             ((MyViewHolder) holder).tv_2015di.setText(record.getRecord_2015().getDifen());
-            ((MyViewHolder) holder).tv_2015gao.setText(record.getRecord_2015().getGaofen());
+            ((MyViewHolder) holder).tv_2015gao.setText(record.getRecord_2015().getWeici());
 
             //2016
             ((MyViewHolder) holder).tv_2016score.setText(record.getRecord_2016().getRenshu());
             ((MyViewHolder) holder).tv_2016di.setText(record.getRecord_2016().getDifen());
-            ((MyViewHolder) holder).tv_2016gao.setText(record.getRecord_2016().getGaofen());
+            ((MyViewHolder) holder).tv_2016gao.setText(record.getRecord_2016().getWeici());
 
             //2017
             ((MyViewHolder) holder).tv_2017score.setText(record.getRecord_2017().getRenshu());
             ((MyViewHolder) holder).tv_2017di.setText(record.getRecord_2017().getDifen());
-            ((MyViewHolder) holder).tv_2017gao.setText(record.getRecord_2017().getGaofen());
+            ((MyViewHolder) holder).tv_2017gao.setText(record.getRecord_2017().getWeici());
 
 
 

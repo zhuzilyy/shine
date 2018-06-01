@@ -45,8 +45,8 @@ public class OkHttpManager {
 
     private OkHttpManager() {
         mOkHttpClient = new OkHttpClient();
-        mOkHttpClient.newBuilder().connectTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS);
+        mOkHttpClient.newBuilder().connectTimeout(20, TimeUnit.SECONDS).readTimeout(20, TimeUnit.SECONDS)
+                .writeTimeout(20, TimeUnit.SECONDS);
         mGson = new Gson();
         handler = new Handler(Looper.getMainLooper());
     }

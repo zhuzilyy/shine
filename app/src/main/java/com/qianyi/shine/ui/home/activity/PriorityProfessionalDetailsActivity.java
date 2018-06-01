@@ -342,7 +342,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
                                 ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo priorInfo = priorData.getInfo();
                                 if (priorInfo != null) {
                                     List<ProfessionPriorBean.ProfessionPriorData.ProfessionPriorInfo.ProfessionInfoList> infoLists = priorInfo.getInfoList();
-                                    if (infoLists!=null && infoLists.size()>0){
+                                    if (infoLists!=null){
                                         setData(false, infoLists);
                                         mAdapter.setEnableLoadMore(true);
                                         swipeRefreshLayout.setRefreshing(false);

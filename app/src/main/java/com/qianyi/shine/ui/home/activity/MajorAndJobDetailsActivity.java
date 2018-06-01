@@ -41,6 +41,7 @@ import com.yyydjk.library.DropDownMenu;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -255,7 +256,7 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
     }
     //刷新
     private void refresh() {
-        LoginBean.LoginData.LoginInfo user = Utils.readUser(MajorAndJobDetailsActivity.this);
+        final LoginBean.LoginData.LoginInfo user = Utils.readUser(MajorAndJobDetailsActivity.this);
         if (user == null) {
             return;
         }
@@ -269,6 +270,7 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 Log.i("ppp", "131" + s);
+                com.orhanobut.logger.Logger.i("用户："+user.getId()+""+s);
                 MajorAndJobDetailsActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -281,7 +283,7 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
                                 ProfessionMajorJobPriorBean.ProfessionMajorJobPriorData.ProfessionMajorJobPriorInfo priorInfo = priorData.getInfo();
                                 if (priorInfo != null) {
                                     List<ProfessionMajorJobPriorBean.ProfessionMajorJobPriorData.ProfessionMajorJobPriorInfo.ProfessionMajorJobPriorList> infoLists = priorInfo.getPriorSchoolList();
-                                    if (infoLists!=null && infoLists.size()>0){
+                                    if (infoLists!=null){
                                         setData(true, infoLists);
                                         mAdapter.setEnableLoadMore(true);
                                         swipeRefreshLayout.setRefreshing(false);
@@ -347,9 +349,6 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
                                         swipeRefreshLayout.setRefreshing(false);
                                         swipeRefreshLayout.setVisibility(View.VISIBLE);
                                         no_data_rl.setVisibility(View.GONE);
-                                    }else{
-                                        swipeRefreshLayout.setVisibility(View.GONE);
-                                        no_data_rl.setVisibility(View.VISIBLE);
                                     }
                                 }
                             }

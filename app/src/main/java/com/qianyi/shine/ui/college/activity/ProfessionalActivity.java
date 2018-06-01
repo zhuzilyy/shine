@@ -61,8 +61,8 @@ public class ProfessionalActivity extends BaseActivity implements View.OnClickLi
     @BindView(R.id.tv_guanzhu) public TextView tv_guanzhu;
     //传进来的专业id
     private String id;
-    private String Major_name;
-    private String MajorName;
+    private String Major_name="";
+    private String MajorName="";
 
     @Override
     protected void initViews() {
