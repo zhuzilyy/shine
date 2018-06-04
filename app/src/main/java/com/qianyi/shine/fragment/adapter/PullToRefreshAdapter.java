@@ -40,8 +40,10 @@ public class PullToRefreshAdapter extends BaseQuickAdapter<HomeBean.HomeData.Hom
 
     @Override
     protected void convert(BaseViewHolder helper, HomeBean.HomeData.HomeInfo.Article item) {
-        ImageView imageView = helper.getView(R.id.item_img);
-        Glide.with(mContext).load(item.getImage()).into(imageView);
+        ImageView imageView = helper.getView(R.id.item_img_gk);
+        String imgurl=item.getImage();
+        Glide.with(mContext).load(imgurl).into(imageView);
+
         helper.setText(R.id.item_desc, item.getTitle());
         helper.setText(R.id.time,item.getCreate_time());
         helper.setText(R.id.readtimes,item.getHits()+"阅读");

@@ -22,7 +22,7 @@
         android:orientation="horizontal"
         >
         <ImageView
-            android:id="@+id/item_img"
+            android:id="@+id/item_img_gk"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.2"
