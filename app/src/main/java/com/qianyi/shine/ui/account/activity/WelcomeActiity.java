@@ -104,10 +104,5 @@ public class WelcomeActiity extends BaseActivity {
                         }
                     }
                 });
-
-
     }
-
-
-
 }
