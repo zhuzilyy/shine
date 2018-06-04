@@ -46,8 +46,8 @@ import okhttp3.Response;
  */
 
 public class PriorityCollegeDetailsActivity extends BaseActivity implements View.OnClickListener {
-    @BindView(R.id.title)
-    public XTitleView title;
+    @BindView(R.id.tv_title)
+    public TextView title;
     @BindView(R.id.line_chart)
     public LineChart mLineChart;
     @BindView(R.id.line_chart02)
@@ -95,17 +95,10 @@ public class PriorityCollegeDetailsActivity extends BaseActivity implements View
         CollegeIdStr = getIntent().getStringExtra("collegeid");
 
 
-        title.xSetTitle(CollegeNameStr);
+        title.setText(CollegeNameStr);
         tv_RiskRate.setText(LuqulvStr);
 
 
-
-        title.setBackListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
 //        //录取分数线波动图
 //        setLineChart(mLineChart);
@@ -359,7 +352,7 @@ public class PriorityCollegeDetailsActivity extends BaseActivity implements View
 
 
 
-    @OnClick({R.id.addAtention_tv,R.id.collegeDetails_tv})
+    @OnClick({R.id.addAtention_tv,R.id.collegeDetails_tv,R.id.iv_back})
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -372,10 +365,9 @@ public class PriorityCollegeDetailsActivity extends BaseActivity implements View
                 intent.putExtra("name",CollegeNameStr);
                 startActivity(intent);
                 break;
-
-            default:
-            break;
-
+            case R.id.iv_back:
+                finish();
+                break;
 
         }
     }

@@ -6,19 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
     <!--title-->
-    <com.qianyi.shine.ui.gaokao_news.view.XTitleView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        app:titleColor="@color/black"
-        app:graty_title="middle"
-        app:titleSize="6.5sp"
-        app:isshow_right_tv="gone"
-        app:isshow_right_iv="gone"
-        app:tv_left="北京大学"
-        app:title_background_color="@android:color/transparent"
-        app:back_src="@mipmap/black_arrow"
-        />
+   <include layout="@layout/layout_title"/>
     <com.qianyi.shine.ui.college.view.MyScrollview
         android:layout_below="@+id/title"
         android:layout_width="match_parent"

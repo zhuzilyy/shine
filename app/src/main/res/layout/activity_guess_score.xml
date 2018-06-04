@@ -212,7 +212,7 @@
             android:textSize="15sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="温馨提示：高考成绩公布前，请填写预估分数，高考出分后请尽快改为真实成绩，方便为您提供风精准的查询与填报服务"
+            android:text="温馨提示：高考成绩公布前，请填写预估分数，高考出分后请尽快改为真实成绩，方便为您提供精准的查询与填报服务。"
             />
         <TextView
             android:id="@+id/tv_know"

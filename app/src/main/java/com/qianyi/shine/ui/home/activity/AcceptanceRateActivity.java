@@ -149,6 +149,8 @@ public class AcceptanceRateActivity extends BaseActivity {
                         //数据不为空
                         if (universityList!=null && universityList.size()>0){
                             setData(true,universityList);
+                            LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(AcceptanceRateActivity.this);
+                            isVip=loginInfo.getIs_vip();
                             if (isVip.equals("0")){
                                 swipeRefreshLayout.setVisibility(View.GONE);
                                 no_internet_rl.setVisibility(View.GONE);
