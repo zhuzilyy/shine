@@ -30,7 +30,6 @@ public class MajorAndJobEstablishProiAdapter extends BaseQuickAdapter<Profession
         super(R.layout.priority_major_and_job_profession_item);
         this.mContext =MContext;
     }
-
     @Override
     protected void convert(BaseViewHolder helper, final ProfessionMajorJobPriorBean.ProfessionMajorJobPriorData.ProfessionMajorJobPriorInfo.ProfessionMajorJobPriorList item) {
         MyListView lv=helper.getView(R.id.lv_major_job);
@@ -59,13 +58,5 @@ public class MajorAndJobEstablishProiAdapter extends BaseQuickAdapter<Profession
                 mContext.startActivity(intent);
             }
         });
-
-
-
-
-
     }
-
-
-
 }

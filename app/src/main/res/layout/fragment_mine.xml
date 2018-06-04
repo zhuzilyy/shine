@@ -52,6 +52,7 @@
                 app:riv_tile_mode="clamp"
                 app:riv_oval="true" />
             <TextView
+                android:id="@+id/tv_nickName"
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
