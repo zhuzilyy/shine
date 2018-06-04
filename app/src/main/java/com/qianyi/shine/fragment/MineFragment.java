@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -58,6 +59,8 @@ public class MineFragment extends BaseFragment {
     LinearLayout ll_mine;
     @BindView(R.id.mine_head)
     RoundedImageView mine_head;
+    @BindView(R.id.tv_nickName)
+    TextView tv_nickName;
     private LinearLayout ll_wechat,ll_friendCircle;
     private Tencent mTencent;
     private MyReceiver myReceiver;
@@ -88,8 +91,10 @@ public class MineFragment extends BaseFragment {
     private void setValues() {
         LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
         String avatar = loginInfo.getAvatar();
+        String nickname = loginInfo.getNickname();
         Log.i("tag",avatar);
         Glide.with(getActivity()).load(avatar).into(mine_head);
+        tv_nickName.setText(nickname);
     }
     @Override
     protected void initData() {
