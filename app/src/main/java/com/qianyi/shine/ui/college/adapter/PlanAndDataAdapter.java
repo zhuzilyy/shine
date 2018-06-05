@@ -108,7 +108,10 @@ public class PlanAndDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemCount() {
-        return this.datas.size();//获取数据的个数
+        if(datas!=null){
+            return this.datas.size();
+        }
+        return 0;//获取数据的个数
     }
 
 

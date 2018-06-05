@@ -71,30 +71,43 @@ public class ScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             if(0==position){
                 //2017
-                ((MyViewHolder) holder).tv_nian.setText("2017");
-                ((MyViewHolder) holder).tv_renshu.setText(allRecord.getScoreinfo().getRecord_2017().getRenshu());
-                ((MyViewHolder) holder).tv_gao.setText(allRecord.getScoreinfo().getRecord_2017().getGaofen());
-                ((MyViewHolder) holder).tv_di.setText(allRecord.getScoreinfo().getRecord_2017().getDifen());
-                ((MyViewHolder) holder).tv_xiancha.setText(allRecord.getScoreinfo().getRecord_2017().getH());
-                ((MyViewHolder) holder).tv_zuidiweici.setText(allRecord.getScoreinfo().getRecord_2017().getWeici());
+
+                PrefessionBean.PrefessionData.PrefessionInfo.Scoreinfo scoreinfo = allRecord.getScoreinfo();
+                if(scoreinfo!=null){
+                    ((MyViewHolder) holder).tv_nian.setText("2017");
+                    ((MyViewHolder) holder).tv_renshu.setText(scoreinfo.getRecord_2017().getRenshu());
+                    ((MyViewHolder) holder).tv_gao.setText(scoreinfo.getRecord_2017().getGaofen());
+                    ((MyViewHolder) holder).tv_di.setText(scoreinfo.getRecord_2017().getDifen());
+                    ((MyViewHolder) holder).tv_xiancha.setText(scoreinfo.getRecord_2017().getH());
+                    ((MyViewHolder) holder).tv_zuidiweici.setText(scoreinfo.getRecord_2017().getWeici());
+
+                }
 
             }else if(1==position){
                 //2016
-                ((MyViewHolder) holder).tv_nian.setText("2016");
-                ((MyViewHolder) holder).tv_renshu.setText(allRecord.getScoreinfo().getRecord_2016().getRenshu());
-                ((MyViewHolder) holder).tv_gao.setText(allRecord.getScoreinfo().getRecord_2016().getGaofen());
-                ((MyViewHolder) holder).tv_di.setText(allRecord.getScoreinfo().getRecord_2016().getDifen());
-                ((MyViewHolder) holder).tv_xiancha.setText(allRecord.getScoreinfo().getRecord_2016().getH());
-                ((MyViewHolder) holder).tv_zuidiweici.setText(allRecord.getScoreinfo().getRecord_2016().getWeici());
+                PrefessionBean.PrefessionData.PrefessionInfo.Scoreinfo scoreinfo = allRecord.getScoreinfo();
+                if(scoreinfo!=null){
+                    ((MyViewHolder) holder).tv_nian.setText("2016");
+                    ((MyViewHolder) holder).tv_renshu.setText(scoreinfo.getRecord_2016().getRenshu());
+                    ((MyViewHolder) holder).tv_gao.setText(scoreinfo.getRecord_2016().getGaofen());
+                    ((MyViewHolder) holder).tv_di.setText(scoreinfo.getRecord_2016().getDifen());
+                    ((MyViewHolder) holder).tv_xiancha.setText(scoreinfo.getRecord_2016().getH());
+                    ((MyViewHolder) holder).tv_zuidiweici.setText(scoreinfo.getRecord_2016().getWeici());
+
+                }
 
             }else if(2==position){
                 //2015
-                ((MyViewHolder) holder).tv_nian.setText("2015");
-                ((MyViewHolder) holder).tv_renshu.setText(allRecord.getScoreinfo().getRecord_2015().getRenshu());
-                ((MyViewHolder) holder).tv_gao.setText(allRecord.getScoreinfo().getRecord_2015().getGaofen());
-                ((MyViewHolder) holder).tv_di.setText(allRecord.getScoreinfo().getRecord_2015().getDifen());
-                ((MyViewHolder) holder).tv_xiancha.setText(allRecord.getScoreinfo().getRecord_2015().getH());
-                ((MyViewHolder) holder).tv_zuidiweici.setText(allRecord.getScoreinfo().getRecord_2015().getWeici());
+                PrefessionBean.PrefessionData.PrefessionInfo.Scoreinfo scoreinfo = allRecord.getScoreinfo();
+                if(scoreinfo!=null){
+                    ((MyViewHolder) holder).tv_nian.setText("2015");
+                    ((MyViewHolder) holder).tv_renshu.setText(scoreinfo.getRecord_2015().getRenshu());
+                    ((MyViewHolder) holder).tv_gao.setText(scoreinfo.getRecord_2015().getGaofen());
+                    ((MyViewHolder) holder).tv_di.setText(scoreinfo.getRecord_2015().getDifen());
+                    ((MyViewHolder) holder).tv_xiancha.setText(scoreinfo.getRecord_2015().getH());
+                    ((MyViewHolder) holder).tv_zuidiweici.setText(scoreinfo.getRecord_2015().getWeici());
+                }
+
 
             }
 

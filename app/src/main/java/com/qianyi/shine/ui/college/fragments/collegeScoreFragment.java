@@ -243,42 +243,56 @@ public class collegeScoreFragment extends BaseFragment {
 //        }
 
 
-        String m2015H = allRecord.getScoreinfo().getRecord_2015().getGaofen();
-        String m2016H = allRecord.getScoreinfo().getRecord_2016().getGaofen();
-        String m2017H = allRecord.getScoreinfo().getRecord_2017().getGaofen();
-        if ("--".equals(m2015H)) {
-            m2015H = "0";
-        }
-        if ("--".equals(m2016H)) {
-            m2016H = "0";
-        }
-        if ("--".equals(m2017H)) {
-            m2017H = "0";
+        PrefessionBean.PrefessionData.PrefessionInfo.Scoreinfo scoreinfo = allRecord.getScoreinfo();
+
+
+        if(scoreinfo!=null){
+            String m2015H = scoreinfo.getRecord_2015().getGaofen();
+            String m2016H = scoreinfo.getRecord_2016().getGaofen();
+            String m2017H = scoreinfo.getRecord_2017().getGaofen();
+
+            if ("--".equals(m2015H)) {
+                m2015H = "0";
+            }
+            if ("--".equals(m2016H)) {
+                m2016H = "0";
+            }
+            if ("--".equals(m2017H)) {
+                m2017H = "0";
+            }
+
+            String m2015L = scoreinfo.getRecord_2015().getDifen();
+            String m2016L = scoreinfo.getRecord_2016().getDifen();
+            String m2017L = scoreinfo.getRecord_2017().getDifen();
+            if ("--".equals(m2015L)) {
+                m2015L = "0";
+            }
+            if ("--".equals(m2016L)) {
+                m2016L = "0";
+            }
+            if ("--".equals(m2017L)) {
+                m2017L = "0";
+            }
+
+
+
+            //高分线
+            entryList1.add(new Entry((Integer.parseInt(m2015H)), 0));
+            entryList1.add(new Entry((Integer.parseInt(m2016H)), 1));
+            entryList1.add(new Entry((Integer.parseInt(m2017H)), 2));
+            //低分线
+            entryList2.add(new Entry((Integer.parseInt(m2015L)), 0));
+            entryList2.add(new Entry((Integer.parseInt(m2016L)), 1));
+            entryList2.add(new Entry((Integer.parseInt(m2017L)), 2));
+
+
+
         }
 
 
-        String m2015L = allRecord.getScoreinfo().getRecord_2015().getDifen();
-        String m2016L = allRecord.getScoreinfo().getRecord_2016().getDifen();
-        String m2017L = allRecord.getScoreinfo().getRecord_2017().getDifen();
-        if ("--".equals(m2015L)) {
-            m2015L = "0";
-        }
-        if ("--".equals(m2016L)) {
-            m2016L = "0";
-        }
-        if ("--".equals(m2017L)) {
-            m2017L = "0";
-        }
 
 
-        //高分线
-        entryList1.add(new Entry((Integer.parseInt(m2015H)), 0));
-        entryList1.add(new Entry((Integer.parseInt(m2016H)), 1));
-        entryList1.add(new Entry((Integer.parseInt(m2017H)), 2));
-        //低分线
-        entryList2.add(new Entry((Integer.parseInt(m2015L)), 0));
-        entryList2.add(new Entry((Integer.parseInt(m2016L)), 1));
-        entryList2.add(new Entry((Integer.parseInt(m2017L)), 2));
+
 
 
         //LineDataSet可以看做是一条线
