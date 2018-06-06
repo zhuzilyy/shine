@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
-
 
 import com.qianyi.shine.R;
 import com.qianyi.shine.base.BaseActivity;

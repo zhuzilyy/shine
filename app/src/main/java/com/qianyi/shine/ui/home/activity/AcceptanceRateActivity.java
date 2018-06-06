@@ -189,11 +189,10 @@ public class AcceptanceRateActivity extends BaseActivity {
             }
         });
     }
-
     //加载
     private void loadMore() {
         mNextRequestPage++;
-        apiHome.intellgentFill(apiConstant.INTELLGENT_FILL, mNextRequestPage,memberId,new RequestCallBack<String>() {
+        apiHome.acceptanceRate(apiConstant.ACCEPT_RATE, keyWord,memberId,mNextRequestPage,new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
                 runOnUiThread(new Runnable() {
