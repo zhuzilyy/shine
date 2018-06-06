@@ -293,6 +293,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         apiHome.refresh(apiConstant.HOME, mNextRequestPage,memberId, new com.qianyi.shine.callbcak.RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, final String s) {
+                Log.i("tag",s);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -338,7 +339,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
-                Log.i("ppp", "132" + e);
+                Log.i("ppp", "132" + e.getMessage());
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -627,7 +628,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 getLevelData();
                 tv_subjectType.setText(headerType);
                 tv_score.setText(headerScore);
-
                 tv_level.setText(headerProvince);
             }
         }

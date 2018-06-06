@@ -125,10 +125,10 @@ public class MineFragment extends BaseFragment {
 
     private void shareFriendCircle() {
         WXWebpageObject webpage = new WXWebpageObject();
-        webpage.webpageUrl = "http://www.gaokaoygzy.cn/download";
+        webpage.webpageUrl = "http://download.gaokaoygzy.cn";
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title ="阳光志愿";
-        msg.description ="阳光志愿" ;
+        msg.description ="专业的高考志愿填报工具，一站式解决所有报考问题" ;
         Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.mipmap.logo);
         Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, 100, 100, true);
         msg.setThumbImage(thumbBmp);
@@ -144,7 +144,7 @@ public class MineFragment extends BaseFragment {
     //分享到QQ
     private void shareToQQ() {
         // 新建Tencent实例用于调用分享方法
-        mTencent = Tencent.createInstance("your APP ID",getActivity().getApplicationContext());
+        mTencent = Tencent.createInstance("101475945",getActivity().getApplicationContext());
         final Bundle params = new Bundle();
         params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);//分享的类型
         params.putString(QQShare.SHARE_TO_QQ_TITLE, "然了个然CSDN博客");//分享标题
@@ -157,10 +157,10 @@ public class MineFragment extends BaseFragment {
     //分享到微信
     private void shareFriends() {
         WXWebpageObject webpage = new WXWebpageObject();
-        webpage.webpageUrl = "http://www.gaokaoygzy.cn/download";
+        webpage.webpageUrl = "http://download.gaokaoygzy.cn";
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title ="阳光志愿";
-        msg.description ="阳光志愿" ;
+        msg.description ="专业的高考志愿填报工具，一站式解决所有报考问题" ;
         Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.mipmap.logo);
         Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, 100, 100, true);
         msg.setThumbImage(thumbBmp);
@@ -171,8 +171,6 @@ public class MineFragment extends BaseFragment {
        // req.scene = sendtype==0?SendMessageToWX.Req.WXSceneSession:SendMessageToWX.Req.WXSceneTimeline;
         req.scene = SendMessageToWX.Req.WXSceneSession;
         mWxApi.sendReq(req);
-
-
     }
     public static String buildTransaction(final String type) {
         return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();

@@ -99,7 +99,6 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
                 "&secret=" + apiConstant.APP_SECRET +
                 "&code=" + code +
                 "&grant_type=authorization_code";
-
         RequestParams params=new RequestParams(GetAccessTokenURL);
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override

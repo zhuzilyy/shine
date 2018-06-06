@@ -49,7 +49,8 @@ public class HomeBean {
         private HomeInfo Info;
 
         public class HomeInfo{
-
+            private List<RecommendUniversity> RecommendUniversityList;
+            private List<Article> ArticleList;
             public List<RecommendUniversity> getRecommendUniversityList() {
                 return RecommendUniversityList;
             }
@@ -65,9 +66,6 @@ public class HomeBean {
             public void setArticleList(List<Article> articleList) {
                 ArticleList = articleList;
             }
-
-            private List<RecommendUniversity> RecommendUniversityList;
-            private List<Article> ArticleList;
             public class RecommendUniversity{
                 public String getId() {
                     return id;
