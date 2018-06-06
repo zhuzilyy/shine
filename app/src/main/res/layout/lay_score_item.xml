@@ -96,6 +96,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:text="--"
+
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="12sp"
