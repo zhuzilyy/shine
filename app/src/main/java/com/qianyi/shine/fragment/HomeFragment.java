@@ -340,6 +340,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
                 Log.i("ppp", "132" + e.getMessage());
+
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
