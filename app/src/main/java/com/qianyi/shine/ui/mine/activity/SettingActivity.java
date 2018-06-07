@@ -8,6 +8,7 @@ import com.qianyi.shine.R;
 import com.qianyi.shine.api.apiConstant;
 import com.qianyi.shine.base.BaseActivity;
 import com.qianyi.shine.ui.account.activity.WebviewActivity;
+import com.qianyi.shine.utils.APKVersionCodeUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -15,31 +16,30 @@ import butterknife.OnClick;
 /**
  * Created by NEUNB on 2018/3/29.
  */
-
 public class SettingActivity extends BaseActivity{
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_versionCode)
+    TextView tv_versionCode;
     @Override
     protected void initViews() {
         BaseActivity.addActivity(this);
         tv_title.setText("设置");
+        String versoinName = APKVersionCodeUtils.getVerName(this);
+        tv_versionCode.setText(versoinName);
     }
-
     @Override
     protected void initData() {
 
     }
-
     @Override
     protected void getResLayout() {
         setContentView(R.layout.activity_setting);
     }
-
     @Override
     protected void initListener() {
 
     }
-
     @Override
     protected void setStatusBarColor() {
 
