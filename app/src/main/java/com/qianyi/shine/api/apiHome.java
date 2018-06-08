@@ -319,6 +319,13 @@ public class apiHome {
 
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
+    //获取定位地址
+    public static void getAddress(String url,String memberId,String register_address,RequestCallBack<String> callback){
+        Map<String,String> params=new HashMap<>();
+        params.put("member_id",memberId);
+        params.put("register_address",register_address);
+        OkHttpManager.getInstance().postRequest(url,params,callback);
+    }
 
 
 

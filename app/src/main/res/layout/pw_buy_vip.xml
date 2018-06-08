@@ -72,7 +72,7 @@
     <TextView
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:text="使用批次:普通类非提前批"
+        android:text="适用批次:普通类非提前批"
         android:textSize="14sp"
         android:textColor="@color/gray"
         android:layout_width="wrap_content"
@@ -114,5 +114,4 @@
         android:background="@color/main_blue"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
-
 </LinearLayout>
