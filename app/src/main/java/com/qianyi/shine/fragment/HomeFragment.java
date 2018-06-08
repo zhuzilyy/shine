@@ -107,6 +107,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private LinearLayout ll_chongci,ll_wentuo,ll_baoshou,ll_scoreInfo;
     private String headerScore,headerType,headerProvince;
     private MyReceiver myReceiver;
+    private boolean isPassLocation;
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         view_home = inflater.inflate(R.layout.fragment_home, null);
@@ -586,11 +587,31 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                     if (!TextUtils.isEmpty(aMapLocation.getCity())) {
                         cityname.setText(aMapLocation.getCity());
                         province=aMapLocation.getProvince();
+                        String city=aMapLocation.getCity();
+                        String county=aMapLocation.getDistrict();
+                        getAddress(province,city,county);
                     }
                 } else {
                     //定位失败
                     Log.i("xzy", "err+" + aMapLocation.getErrorCode() + "  info=" + aMapLocation.getErrorInfo());
                 }
+            }
+        });
+    }
+    //获取位置信息
+    private void getAddress(String provice,String city,String county) {
+        if (isPassLocation){
+            return;
+        }
+        String address=provice+city+county;
+        apiHome.getAddress(apiConstant.GET_ADDRESS, memberId, address, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(Call call, Response response, String s) {
+                isPassLocation=true;
+            }
+            @Override
+            public void onEror(Call call, int statusCode, Exception e) {
+
             }
         });
     }

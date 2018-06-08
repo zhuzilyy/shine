@@ -21,14 +21,12 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <com.qianyi.shine.ui.account.view.ClearEditText
-        android:maxLength="11"
         android:singleLine="true"
         android:layout_marginTop="70dp"
         android:id="@+id/et_userName"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:hint="请输入输入手机号"
-        android:inputType="number"
+        android:hint="请输入输入手机号或Vip账号"
         android:textSize="15sp"
         android:textColorHint="@color/gray"
         android:text=""
