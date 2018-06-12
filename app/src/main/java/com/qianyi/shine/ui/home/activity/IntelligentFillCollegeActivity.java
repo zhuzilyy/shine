@@ -338,7 +338,7 @@ public class IntelligentFillCollegeActivity extends BaseActivity implements View
                     intent.putExtra("major_id",majorId);
                     startActivity(intent);
                 }else if(!TextUtils.isEmpty(intention_job) && TextUtils.isEmpty(intention_area) && TextUtils.isEmpty(intention_major)){
-                    Intent intent = new Intent(IntelligentFillCollegeActivity.this, OccupationDetailActivity.class);
+                    Intent intent = new Intent(IntelligentFillCollegeActivity.this, MajorAndJobDetailsActivity.class);
                     intent.putExtra("occupationName",intention_job);
                     intent.putExtra("occupationParentName",occupationParentName);
                     startActivity(intent);
