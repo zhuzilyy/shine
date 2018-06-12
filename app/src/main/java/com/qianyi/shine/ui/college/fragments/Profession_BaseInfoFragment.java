@@ -72,9 +72,12 @@ public class Profession_BaseInfoFragment extends BaseFragment {
         }
 
         //男女比例
-        id_progress.setProgress(Integer.parseInt(getMajorInfo().getMale()));
-        pro_nan.setText(getMajorInfo().getMale());
-        pro_nv.setText(getMajorInfo().getFemalte());
+        if(getMajorInfo().getMale()!=null&&getMajorInfo().getMale()!=""){
+            id_progress.setProgress(Integer.parseInt(getMajorInfo().getMale()));
+            pro_nan.setText(getMajorInfo().getMale());
+            pro_nv.setText(getMajorInfo().getFemalte());
+        }
+
         //对口专业
         for (int i = 0; i <getMajorInfo().getMajor().size() ; i++) {
             CollegeEntity collegeEntity = new CollegeEntity(0,"",getMajorInfo().getMajor().get(i).getTitle(),getMajorInfo().getMajor().get(i).getDscr());

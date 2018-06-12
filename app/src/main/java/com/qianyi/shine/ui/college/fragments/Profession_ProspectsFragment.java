@@ -91,9 +91,11 @@ public class Profession_ProspectsFragment extends BaseFragment {
         }
         //毕业超过N的工资
         Float num=Float.parseFloat(majorInfo.getSalary_over_ratio());
-        BigDecimal bg = new BigDecimal(num);
-        double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()*100;
-        tv_over.setText("毕业薪资超过"+f1+"%的专业");
+        float floatNum = num * 100;
+       /* BigDecimal bg = new BigDecimal(num);
+        double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()*100;*/
+
+        tv_over.setText("毕业薪资超过"+floatNum+"%的专业");
         //薪酬排名
         tv_moneyOrder.setText(majorInfo.getSalary_factor_rank_index());
         //毕业5年的月薪
@@ -336,6 +338,13 @@ public class Profession_ProspectsFragment extends BaseFragment {
 
         ArrayList<Entry> entryList1 = new ArrayList<Entry>();
         ArrayList<Entry> entryList2 = new ArrayList<Entry>();
+        if(majorInfo.getMajor_salary_year_list().size()<=0){
+            return;
+        }
+        if(majorInfo.getGeneral_salary_year_list().size()<=0){
+            return;
+        }
+
         for(int i=0;i<majorInfo.getMajor_salary_year_list().size();i++){
             //Entry(yValue,xIndex);一个Entry表示一个点，第一个参数为y值，第二个为X轴List的角标
             entryList1.add(new Entry((int)(Float.parseFloat(majorInfo.getMajor_salary_year_list().get(i).getSalary())),i));
