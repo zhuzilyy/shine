@@ -300,12 +300,12 @@ public class PriorityCollegeActivity extends BaseActivity {
                        List<SchoolInfo> priorSchoolList =universityBean.getData().getInfo().getPriorSchoolList();
                        if (priorSchoolList!=null && priorSchoolList.size()>0){
                            LoginBean.LoginData.LoginInfo useInfo = Utils.readUser(PriorityCollegeActivity.this);
-                           isVip= useInfo.getIs_vip();
+                       /*    isVip= useInfo.getIs_vip();
                            if (isVip.equals("0")){
                                btn_openVip.setVisibility(View.VISIBLE);
                            }else if (isVip.equals("1")){
                                btn_openVip.setVisibility(View.GONE);
-                           }
+                           }*/
                            setData(true,priorSchoolList);
                            swipeRefreshLayout.setVisibility(View.VISIBLE);
                            no_internet_rl.setVisibility(View.GONE);

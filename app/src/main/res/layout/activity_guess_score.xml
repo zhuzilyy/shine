@@ -152,12 +152,12 @@
             android:digits="0.123456789"
             android:textSize="15sp"
             android:layout_alignParentRight="true"
-            android:hint="请输入您的排名"
+            android:hint="请输入您的排名(非必须)"
             android:background="@null"
             android:inputType="numberDecimal"
             android:layout_marginRight="20dp"
             android:gravity="center_vertical|right"
-            android:layout_width="120dp"
+            android:layout_width="160dp"
             android:layout_height="match_parent" />
     </RelativeLayout>
     <View
@@ -168,12 +168,12 @@
         android:textColor="@color/cicle_red"
         android:textSize="14sp"
         android:layout_marginTop="10dp"
-        android:text="注意:高考成绩只能修改2次,请您认真填写"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="注意:高考出分前请您填写预估分数,正式出分后请立刻修改为真实高考成绩,我们会在第一时间更新分数线等数据,分数填写后可修改两次,请您认真填写。"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-
     <Button
         android:id="@+id/btn_confirm"
         android:textSize="16sp"
