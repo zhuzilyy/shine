@@ -152,7 +152,7 @@
             android:digits="0.123456789"
             android:textSize="15sp"
             android:layout_alignParentRight="true"
-            android:hint="请输入您的排名(非必须)"
+            android:hint="请输入您的排名(非必填)"
             android:background="@null"
             android:inputType="numberDecimal"
             android:layout_marginRight="20dp"

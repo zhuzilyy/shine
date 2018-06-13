@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import com.qianyi.shine.utils.Utils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -91,7 +93,8 @@ public class Profession_ProspectsFragment extends BaseFragment {
         }
         //毕业超过N的工资
         Float num=Float.parseFloat(majorInfo.getSalary_over_ratio());
-        float floatNum = num * 100;
+        Log.i("ssss",num+"");
+        int floatNum = (int)(num * 100);
        /* BigDecimal bg = new BigDecimal(num);
         double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()*100;*/
 
@@ -137,6 +140,10 @@ public class Profession_ProspectsFragment extends BaseFragment {
     private void loadPieCityChartData(PieChart chart) {
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
+        if(getMajorInfo().getCity_list()==null){
+            return;
+        }
+
         for (int i = 0; i <getMajorInfo().getCity_list().size(); i++) {
             String ratio = getMajorInfo().getCity_list().get(i).getRatio();
             float nn = Float.parseFloat(ratio);
@@ -167,6 +174,7 @@ public class Profession_ProspectsFragment extends BaseFragment {
         mPieChartData.setValueTextSize(11f);//设置文字大小
         mPieChartData.setValueTextColor(Color.BLACK);
 
+
         //设置中心数据
         chart.setCenterText("地区去向");
     }
@@ -177,8 +185,12 @@ public class Profession_ProspectsFragment extends BaseFragment {
      */
     private void loadPieZhiNengChartData(PieChart chart) {
         ArrayList<Entry> entries = new ArrayList<Entry>();
+        List<ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo.ZhinengList> ind_info_list = getMajorInfo().getZhineng_list();
+        if(getMajorInfo().getInd_info_list()==null){
+            return;
+        }
 
-        for (int i = 0; i <getMajorInfo().getInd_info_list().size(); i++) {
+        for (int i = 0; i <ind_info_list.size(); i++) {
             String ratio = getMajorInfo().getZhineng_list().get(i).getRatio();
             float nn = Float.parseFloat(ratio);
             float mm=nn*100+10;
