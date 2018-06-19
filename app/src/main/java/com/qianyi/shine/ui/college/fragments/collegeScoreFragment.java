@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -63,6 +64,8 @@ public class collegeScoreFragment extends BaseFragment {
     private ScoreAdapter moneyAdapter;
     @BindView(R.id.ll_openVip)
     LinearLayout ll_openVip;
+    @BindView(R.id.rl_vip)
+    RelativeLayout rl_vip;
     @BindView(R.id.myScrollview)
     MyScrollview myScrollview;
     private MyReceiver myReceiver;
@@ -127,9 +130,11 @@ public class collegeScoreFragment extends BaseFragment {
                     if (isVip.equals("0")) {
                         myScrollview.setVisibility(View.GONE);
                         ll_openVip.setVisibility(View.VISIBLE);
+                        rl_vip.setVisibility(View.VISIBLE);
                     } else if (isVip.equals("1")) {
                         myScrollview.setVisibility(View.VISIBLE);
                         ll_openVip.setVisibility(View.GONE);
+                        rl_vip.setVisibility(View.GONE);
                     }
                     PrefessionBean.PrefessionData prefessionData = prefessionBean.getData();
                     if (prefessionData != null) {
@@ -358,6 +363,7 @@ public class collegeScoreFragment extends BaseFragment {
             String action = intent.getAction();
             if (action.equals("com.action.open.vip")) {
                 ll_openVip.setVisibility(View.GONE);
+                rl_vip.setVisibility(View.GONE);
                 myScrollview.setVisibility(View.VISIBLE);
             }
         }

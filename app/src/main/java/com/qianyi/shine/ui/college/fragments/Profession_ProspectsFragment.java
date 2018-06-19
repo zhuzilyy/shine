@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -62,6 +63,8 @@ public class Profession_ProspectsFragment extends BaseFragment {
     public TextView tv_moneyOrder;
     @BindView(R.id.ll_openVip)
     public LinearLayout ll_openVip;
+    @BindView(R.id.rl_vip)
+    public RelativeLayout rl_vip;
     @BindView(R.id.myScrollview)
     public MyScrollview myScrollview;
     private MyReceiver myReceiver;
@@ -71,6 +74,17 @@ public class Profession_ProspectsFragment extends BaseFragment {
 
     public void setMajorInfo(ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo majorInfo) {
         this.majorInfo = majorInfo;
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
+        String isVip=loginInfo.getIs_vip();
+        if (isVip.equals("0")){
+            ll_openVip.setVisibility(View.VISIBLE);
+            rl_vip.setVisibility(View.VISIBLE);
+            myScrollview.setVisibility(View.GONE);
+        }else if (isVip.equals("1")){
+            ll_openVip.setVisibility(View.GONE);
+            rl_vip.setVisibility(View.GONE);
+            myScrollview.setVisibility(View.VISIBLE);
+        }
         initMdata(majorInfo);
 
     }
@@ -79,15 +93,6 @@ public class Profession_ProspectsFragment extends BaseFragment {
      * @param majorInfo
      */
     private void initMdata(ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo majorInfo) {
-        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(getActivity());
-        String isVip=loginInfo.getIs_vip();
-        if (isVip.equals("0")){
-            ll_openVip.setVisibility(View.VISIBLE);
-            myScrollview.setVisibility(View.GONE);
-        }else if (isVip.equals("1")){
-            ll_openVip.setVisibility(View.GONE);
-            myScrollview.setVisibility(View.VISIBLE);
-        }
         if(getMajorInfo() == null){
             return;
         }
@@ -228,15 +233,12 @@ public class Profession_ProspectsFragment extends BaseFragment {
 
 
     public ProfessionBean.ProfessionData.ProfessionInfo.MajorInfo majorInfo;
-
-
     @Override
     protected View getResLayout(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_profession_prospects,null);
     }
     @Override
     protected void initViews() {
-
 
 
     }
@@ -535,6 +537,7 @@ public class Profession_ProspectsFragment extends BaseFragment {
             String action = intent.getAction();
             if (action.equals("com.action.open.vip")){
                 ll_openVip.setVisibility(View.GONE);
+                rl_vip.setVisibility(View.GONE);
                 myScrollview.setVisibility(View.VISIBLE);
             }
         }

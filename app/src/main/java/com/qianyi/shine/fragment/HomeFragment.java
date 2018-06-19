@@ -340,18 +340,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
             @Override
             public void onEror(Call call, int statusCode, Exception e) {
-                Log.i("ppp", "132" + e.getMessage());
 
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mSwipeRefreshLayout.setVisibility(View.GONE);
-                        no_internet_rl.setVisibility(View.VISIBLE);
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
             }
         });
-
     }
 
     //加载

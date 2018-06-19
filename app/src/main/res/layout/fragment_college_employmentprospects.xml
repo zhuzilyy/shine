@@ -443,5 +443,15 @@
     </com.qianyi.shine.ui.college.view.MyScrollview>
     <include layout="@layout/common_wrong_intert"/>
     <include layout="@layout/common_no_data"/>
-    <include layout="@layout/layout_not_vip"/>
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_vip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:src="@mipmap/occupation_vip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <include layout="@layout/layout_not_vip"/>
+    </RelativeLayout>
 </LinearLayout>

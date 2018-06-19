@@ -4,7 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/layout_title" />
-    <include layout="@layout/layout_not_vip"/>
+    <RelativeLayout
+        android:id="@+id/rl_vip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:scaleType="center"
+            android:src="@mipmap/employment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <include layout="@layout/layout_not_vip"/>
+    </RelativeLayout>
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/ll_content"

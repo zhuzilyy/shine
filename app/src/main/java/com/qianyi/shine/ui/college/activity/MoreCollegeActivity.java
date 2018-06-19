@@ -288,11 +288,11 @@ public class MoreCollegeActivity extends BaseActivity {
                         if (recommendUniversityList!=null && recommendUniversityList.size()>0){
                             LoginBean.LoginData.LoginInfo useInfo = Utils.readUser(MoreCollegeActivity.this);
                             String isVip= useInfo.getIs_vip();
-                            if (isVip.equals("0")){
+                          /*  if (isVip.equals("0")){
                                 btn_openVip.setVisibility(View.VISIBLE);
                             }else if (isVip.equals("1")){
                                 btn_openVip.setVisibility(View.GONE);
-                            }
+                            }*/
                             setData(true,recommendUniversityList);
                             swipeRefreshLayout.setVisibility(View.VISIBLE);
                             no_internet_rl.setVisibility(View.GONE);

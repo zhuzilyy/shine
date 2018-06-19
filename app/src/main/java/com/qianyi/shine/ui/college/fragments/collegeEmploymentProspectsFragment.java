@@ -85,6 +85,8 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
     RelativeLayout no_internet_rl;
     @BindView(R.id.ll_openVip)
     LinearLayout ll_openVip;
+    @BindView(R.id.rl_vip)
+    RelativeLayout rl_vip;
     @BindView(R.id.reload)
     TextView reload;
     @BindView(R.id.myScrollview)
@@ -313,8 +315,10 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
                             no_internet_rl.setVisibility(View.GONE);
                             no_data_rl.setVisibility(View.GONE);
                             ll_openVip.setVisibility(View.VISIBLE);
+                            rl_vip.setVisibility(View.VISIBLE);
                         }else if (isVip.equals("1")){
                             ll_openVip.setVisibility(View.GONE);
+                            rl_vip.setVisibility(View.GONE);
                             myScrollview.setVisibility(View.VISIBLE);
                             no_internet_rl.setVisibility(View.GONE);
                             no_data_rl.setVisibility(View.GONE);
@@ -359,9 +363,17 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
                                     loadPieCityChartData(mPieChartArea,prospect.getCity_list());
                                 }
                             }  else if(code.equals("-100")){
-                                myScrollview.setVisibility(View.GONE);
-                                no_internet_rl.setVisibility(View.GONE);
-                                no_data_rl.setVisibility(View.VISIBLE);
+                                if (isVip.equals("0")){
+                                    myScrollview.setVisibility(View.GONE);
+                                    no_internet_rl.setVisibility(View.GONE);
+                                    no_data_rl.setVisibility(View.GONE);
+                                    ll_openVip.setVisibility(View.VISIBLE);
+                                    rl_vip.setVisibility(View.VISIBLE);
+                                }else if(isVip.equals("1")){
+                                    myScrollview.setVisibility(View.GONE);
+                                    no_internet_rl.setVisibility(View.GONE);
+                                    no_data_rl.setVisibility(View.VISIBLE);
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -404,6 +416,7 @@ public class collegeEmploymentProspectsFragment extends BaseFragment {
             String action = intent.getAction();
             if (action.equals("com.action.open.vip")){
                 ll_openVip.setVisibility(View.GONE);
+                rl_vip.setVisibility(View.GONE);
                 getData();
             }
         }

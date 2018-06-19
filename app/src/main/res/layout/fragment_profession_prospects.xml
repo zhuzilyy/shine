@@ -318,6 +318,17 @@
             </LinearLayout>
         </LinearLayout>
     </com.qianyi.shine.ui.college.view.MyScrollview>
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_vip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:scaleType="fitCenter"
+            android:src="@mipmap/find_major_vip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     <include layout="@layout/layout_not_vip"/>
+    </RelativeLayout>
 
 </LinearLayout>

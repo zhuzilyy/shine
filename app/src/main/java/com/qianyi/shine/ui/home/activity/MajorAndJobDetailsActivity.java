@@ -73,6 +73,8 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
     TextView tv_title;
     @BindView(R.id.ll_openVip)
     LinearLayout ll_openVip;
+    @BindView(R.id.rl_vip)
+    RelativeLayout rl_vip;
     //**************
     private SwipeRefreshLayout swipeRefreshLayout;
     private RelativeLayout no_data_rl;
@@ -93,8 +95,10 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
         isVip=loginInfo.getIs_vip();
         if (isVip.equals("0")){
             ll_openVip.setVisibility(View.VISIBLE);
+            rl_vip.setVisibility(View.VISIBLE);
         }else if (isVip.equals("1")){
             ll_openVip.setVisibility(View.GONE);
+            rl_vip.setVisibility(View.GONE);
         }
         BaseActivity.addActivity(this);
         tv_title.setText("专业优先");
@@ -410,6 +414,7 @@ public class MajorAndJobDetailsActivity extends BaseActivity {
             String action = intent.getAction();
             if (action.equals("com.action.open.vip")){
                 ll_openVip.setVisibility(View.GONE);
+                rl_vip.setVisibility(View.GONE);
                 refresh();
             }
         }

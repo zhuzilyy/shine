@@ -14,8 +14,9 @@ public class apiPay {
     /**
      * 获取支付参数
      * */
-    public static void getPayConf(String url,RequestCallBack<String> callback){
+    public static void getPayConf(String url,String member_id,RequestCallBack<String> callback){
         Map<String,String> params=new HashMap<>();
+        params.put("member_id",member_id);
         OkHttpManager.getInstance().postRequest(url,params,callback);
     }
     /**

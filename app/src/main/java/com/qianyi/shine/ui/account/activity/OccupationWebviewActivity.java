@@ -10,6 +10,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qianyi.shine.R;
@@ -36,6 +37,8 @@ public class OccupationWebviewActivity extends BaseActivity {
     ProgressBar pb_webview;
     @BindView(R.id.ll_openVip)
     LinearLayout ll_openVip;
+    @BindView(R.id.rl_vip)
+    RelativeLayout rl_vip;
     private WebSettings webSettings;
     private String isVip;
     private MyReceiver myReceiver;
@@ -45,8 +48,10 @@ public class OccupationWebviewActivity extends BaseActivity {
         isVip=loginInfo.getIs_vip();
         if (isVip.equals("0")){
             ll_openVip.setVisibility(View.VISIBLE);
+            rl_vip.setVisibility(View.VISIBLE);
         }else if (isVip.equals("1")){
             ll_openVip.setVisibility(View.GONE);
+            rl_vip.setVisibility(View.GONE);
         }
         BaseActivity.addActivity(this);
         Intent intent=getIntent();
@@ -124,6 +129,7 @@ public class OccupationWebviewActivity extends BaseActivity {
             String action = intent.getAction();
             if (action.equals("com.action.open.vip")){
                 ll_openVip.setVisibility(View.GONE);
+                rl_vip.setVisibility(View.GONE);
             }
         }
     }

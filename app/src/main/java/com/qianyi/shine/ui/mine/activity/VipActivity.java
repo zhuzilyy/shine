@@ -58,7 +58,7 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
     private int currentPayMethod = 0;
     private TextView tv_gotoPay;
     private PayReq req;
-    private String mOrderstr;
+    private String mOrderstr,memberId;
     //
     private String vipMoney;
     private String vipLimit;
@@ -101,6 +101,9 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
                 currentPayMethod=1;
             }
         });
+
+        LoginBean.LoginData.LoginInfo loginInfo = Utils.readUser(this);
+        memberId= loginInfo.getId();
 
     }
     @Override
@@ -193,7 +196,7 @@ public class VipActivity extends BaseActivity implements View.OnClickListener{
     private void getVipConf() {
         final CustomLoadingDialog loadingDialog = new CustomLoadingDialog(VipActivity.this);
         loadingDialog.show();
-        apiPay.getPayConf(apiConstant.VIP_CONFIG, new RequestCallBack<String>() {
+        apiPay.getPayConf(apiConstant.VIP_CONFIG,memberId, new RequestCallBack<String>() {
             @Override
             public void onSuccess(Call call, Response response, String s) {
                 loadingDialog.dismiss();

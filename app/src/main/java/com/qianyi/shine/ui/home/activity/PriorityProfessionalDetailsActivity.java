@@ -75,6 +75,8 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
     TextView tv_title;
     @BindView(R.id.ll_openVip)
     LinearLayout ll_openVip;
+    @BindView(R.id.rl_vip)
+    RelativeLayout rl_vip;
     //**************
     private SwipeRefreshLayout swipeRefreshLayout;
     private RelativeLayout no_data_rl;
@@ -94,12 +96,13 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         isVip=loginInfo.getIs_vip();
         if (isVip.equals("0")){
             ll_openVip.setVisibility(View.VISIBLE);
+            rl_vip.setVisibility(View.VISIBLE);
         }else if (isVip.equals("1")){
             ll_openVip.setVisibility(View.GONE);
+            rl_vip.setVisibility(View.GONE);
         }
         BaseActivity.addActivity(this);
         tv_title.setText("专业优先");
-
         major_id = getIntent().getStringExtra("major_id");
 
         //省份
@@ -113,7 +116,6 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
             public void onClick(View v) {
                 mDropDownMenu.setTabText(constellationPosition == 0 ? headers[1] : citys[constellationPosition]);
                 mDropDownMenu.closeMenu();
-
                 mCity = citys[constellationPosition];
                 refresh();
 
@@ -163,7 +165,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
         });
 
         //填充布局
-        View contentView = LayoutInflater.from(PriorityProfessionalDetailsActivity.this).inflate(R.layout.layout_refresh, null);
+        View contentView = LayoutInflater.from(PriorityProfessionalDetailsActivity.this).inflate(R.layout.layout_refresh2, null);
         swipeRefreshLayout = contentView.findViewById(R.id.swipeLayout);
         no_data_rl = contentView.findViewById(R.id.no_data_rl);
         recyclerView = contentView.findViewById(R.id.rv_list);
@@ -416,6 +418,7 @@ public class PriorityProfessionalDetailsActivity extends BaseActivity {
             String action = intent.getAction();
             if (action.equals("com.action.open.vip")){
                 ll_openVip.setVisibility(View.GONE);
+                rl_vip.setVisibility(View.GONE);
                 refresh();
             }
         }

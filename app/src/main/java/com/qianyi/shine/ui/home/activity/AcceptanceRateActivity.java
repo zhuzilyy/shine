@@ -164,9 +164,17 @@ public class AcceptanceRateActivity extends BaseActivity {
                             }
                         }else{
                             //在这里显示一下逻辑
-                            swipeRefreshLayout.setVisibility(View.GONE);
-                            no_internet_rl.setVisibility(View.GONE);
-                            no_data_rl.setVisibility(View.VISIBLE);
+                            if (isVip.equals("1")){
+                                swipeRefreshLayout.setVisibility(View.GONE);
+                                no_internet_rl.setVisibility(View.GONE);
+                                no_data_rl.setVisibility(View.VISIBLE);
+                            }else{
+                                swipeRefreshLayout.setVisibility(View.GONE);
+                                no_internet_rl.setVisibility(View.GONE);
+                                no_data_rl.setVisibility(View.GONE);
+                                ll_openVip.setVisibility(View.VISIBLE);
+                            }
+
                         }
                         mAdapter.setEnableLoadMore(true);
                         swipeRefreshLayout.setRefreshing(false);

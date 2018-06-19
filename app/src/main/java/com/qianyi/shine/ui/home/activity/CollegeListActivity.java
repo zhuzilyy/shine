@@ -117,7 +117,11 @@ public class CollegeListActivity extends BaseActivity {
                 typeAdapter.setCheckItem(position);
                 mDropDownMenu.setTabText(types[position]);
                 mDropDownMenu.closeMenu();
-                level=types[position];
+                if (types[position].equals("默认")){
+                    is_type="";
+                }else{
+                    is_type=types[position];
+                }
                 refresh();
             }
         });
@@ -132,12 +136,9 @@ public class CollegeListActivity extends BaseActivity {
                 batchAdapter.setCheckItem(position);
                 mDropDownMenu.setTabText(batch[position]);
                 mDropDownMenu.closeMenu();
-                if (types[position].equals("默认")){
-                    is_type="";
-                }else{
-                    is_type=types[position];
-                }
+                level=batch[position];
                 refresh();
+
             }
         });
         /*位次*/
