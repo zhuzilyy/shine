@@ -115,15 +115,18 @@ public class RegisterActivity extends BaseActivity {
                 String confrimCode=et_confirmCode.getText().toString();
                 String pwd = et_pwd.getText().toString();
                 if (TextUtils.isEmpty(phoneNum)){
-                    ToastUtils.showShortToast("手机号不能为空");
+                   // ToastUtils.showShortToast("手机号不能为空");
+                    Toast.makeText(this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(confrimCode)){
-                    ToastUtils.showShortToast("验证码不能为空");
+                   // ToastUtils.showShortToast("验证码不能为空");
+                    Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(pwd)){
-                    ToastUtils.showShortToast("密码不能为空");
+                  //  ToastUtils.showShortToast("密码不能为空");
+                    Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 register(phoneNum,confrimCode,pwd);
