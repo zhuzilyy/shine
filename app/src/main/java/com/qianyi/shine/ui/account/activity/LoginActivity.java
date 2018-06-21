@@ -244,14 +244,11 @@ public class LoginActivity extends BaseActivity {
                 loadingDialog.dismiss();
             }
         });
-
-
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Tencent.onActivityResultData(requestCode, resultCode, data, new BaseUiListener());
+        //Tencent.onActivityResultData(requestCode, resultCode, data, new BaseUiListener());
         Tencent.handleResultData(data, new BaseUiListener());
     }
     //登录的方法
